@@ -49,9 +49,10 @@ file safety:
     reviewed_by: timgentry
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   lib/tasks/audit_code.rake:
-    comments: 
-    reviewed_by: 
-    safe_revision: 
+    comments: Identical to the version reviewed by josh.pencheon when contained within
+      ndr_support
+    reviewed_by: timgentry
+    safe_revision: 0d56ba443b2cddca5ba2d96ea61ec6f2b898436d
   ndr_dev_support.gemspec:
     comments: 
     reviewed_by: 
