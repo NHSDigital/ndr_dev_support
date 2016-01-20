@@ -1,0 +1,66 @@
+---
+file safety:
+  ".gitignore":
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+  ".rubocop.yml":
+    comments: 
+    reviewed_by: 
+    safe_revision: 
+  CODE_OF_CONDUCT.md:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+  Gemfile:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+  LICENSE.txt:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+  README.md:
+    comments: 
+    reviewed_by: 
+    safe_revision: 
+  Rakefile:
+    comments: 
+    reviewed_by: 
+    safe_revision: 
+  bin/console:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+  bin/setup:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+  lib/ndr_dev_support.rb:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+  lib/ndr_dev_support/tasks.rb:
+    comments: 
+    reviewed_by: 
+    safe_revision: 
+  lib/ndr_dev_support/version.rb:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+  lib/tasks/audit_code.rake:
+    comments: 
+    reviewed_by: 
+    safe_revision: 
+  ndr_dev_support.gemspec:
+    comments: 
+    reviewed_by: 
+    safe_revision: 
+  test/ndr_dev_support_test.rb:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+  test/test_helper.rb:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
