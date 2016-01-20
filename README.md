@@ -11,7 +11,7 @@ providing:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'ndr_dev_support'
+gem 'ndr_dev_support', group: :development
 ```
 
 And then execute:
