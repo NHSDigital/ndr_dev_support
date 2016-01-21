@@ -152,7 +152,7 @@ namespace :rubocop do
 
       def colour_severity(severity, initial_only: false)
         colour  = COLOURS[severity]
-        message = initial_only ? severity.first.upcase : severity
+        message = initial_only ? severity[0, 1].upcase : severity
         colour ? Rainbow(message).color(colour) : message
       end
 
