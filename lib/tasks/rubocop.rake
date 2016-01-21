@@ -113,6 +113,15 @@ namespace :rubocop do
     class RubocopDiff
       require 'json'
       require 'yaml'
+      require 'rainbow'
+
+      COLOURS = {
+        'refactor'   => :yellow,
+        'convention' => :yellow,
+        'warning'    => :magenta,
+        'error'      => :red,
+        'fatal'      => :red
+      }
 
       attr_accessor :filename, :line_numbers
 
@@ -125,15 +134,27 @@ namespace :rubocop do
       end
 
       def report
-        related_offenses.each do |offense|
-          puts "#{filename}:#{offense['location']['line']}:#{offense['location']['column']}: " \
-               "#{offense['severity'][0, 1].upcase}: #{offense['message']} #{offense['severity']}"
-        end
-
-        related_offenses.empty?
+        related_offenses.each { |offense| puts offense_message(offense) }.empty?
       end
 
       private
+
+      def offense_message(offense)
+        format('%s:%d:%d: %s: %s %s',
+               Rainbow(filename).cyan,
+               offense['location']['line'],
+               offense['location']['column'],
+               colour_severity(offense['severity'], initial_only: true),
+               offense['message'],
+               colour_severity(offense['severity'])
+              )
+      end
+
+      def colour_severity(severity, initial_only: false)
+        colour  = COLOURS[severity]
+        message = initial_only ? severity.first.upcase : severity
+        colour ? Rainbow(message).color(colour) : message
+      end
 
       def related_offenses
         return all_offenses if line_numbers.empty?
