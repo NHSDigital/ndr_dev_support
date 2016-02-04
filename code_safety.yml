@@ -6,8 +6,8 @@ file safety:
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   ".rubocop.yml":
     comments: 
-    reviewed_by: 
-    safe_revision: 
+    reviewed_by: joshpencheon
+    safe_revision: e1ead45a8d1fd525f3a39cc4a87e6c0338c6b879
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -22,12 +22,12 @@ file safety:
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   README.md:
     comments: 
-    reviewed_by: 
-    safe_revision: 
+    reviewed_by: joshpencheon
+    safe_revision: 26a4c2f4648cfeb179057db2430d634e25dfcbe2
   Rakefile:
     comments: 
-    reviewed_by: 
-    safe_revision: 
+    reviewed_by: joshpencheon
+    safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   bin/console:
     comments: 
     reviewed_by: timgentry
@@ -40,23 +40,43 @@ file safety:
     comments: 
     reviewed_by: timgentry
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
-  lib/ndr_dev_support/tasks.rb:
+  lib/ndr_dev_support/rubocop/executor.rb:
     comments: 
     reviewed_by: 
     safe_revision: 
+  lib/ndr_dev_support/rubocop/range_augmenter.rb:
+    comments: 
+    reviewed_by: joshpencheon
+    safe_revision: fe5f0a693b77eeecaa39ff6fcf87ad59c4fb46e1
+  lib/ndr_dev_support/rubocop/range_finder.rb:
+    comments: 
+    reviewed_by: 
+    safe_revision: 
+  lib/ndr_dev_support/rubocop/reporter.rb:
+    comments: 
+    reviewed_by: joshpencheon
+    safe_revision: fe5f0a693b77eeecaa39ff6fcf87ad59c4fb46e1
+  lib/ndr_dev_support/tasks.rb:
+    comments: 
+    reviewed_by: joshpencheon
+    safe_revision: a55c971cb770a8e5dc4be7ed66663dd5d695fcd1
   lib/ndr_dev_support/version.rb:
     comments: 
-    reviewed_by: timgentry
-    safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+    reviewed_by: joshpencheon
+    safe_revision: b68dd0ff123596cf92735537fad04e73982568c7
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
     reviewed_by: timgentry
     safe_revision: 0d56ba443b2cddca5ba2d96ea61ec6f2b898436d
+  lib/tasks/rubocop.rake:
+    comments: 
+    reviewed_by: joshpencheon
+    safe_revision: fe5f0a693b77eeecaa39ff6fcf87ad59c4fb46e1
   ndr_dev_support.gemspec:
     comments: 
-    reviewed_by: 
-    safe_revision: 
+    reviewed_by: joshpencheon
+    safe_revision: d61f29be0444859c092f4c0599cc48f5bea8f0ac
   test/ndr_dev_support_test.rb:
     comments: 
     reviewed_by: timgentry
