@@ -6,16 +6,6 @@
 Style/DotPosition:
   EnforcedStyle: trailing
 
-HashSyntax:
-  EnforcedStyle: hash_rockets
-  SupportedStyles:
-    - ruby19
-    - hash_rockets
-
-# Would enforce "-> { }", which we cannot use yet.
-Lambda:
-  Enabled: false
-
 # ...
 LineLength:
   Max: 99
