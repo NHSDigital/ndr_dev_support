@@ -42,16 +42,16 @@ file safety:
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   lib/ndr_dev_support/rubocop/executor.rb:
     comments: 
-    reviewed_by: 
-    safe_revision: 
+    reviewed_by: joshpencheon
+    safe_revision: 301a0785d32fbc91b5fa175a0b4a4aed5bc5b8c1
   lib/ndr_dev_support/rubocop/range_augmenter.rb:
     comments: 
     reviewed_by: joshpencheon
     safe_revision: fe5f0a693b77eeecaa39ff6fcf87ad59c4fb46e1
   lib/ndr_dev_support/rubocop/range_finder.rb:
     comments: 
-    reviewed_by: 
-    safe_revision: 
+    reviewed_by: joshpencheon
+    safe_revision: 224e0d38173beb8ed4df620e022b9b0b8aea3289
   lib/ndr_dev_support/rubocop/reporter.rb:
     comments: 
     reviewed_by: joshpencheon
@@ -63,7 +63,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: joshpencheon
-    safe_revision: b68dd0ff123596cf92735537fad04e73982568c7
+    safe_revision: f1b6de9e3667a0ac5de200f8c6ba2d5b625d931a
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
