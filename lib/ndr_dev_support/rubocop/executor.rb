@@ -1,4 +1,5 @@
 require 'json'
+require 'shellwords'
 
 module NdrDevSupport
   module Rubocop
@@ -19,7 +20,7 @@ module NdrDevSupport
       private
 
       def offenses
-        hash = JSON.parse(`rubocop --format json #{@filename}`)
+        hash = JSON.parse(`rubocop --format json #{Shellwords.escape(@filename)}`)
         hash['files'].first['offenses']
       end
     end

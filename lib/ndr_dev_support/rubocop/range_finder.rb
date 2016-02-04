@@ -1,4 +1,5 @@
 require 'english'
+require 'shellwords'
 
 module NdrDevSupport
   module Rubocop
@@ -28,7 +29,7 @@ module NdrDevSupport
       private
 
       def git_diff(args)
-        diff = `git diff --no-prefix --unified=0 #{args}`
+        diff = `git diff --no-prefix --unified=0 #{Shellwords.escape(args)}`
         fail "Failed to diff: '#{args}'" unless $CHILD_STATUS.exitstatus.zero?
         diff
       end
