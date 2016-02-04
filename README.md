@@ -42,7 +42,6 @@ For more details of the audit tasks available, execute:
 
 ndr_dev_support provides rake tasks to enable more targeted use of RuboCop, to analyse only relevant code changes:
 ```
-$ rake rubocop:diff
 $ rake rubocop:diff HEAD
 $ rake rubocop:diff HEAD~3..HEAD~2
 $ rake rubocop:diff HEAD~3..HEAD~2
