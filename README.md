@@ -51,7 +51,7 @@ $ rake rubocop:diff master
 $ rake rubocop:diff path/to/file
 $ rake rubocop:diff dir/
 ```
-As well as the primary `rubocop:diff` task, there are a number of convience tasks provided:
+As well as the primary `rubocop:diff` task, there are a number of convenience tasks provided:
 ```
 $ rake rubocop:diff:head
 $ rake rubocop:diff:staged
