@@ -34,15 +34,36 @@ Once files have been reviewed as secure, the revision number for that file is st
 
 Note: This feature works with svn and git repositories and svn, git-svn and git working copies.
 
-To add code auditing to your project add this line to your application's Rakefile:
+For more details of the audit tasks available, execute:
+
+    $ rake -T audit
+
+### RuboCop filtering
+
+ndr_dev_support provides rake tasks to enable more targeted use of RuboCop, to analyse only relevant code changes:
+```
+$ rake rubocop:diff
+$ rake rubocop:diff HEAD
+$ rake rubocop:diff HEAD~3..HEAD~2
+$ rake rubocop:diff HEAD~3..HEAD~2
+$ rake rubocop:diff aef12fd4
+$ rake rubocop:diff master
+$ rake rubocop:diff path/to/file
+$ rake rubocop:diff dir/
+```
+As well as the primary `rubocop:diff` task, there are a number of convience tasks provided:
+```
+$ rake rubocop:diff:head
+$ rake rubocop:diff:staged
+$ rake rubocop:diff:unstaged
+$ find . -iregex .*\.rake$ | xargs rake rubocop:diff:file
+```
+
+To add development support tasks to your project, add this line to your application's Rakefile:
 
 ```ruby
 require 'ndr_dev_support/tasks'
 ```
-
-For more details of the tasks available, execute:
-
-    $ rake -T audit
 
 ## Development
 
