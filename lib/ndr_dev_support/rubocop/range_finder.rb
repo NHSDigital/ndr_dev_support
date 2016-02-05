@@ -17,8 +17,7 @@ module NdrDevSupport
       end
 
       def diff_files(files)
-        diff = Array(files).map { |file| git_diff(%(-- "#{file}")) }.join
-        file_change_locations_from diff
+        file_change_locations_from git_diff(files * ' ')
       end
 
       def diff_head
@@ -40,9 +39,19 @@ module NdrDevSupport
       private
 
       def git_diff(args)
-        diff = `git diff --no-prefix --unified=0 #{Shellwords.escape(args)}`
-        fail "Failed to diff: '#{args}'" unless $CHILD_STATUS.exitstatus.zero?
-        diff
+        diff_cmd = 'git diff --no-prefix --unified=0 '
+        diff_cmd << Shellwords.escape(args) unless args.empty?
+        require 'open3'
+        stdout, stderr, status = Open3.capture3(diff_cmd)
+
+        return stdout if status.success?
+
+        fail Rainbow(<<-MSG).red
+Failed to generate diff from:
+  #{diff_cmd}
+
+#{stderr}
+        MSG
       end
 
       def file_changes_hash

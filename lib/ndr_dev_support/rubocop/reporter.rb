@@ -28,7 +28,7 @@ module NdrDevSupport
           print_offenses
           return @offenses.values.all?(&:empty?)
         else
-          puts Rainbow('No files scanned.').red
+          puts Rainbow('No files scanned.').yellow
           return false
         end
       end
