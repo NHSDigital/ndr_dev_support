@@ -59,7 +59,7 @@ file safety:
   lib/ndr_dev_support/rubocop/reporter.rb:
     comments: 
     reviewed_by: joshpencheon
-    safe_revision: fe5f0a693b77eeecaa39ff6fcf87ad59c4fb46e1
+    safe_revision: 14bce27945f581f7d598e73c9412bb6ebbbc9c41
   lib/ndr_dev_support/tasks.rb:
     comments: 
     reviewed_by: joshpencheon
