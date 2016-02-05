@@ -1,4 +1,5 @@
 require 'English'
+require 'open3'
 require 'rubocop'
 require 'shellwords'
 
@@ -41,7 +42,6 @@ module NdrDevSupport
       def git_diff(args)
         diff_cmd = 'git diff --no-prefix --unified=0 '
         diff_cmd << Shellwords.escape(args) unless args.empty?
-        require 'open3'
         stdout, stderr, status = Open3.capture3(diff_cmd)
 
         return stdout if status.success?
