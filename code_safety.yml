@@ -55,7 +55,7 @@ file safety:
   lib/ndr_dev_support/rubocop/range_finder.rb:
     comments: 
     reviewed_by: joshpencheon
-    safe_revision: a8ecc0519a4abf9d464c49183863d65121dc8d0b
+    safe_revision: 7cb00493b4f0bdce37a5fa216647d8f7692161e2
   lib/ndr_dev_support/rubocop/reporter.rb:
     comments: 
     reviewed_by: joshpencheon
