@@ -16,7 +16,7 @@ module NdrDevSupport
       }.freeze
 
       def initialize(offenses)
-        @offenses = offenses
+        @offenses = Hash[offenses.sort_by { |file, _offenses| file }]
       end
 
       # Prints out a report, and returns an appriopriate
@@ -28,7 +28,7 @@ module NdrDevSupport
           print_offenses
           return @offenses.values.all?(&:empty?)
         else
-          puts Rainbow('No files scanned.').yellow
+          puts Rainbow('No relevant changes found.').yellow
           return false
         end
       end

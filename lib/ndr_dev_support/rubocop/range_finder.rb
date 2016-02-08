@@ -7,16 +7,6 @@ module NdrDevSupport
   module Rubocop
     # Produces diffs, and parses from them the file/hunk boundaries
     class RangeFinder
-      class << self
-        # Use RuboCop to produce a list of all files that should be scanned.
-        def target_files
-          @target_files ||= begin
-            defaults = ::RuboCop::ConfigStore.new
-            ::RuboCop::TargetFinder.new(defaults, {}).target_files_in_dir
-          end
-        end
-      end
-
       def diff_files(files)
         file_change_locations_from git_diff(files * ' ')
       end
@@ -69,13 +59,7 @@ Failed to generate diff from:
           end
         end
 
-        ruby_files_from changes
-      end
-
-      # Don't report on changes in files that RuboCop won't understand:
-      def ruby_files_from(changes)
-        whitelist = RangeFinder.target_files
-        changes.reject { |file, _ranges| !whitelist.include? File.join(Dir.pwd, file) }
+        changes
       end
 
       def hunk_range_from(line)

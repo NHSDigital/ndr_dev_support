@@ -4,16 +4,25 @@ namespace :rubocop do
   require 'ndr_dev_support/rubocop/executor'
   require 'ndr_dev_support/rubocop/reporter'
 
+  def filtered_offenses_by_line(offenses, lines)
+    offenses.select do |offense|
+      line = offense['location']['line']
+      1 == line || lines.include?(line)
+    end
+  end
+
   # For a given set of change locations (extract from a diff),
   # run rubocop on the relevant files, and report filtered results.
   def rubocop_file_ranges(file_ranges)
-    output  = {}
-    threads = file_ranges.map do |file, ranges|
+    output   = {}
+    offenses = NdrDevSupport::Rubocop::Executor.new(file_ranges.keys).offenses_by_file
+
+    threads = offenses.map do |file, file_offenses|
       Thread.new do
         # Expand ranges to include entire methods, etc:
-        lines = NdrDevSupport::Rubocop::RangeAugmenter.new(file, ranges).augmented_lines
-        # Get rubocop output for those files:
-        output[file] = NdrDevSupport::Rubocop::Executor.new(file, lines).output
+        augmenter = NdrDevSupport::Rubocop::RangeAugmenter.new(file, file_ranges[file] || [])
+        # Get subset of rubocop output for those files:
+        output[file] = filtered_offenses_by_line(file_offenses, augmenter.augmented_lines)
       end
     end
     threads.each(&:join)

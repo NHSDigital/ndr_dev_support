@@ -6,23 +6,26 @@ module NdrDevSupport
     # This class filters the Rubocop report of a file
     # to only the given lines.
     class Executor
-      def initialize(filename, lines)
-        @filename = filename
-        @lines    = lines
-      end
-
-      def output
-        offenses.select do |offense|
-          line_number = offense['location']['line']
-          1 == line_number || @lines.include?(line_number)
+      class << self
+        # Use RuboCop to produce a list of all files that should be scanned.
+        def target_files
+          @target_files ||= `rubocop -L`.each_line.map(&:strip)
         end
       end
 
-      private
+      def initialize(filenames)
+        @filenames = Executor.target_files & filenames
+      end
 
-      def offenses
-        hash = JSON.parse(`rubocop --format json #{Shellwords.escape(@filename)}`)
-        hash['files'].first['offenses']
+      def offenses_by_file
+        return [] if @filenames.empty?
+
+        escaped_paths = @filenames.map { |path| Shellwords.escape(path) }
+        output = JSON.parse(`rubocop --format json #{escaped_paths.join(' ')}`)
+
+        output['files'].each_with_object({}) do |file_output, result|
+          result[file_output['path']] = file_output['offenses']
+        end
       end
     end
   end
