@@ -46,28 +46,28 @@ file safety:
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   lib/ndr_dev_support/rubocop/executor.rb:
     comments: 
-    reviewed_by: joshpencheon
-    safe_revision: 301a0785d32fbc91b5fa175a0b4a4aed5bc5b8c1
+    reviewed_by: josh.pencheon
+    safe_revision: 41cf1558f567928faaa1e670a36d941c03c78044
   lib/ndr_dev_support/rubocop/range_augmenter.rb:
     comments: 
     reviewed_by: joshpencheon
     safe_revision: fe5f0a693b77eeecaa39ff6fcf87ad59c4fb46e1
   lib/ndr_dev_support/rubocop/range_finder.rb:
     comments: 
-    reviewed_by: joshpencheon
-    safe_revision: 7cb00493b4f0bdce37a5fa216647d8f7692161e2
+    reviewed_by: josh.pencheon
+    safe_revision: 41cf1558f567928faaa1e670a36d941c03c78044
   lib/ndr_dev_support/rubocop/reporter.rb:
     comments: 
-    reviewed_by: joshpencheon
-    safe_revision: 14bce27945f581f7d598e73c9412bb6ebbbc9c41
+    reviewed_by: josh.pencheon
+    safe_revision: 41cf1558f567928faaa1e670a36d941c03c78044
   lib/ndr_dev_support/tasks.rb:
     comments: 
     reviewed_by: joshpencheon
     safe_revision: a55c971cb770a8e5dc4be7ed66663dd5d695fcd1
   lib/ndr_dev_support/version.rb:
     comments: 
-    reviewed_by: joshpencheon
-    safe_revision: 18e533e0b99bfb8aebe4ccbcff4bc2102619ab33
+    reviewed_by: josh.pencheon
+    safe_revision: 3f4e55cee33c956405ab82e55b76914be0770577
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -75,8 +75,8 @@ file safety:
     safe_revision: 0d56ba443b2cddca5ba2d96ea61ec6f2b898436d
   lib/tasks/rubocop.rake:
     comments: 
-    reviewed_by: joshpencheon
-    safe_revision: 13cdf4eec8ea311ea480a90a3ba325a386db94e0
+    reviewed_by: josh.pencheon
+    safe_revision: 41cf1558f567928faaa1e670a36d941c03c78044
   ndr_dev_support.gemspec:
     comments: 
     reviewed_by: joshpencheon
