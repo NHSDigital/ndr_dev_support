@@ -13,7 +13,8 @@ module NdrDevSupport
 
       def output
         offenses.select do |offense|
-          @lines.include? offense['location']['line']
+          line_number = offense['location']['line']
+          1 == line_number || @lines.include?(line_number)
         end
       end
 

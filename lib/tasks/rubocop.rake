@@ -31,8 +31,10 @@ namespace :rubocop do
       rake rubocop:diff master
   USAGE
   task :diff do
-    expr   = ARGV[1..-1].join(' ')
-    ranges = NdrDevSupport::Rubocop::RangeFinder.new.diff_expr(expr)
+    args = ARGV.dup
+    nil until 'rubocop:diff' == args.shift
+
+    ranges = NdrDevSupport::Rubocop::RangeFinder.new.diff_expr args.join(' ')
     rubocop_file_ranges ranges
   end
 
