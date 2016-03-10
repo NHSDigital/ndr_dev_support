@@ -344,7 +344,7 @@ def print_repo_file_diffs(repolatest, repo, fname, user_name, safe_revision)
   cmd = nil
   case repository_type
   when 'git'
-    cmd = ['git', '--no-pager', 'diff', '-b', "#{safe_revision}..#{repolatest}", fname]
+    cmd = ['git', '--no-pager', 'diff', '--color', '-b', "#{safe_revision}..#{repolatest}", fname]
   when 'git-svn', 'svn'
     cmd = ['svn', 'diff', '-r', "#{safe_revision.to_i}:#{repolatest.to_i}", '-x', '-b', "#{repo}/#{fname}"]
   end
