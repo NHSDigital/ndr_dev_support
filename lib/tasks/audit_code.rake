@@ -65,7 +65,9 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
     end
   end
   puts "Updating latest revisions for #{file_safety.size} files"
-  set_last_changed_revision(trunk_repo, file_safety, file_safety.keys)
+  set_last_changed_revision(trunk_repo, file_safety)
+  puts "Updating stale revisions for #{file_safety.size} files"
+  set_first_stale_revision(trunk_repo, file_safety)
   puts "\nSummary:"
   puts "Number of files originally in #{SAFETY_FILE}: #{orig_count}"
   puts "Number of new files added: #{file_safety.size - orig_count}"
@@ -85,7 +87,7 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
   # We also print a third category: ones which are no longer in the repository
   file_list =
     if show_in_priority
-      file_safety.sort_by { |_k, v| v.nil? ? -100 : v['last_changed_rev'].to_i }.map(&:first)
+      file_safety.sort_by { |_k, v| v.nil? ? -100 : v['first_stale_rev'].to_i }.map(&:first)
     else
       file_safety.keys.sort
     end
@@ -118,15 +120,16 @@ def print_file_safety(file_safety, repo, fname, verbose = false, silent = false)
 
   if entry['safe_revision'].nil?
     msg += 'No safe revision known'
+    msg += ", added in #{entry['first_stale_rev']}"      unless entry['first_stale_rev'].nil?
     msg += ", last changed #{entry['last_changed_rev']}" unless entry['last_changed_rev'].nil?
   else
-    repolatest = entry['last_changed_rev'] # May have been prepopulated en mass
     msg += 'Not in repository: ' if entry['last_changed_rev'] == -1
-    if (repolatest != entry['safe_revision']) &&
-       !(repolatest =~ /^[0-9]+$/ && entry['safe_revision'] =~ /^[0-9]+$/ &&
-         repolatest.to_i < entry['safe_revision'].to_i)
+    first_stale_rev = entry['first_stale_rev']
+    if (first_stale_rev != entry['safe_revision']) &&
+       !(first_stale_rev =~ /^[0-9]+$/ && entry['safe_revision'] =~ /^[0-9]+$/ &&
+         first_stale_rev.to_i < entry['safe_revision'].to_i)
       # (Allow later revisions to be treated as safe for svn)
-      msg += "No longer safe since revision #{repolatest}: "
+      msg += "No longer safe since revision #{first_stale_rev}: "
     else
       return false unless verbose
       msg += 'Safe: '
@@ -234,9 +237,9 @@ end
 # Fill in the latest changed revisions in a file safety map.
 # (Don't write this data to the YAML file, as it is intrinsic to the SVN
 # repository.)
-def set_last_changed_revision(repo, file_safety, fnames)
+def set_last_changed_revision(repo, file_safety)
   dot_freq = (file_safety.size / 40.0).ceil # Print up to 40 progress dots
-  fnames   = file_safety.keys if fnames.nil?
+  fnames   = file_safety.keys
 
   fnames.each_with_index do |f, i|
     last_revision = get_last_changed_revision(repo, f)
@@ -278,6 +281,44 @@ def get_last_changed_revision(repo, fname)
     rescue
       puts 'We have an error in getting the revision'
     end
+  end
+end
+
+def set_first_stale_revision(repo, file_safety)
+  dot_freq = (file_safety.size / 40.0).ceil # Print up to 40 progress dots
+  fnames   = file_safety.keys
+
+  fnames.each_with_index do |f, i|
+    stale_revision = get_first_stale_revision(repo, f, file_safety)
+    if stale_revision.nil? || stale_revision.empty?
+      file_safety[f]['first_stale_rev']  = -1
+    else
+      file_safety[f]['first_stale_rev']  = stale_revision
+    end
+    # Show progress
+    print '.' if (i % dot_freq) == 0
+  end
+  puts
+end
+
+# Returns the first revision for which the file went stale
+def get_first_stale_revision(repo, fname, file_safety)
+  safe_revision = file_safety[fname]['safe_revision']
+  case repository_type
+  when 'git'
+    if safe_revision
+      %x[git log #{safe_revision}..HEAD --reverse --pretty=format:'%H' -- "#{fname}"].split("\n")[0]
+    else
+      # If the file hasn't been reviewed before, the initial commit is the stale revision:
+      %x[git log --diff-filter=A --pretty=format:'%H' -- "#{fname}"].chomp
+    end
+  when 'git-svn', 'svn'
+    # If the file hasn't been reviewed before, the stale revision will be the commit that added it.
+    # If it has been flagged as safe before, we look for the subsequent change, chronologically.
+    safe_revision ||= 0
+
+    log = %x[svn log -q -r #{safe_revision.to_i + 1}:HEAD --limit 1 "#{repo}/#{fname}"].split("\n")[1]
+    log && log.match('r([0-9]*)').to_a[1]
   end
 end
 
@@ -394,6 +435,10 @@ files which have changed since they were last verified as safe."
     show_in_priority = (ENV['show_in_priority'].to_s =~ /\Atrue\Z/i)
     max_print = ENV['max_print'] =~ /\A-?[0-9][0-9]*\Z/ ? ENV['max_print'].to_i : 20
     reviewer  = ENV['reviewed_by']
+
+    if show_in_priority && 'git' == repository_type
+      fail '`show_in_priority` unsupported for git repositories!'
+    end
 
     all_safe = audit_code_safety(max_print, ignore_new, show_diffs, show_in_priority, reviewer)
 
