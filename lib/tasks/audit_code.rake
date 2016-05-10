@@ -266,7 +266,7 @@ end
 def get_last_changed_revision(repo, fname)
   case repository_type
   when 'git'
-    %x[git log -n 1 "#{fname}"].split("\n").first[7..-1]
+    %x[git log -n 1 --pretty=format:%H "#{fname}"].chomp
   when 'git-svn', 'svn'
     begin
       svn_info = %x[svn info -r head "#{repo}/#{fname}"]
