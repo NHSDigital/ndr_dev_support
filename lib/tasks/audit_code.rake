@@ -236,35 +236,19 @@ end
 # repository.)
 def set_last_changed_revision(repo, file_safety, fnames)
   dot_freq = (file_safety.size / 40.0).ceil # Print up to 40 progress dots
-  case repository_type
-  when 'git'
-    fnames = file_safety.keys if fnames.nil?
+  fnames   = file_safety.keys if fnames.nil?
 
-    fnames.each_with_index do |f, i|
-      info = %x[git log -n 1 #{f}].split("\n").first[7..-1]
-      if info.nil? || info.empty?
-        file_safety[f]['last_changed_rev'] = -1
-      else
-        file_safety[f]['last_changed_rev'] = info
-      end
-      # Show progress
-      print '.' if (i % dot_freq) == 0
+  fnames.each_with_index do |f, i|
+    last_revision = get_last_changed_revision(repo, f)
+    if last_revision.nil? || last_revision.empty?
+      file_safety[f]['last_changed_rev'] = -1
+    else
+      file_safety[f]['last_changed_rev'] = last_revision
     end
-    puts
-  when 'git-svn', 'svn'
-    fnames = file_safety.keys if fnames.nil?
-
-    fnames.each_with_index do |f, i|
-      last_revision = get_last_changed_revision(repo, f)
-      if last_revision.nil? || last_revision.empty?
-        file_safety[f]['last_changed_rev'] = -1
-      else
-        file_safety[f]['last_changed_rev'] = last_revision
-      end
-      # Show progress
-      print '.' if (i % dot_freq) == 0
-    end
-    puts
+    # Show progress
+    print '.' if (i % dot_freq) == 0
+  end
+  puts
     # NOTE: Do we need the following for retries?
 #     if retries && result.size != fnames.size && fnames.size > 1
 #        # At least one invalid (deleted file --> subsequent arguments ignored)
@@ -276,7 +260,6 @@ def set_last_changed_revision(repo, file_safety, fnames)
 #           result += svn_info_entries([f], repo, false, debug)
 #        }
 #      end
-  end
 end
 
 # Return the last changed revision
