@@ -1,16 +1,17 @@
+require 'pathname'
+require 'yaml'
+
 SAFETY_FILE =
   if File.exist?('code_safety.yml')
-    'code_safety.yml'
+    Pathname.new('code_safety.yml').expand_path
   elsif defined?(Rails)
     Rails.root.join('config', 'code_safety.yml')
   else
-    'code_safety.yml'
+    Pathname.new('code_safety.yml').expand_path
   end
 
 # Temporary overrides to only audit external access files
 SAFETY_REPOS = [['/svn/era', '/svn/extra/era/external-access']]
-
-require 'yaml'
 
 # Parameter max_print is number of entries to print before truncating output
 # (negative value => print all)
@@ -50,7 +51,7 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
     puts "Checking for new files in #{safety_repo}"
     new_files = get_new_files(safety_repo)
     # Ignore subdirectories, and exclude code_safety.yml by default.
-    new_files.delete_if { |f| f =~ /[\/\\]$/ || f == SAFETY_FILE }
+    new_files.delete_if { |f| f =~ /[\/\\]$/ || Pathname.new(f).expand_path == SAFETY_FILE }
     new_files.each do |f|
       next if file_safety.key?(f)
       file_safety[f] = {
@@ -473,3 +474,4 @@ end
 
 # Prevent building of un-reviewed gems:
 task build: :'audit:ensure_safe'
+
