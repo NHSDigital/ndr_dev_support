@@ -11,7 +11,7 @@ providing:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'ndr_dev_support', group: :development
+gem 'ndr_dev_support', group: [:development, :test]
 ```
 
 And then execute:
@@ -62,6 +62,24 @@ To add development support tasks to your project, add this line to your applicat
 
 ```ruby
 require 'ndr_dev_support/tasks'
+```
+
+### Integration test environment
+
+ndr_dev_support bundles a configured Rails integration testing environment. It uses `capybara` and `poltergeist` to drive a PhantomJS headless browser, and includes all necessary configuration (e.g. connection sharing / transactional test support).
+
+If an integration test errors or fails, `capybara-screenshot` is used to automatically retrieve a full-height screenshot from PhantomJS, which is then stored in `tmp/`.
+
+Beyond standard Capybara testing DSL, ndr_dev_support bundles some additional functionality:
+
+* `clear_headless_session!` - causes PhantomJS to reset, simulating a browser restart.
+* `delete_all_cookies!` - causes PhantomJS to delete all cookies. Helpful for testing AJAX logouts.
+* `within_screenshot_compatible_window` – similar to `within_window`, but allows failure screenshots to be taken of the failing child window, rather than the spawning parent.
+
+To use, ensure `phantomjs` is installed, and add the following to your application's `test_helper.rb`
+
+```ruby
+require 'ndr_dev_support/integration_testing'
 ```
 
 ## Development
