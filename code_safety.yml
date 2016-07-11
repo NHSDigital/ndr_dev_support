@@ -55,7 +55,7 @@ file safety:
   lib/ndr_dev_support/integration_testing/connection_sharing.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 88ac9269eb8f0b44c5920a946708e4715421bcad
+    safe_revision: 14716806f63058b1d5f3485e2380302fa6ef7526
   lib/ndr_dev_support/integration_testing/poltergeist.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -87,7 +87,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: cc35bc393f1e6b9eb3a93dfe4fa3a9aa90aacbec
+    safe_revision: 5ad343255973352fe41a9285ea7234276ebc49ab
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
