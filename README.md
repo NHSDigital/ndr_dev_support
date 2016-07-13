@@ -3,8 +3,9 @@
 This is the Public Health England (PHE) National Disease Registers (NDR) Developer Support ruby gem,
 providing:
 
-1. rake tasks to manage code auditing of ruby based projects; and
-2. a rake task to limit Rubocop's output to changed (and related) code.
+1. rake tasks to manage code auditing of ruby based projects
+2. rake tasks to limit Rubocop's output to changed (and related) code
+3. integration testing support, which can be required from a project's `test_helper.rb`
 
 ## Installation
 
