@@ -1,19 +1,83 @@
-# By default, would enforce { key: value } rather than { :key => value }.
-# AllCops:
-#   RunRailsCops: true
+# This file contains NDR's agreed deviations from the standard Ruby
+# Style Guide, the configuration for which can be found here:
+#   https://github.com/bbatsov/rubocop/blob/master/config/default.yml
+#
+# See the README for instructions on using in a project.
 
-# Multi-line method chaining should be done with trailing dots.
+AllCops:
+  # All cops should ignore files in the following locations:
+  Exclude:
+    - 'bin/*'
+    - 'db/**/*'
+    - 'lib/generators/**/templates/*'
+    - 'vendor/**/*'
+
+# Run the Rails cops by default (-R/--rails not required):
+Rails:
+  Enabled: true
+
+##################### Style ##################################
+
+# We make use of block comments, e.g. for validation documentation.
+Style/BlockComments:
+  Enabled: false
+
 Style/DotPosition:
+  # Multi-line method chaining should be done with trailing dots.
   EnforcedStyle: trailing
 
-# ...
-LineLength:
-  Max: 99
+Style/IfUnlessModifier:
+  MaxLineLength: 100
 
-# Relax some of the cops for tests
+Style/ModuleFunction:
+  # `extend self` has fewer side effects than `module_function`.
+  EnforcedStyle: extend_self
+
+Style/NumericLiterals:
+  Exclude:
+    - 'test/**/*.rb'
+
+Style/SingleLineBlockParams:
+  # Prefer readability of contextually-named variables.
+  Enabled: false
+
+Style/WhileUntilModifier:
+  MaxLineLength: 100
+
+##################### Metrics ##################################
+# NOTE: we bump some metrics by 50%, in recognition of Rubocop's
+#       desire to split that which we would consider atomic.
+
 Metrics/ClassLength:
+  Max: 150
   Exclude:
     - test/**/*.rb
+
+Metrics/ModuleLength:
+  Max: 150
+  Exclude:
+    - test/**/*.rb
+
+Metrics/CyclomaticComplexity:
+  Max: 9
+
+Metrics/LineLength:
+  Max: 100
+  Exclude:
+    - test/**/*.rb
+
 Metrics/MethodLength:
+  Max: 15
   Exclude:
     - test/**/*.rb
+
+Metrics/PerceivedComplexity:
+  Max: 12
+
+##################### Rails ##################################
+
+Rails/ActionFilter:
+  # 'action' is the default already; we explicitly list here as Rails 3.x
+  # projects will want to override this configuration to use 'filter' instead.
+  EnforcedStyle: action
+
