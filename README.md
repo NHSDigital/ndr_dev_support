@@ -39,9 +39,26 @@ For more details of the audit tasks available, execute:
 
     $ rake -T audit
 
+### RuboCop configuration
+
+ndr_dev_support includes tweaks to the default Ruby Style Guide, to better suit NDR.
+To use this updated style guide from within a project, add the following to top of the project's `.rubocop.yml` file:
+
+```yaml
+inherit_gem:
+  ndr_dev_support: .rubocop.yml
+```
+
+In order for these configuration to apply, you will need to invoke RuboCop using Bundler:
+
+```
+$ bundle exec rubocop .
+```
+...or use the bundled rake task (see next section).
+
 ### RuboCop filtering
 
-ndr_dev_support provides rake tasks to enable more targeted use of RuboCop, to analyse only relevant code changes:
+ndr_dev_support also provides rake tasks to enable more targeted use of RuboCop, to analyse only relevant code changes:
 ```
 $ rake rubocop:diff HEAD
 $ rake rubocop:diff HEAD~3..HEAD~2
