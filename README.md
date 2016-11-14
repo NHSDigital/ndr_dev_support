@@ -84,7 +84,7 @@ require 'ndr_dev_support/tasks'
 
 ### Integration test environment
 
-ndr_dev_support bundles a configured Rails integration testing environment. It uses `capybara` and `poltergeist` to drive a PhantomJS headless browser, and includes all necessary configuration (e.g. connection sharing / transactional test support).
+ndr_dev_support bundles a configured Rails integration testing environment. It uses `capybara` and `poltergeist` to drive a PhantomJS headless browser, and includes some sensible configuration.
 
 If an integration test errors or fails, `capybara-screenshot` is used to automatically retrieve a full-height screenshot from PhantomJS, which is then stored in `tmp/`.
 
@@ -98,6 +98,39 @@ To use, ensure `phantomjs` is installed, and add the following to your applicati
 
 ```ruby
 require 'ndr_dev_support/integration_testing'
+```
+
+When using `capybara` with PhantomJS, the test database must be consistent between the test runner and the application being tested. With transactional tests in operation, this means that both must share a connection. Doing so is error-prone, and can introduce race conditions. However, some projects have had success with the approach, so it is available within `ndr_dev_support` with the following additional require statement:
+
+```ruby
+# WARNING: can result in race conditions within the test suite
+require 'ndr_dev_support/integration_testing/connection_sharing'
+```
+
+The slower, more reliable, alternative is to use the `database_cleaner` gem. `ndr_dev_support` provides no built-in support for this approach, as configuration can be quite project-specific. However, as a starting point:
+
+Add to the `Gemfile`:
+
+```ruby
+group :test do
+  gem 'database_cleaner'
+end
+```
+
+Add to `test_helper.rb`:
+
+```ruby
+require 'database_cleaner'
+DatabaseCleaner.strategy = :deletion # anecdotally, faster than :truncation for our projects
+
+class ActionDispatch::IntegrationTest
+  # Don't wrap each test case in a transaction:
+  self.use_transactional_tests = false
+
+  # Instead, insert fixtures afresh between each test:
+  setup    { DatabaseCleaner.start }
+  teardown { DatabaseCleaner.clean }
+end
 ```
 
 ## Development
