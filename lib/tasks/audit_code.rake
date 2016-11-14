@@ -83,9 +83,9 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
   puts "Number of files which are no longer safe: #{unsafe.size}"
   puts
   printed = []
-  # We also print a third category: ones which are no longer in the repository
   file_list = sorted_file_list(file_safety, show_in_priority)
 
+  # We also print a third category: ones which are no longer in the repository
   file_list.each do |f|
     if print_file_safety(file_safety, trunk_repo, f, false, printed.size >= max_print)
       printed << f
@@ -105,9 +105,81 @@ end
 
 def sorted_file_list(file_safety, show_in_priority)
   if show_in_priority
-    file_safety.sort_by { |_k, v| v.nil? ? -100 : v['last_changed_rev'].to_i }.map(&:first)
+    pairs = file_safety.sort_by do |path, info|
+      # Sort using derived ordering, then alphabetically
+      [priority_ordering_for(path, info), path]
+    end
+
+    pairs.map(&:first)
   else
     file_safety.keys.sort
+  end
+end
+
+# Returns an orderable value for `path`, so that reviews
+# can be performed in order of priority. For a file that has
+# not been reviewed as safe
+def priority_ordering_for(path, info)
+  if info['safe_revision'].nil?
+    initial_ordering_for(path)
+  else
+    reviewed_ordering_for(path, info)
+  end
+end
+
+# Returns for `path` a value which allows paths to
+# be sorted chronologically by their creation date
+def initial_ordering_for(path)
+  case repository_type
+  when 'svn'
+    %x[svn log -r 1:HEAD --limit 1 -q "#{path}" | grep -v '^-' | cut -d' ' -f1 | tr -d 'r'].to_i
+  when 'git-svn'
+    # TODO: there seems to be a bug in git-svn's --oneline implmentation:
+    #       $ git svn --version #=> git-svn version 2.9.0 (svn 1.9.4)
+    #       It truncates revisions that are longer than the first revision it prints.
+    #
+    #       I think the below would work around the issue, although I don't believe we're
+    #       actually affected; we only ever care about the first revision printed anyway.
+    #
+    #       %x[git svn log --reverse "#{path}" | grep -E '^-+$' -A1 | grep -v '^-' | \
+    #          cut -d'|' -f1 | tr -d 'r'].to_i
+    #
+    #       We do care more in #reviewed_ordering_for, though, as for that we're interested
+    #       in the subsequent file to affect the `path`.
+    #
+    %x[git svn log --oneline --reverse --limit 1 "#{path}" | cut -d'|' -f1 | tr -d 'r'].to_i
+  when 'git'
+    # Get full SHA of first commit, and then count parent commits from there:
+    %x[git log --format=%H --reverse -- "#{path}" | head -1 | xargs git rev-list --count].to_i
+  else
+    0
+  end
+end
+
+# Returns for `path` a value which allows paths to
+# be sorted chronologically by the date which they
+# were first changed after they were last reviewed
+# and marked as safe.
+def reviewed_ordering_for(path, info)
+  case repository_type
+  when 'svn'
+    # Get the quiet log of first commit after the safe_revision that modified `path`,
+    # and extract from that the revision number:
+    %x[svn log -r #{info['safe_revision'].to_i + 1}:HEAD --limit 1 -q "#{path}" | \
+       grep -v '^-' | cut -d' ' -f1 | tr -d 'r'].to_i
+  when 'git-svn'
+    # Pull out commit history for path in chronological order, filter to lines
+    # matching revisions, file the line matching the known safe revision, then
+    # extract the next revision (er, yuk?):
+    %x[git svn log --reverse "#{path}" | grep -E '^-+$' -A1 | grep -v '^-' | \
+       grep '^r#{info['safe_revision']}' -A1 | tail -1 | cut -d'|' -f1 | tr -d 'r'].to_i
+  when 'git'
+    # Find first commit (chronologically) in the safe_revision..HEAD range that modifies
+    # `path`, then count reachable parents from there:
+    %x[git log --format=%H --reverse #{info['safe_revision']}..HEAD -- "#{path}" | head -1 | \
+       xargs git rev-list --count].to_i
+  else
+    0
   end
 end
 
