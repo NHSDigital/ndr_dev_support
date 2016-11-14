@@ -84,12 +84,7 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
   puts
   printed = []
   # We also print a third category: ones which are no longer in the repository
-  file_list =
-    if show_in_priority
-      file_safety.sort_by { |_k, v| v.nil? ? -100 : v['last_changed_rev'].to_i }.map(&:first)
-    else
-      file_safety.keys.sort
-    end
+  file_list = sorted_file_list(file_safety, show_in_priority)
 
   file_list.each do |f|
     if print_file_safety(file_safety, trunk_repo, f, false, printed.size >= max_print)
@@ -106,6 +101,14 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
 
   # Returns `true` unless there are pending reviews:
   unsafe.length.zero? && unknown.length.zero?
+end
+
+def sorted_file_list(file_safety, show_in_priority)
+  if show_in_priority
+    file_safety.sort_by { |_k, v| v.nil? ? -100 : v['last_changed_rev'].to_i }.map(&:first)
+  else
+    file_safety.keys.sort
+  end
 end
 
 # Print summary details of a file's known safety
