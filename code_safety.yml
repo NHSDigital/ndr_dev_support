@@ -86,8 +86,8 @@ file safety:
     safe_revision: a55c971cb770a8e5dc4be7ed66663dd5d695fcd1
   lib/ndr_dev_support/version.rb:
     comments: 
-    reviewed_by: josh.pencheon
-    safe_revision: 5ad343255973352fe41a9285ea7234276ebc49ab
+    reviewed_by: timgentry
+    safe_revision: d34d36104299c4debfd2a02cd1af050fcbbcc3e8
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
