@@ -1,6 +1,11 @@
 require 'pathname'
 require 'yaml'
 
+# FIXME: (?)
+#   We should be using Shellwords#escape throughout; it's code_safety.yml
+#   could be modified to cause running these rake tasks to execute arbitrary
+#   shell commands (filenames / safe_revisions etc are directly interpolated).
+
 SAFETY_FILE =
   if File.exist?('code_safety.yml')
     Pathname.new('code_safety.yml').expand_path
