@@ -156,10 +156,8 @@ def initial_ordering_for(path)
   end
 end
 
-# Returns for `path` a value which allows paths to
-# be sorted chronologically by the date which they
-# were first changed after they were last reviewed
-# and marked as safe.
+# Returns for `path` a value which allows paths to be sorted chronologically by the
+# date which they were first changed after they were last reviewed and marked as safe.
 def reviewed_ordering_for(path, info)
   case repository_type
   when 'svn'
@@ -175,9 +173,10 @@ def reviewed_ordering_for(path, info)
        grep '^r#{info['safe_revision']}' -A1 | tail -1 | cut -d'|' -f1 | tr -d 'r'].to_i
   when 'git'
     # Find first commit (chronologically) in the safe_revision..HEAD range that modifies
-    # `path`, then count reachable parents from there:
-    %x[git log --format=%H --reverse #{info['safe_revision']}..HEAD -- "#{path}" | head -1 | \
-       xargs git rev-list --count].to_i
+    # `path`, then count reachable parents from there. In the case that there was no commit
+    # in the range, returns the ordering for the safe revision instead.
+    %x[git log --format=%H --reverse #{info['safe_revision']}^..HEAD -- "#{path}" | \
+       head -2 | tail -1 | xargs git rev-list --count].to_i
   else
     0
   end
