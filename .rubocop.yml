@@ -22,6 +22,10 @@ Rails:
 Style/BlockComments:
   Enabled: false
 
+Style/Documentation:
+  Exclude:
+    - 'test/**/*'
+
 Style/DotPosition:
   # Multi-line method chaining should be done with trailing dots.
   EnforcedStyle: trailing
