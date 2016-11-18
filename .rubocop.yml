@@ -48,6 +48,9 @@ Style/WhileUntilModifier:
 # NOTE: we bump some metrics by 50%, in recognition of Rubocop's
 #       desire to split that which we would consider atomic.
 
+Metrics/AbcSize:
+  Max: 23
+
 Metrics/ClassLength:
   Max: 150
   Exclude:
