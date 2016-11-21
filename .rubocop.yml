@@ -59,6 +59,11 @@ Style/WhileUntilModifier:
 Metrics/AbcSize:
   Max: 23
 
+Metrics/BlockLength:
+  # We're already limiting method size, blocks outside of methods
+  # can legitimately be long (RuboCop defaults to max: 25 lines).
+  Enabled: false
+
 Metrics/ClassLength:
   Max: 150
   Exclude:
