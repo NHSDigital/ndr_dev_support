@@ -7,10 +7,10 @@
 AllCops:
   # All cops should ignore files in the following locations:
   Exclude:
-    - 'bin/*'
-    - 'db/**/*'
-    - 'lib/generators/**/templates/*'
-    - 'vendor/**/*'
+  - 'bin/*'
+  - 'db/**/*'
+  - 'lib/generators/**/templates/*'
+  - 'vendor/**/*'
 
 # Run the Rails cops by default (-R/--rails not required):
 Rails:
@@ -24,7 +24,7 @@ Style/BlockComments:
 
 Style/Documentation:
   Exclude:
-    - 'test/**/*'
+  - 'test/**/*.rb'
 
 Style/DotPosition:
   # Multi-line method chaining should be done with trailing dots.
@@ -39,7 +39,7 @@ Style/ModuleFunction:
 
 Style/NumericLiterals:
   Exclude:
-    - 'test/**/*.rb'
+  - 'test/**/*.rb'
 
 Style/SingleLineBlockParams:
   # Prefer readability of contextually-named variables.
@@ -58,12 +58,12 @@ Metrics/AbcSize:
 Metrics/ClassLength:
   Max: 150
   Exclude:
-    - test/**/*.rb
+  - 'test/**/*.rb'
 
 Metrics/ModuleLength:
   Max: 150
   Exclude:
-    - test/**/*.rb
+  - 'test/**/*.rb'
 
 Metrics/CyclomaticComplexity:
   Max: 9
@@ -71,12 +71,12 @@ Metrics/CyclomaticComplexity:
 Metrics/LineLength:
   Max: 100
   Exclude:
-    - test/**/*.rb
+  - 'test/**/*.rb'
 
 Metrics/MethodLength:
   Max: 15
   Exclude:
-    - test/**/*.rb
+  - 'test/**/*.rb'
 
 Metrics/PerceivedComplexity:
   Max: 12
