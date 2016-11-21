@@ -30,6 +30,10 @@ Style/DotPosition:
   # Multi-line method chaining should be done with trailing dots.
   EnforcedStyle: trailing
 
+Style/FrozenStringLiteralComment:
+  # We're not confident enough to make this recommendation everywhere
+  Enabled: false
+
 Style/IfUnlessModifier:
   MaxLineLength: 100
 
