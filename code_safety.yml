@@ -6,8 +6,8 @@ file safety:
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   ".rubocop.yml":
     comments: 
-    reviewed_by: timgentry
-    safe_revision: 1cc4e768fd872e0776962c50fa220a17ee738558
+    reviewed_by: josh.pencheon
+    safe_revision: b37c9dc7871fad7c592945188b2e7307f1abedcd
   ".travis.yml":
     comments: 
     reviewed_by: josh.pencheon
@@ -26,8 +26,8 @@ file safety:
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   README.md:
     comments: 
-    reviewed_by: timgentry
-    safe_revision: 337228acefd995d094490b51f554c74aeec69e89
+    reviewed_by: josh.pencheon
+    safe_revision: 6cf4a9cab6f8f028d45e05e256b63d9fe9d1b7fc
   Rakefile:
     comments: 
     reviewed_by: josh.pencheon
@@ -47,7 +47,7 @@ file safety:
   lib/ndr_dev_support/integration_testing.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 88ac9269eb8f0b44c5920a946708e4715421bcad
+    safe_revision: 5b238d73cfb0e506ced8b4e474cc2b3392838925
   lib/ndr_dev_support/integration_testing/capybara.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -55,7 +55,7 @@ file safety:
   lib/ndr_dev_support/integration_testing/connection_sharing.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 14716806f63058b1d5f3485e2380302fa6ef7526
+    safe_revision: 6cf4a9cab6f8f028d45e05e256b63d9fe9d1b7fc
   lib/ndr_dev_support/integration_testing/poltergeist.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -86,8 +86,8 @@ file safety:
     safe_revision: a55c971cb770a8e5dc4be7ed66663dd5d695fcd1
   lib/ndr_dev_support/version.rb:
     comments: 
-    reviewed_by: timgentry
-    safe_revision: d34d36104299c4debfd2a02cd1af050fcbbcc3e8
+    reviewed_by: josh.pencheon
+    safe_revision: 48575bd1b969dbae8bf03a645a6fa0b0ecf9bba9
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
