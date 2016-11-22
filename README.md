@@ -45,9 +45,10 @@ ndr_dev_support includes tweaks to the default Ruby Style Guide, to better suit 
 To use this updated style guide from within a project, add the following to top of the project's `.rubocop.yml` file:
 
 ```yaml
-inherit_gem:
-  ndr_dev_support: .rubocop.yml
+inherit_from: 'https://raw.githubusercontent.com/PublicHealthEngland/ndr_dev_support/master/.rubocop.yml'
 ```
+
+RuboCop also allows `inherit_gem`, but this currently doesn't work with relative paths (paths are deemed relative to the config file, rather than the project including `ndr_dev_support`).
 
 In order for these configuration to apply, you will need to invoke RuboCop using Bundler:
 
