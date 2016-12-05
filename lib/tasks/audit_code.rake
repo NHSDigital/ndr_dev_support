@@ -88,6 +88,9 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
   puts "Number of files which are no longer safe: #{unsafe.size}"
   puts
   printed = []
+  
+  # TODO: priority ordering is going to be expensive; we should only spend
+  #       time ordering the sublist of files that are `unkown` / `unsafe`!
   file_list = sorted_file_list(file_safety, show_in_priority)
 
   # We also print a third category: ones which are no longer in the repository
