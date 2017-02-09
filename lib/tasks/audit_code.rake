@@ -242,7 +242,7 @@ def set_last_changed_revision(repo, file_safety, fnames)
     fnames = file_safety.keys if fnames.nil?
 
     fnames.each_with_index do |f, i|
-      info = %x[git log -n 1 #{f}].split("\n").first[7..-1]
+      info = %x[git log -n 1 -- #{f}].split("\n").first[7..-1]
       if info.nil? || info.empty?
         file_safety[f]['last_changed_rev'] = -1
       else
