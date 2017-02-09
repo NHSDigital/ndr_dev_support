@@ -87,12 +87,12 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: timgentry
-    safe_revision: cb511a532ed4eb7bbed50261626287f887d47a1b
+    safe_revision: e7f67cbe41eb7c64866b46ff78b49dd0991a1161
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
     reviewed_by: timgentry
-    safe_revision: 64fc0d768229c885e47e2a6b45a0c8c647d91af9
+    safe_revision: 2cee09c32e63a5c339fc8acddd04c2f30dbbfa06
   lib/tasks/rubocop.rake:
     comments: 
     reviewed_by: josh.pencheon
