@@ -71,12 +71,12 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
   puts "Number of files originally in #{SAFETY_FILE}: #{orig_count}"
   puts "Number of new files added: #{file_safety.size - orig_count}"
 
-  if file_safety.keys.select {|a| !File.file?(a)}.size > 0 then
-    puts "Number of files no longer in repository but in code_safety.yml: #{file_safety.keys.select {|a| !File.file?(a)}.size}"
+  missing_files = file_safety.keys.reject { |path| File.file?(path) }
+  
+  if missing_files.length > 0
+    puts "Number of files no longer in repository but in code_safety.yml: #{missing_files.length}"
     puts "  Please run rake audit:tidy_code_safety_file to remove redundant files"
-     file_safety.keys.select {|a| !File.file?(a)}.each do |fd|
-       puts "  " + fd
-     end 
+    missing_files.each { |path| puts "  " + path }
   end
 
   # Now generate statistics:
@@ -474,8 +474,7 @@ Usage:
 
   desc 'Deletes any files from code_safety.yml that are no longer in repository.'
   task(:tidy_code_safety_file) do
-
-    puts 'Checking code safety...'
+    puts 'Checking code safety for missing files...'
 
     remove_non_existent_files_from_code_safety
   end
