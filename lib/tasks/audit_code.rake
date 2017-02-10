@@ -151,7 +151,7 @@ def flag_file_as_safe(release, reviewed_by, comments, f)
   safety_cfg = YAML.load_file(SAFETY_FILE)
   file_safety = safety_cfg['file safety']
 
-  unless File.exist?(f) 
+  unless File.exist?(f)
     abort("Error: Unable to flag non-existent file as safe: #{f}")
   end
   unless file_safety.key?(f)
@@ -408,7 +408,7 @@ end
 def remove_non_existent_files_from_code_safety
   safety_cfg = YAML.load_file(SAFETY_FILE)
   file_safety = safety_cfg['file safety']
-  files_no_longer_in_repo = file_safety.keys.select {|ff| !File.file?(ff)}
+  files_no_longer_in_repo = files_no_longer_in_repo = file_safety.keys.reject {|ff| File.file?(ff)}
   files_no_longer_in_repo.each do |f|
     puts 'No longer in repository ' + f 
     file_safety.delete f
@@ -474,13 +474,10 @@ Usage:
 
   desc 'Deletes any files from code_safety.yml that are no longer in repository.'
   task(:tidy_code_safety_file) do
-#    abort('You have local changes, cannot verify code safety!') unless clean_working_copy?
 
     puts 'Checking code safety...'
 
-    begin
-      remove_non_existent_files_from_code_safety
-    end
+    remove_non_existent_files_from_code_safety
   end
 
   desc 'Wraps audit:code, and stops if any review is pending/stale.'
