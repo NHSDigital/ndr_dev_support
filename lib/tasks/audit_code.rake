@@ -71,6 +71,14 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
   puts "Number of files originally in #{SAFETY_FILE}: #{orig_count}"
   puts "Number of new files added: #{file_safety.size - orig_count}"
 
+  if file_safety.keys.select {|a| !File.file?(a)}.size > 0 then
+    puts "Number of files no longer in repository but in code_safety.yml: #{file_safety.keys.select {|a| !File.file?(a)}.size}"
+    puts "  Please run rake audit:tidy_code_safety_file to remove redundant files"
+     file_safety.keys.select {|a| !File.file?(a)}.each do |fd|
+       puts "  " + fd
+     end 
+  end
+
   # Now generate statistics:
   unknown = file_safety.values.select { |x| x['safe_revision'].nil? }
   unsafe = file_safety.values.select do |x|
@@ -143,7 +151,7 @@ def flag_file_as_safe(release, reviewed_by, comments, f)
   safety_cfg = YAML.load_file(SAFETY_FILE)
   file_safety = safety_cfg['file safety']
 
-  unless File.exist?(f)
+  unless File.exist?(f) 
     abort("Error: Unable to flag non-existent file as safe: #{f}")
   end
   unless file_safety.key?(f)
@@ -352,6 +360,7 @@ def print_repo_file_diffs(repolatest, repo, fname, user_name, safe_revision)
   if cmd
     puts(cmd.join(' '))
     stdout_and_err_str, status = Open3.capture2e(*cmd)
+    puts 'Invalid commit ID in code_safety.yml ' + safe_revision  if stdout_and_err_str.starts_with?('fatal: Invalid revision range ')
     puts(stdout_and_err_str)
   else
     puts 'Unknown repo'
@@ -394,6 +403,21 @@ def clean_working_copy?
  when 'git', 'git-svn'
    system('git diff --quiet HEAD')
  end
+end
+
+def remove_non_existent_files_from_code_safety
+  safety_cfg = YAML.load_file(SAFETY_FILE)
+  file_safety = safety_cfg['file safety']
+  files_no_longer_in_repo = file_safety.keys.select {|ff| !File.file?(ff)}
+  files_no_longer_in_repo.each do |f|
+    puts 'No longer in repository ' + f 
+    file_safety.delete f
+  end 
+  File.open(SAFETY_FILE, 'w') do |file|
+    # Consistent file diffs, as ruby preserves Hash insertion order since v1.9
+    safety_cfg['file safety'] = Hash[file_safety.sort]
+    YAML.dump(safety_cfg, file) # Save changes before checking latest revisions
+  end 
 end
 
 namespace :audit do
@@ -446,6 +470,17 @@ Usage:
     end
 
     flag_file_as_safe(release, ENV['reviewed_by'], ENV['comments'], ENV['file'])
+  end
+
+  desc 'Deletes any files from code_safety.yml that are no longer in repository.'
+  task(:tidy_code_safety_file) do
+#    abort('You have local changes, cannot verify code safety!') unless clean_working_copy?
+
+    puts 'Checking code safety...'
+
+    begin
+      remove_non_existent_files_from_code_safety
+    end
   end
 
   desc 'Wraps audit:code, and stops if any review is pending/stale.'
