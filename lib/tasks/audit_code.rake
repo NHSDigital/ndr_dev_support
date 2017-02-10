@@ -408,7 +408,7 @@ end
 def remove_non_existent_files_from_code_safety
   safety_cfg = YAML.load_file(SAFETY_FILE)
   file_safety = safety_cfg['file safety']
-  files_no_longer_in_repo = files_no_longer_in_repo = file_safety.keys.reject {|ff| File.file?(ff)}
+  files_no_longer_in_repo = file_safety.keys.reject {|ff| File.file?(ff)}
   files_no_longer_in_repo.each do |f|
     puts 'No longer in repository ' + f 
     file_safety.delete f
