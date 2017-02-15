@@ -23,6 +23,12 @@ Or install it yourself as:
 
     $ gem install ndr_dev_support
 
+To add development support tasks (see below) to your project, add this line to your application's `Rakefile`:
+
+```ruby
+require 'ndr_dev_support/tasks'
+```
+
 ## Usage
 
 ### Code Auditing Rake Tasks
@@ -75,12 +81,6 @@ $ rake rubocop:diff:head
 $ rake rubocop:diff:staged
 $ rake rubocop:diff:unstaged
 $ find . -iregex .*\.rake$ | xargs rake rubocop:diff:file
-```
-
-To add development support tasks to your project, add this line to your application's Rakefile:
-
-```ruby
-require 'ndr_dev_support/tasks'
 ```
 
 ### Integration test environment
