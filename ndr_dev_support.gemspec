@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.2'
 
   # Rubocop dependencies:
-  spec.add_dependency 'rubocop', '0.44.0'
+  spec.add_dependency 'rubocop', '0.44.1'
   spec.add_dependency 'parser'
   spec.add_dependency 'rainbow'
 
