@@ -10,6 +10,7 @@ AllCops:
   - 'bin/*'
   - 'db/**/*'
   - 'lib/generators/**/templates/*'
+  - 'tmp/**/*'
   - 'vendor/**/*'
 
 # Run the Rails cops by default (-R/--rails not required):
