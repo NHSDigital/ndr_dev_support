@@ -360,7 +360,7 @@ def print_repo_file_diffs(repolatest, repo, fname, user_name, safe_revision)
   if cmd
     puts(cmd.join(' '))
     stdout_and_err_str, status = Open3.capture2e(*cmd)
-    puts 'Invalid commit ID in code_safety.yml ' + safe_revision  if stdout_and_err_str.starts_with?('fatal: Invalid revision range ')
+    puts 'Invalid commit ID in code_safety.yml ' + safe_revision  if stdout_and_err_str.start_with?('fatal: Invalid revision range ')
     puts(stdout_and_err_str)
   else
     puts 'Unknown repo'
