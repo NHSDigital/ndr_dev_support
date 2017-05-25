@@ -13,6 +13,11 @@ SAFETY_FILE =
 # Temporary overrides to only audit external access files
 SAFETY_REPOS = [['/svn/era', '/svn/extra/era/external-access']]
 
+# Returns the (Bundler aware) rake command
+def rake_cmd
+  ENV['BUNDLE_BIN_PATH'] ? 'bundle exec rake' : 'rake'
+end
+
 # Parameter max_print is number of entries to print before truncating output
 # (negative value => print all)
 def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, show_in_priority = false, user_name = 'usr')
@@ -75,7 +80,7 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
   
   if missing_files.length > 0
     puts "Number of files no longer in repository but in code_safety.yml: #{missing_files.length}"
-    puts "  Please run rake audit:tidy_code_safety_file to remove redundant files"
+    puts "  Please run #{rake_cmd} audit:tidy_code_safety_file to remove redundant files"
     missing_files.each { |path| puts "  " + path }
   end
 
@@ -367,7 +372,8 @@ def print_repo_file_diffs(repolatest, repo, fname, user_name, safe_revision)
   end
 
   puts %(To flag the changes to this file as safe, run:)
-  puts %(  rake audit:safe release=#{repolatest} file=#{fname} reviewed_by=#{user_name} comments="")
+  puts "  #{rake_cmd} audit:safe release=#{repolatest} file=#{fname} reviewed_by=#{user_name}" \
+       ' comments=""'
   puts
 end
 
@@ -440,7 +446,7 @@ files which have changed since they were last verified as safe."
     all_safe = audit_code_safety(max_print, ignore_new, show_diffs, show_in_priority, reviewer)
 
     unless show_diffs
-      puts 'To show file diffs, run:  rake audit:code max_print=-1 show_diffs=true'
+      puts "To show file diffs, run:  #{rake_cmd} audit:code max_print=-1 show_diffs=true"
     end
 
     exit(1) unless all_safe
@@ -449,8 +455,8 @@ files which have changed since they were last verified as safe."
   desc "Flag a source file as safe.
 
 Usage:
-  Flag as safe:   rake audit:safe release=revision reviewed_by=usr [comments=...] file=f
-  Needs review:   rake audit:safe release=0 [comments=...] file=f"
+  Flag as safe:   #{rake_cmd} audit:safe release=revision reviewed_by=usr [comments=...] file=f
+  Needs review:   #{rake_cmd} audit:safe release=0 [comments=...] file=f"
   task(:safe) do
     release = get_release
 
@@ -458,14 +464,14 @@ Usage:
     required_fields << 'reviewed_by' if release # 'Needs review' doesn't need a reviewer
     missing = required_fields.collect { |f| (f if ENV[f].to_s.empty? || (f == 'reviewed_by' && ENV[f] == 'usr')) }.compact # Avoid accidental missing username
     unless missing.empty?
-      puts 'Usage: rake audit:safe release=revision reviewed_by=usr [comments=...] file=f'
-      puts 'or, to flag a file for review: rake audit:safe release=0 [comments=...] file=f'
+      puts "Usage: #{rake_cmd} audit:safe release=revision reviewed_by=usr [comments=...] file=f"
+      puts "or, to flag a file for review: #{rake_cmd} audit:safe release=0 [comments=...] file=f"
       abort("Error: Missing required argument(s): #{missing.join(', ')}")
     end
 
     unless release.nil? || release_valid?(release)
-      puts 'Usage: rake audit:safe release=revision reviewed_by=usr [comments=...] file=f'
-      puts 'or, to flag a file for review: rake audit:safe release=0 [comments=...] file=f'
+      puts "Usage: #{rake_cmd} audit:safe release=revision reviewed_by=usr [comments=...] file=f"
+      puts "or, to flag a file for review: #{rake_cmd} audit:safe release=0 [comments=...] file=f"
       abort("Error: Invalid release: #{ENV['release']}")
     end
 
@@ -495,7 +501,7 @@ Usage:
     rescue SystemExit => ex
       puts '=============================================================='
       puts 'Code safety review of some files are not up-to-date; aborting!'
-      puts '  - to review the files in question, run:  rake audit:code'
+      puts "  - to review the files in question, run:  #{rake_cmd} audit:code"
       puts '=============================================================='
 
       raise ex
