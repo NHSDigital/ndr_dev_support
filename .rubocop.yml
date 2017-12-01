@@ -53,6 +53,12 @@ Style/SingleLineBlockParams:
 Style/WhileUntilModifier:
   MaxLineLength: 100
 
+####################### Performance ############################
+
+# Disagree; readabilty trumps here IMO.
+Performance/Casecmp:
+  Enabled: false
+
 ##################### Metrics ##################################
 # NOTE: we bump some metrics by 50%, in recognition of Rubocop's
 #       desire to split that which we would consider atomic.
