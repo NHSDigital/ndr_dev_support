@@ -13,6 +13,13 @@ AllCops:
   - 'tmp/**/*'
   - 'vendor/**/*'
 
+# Once supported by RuboCop, this will prevent cop-specific Excludes from
+# overwriting the AllCops defaults above:
+#
+#   inherit_mode:
+#     merge:
+#       - Exclude
+
 # Run the Rails cops by default (-R/--rails not required):
 Rails:
   Enabled: true
