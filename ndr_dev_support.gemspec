@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'pry'
 
   # Rubocop dependencies:
-  spec.add_dependency 'rubocop', '0.44.1'
+  spec.add_dependency 'rubocop', '0.52.1'
   spec.add_dependency 'parser'
   spec.add_dependency 'rainbow'
 

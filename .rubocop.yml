@@ -35,8 +35,8 @@ Style/FrozenStringLiteralComment:
   # We're not confident enough to make this recommendation everywhere
   Enabled: false
 
-Style/IfUnlessModifier:
-  MaxLineLength: 100
+Metrics/LineLength:
+  Max: 100
 
 Style/ModuleFunction:
   # `extend self` has fewer side effects than `module_function`.
@@ -49,9 +49,6 @@ Style/NumericLiterals:
 Style/SingleLineBlockParams:
   # Prefer readability of contextually-named variables.
   Enabled: false
-
-Style/WhileUntilModifier:
-  MaxLineLength: 100
 
 ####################### Performance ############################
 
