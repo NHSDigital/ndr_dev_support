@@ -17,6 +17,12 @@ AllCops:
 Rails:
   Enabled: true
 
+##################### Layout #################################
+
+Layout/DotPosition:
+  # Multi-line method chaining should be done with trailing dots.
+  EnforcedStyle: trailing
+
 ##################### Style ##################################
 
 # We make use of block comments, e.g. for validation documentation.
@@ -26,10 +32,6 @@ Style/BlockComments:
 Style/Documentation:
   Exclude:
   - 'test/**/*.rb'
-
-Style/DotPosition:
-  # Multi-line method chaining should be done with trailing dots.
-  EnforcedStyle: trailing
 
 Style/FrozenStringLiteralComment:
   # We're not confident enough to make this recommendation everywhere
