@@ -62,7 +62,8 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
       file_safety[f] = {
         'comments' => nil,
         'reviewed_by' => nil,
-        'safe_revision' => nil }
+        'safe_revision' => nil
+      }
     end
     File.open(SAFETY_FILE, 'w') do |file|
       # Consistent file diffs, as ruby preserves Hash insertion order since v1.9
@@ -77,19 +78,19 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
   puts "Number of new files added: #{file_safety.size - orig_count}"
 
   missing_files = file_safety.keys.reject { |path| File.file?(path) }
-  
+
   if missing_files.length > 0
     puts "Number of files no longer in repository but in code_safety.yml: #{missing_files.length}"
     puts "  Please run #{rake_cmd} audit:tidy_code_safety_file to remove redundant files"
-    missing_files.each { |path| puts "  " + path }
+    missing_files.each { |path| puts '  ' + path }
   end
 
   # Now generate statistics:
   unknown = file_safety.values.select { |x| x['safe_revision'].nil? }
   unsafe = file_safety.values.select do |x|
     !x['safe_revision'].nil? && x['safe_revision'] != -1 &&
-    x['last_changed_rev'] != x['safe_revision'] &&
-    !(x['last_changed_rev'] =~ /^[0-9]+$/ && x['safe_revision'] =~ /^[0-9]+$/ &&
+      x['last_changed_rev'] != x['safe_revision'] &&
+      !(x['last_changed_rev'] =~ /^[0-9]+$/ && x['safe_revision'] =~ /^[0-9]+$/ &&
       x['last_changed_rev'].to_i < x['safe_revision'].to_i)
   end
   puts "Number of files with no safe version: #{unknown.size}"
@@ -201,7 +202,7 @@ def repository_type
   @repository_type ||= if Dir.exist?('.svn') || system("svn info . > /dev/null 2>&1")
                          'svn'
                        elsif Dir.exist?('.git') && open('.git/config').grep(/svn/).any?
-                         'git-svn' 
+                         'git-svn'
                        elsif Dir.exist?('.git') && open('.git/config').grep(/git/).any?
                          'git'
                        else
@@ -214,17 +215,17 @@ def get_trunk_repo
   when 'svn'
     repo_info = %x[svn info]
     puts 'svn case'
-    return repo_info.split("\n").select { |x| x =~ /^URL: / }.collect { |x| x[5..-1] }.first
+    repo_info.split("\n").select { |x| x =~ /^URL: / }.collect { |x| x[5..-1] }.first
   when 'git-svn'
     puts 'git-svn case'
     repo_info = %x[git svn info]
-    return repo_info.split("\n").select { |x| x =~ /^URL: / }.collect { |x| x[5..-1] }.first
+    repo_info.split("\n").select { |x| x =~ /^URL: / }.collect { |x| x[5..-1] }.first
   when 'git'
     puts 'git case'
     repo_info = %x[git remote -v]
-    return repo_info.split("\n").first[7..-9]
+    repo_info.split("\n").first[7..-9]
   else
-    return 'Information not available. Unknown repository type'
+    'Information not available. Unknown repository type'
   end
 end
 
@@ -364,7 +365,7 @@ def print_repo_file_diffs(repolatest, repo, fname, user_name, safe_revision)
   end
   if cmd
     puts(cmd.join(' '))
-    stdout_and_err_str, status = Open3.capture2e(*cmd)
+    stdout_and_err_str, _status = Open3.capture2e(*cmd)
     puts 'Invalid commit ID in code_safety.yml ' + safe_revision  if stdout_and_err_str.start_with?('fatal: Invalid revision range ')
     puts(stdout_and_err_str)
   else
@@ -403,27 +404,27 @@ def get_release
 end
 
 def clean_working_copy?
- case repository_type
- when 'svn'
-   system('svn status | grep -q [^AMCDG]')
- when 'git', 'git-svn'
-   system('git diff --quiet HEAD')
- end
+  case repository_type
+  when 'svn'
+    system('svn status | grep -q [^AMCDG]')
+  when 'git', 'git-svn'
+    system('git diff --quiet HEAD')
+  end
 end
 
 def remove_non_existent_files_from_code_safety
   safety_cfg = YAML.load_file(SAFETY_FILE)
   file_safety = safety_cfg['file safety']
-  files_no_longer_in_repo = file_safety.keys.reject {|ff| File.file?(ff)}
+  files_no_longer_in_repo = file_safety.keys.reject { |ff| File.file?(ff) }
   files_no_longer_in_repo.each do |f|
-    puts 'No longer in repository ' + f 
+    puts 'No longer in repository ' + f
     file_safety.delete f
-  end 
+  end
   File.open(SAFETY_FILE, 'w') do |file|
     # Consistent file diffs, as ruby preserves Hash insertion order since v1.9
     safety_cfg['file safety'] = Hash[file_safety.sort]
     YAML.dump(safety_cfg, file) # Save changes before checking latest revisions
-  end 
+  end
 end
 
 namespace :audit do
@@ -453,7 +454,6 @@ files which have changed since they were last verified as safe."
   end
 
   desc "Flag a source file as safe.
-
 Usage:
   Flag as safe:   #{rake_cmd} audit:safe release=revision reviewed_by=usr [comments=...] file=f
   Needs review:   #{rake_cmd} audit:safe release=0 [comments=...] file=f"
@@ -511,4 +511,3 @@ end
 
 # Prevent building of un-reviewed gems:
 task build: :'audit:ensure_safe'
-
