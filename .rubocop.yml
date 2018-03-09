@@ -55,6 +55,10 @@ Style/NumericLiterals:
   Exclude:
   - 'test/**/*.rb'
 
+Style/YodaCondition:
+  # Disagree; literals as first argument can guard against accidental assignment.
+  Enabled: false
+
 Style/SingleLineBlockParams:
   # Prefer readability of contextually-named variables.
   Enabled: false
