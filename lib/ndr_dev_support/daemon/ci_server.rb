@@ -33,7 +33,7 @@ module NdrDevSupport
         if (matchdata = commit.message.match(/\bgit-svn-id: [^@]+@(\d+)\s/))
           matchdata[1]
         else
-          commit.oid
+          commit.oid[0, 7]
         end
       end
 
