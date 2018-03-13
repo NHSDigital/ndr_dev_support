@@ -32,6 +32,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'capybara-screenshot'
   spec.add_dependency 'poltergeist', '>= 1.8.0'
 
+  # CI server dependencies:
+  spec.add_dependency 'activesupport', '< 6.0.0'
+  spec.add_dependency 'rugged'
+
   spec.add_development_dependency 'bundler', '~> 1.7'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency "minitest", "~> 5.0"
