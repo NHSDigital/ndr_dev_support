@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
 
   # CI server dependencies:
   spec.add_dependency 'activesupport', '< 6.0.0'
+  spec.add_dependency 'bundler-audit'
   spec.add_dependency 'rugged'
 
   spec.add_development_dependency 'bundler', '~> 1.7'
