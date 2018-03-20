@@ -1,6 +1,7 @@
 load 'tasks/audit_code.rake'
 load 'tasks/ci/bundle_audit.rake'
 load 'tasks/ci/bundle_install.rake'
+load 'tasks/ci/housekeep.rake'
 load 'tasks/ci/notes.rake'
 load 'tasks/ci/rugged.rake'
 load 'tasks/ci/server.rake'
