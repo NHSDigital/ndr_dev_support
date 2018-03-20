@@ -1,7 +1,7 @@
 namespace :ci do
   # Runs the Rails rake notes task (if using Rails) and converts annotation counts into "metrics"
   # Usage: bundle exec rake ci:notes
-  desc 'notes'
+  desc 'Count notes and other annotations'
   task :notes do
     next unless Rake::Task.task_defined?('notes')
 

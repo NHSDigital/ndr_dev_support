@@ -1,7 +1,7 @@
 namespace :ci do
   # Checks bundle audit and converts advisories into "attachments"
   # Usage: bin/rake ci:bundle_audit
-  desc 'bundle_audit'
+  desc 'Patch-level verification for Bundler'
   task :bundle_audit do
     require 'English'
 

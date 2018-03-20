@@ -1,6 +1,6 @@
 namespace :ci do
   namespace :rugged do
-    desc 'setup'
+    desc 'Setup Rugged, get the current commit and friendly version of the revision name'
     task :setup do
       require 'ndr_dev_support/daemon/ci_server'
 

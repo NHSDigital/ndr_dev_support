@@ -1,5 +1,5 @@
 namespace :ci do
-  desc 'server'
+  desc 'Runs the Rake CI server'
   task :server do
     require 'ndr_dev_support/daemon/ci_server'
 
