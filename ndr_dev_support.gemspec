@@ -35,6 +35,7 @@ Gem::Specification.new do |spec|
   # CI server dependencies:
   spec.add_dependency 'activesupport', '< 6.0.0'
   spec.add_dependency 'bundler-audit'
+  spec.add_dependency 'github-linguist'
   spec.add_dependency 'prometheus-client'
   spec.add_dependency 'rugged'
 
