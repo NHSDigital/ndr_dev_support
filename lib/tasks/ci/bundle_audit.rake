@@ -5,11 +5,6 @@ namespace :ci do
   task :bundle_audit do
     require 'English'
 
-    COLOURS = {
-      'High' => 'danger',
-      'Medium' => 'warning'
-    }.freeze
-
     # Update ruby-advisory-db
     `bundle audit update`
     # Check for insecure dependencies
@@ -33,6 +28,7 @@ namespace :ci do
       criticality = hash['Criticality']
 
       attachment = {
+        color: criticality == 'High' ? 'danger' : 'warning',
         fallback: title,
         title: title,
         title_link: url,
@@ -40,7 +36,6 @@ namespace :ci do
         fields: hash.map { |key, value| { title: key, value: value, short: true } },
         footer: 'bundle exec rake ci:bundle_audit'
       }
-      attachment[:color] = COLOURS[criticality] if COLOURS[criticality]
 
       @attachments ||= []
       @attachments << attachment
