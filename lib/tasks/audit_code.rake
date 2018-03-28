@@ -403,6 +403,17 @@ def get_release
   release
 end
 
+def get_reviewer(prompt = false)
+  reviewer = ENV['reviewed_by']
+  if reviewer.nil?
+    require 'rugged'
+    repo = Rugged::Repository.new('.')
+    reviewer = repo.config['user.username'] || repo.config['user.name']
+  end
+  reviewer = prompter('Please provider your username:') if prompt && reviewer.nil?
+  ENV['reviewed_by'] = reviewer
+end
+
 def clean_working_copy?
   case repository_type
   when 'svn'
@@ -425,6 +436,11 @@ def remove_non_existent_files_from_code_safety
     safety_cfg['file safety'] = Hash[file_safety.sort]
     YAML.dump(safety_cfg, file) # Save changes before checking latest revisions
   end
+end
+
+def prompter(msg)
+  STDOUT.puts msg
+  STDIN.gets.strip
 end
 
 namespace :audit do
@@ -476,6 +492,50 @@ Usage:
     end
 
     flag_file_as_safe(release, ENV['reviewed_by'], ENV['comments'], ENV['file'])
+  end
+
+  desc "Review safety of selected source file.
+Usage:
+  Review a source file:   #{rake_cmd} audit:review file=f [comments=...]"
+  task(:review) do
+    fname = ENV['file']
+    if fname.nil?
+      puts "Usage: #{rake_cmd} audit:review file=f [comments=...]"
+      abort('Error: Missing required argument: file')
+    end
+    abort("Error: Unable to review non-existent file as safe: #{fname}") unless File.exist?(fname)
+
+    safety_cfg = File.exist?(SAFETY_FILE) ? YAML.load_file(SAFETY_FILE) : {}
+    file_safety = safety_cfg['file safety']
+    file_safety[fname] ||= {
+      'comments' => nil,
+      'reviewed_by' => nil,
+      'safe_revision' => nil
+    }
+
+    trunk_repo = get_trunk_repo
+    set_last_changed_revision(trunk_repo, file_safety, [fname])
+
+    if print_file_safety(file_safety, trunk_repo, fname)
+      print_file_diffs(file_safety, trunk_repo, fname, get_reviewer)
+
+      input = prompter("Do you want to mark #{fname} safe? [yes/no]")
+      until %w[yes no].include?(input.downcase)
+        input = prompter("Do you want to mark #{fname} safe? [yes/no]")
+      end
+
+      if input.downcase == 'yes'
+        get_reviewer(true)
+        ENV['comments'] ||= prompter('Please write your comments:')
+        release = get_last_changed_revision(trunk_repo, fname)
+        repolatest = file_safety[fname]['last_changed_rev'] || get_last_changed_revision(repo, fname)
+        
+        abort("Error: Invalid release: #{ENV['release']}") unless release_valid?(release)
+        flag_file_as_safe(repolatest, ENV['reviewed_by'], ENV['comments'], ENV['file'])
+      end
+    else
+      puts "#{fname}\n  File is safe. No review needed."
+    end
   end
 
   desc 'Deletes any files from code_safety.yml that are no longer in repository.'
