@@ -11,7 +11,7 @@ SAFETY_FILE =
   end
 
 # Temporary overrides to only audit external access files
-SAFETY_REPOS = [['/svn/era', '/svn/extra/era/external-access']]
+SAFETY_REPOS = [['/svn/era', '/svn/extra/era/external-access']].freeze
 
 # Returns the (Bundler aware) rake command
 def rake_cmd
@@ -34,9 +34,9 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
   puts 'Running source code safety audit script.'
   puts
 
-  max_print = 1_000_000 if max_print < 0
+  max_print = 1_000_000 if max_print.negative?
   file_safety = load_file_safety
-  file_safety.each do |_k, v|
+  file_safety.each_value do |v|
     rev = v['safe_revision']
     v['safe_revision'] = rev.to_s if rev.is_a?(Integer)
   end
@@ -73,7 +73,7 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
 
   missing_files = file_safety.keys.reject { |path| File.file?(path) }
 
-  if missing_files.length > 0
+  unless missing_files.empty?
     puts "Number of files no longer in repository but in code_safety.yml: #{missing_files.length}"
     puts "  Please run #{rake_cmd} audit:tidy_code_safety_file to remove redundant files"
     missing_files.each { |path| puts '  ' + path }
@@ -100,9 +100,7 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
     end
 
   file_list.each do |f|
-    if print_file_safety(file_safety, trunk_repo, f, false, printed.size >= max_print)
-      printed << f
-    end
+    printed << f if print_file_safety(file_safety, f, false, printed.size >= max_print)
   end
   puts "... and #{printed.size - max_print} others" if printed.size > max_print
   if show_diffs
@@ -120,7 +118,7 @@ end
 # If not verbose, only prints details for unsafe files
 # Returns true if anything printed (or would have been printed if silent),
 # or false otherwise.
-def print_file_safety(file_safety, repo, fname, verbose = false, silent = false)
+def print_file_safety(file_safety, fname, verbose = false, silent = false)
   msg = "#{fname}\n  "
   entry = file_safety[fname]
   msg += 'File not in audit list' if entry.nil?
@@ -148,14 +146,12 @@ def print_file_safety(file_safety, repo, fname, verbose = false, silent = false)
 end
 
 def flag_file_as_safe(release, reviewed_by, comments, f)
-  unless File.exist?(f)
-    abort("Error: Unable to flag non-existent file as safe: #{f}")
-  end
+  abort("Error: Unable to flag non-existent file as safe: #{f}") unless File.exist?(f)
   file_safety = load_file_safety
   add_new_file_to_file_safety(file_safety, f)
   entry = file_safety[f]
   entry_orig = entry.dup
-  if comments.to_s.length > 0 && entry['comments'] != comments
+  if !comments.to_s.empty? && entry['comments'] != comments
     entry['comments'] = if entry['comments'].to_s.empty?
                           comments
                         else
@@ -163,9 +159,7 @@ def flag_file_as_safe(release, reviewed_by, comments, f)
                         end
   end
   if entry['safe_revision']
-    unless release
-      abort("Error: File already has safe revision #{entry['safe_revision']}: #{f}")
-    end
+    abort("Error: File already has safe revision #{entry['safe_revision']}: #{f}") unless release
     if release.is_a?(Integer) && release < entry['safe_revision']
       puts("Warning: Rolling back safe revision from #{entry['safe_revision']} to #{release} for #{f}")
     end
@@ -191,7 +185,7 @@ end
 
 # Determine the type of repository
 def repository_type
-  @repository_type ||= if Dir.exist?('.svn') || system("svn info . > /dev/null 2>&1")
+  @repository_type ||= if Dir.exist?('.svn') || system('svn info . > /dev/null 2>&1')
                          'svn'
                        elsif Dir.exist?('.git') && open('.git/config').grep(/svn/).any?
                          'git-svn'
@@ -205,16 +199,16 @@ end
 def get_trunk_repo
   case repository_type
   when 'svn'
-    repo_info = %x[svn info]
+    repo_info = `svn info`
     puts 'svn case'
     repo_info.split("\n").select { |x| x =~ /^URL: / }.collect { |x| x[5..-1] }.first
   when 'git-svn'
     puts 'git-svn case'
-    repo_info = %x[git svn info]
+    repo_info = `git svn info`
     repo_info.split("\n").select { |x| x =~ /^URL: / }.collect { |x| x[5..-1] }.first
   when 'git'
     puts 'git case'
-    repo_info = %x[git remote -v]
+    repo_info = `git remote -v`
     repo_info.split("\n").first[7..-9]
   else
     'Information not available. Unknown repository type'
@@ -224,15 +218,15 @@ end
 def get_new_files(safety_repo)
   case repository_type
   when 'svn', 'git-svn'
-    %x[svn ls -R "#{safety_repo}"].split("\n")
+    `svn ls -R "#{safety_repo}"`.split("\n")
   when 'git'
-    #%x[git ls-files --modified].split("\n")
-    %x[git ls-files].split("\n")
+    # `git ls-files --modified`.split("\n")
+    `git ls-files`.split("\n")
 
     # TODO: Below is for remote repository - for testing use local files
-    #new_files = %x[git ls-files --modified #{safety_repo}].split("\n")
+    # new_files = `git ls-files --modified #{safety_repo}`.split("\n")
     # TODO: Do we need the --modified option?
-    #new_files = %x[git ls-files --modified].split("\n")
+    # new_files = `git ls-files --modified`.split("\n")
   else
     []
   end
@@ -248,14 +242,14 @@ def set_last_changed_revision(repo, file_safety, fnames)
     fnames = file_safety.keys if fnames.nil?
 
     fnames.each_with_index do |f, i|
-      info = %x[git log -n 1 -- #{f}].split("\n").first[7..-1]
+      info = `git log -n 1 -- #{f}`.split("\n").first[7..-1]
       if info.nil? || info.empty?
         file_safety[f]['last_changed_rev'] = -1
       else
         file_safety[f]['last_changed_rev'] = info
       end
       # Show progress
-      print '.' if (i % dot_freq) == 0
+      print '.' if (i % dot_freq).zero?
     end
     puts
   when 'git-svn', 'svn'
@@ -269,20 +263,20 @@ def set_last_changed_revision(repo, file_safety, fnames)
         file_safety[f]['last_changed_rev'] = last_revision
       end
       # Show progress
-      print '.' if (i % dot_freq) == 0
+      print '.' if (i % dot_freq).zero?
     end
     puts
     # NOTE: Do we need the following for retries?
-#     if retries && result.size != fnames.size && fnames.size > 1
-#        # At least one invalid (deleted file --> subsequent arguments ignored)
-#        # Try each file individually
-#        # (It would probably be safe to continue from the extra_info.size argument)
-#        puts "Retrying (got #{result.size}, expected #{fnames.size})" if debug >= 2
-#        result = []
-#        fnames.each{ |f|
-#           result += svn_info_entries([f], repo, false, debug)
-#        }
-#      end
+    # if retries && result.size != fnames.size && fnames.size > 1
+    #    # At least one invalid (deleted file --> subsequent arguments ignored)
+    #    # Try each file individually
+    #    # (It would probably be safe to continue from the extra_info.size argument)
+    #    puts "Retrying (got #{result.size}, expected #{fnames.size})" if debug >= 2
+    #    result = []
+    #    fnames.each{ |f|
+    #       result += svn_info_entries([f], repo, false, debug)
+    #    }
+    #  end
   end
 end
 
@@ -290,10 +284,10 @@ end
 def get_last_changed_revision(repo, fname)
   case repository_type
   when 'git'
-    %x[git log -n 1 -- "#{fname}"].split("\n").first[7..-1]
+    `git log -n 1 -- "#{fname}"`.split("\n").first[7..-1]
   when 'git-svn', 'svn'
     begin
-      svn_info = %x[svn info -r head "#{repo}/#{fname}"]
+      svn_info = `svn info -r head "#{repo}/#{fname}"`
     rescue
       puts 'we have an error in the svn info line'
     end
@@ -302,16 +296,6 @@ def get_last_changed_revision(repo, fname)
     rescue
       puts 'We have an error in getting the revision'
     end
-  end
-end
-
-# Get mime type. Note that Git does not have this information
-def get_mime_type(repo, fname)
-  case repository_type
-  when 'git'
-    'Git does not provide mime types'
-  when 'git-svn', 'svn'
-    %x[svn propget svn:mime-type "#{repo}/#{fname}"].chomp
   end
 end
 
@@ -324,14 +308,8 @@ def print_file_diffs(file_safety, repo, fname, user_name)
   if safe_revision.nil?
     first_revision = set_safe_revision
     print_repo_file_diffs(repolatest, repo, fname, user_name, first_revision)
-  else
-
-    rev = get_last_changed_revision(repo, fname)
-    if rev
-      mime = get_mime_type(repo, fname)
-    end
-
-    print_repo_file_diffs(repolatest, repo, fname, user_name, safe_revision) if repolatest != safe_revision
+  elsif repolatest != safe_revision
+    print_repo_file_diffs(repolatest, repo, fname, user_name, safe_revision)
   end
 end
 
@@ -340,7 +318,7 @@ end
 def set_safe_revision
   case repository_type
   when 'git'
-    %x[git rev-list --max-parents=0 HEAD].chomp
+    `git rev-list --max-parents=0 HEAD`.chomp
   when 'git-svn', 'svn'
     0
   end
@@ -358,7 +336,7 @@ def print_repo_file_diffs(repolatest, repo, fname, user_name, safe_revision)
   if cmd
     puts(cmd.join(' '))
     stdout_and_err_str, _status = Open3.capture2e(*cmd)
-    puts 'Invalid commit ID in code_safety.yml ' + safe_revision  if stdout_and_err_str.start_with?('fatal: Invalid revision range ')
+    puts 'Invalid commit ID in code_safety.yml ' + safe_revision if stdout_and_err_str.start_with?('fatal: Invalid revision range ')
     puts(stdout_and_err_str)
   else
     puts 'Unknown repo'
@@ -442,7 +420,6 @@ end
 namespace :audit do
   desc "Audit safety of source code.
 Usage: audit:code [max_print=n] [ignore_new=false|true] [show_diffs=false|true] [reviewed_by=usr]
-
 File #{SAFETY_FILE} lists the safety and revision information
 of the era source code. This task updates the list, and [TODO] warns about
 files which have changed since they were last verified as safe."
@@ -472,7 +449,7 @@ Usage:
   task(:safe) do
     release = get_release
 
-    required_fields = %w(release file)
+    required_fields = %w[release file]
     required_fields << 'reviewed_by' if release # 'Needs review' doesn't need a reviewer
     missing = required_fields.collect { |f| (f if ENV[f].to_s.empty? || (f == 'reviewed_by' && ENV[f] == 'usr')) }.compact # Avoid accidental missing username
     unless missing.empty?
@@ -506,7 +483,7 @@ Usage:
     trunk_repo = get_trunk_repo
     set_last_changed_revision(trunk_repo, file_safety, [fname])
 
-    if print_file_safety(file_safety, trunk_repo, fname)
+    if print_file_safety(file_safety, fname)
       print_file_diffs(file_safety, trunk_repo, fname, get_reviewer)
 
       input = prompter("Do you want to mark #{fname} safe? [yes/no]")
@@ -519,7 +496,6 @@ Usage:
         ENV['comments'] ||= prompter('Please write your comments:')
         release = get_last_changed_revision(trunk_repo, fname)
         repolatest = file_safety[fname]['last_changed_rev']
-        
         abort("Error: Invalid release: #{ENV['release']}") unless release_valid?(release)
         flag_file_as_safe(repolatest, ENV['reviewed_by'], ENV['comments'], ENV['file'])
       end
