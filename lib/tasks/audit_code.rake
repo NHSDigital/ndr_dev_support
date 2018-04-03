@@ -18,6 +18,34 @@ def rake_cmd
   ENV['BUNDLE_BIN_PATH'] ? 'bundle exec rake' : 'rake'
 end
 
+def load_file_safety
+  safety_cfg = File.exist?(SAFETY_FILE) ? YAML.load_file(SAFETY_FILE) : {}
+  file_safety = safety_cfg['file safety']
+  if file_safety.nil?
+    puts "Creating new 'file safety' block in #{SAFETY_FILE}"
+    file_safety = {}
+  end
+  file_safety
+end
+
+def update_safety_file(file_safety)
+  File.open(SAFETY_FILE, 'w') do |file|
+    # Consistent file diffs, as ruby preserves Hash insertion order since v1.9
+    list = {}
+    list['file safety'] = Hash[file_safety.sort]
+    YAML.dump(list, file) # Save changes before checking latest revisions
+  end
+end
+
+def add_new_file_to_file_safety(file_safety, f)
+  return if file_safety.key?(f)
+  file_safety[f] = {
+    'comments' => nil,
+    'reviewed_by' => nil,
+    'safe_revision' => nil
+  }
+end
+
 # Parameter max_print is number of entries to print before truncating output
 # (negative value => print all)
 def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, show_in_priority = false, user_name = 'usr')
@@ -25,12 +53,7 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
   puts
 
   max_print = 1_000_000 if max_print < 0
-  safety_cfg = File.exist?(SAFETY_FILE) ? YAML.load_file(SAFETY_FILE) : {}
-  file_safety = safety_cfg['file safety']
-  if file_safety.nil?
-    puts "Creating new 'file safety' block in #{SAFETY_FILE}"
-    safety_cfg['file safety'] = file_safety = {}
-  end
+  file_safety = load_file_safety
   file_safety.each do |_k, v|
     rev = v['safe_revision']
     v['safe_revision'] = rev.to_s if rev.is_a?(Integer)
@@ -57,19 +80,8 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
     new_files = get_new_files(safety_repo)
     # Ignore subdirectories, and exclude code_safety.yml by default.
     new_files.delete_if { |f| f =~ /[\/\\]$/ || Pathname.new(f).expand_path == SAFETY_FILE }
-    new_files.each do |f|
-      next if file_safety.key?(f)
-      file_safety[f] = {
-        'comments' => nil,
-        'reviewed_by' => nil,
-        'safe_revision' => nil
-      }
-    end
-    File.open(SAFETY_FILE, 'w') do |file|
-      # Consistent file diffs, as ruby preserves Hash insertion order since v1.9
-      safety_cfg['file safety'] = Hash[file_safety.sort]
-      YAML.dump(safety_cfg, file) # Save changes before checking latest revisions
-    end
+    new_files.each { |f| add_new_file_to_file_safety(file_safety, f) }
+    update_safety_file(file_safety) # Save changes before checking latest revisions
   end
   puts "Updating latest revisions for #{file_safety.size} files"
   set_last_changed_revision(trunk_repo, file_safety, file_safety.keys)
@@ -154,18 +166,12 @@ def print_file_safety(file_safety, repo, fname, verbose = false, silent = false)
 end
 
 def flag_file_as_safe(release, reviewed_by, comments, f)
-  safety_cfg = YAML.load_file(SAFETY_FILE)
-  file_safety = safety_cfg['file safety']
+  file_safety = load_file_safety
 
   unless File.exist?(f)
     abort("Error: Unable to flag non-existent file as safe: #{f}")
   end
-  unless file_safety.key?(f)
-    file_safety[f] = {
-      'comments' => nil,
-      'reviewed_by' => :dummy, # dummy value, will be overwritten
-      'safe_revision' => nil }
-  end
+  add_new_file_to_file_safety(file_safety, f)
   entry = file_safety[f]
   entry_orig = entry.dup
   if comments.to_s.length > 0 && entry['comments'] != comments
@@ -188,11 +194,7 @@ def flag_file_as_safe(release, reviewed_by, comments, f)
   if entry == entry_orig
     puts "No changes when updating safe_revision to #{release || '[none]'} for #{f}"
   else
-    File.open(SAFETY_FILE, 'w') do |file|
-      # Consistent file diffs, as ruby preserves Hash insertion order since v1.9
-      safety_cfg['file safety'] = Hash[file_safety.sort]
-      YAML.dump(safety_cfg, file) # Save changes before checking latest revisions
-    end
+    update_safety_file(file_safety)
     puts "Updated safe_revision to #{release || '[none]'} for #{f}"
   end
 end
@@ -413,18 +415,13 @@ def clean_working_copy?
 end
 
 def remove_non_existent_files_from_code_safety
-  safety_cfg = YAML.load_file(SAFETY_FILE)
-  file_safety = safety_cfg['file safety']
+  file_safety = load_file_safety
   files_no_longer_in_repo = file_safety.keys.reject { |ff| File.file?(ff) }
   files_no_longer_in_repo.each do |f|
     puts 'No longer in repository ' + f
     file_safety.delete f
   end
-  File.open(SAFETY_FILE, 'w') do |file|
-    # Consistent file diffs, as ruby preserves Hash insertion order since v1.9
-    safety_cfg['file safety'] = Hash[file_safety.sort]
-    YAML.dump(safety_cfg, file) # Save changes before checking latest revisions
-  end
+  update_safety_file(file_safety)
 end
 
 namespace :audit do
