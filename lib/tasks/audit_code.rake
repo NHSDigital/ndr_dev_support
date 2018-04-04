@@ -336,7 +336,7 @@ def print_repo_file_diffs(repolatest, repo, fname, usr, safe_revision, interacti
   require 'highline/import'
 
   if interactive
-    ask("\nPress Enter to continue ...")
+    ask("\n<%= color('Press Enter to continue ...', :yellow) %>")
     system('clear')
     system("printf '\033[3J'") # clear the scrollback
   end
@@ -358,16 +358,23 @@ def print_repo_file_diffs(repolatest, repo, fname, usr, safe_revision, interacti
   end
 
   if interactive
-    response = ask("Flag #{fname} changes safe? [Yes|No|Abort]: ") { |q| q.in = %w[Yes No Abort] }
-    if response == 'Yes'
+    response = ask("Flag #{fname} changes safe? [Yes|No|Abort]: ") { |q| q.case = :down }
+    if %w[yes y].include?(response)
       puts 'Flagging as safe...'
       release = get_release(repolatest)
-      usr = ask('File reviewed by:') { |q| q.validate = /\A[\w ]+\Z/} if usr.to_s.strip.empty?
+      if usr.to_s.strip.empty?
+        usr = ask('File reviewed by:') do |q|
+          q.whitespace = :strip_and_collapse
+          q.validate = /\A[\w \-]+\Z/
+        end
+      end
       comment = ask('Please write your comments (optional):')
       # use to_s to convert response from !ruby/string:HighLine::String to String
       flag_file_as_safe(release, usr.to_s, comment.to_s, fname)
-    elsif response == 'Abort'
+    elsif %w[abort a].include?(response)
       abort('Rake abort: user interrupt detected')
+    else
+      say("\n<%= color('Safey review for #{fname} skipped by user.', :magenta) %>")
     end
   else
     puts 'To flag the changes to this file as safe, run:'
