@@ -18,20 +18,44 @@ def rake_cmd
   ENV['BUNDLE_BIN_PATH'] ? 'bundle exec rake' : 'rake'
 end
 
-# Parameter max_print is number of entries to print before truncating output
-# (negative value => print all)
-def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, show_in_priority = false, user_name = 'usr')
-  puts 'Running source code safety audit script.'
-  puts
-
-  max_print = 1_000_000 if max_print < 0
+def load_file_safety
   safety_cfg = File.exist?(SAFETY_FILE) ? YAML.load_file(SAFETY_FILE) : {}
   file_safety = safety_cfg['file safety']
   if file_safety.nil?
     puts "Creating new 'file safety' block in #{SAFETY_FILE}"
-    safety_cfg['file safety'] = file_safety = {}
+    file_safety = {}
   end
-  file_safety.each do |_k, v|
+  file_safety
+end
+
+def update_safety_file(file_safety)
+  File.open(SAFETY_FILE, 'w') do |file|
+    # Consistent file diffs, as ruby preserves Hash insertion order since v1.9
+    list = {}
+    list['file safety'] = Hash[file_safety.sort]
+    YAML.dump(list, file) # Save changes before checking latest revisions
+  end
+end
+
+def add_new_file_to_file_safety(file_safety, f)
+  return if file_safety.key?(f)
+  file_safety[f] = {
+    'comments' => nil,
+    'reviewed_by' => nil,
+    'safe_revision' => nil
+  }
+end
+
+# Parameter max_print is number of entries to print before truncating output
+# (negative value => print all)
+def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, show_in_priority = false, usr = 'usr', interactive = false)
+  puts 'Running source code safety audit script.'
+  puts
+
+  max_print = 1_000_000 if max_print.negative?
+  show_diffs = true if interactive
+  file_safety = load_file_safety
+  file_safety.each_value do |v|
     rev = v['safe_revision']
     v['safe_revision'] = rev.to_s if rev.is_a?(Integer)
   end
@@ -57,19 +81,8 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
     new_files = get_new_files(safety_repo)
     # Ignore subdirectories, and exclude code_safety.yml by default.
     new_files.delete_if { |f| f =~ /[\/\\]$/ || Pathname.new(f).expand_path == SAFETY_FILE }
-    new_files.each do |f|
-      next if file_safety.key?(f)
-      file_safety[f] = {
-        'comments' => nil,
-        'reviewed_by' => nil,
-        'safe_revision' => nil
-      }
-    end
-    File.open(SAFETY_FILE, 'w') do |file|
-      # Consistent file diffs, as ruby preserves Hash insertion order since v1.9
-      safety_cfg['file safety'] = Hash[file_safety.sort]
-      YAML.dump(safety_cfg, file) # Save changes before checking latest revisions
-    end
+    new_files.each { |f| add_new_file_to_file_safety(file_safety, f) }
+    update_safety_file(file_safety) # Save changes before checking latest revisions
   end
   puts "Updating latest revisions for #{file_safety.size} files"
   set_last_changed_revision(trunk_repo, file_safety, file_safety.keys)
@@ -79,7 +92,7 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
 
   missing_files = file_safety.keys.reject { |path| File.file?(path) }
 
-  if missing_files.length > 0
+  unless missing_files.empty?
     puts "Number of files no longer in repository but in code_safety.yml: #{missing_files.length}"
     puts "  Please run #{rake_cmd} audit:tidy_code_safety_file to remove redundant files"
     missing_files.each { |path| puts '  ' + path }
@@ -106,15 +119,13 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
     end
 
   file_list.each do |f|
-    if print_file_safety(file_safety, trunk_repo, f, false, printed.size >= max_print)
-      printed << f
-    end
+    printed << f if print_file_safety(file_safety, f, false, printed.size >= max_print)
   end
   puts "... and #{printed.size - max_print} others" if printed.size > max_print
   if show_diffs
     puts
     printed.each do |f|
-      print_file_diffs(file_safety, trunk_repo, f, user_name)
+      print_file_diffs(file_safety, trunk_repo, f, usr, interactive)
     end
   end
 
@@ -126,7 +137,7 @@ end
 # If not verbose, only prints details for unsafe files
 # Returns true if anything printed (or would have been printed if silent),
 # or false otherwise.
-def print_file_safety(file_safety, repo, fname, verbose = false, silent = false)
+def print_file_safety(file_safety, fname, verbose = false, silent = false)
   msg = "#{fname}\n  "
   entry = file_safety[fname]
   msg += 'File not in audit list' if entry.nil?
@@ -154,21 +165,12 @@ def print_file_safety(file_safety, repo, fname, verbose = false, silent = false)
 end
 
 def flag_file_as_safe(release, reviewed_by, comments, f)
-  safety_cfg = YAML.load_file(SAFETY_FILE)
-  file_safety = safety_cfg['file safety']
-
-  unless File.exist?(f)
-    abort("Error: Unable to flag non-existent file as safe: #{f}")
-  end
-  unless file_safety.key?(f)
-    file_safety[f] = {
-      'comments' => nil,
-      'reviewed_by' => :dummy, # dummy value, will be overwritten
-      'safe_revision' => nil }
-  end
+  abort("Error: Unable to flag non-existent file as safe: #{f}") unless File.exist?(f)
+  file_safety = load_file_safety
+  add_new_file_to_file_safety(file_safety, f)
   entry = file_safety[f]
   entry_orig = entry.dup
-  if comments.to_s.length > 0 && entry['comments'] != comments
+  if !comments.to_s.empty? && entry['comments'] != comments
     entry['comments'] = if entry['comments'].to_s.empty?
                           comments
                         else
@@ -176,9 +178,7 @@ def flag_file_as_safe(release, reviewed_by, comments, f)
                         end
   end
   if entry['safe_revision']
-    unless release
-      abort("Error: File already has safe revision #{entry['safe_revision']}: #{f}")
-    end
+    abort("Error: File already has safe revision #{entry['safe_revision']}: #{f}") unless release
     if release.is_a?(Integer) && release < entry['safe_revision']
       puts("Warning: Rolling back safe revision from #{entry['safe_revision']} to #{release} for #{f}")
     end
@@ -188,11 +188,7 @@ def flag_file_as_safe(release, reviewed_by, comments, f)
   if entry == entry_orig
     puts "No changes when updating safe_revision to #{release || '[none]'} for #{f}"
   else
-    File.open(SAFETY_FILE, 'w') do |file|
-      # Consistent file diffs, as ruby preserves Hash insertion order since v1.9
-      safety_cfg['file safety'] = Hash[file_safety.sort]
-      YAML.dump(safety_cfg, file) # Save changes before checking latest revisions
-    end
+    update_safety_file(file_safety)
     puts "Updated safe_revision to #{release || '[none]'} for #{f}"
   end
 end
@@ -313,49 +309,38 @@ def get_last_changed_revision(repo, fname)
   end
 end
 
-# Get mime type. Note that Git does not have this information
-def get_mime_type(repo, fname)
-  case repository_type
-  when 'git'
-    'Git does not provide mime types'
-  when 'git-svn', 'svn'
-    %x[svn propget svn:mime-type "#{repo}/#{fname}"].chomp
-  end
-end
-
 # # Print file diffs, for code review
-def print_file_diffs(file_safety, repo, fname, user_name)
+def print_file_diffs(file_safety, repo, fname, usr, interactive)
   entry = file_safety[fname]
   repolatest = entry['last_changed_rev']
   safe_revision = entry['safe_revision']
 
-  if safe_revision.nil?
-    first_revision = set_safe_revision
-    print_repo_file_diffs(repolatest, repo, fname, user_name, first_revision)
-  else
-
-    rev = get_last_changed_revision(repo, fname)
-    if rev
-      mime = get_mime_type(repo, fname)
-    end
-
-    print_repo_file_diffs(repolatest, repo, fname, user_name, safe_revision) if repolatest != safe_revision
-  end
+  return unless safe_revision.nil? || repolatest != safe_revision
+  safe_revision ||= root_revision
+  print_repo_file_diffs(repolatest, repo, fname, usr, safe_revision, interactive)
 end
 
 # Returns first commit for git and 0 for svn in order to be used to display
 # new files. Called from print_file_diffs
-def set_safe_revision
+def root_revision
   case repository_type
   when 'git'
-    %x[git rev-list --max-parents=0 HEAD].chomp
+    `git rev-list --max-parents=0 HEAD`.chomp
   when 'git-svn', 'svn'
     0
   end
 end
 
-def print_repo_file_diffs(repolatest, repo, fname, user_name, safe_revision)
+def print_repo_file_diffs(repolatest, repo, fname, usr, safe_revision, interactive)
   require 'open3'
+  require 'highline/import'
+
+  if interactive
+    ask("\n<%= color('Press Enter to continue ...', :yellow) %>")
+    system('clear')
+    system("printf '\033[3J'") # clear the scrollback
+  end
+
   cmd = nil
   case repository_type
   when 'git'
@@ -366,15 +351,36 @@ def print_repo_file_diffs(repolatest, repo, fname, user_name, safe_revision)
   if cmd
     puts(cmd.join(' '))
     stdout_and_err_str, _status = Open3.capture2e(*cmd)
-    puts 'Invalid commit ID in code_safety.yml ' + safe_revision  if stdout_and_err_str.start_with?('fatal: Invalid revision range ')
+    puts 'Invalid commit ID in code_safety.yml ' + safe_revision if stdout_and_err_str.start_with?('fatal: Invalid revision range ')
     puts(stdout_and_err_str)
   else
     puts 'Unknown repo'
   end
 
-  puts %(To flag the changes to this file as safe, run:)
-  puts "  #{rake_cmd} audit:safe release=#{repolatest} file=#{fname} reviewed_by=#{user_name}" \
-       ' comments=""'
+  if interactive
+    response = ask("Flag #{fname} changes safe? [Yes|No|Abort]: ") { |q| q.case = :down }
+    if %w[yes y].include?(response)
+      puts 'Flagging as safe...'
+      release = get_release(repolatest)
+      if usr.to_s.strip.empty?
+        usr = ask('File reviewed by:') do |q|
+          q.whitespace = :strip_and_collapse
+          q.validate = /\A[\w \-]+\Z/
+        end
+      end
+      comment = ask('Please write your comments (optional):')
+      # use to_s to convert response from !ruby/string:HighLine::String to String
+      flag_file_as_safe(release, usr.to_s, comment.to_s, fname)
+    elsif %w[abort a].include?(response)
+      abort('Rake abort: user interrupt detected')
+    else
+      say("\n<%= color('Safey review for #{fname} skipped by user.', :magenta) %>")
+    end
+  else
+    puts 'To flag the changes to this file as safe, run:'
+    puts "  #{rake_cmd} audit:safe release=#{repolatest} file=#{fname} reviewed_by=#{usr}" \
+         ' comments=""'
+  end
   puts
 end
 
@@ -389,8 +395,8 @@ def release_valid?(release)
   end
 end
 
-def get_release
-  release = ENV['release']
+def get_release(release = nil)
+  release ||= ENV['release']
   release = nil if release == '0'
   case repository_type
   when 'svn', 'git-svn'
@@ -413,29 +419,24 @@ def clean_working_copy?
 end
 
 def remove_non_existent_files_from_code_safety
-  safety_cfg = YAML.load_file(SAFETY_FILE)
-  file_safety = safety_cfg['file safety']
+  file_safety = load_file_safety
   files_no_longer_in_repo = file_safety.keys.reject { |ff| File.file?(ff) }
   files_no_longer_in_repo.each do |f|
     puts 'No longer in repository ' + f
     file_safety.delete f
   end
-  File.open(SAFETY_FILE, 'w') do |file|
-    # Consistent file diffs, as ruby preserves Hash insertion order since v1.9
-    safety_cfg['file safety'] = Hash[file_safety.sort]
-    YAML.dump(safety_cfg, file) # Save changes before checking latest revisions
-  end
+  update_safety_file(file_safety)
 end
 
 namespace :audit do
   desc "Audit safety of source code.
-Usage: audit:code [max_print=n] [ignore_new=false|true] [show_diffs=false|true] [reviewed_by=usr]
+Usage: audit:code [max_print=n] [ignore_new=false|true] [show_diffs=false|true] [reviewed_by=usr] [interactive=false|true]
 
 File #{SAFETY_FILE} lists the safety and revision information
 of the era source code. This task updates the list, and [TODO] warns about
 files which have changed since they were last verified as safe."
   task(:code) do
-    puts 'Usage: audit:code [max_print=n] [ignore_new=false|true] [show_diffs=false|true] [show_in_priority=false|true] [reviewed_by=usr]'
+    puts 'Usage: audit:code [max_print=n] [ignore_new=false|true] [show_diffs=false|true] [show_in_priority=false|true] [reviewed_by=usr] [interactive=false|true]'
     puts "This is a #{repository_type} repository"
 
     ignore_new = (ENV['ignore_new'].to_s =~ /\Atrue\Z/i)
@@ -443,10 +444,11 @@ files which have changed since they were last verified as safe."
     show_in_priority = (ENV['show_in_priority'].to_s =~ /\Atrue\Z/i)
     max_print = ENV['max_print'] =~ /\A-?[0-9][0-9]*\Z/ ? ENV['max_print'].to_i : 20
     reviewer  = ENV['reviewed_by']
+    interactive = (ENV['interactive'].to_s =~ /\Atrue\Z/i)
 
-    all_safe = audit_code_safety(max_print, ignore_new, show_diffs, show_in_priority, reviewer)
+    all_safe = audit_code_safety(max_print, ignore_new, show_diffs, show_in_priority, reviewer, interactive)
 
-    unless show_diffs
+    unless show_diffs || interactive
       puts "To show file diffs, run:  #{rake_cmd} audit:code max_print=-1 show_diffs=true"
     end
 
