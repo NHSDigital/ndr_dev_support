@@ -11,7 +11,7 @@ file safety:
   ".rubocop.yml":
     comments: 
     reviewed_by: timgentry
-    safe_revision: ac89be1deb3d47e9fb00ac2de424116593012074
+    safe_revision: 3a4fc58f43e28c32e4fea25fa56a1eaf4a887d84
   ".travis.yml":
     comments: 
     reviewed_by: josh.pencheon
@@ -48,6 +48,14 @@ file safety:
     comments: 
     reviewed_by: timgentry
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+  lib/ndr_dev_support/daemon/ci_server.rb:
+    comments: 
+    reviewed_by: 
+    safe_revision: 
+  lib/ndr_dev_support/daemon/stoppable.rb:
+    comments: 
+    reviewed_by: 
+    safe_revision: 
   lib/ndr_dev_support/integration_testing.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -84,19 +92,63 @@ file safety:
     comments: 
     reviewed_by: josh.pencheon
     safe_revision: 41cf1558f567928faaa1e670a36d941c03c78044
+  lib/ndr_dev_support/slack_message_publisher.rb:
+    comments: 
+    reviewed_by: 
+    safe_revision: 
   lib/ndr_dev_support/tasks.rb:
     comments: 
-    reviewed_by: joshpencheon
-    safe_revision: a55c971cb770a8e5dc4be7ed66663dd5d695fcd1
+    reviewed_by: timgentry
+    safe_revision: ad38e92c6e56b9d81fdab10681d8f2924eeadf5a
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: timgentry
-    safe_revision: fde5bc348b5393ab95b8f0e8d5cae9df29a85f34
+    safe_revision: 8e076cbdbac3a1d65e955457b58e42f4ed6ff152
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
     reviewed_by: timgentry
     safe_revision: 4813e92fc951a3c033c08c848a9e07e8d5867133
+  lib/tasks/ci/bundle_audit.rake:
+    comments: 
+    reviewed_by: 
+    safe_revision: 
+  lib/tasks/ci/bundle_install.rake:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: cf22c7ab8b2eb67b501b5ebd1309c832db4fdf6c
+  lib/tasks/ci/housekeep.rake:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: 3dfcdb6c76fbccc44a331986673d63282f87f2fa
+  lib/tasks/ci/linguist.rake:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: 00cd6c2f71612a467ee88ad53c21e08f073871d5
+  lib/tasks/ci/notes.rake:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: f828113894a16581d0aa181504c799e661f8401d
+  lib/tasks/ci/prometheus.rake:
+    comments: 
+    reviewed_by: 
+    safe_revision: 
+  lib/tasks/ci/rugged.rake:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: 7ab7061b257f916eb43bc8d184aa425f1f08b739
+  lib/tasks/ci/server.rake:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: e581239a77666500a3108bcb3d480e370a82adb8
+  lib/tasks/ci/slack.rake:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: ad38e92c6e56b9d81fdab10681d8f2924eeadf5a
+  lib/tasks/ci/stats.rake:
+    comments: 
+    reviewed_by: timgentry
+    safe_revision: 2abc538e6e43896896721470237e5f91be1bf500
   lib/tasks/rubocop.rake:
     comments: 
     reviewed_by: josh.pencheon
@@ -104,7 +156,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments: 
     reviewed_by: timgentry
-    safe_revision: ac89be1deb3d47e9fb00ac2de424116593012074
+    safe_revision: 73030d56a06d05ae2d8716713b01647d76b7d904
   test/ndr_dev_support_test.rb:
     comments: 
     reviewed_by: timgentry
