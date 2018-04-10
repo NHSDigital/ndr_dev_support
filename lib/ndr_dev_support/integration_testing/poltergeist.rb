@@ -17,6 +17,16 @@ module NdrDevSupport
             page.driver.remove_cookie(name)
           end
         end
+
+        # Wrap up interacting with modals. The assumption is that the modal
+        # should be gone one the interaction is complete (as this is a good
+        # proxy for a triggered AJAX request to have completed, and therefore
+        # a signal for capybara to wait for); if this is not the case, pass
+        # `remain: true` to signal that the modal should remain active.
+        def within_modal(selector: '#modal', remain: false)
+          within(selector) { yield }
+          assert(remain ? has_selector?(selector) : has_no_selector?(selector))
+        end
       end
     end
   end
