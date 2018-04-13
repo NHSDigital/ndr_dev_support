@@ -123,8 +123,9 @@ Beyond standard Capybara testing DSL, ndr_dev_support bundles some additional fu
 * `within_screenshot_compatible_window` – similar to `within_window`, but allows failure screenshots to be taken of the failing child window, rather than the spawning parent.
 * `within_modal` - scope capybara to only interact within a modal, and (by default) expect the modal to disappear when done.
 
+#### Database synchronisation
 
-When using `capybara` with PhantomJS, the test database must be consistent between the test runner and the application being tested. With transactional tests in operation, this means that both must share a connection. It is up to the individual project to provide this facility; as of Rails 5.1, it is built in to the framework directly.
+When using a headless browser for integration tests, the test database must be consistent between the test runner and the application being tested. With transactional tests in operation, this means that both must share a connection. It is up to the individual project to provide this facility; as of Rails 5.1, it is built in to the framework directly.
 
 ## Development
 
