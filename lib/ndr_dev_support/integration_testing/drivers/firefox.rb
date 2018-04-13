@@ -5,5 +5,5 @@ Capybara.register_driver(:firefox) do |app|
 end
 
 Capybara::Screenshot.register_driver(:firefox) do |driver, path|
-  driver.browser.render_screenshot(path)
+  driver.browser.save_screenshot(path)
 end

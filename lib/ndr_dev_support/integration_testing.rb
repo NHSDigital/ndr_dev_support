@@ -16,9 +16,9 @@ require 'ndr_dev_support/integration_testing/dsl'
 
 # These are all the drivers we have capybara / screenshot support for:
 require 'ndr_dev_support/integration_testing/drivers/chrome'
-require 'ndr_dev_support/integration_testing/drivers/chrome-headless'
+require 'ndr_dev_support/integration_testing/drivers/chrome_headless'
 require 'ndr_dev_support/integration_testing/drivers/firefox'
-require 'ndr_dev_support/integration_testing/drivers/poltergiest'
+require 'ndr_dev_support/integration_testing/drivers/poltergeist'
 
 # Keep poltergeist as the default driver for now. For motivation behind not changing
 # immediately, see the "Differences between Poltergeist and Selenium" section of:
