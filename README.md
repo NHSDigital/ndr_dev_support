@@ -85,21 +85,44 @@ $ find . -iregex .*\.rake$ | xargs rake rubocop:diff:file
 
 ### Integration test environment
 
-ndr_dev_support bundles a configured Rails integration testing environment. It uses `capybara` and `poltergeist` to drive a PhantomJS headless browser, and includes some sensible configuration.
+ndr_dev_support bundles a configured Rails integration testing environment.
 
-If an integration test errors or fails, `capybara-screenshot` is used to automatically retrieve a full-height screenshot from PhantomJS, which is then stored in `tmp/`.
+By default, it uses `capybara` and `poltergeist` to drive a PhantomJS headless browser, and includes some sensible configuration.
 
-Beyond standard Capybara testing DSL, ndr_dev_support bundles some additional functionality:
-
-* `clear_headless_session!` - causes PhantomJS to reset, simulating a browser restart.
-* `delete_all_cookies!` - causes PhantomJS to delete all cookies. Helpful for testing AJAX logouts.
-* `within_screenshot_compatible_window` – similar to `within_window`, but allows failure screenshots to be taken of the failing child window, rather than the spawning parent.
-
-To use, ensure `phantomjs` is installed, and add the following to your application's `test_helper.rb`
+To use, simply add the following to your application's `test_helper.rb`
 
 ```ruby
 require 'ndr_dev_support/integration_testing'
 ```
+
+#### Other drivers
+
+Other drivers are also supported; `chrome` / `chrome_headless` / `firefox` are all powered by selenium, and can either be explicitly used with:
+
+```ruby
+Capybara.default_driver    = :chrome_headless
+Capybara.javascript_driver = :chrome_headless
+```
+
+...or, assuming no driver has been explicitly set, can be selected at runtime:
+
+```
+$ INTEGRATION_DRIVER=chrome_headless bin/rake test
+```
+
+#### Screenshots
+
+If an integration test errors or fails, `capybara-screenshot` is used to automatically retrieve a full-height screenshot from the headless browser, which is then stored in `tmp/`.
+
+#### DSL extensions
+
+Beyond standard Capybara testing DSL, ndr_dev_support bundles some additional functionality:
+
+* `clear_headless_session!` - causes the headless browser to reset, simulating a browser restart.
+* `delete_all_cookies!` - causes the headless browser to delete all cookies. Helpful for testing AJAX logouts.
+* `within_screenshot_compatible_window` – similar to `within_window`, but allows failure screenshots to be taken of the failing child window, rather than the spawning parent.
+* `within_modal` - scope capybara to only interact within a modal, and (by default) expect the modal to disappear when done.
+
 
 When using `capybara` with PhantomJS, the test database must be consistent between the test runner and the application being tested. With transactional tests in operation, this means that both must share a connection. It is up to the individual project to provide this facility; as of Rails 5.1, it is built in to the framework directly.
 
