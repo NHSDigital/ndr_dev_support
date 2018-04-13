@@ -1,4 +1,3 @@
-# coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'ndr_dev_support/version'
@@ -26,16 +25,16 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'highline', '>= 1.6.0'
 
   # Rubocop dependencies:
-  spec.add_dependency 'rubocop', '0.52.1'
   spec.add_dependency 'parser'
   spec.add_dependency 'rainbow'
+  spec.add_dependency 'rubocop', '0.52.1'
 
   # Integration test dependencies:
   spec.add_dependency 'capybara'
   spec.add_dependency 'capybara-screenshot'
+  spec.add_dependency 'chromedriver-helper'
   spec.add_dependency 'poltergeist', '>= 1.8.0'
   spec.add_dependency 'selenium-webdriver'
-  spec.add_dependency 'chromedriver-helper'
 
   # CI server dependencies:
   spec.add_dependency 'activesupport', '< 6.0.0'
@@ -46,6 +45,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rugged'
 
   spec.add_development_dependency 'bundler', '~> 1.7'
+  spec.add_development_dependency 'minitest', '~> 5.0'
   spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency "minitest", "~> 5.0"
 end
