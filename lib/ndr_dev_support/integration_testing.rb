@@ -19,11 +19,7 @@ require 'ndr_dev_support/integration_testing/drivers/chrome'
 require 'ndr_dev_support/integration_testing/drivers/chrome_headless'
 require 'ndr_dev_support/integration_testing/drivers/firefox'
 require 'ndr_dev_support/integration_testing/drivers/poltergeist'
+require 'ndr_dev_support/integration_testing/drivers/switchable'
 
-# Keep poltergeist as the default driver for now. For motivation behind not changing
-# immediately, see the "Differences between Poltergeist and Selenium" section of:
-#
-#   https://about.gitlab.com/2017/12/19/moving-to-headless-chrome/
-#
-Capybara.default_driver    = :poltergeist
-Capybara.javascript_driver = :poltergeist
+Capybara.default_driver    = :switchable
+Capybara.javascript_driver = :switchable
