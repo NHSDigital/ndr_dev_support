@@ -34,6 +34,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'capybara'
   spec.add_dependency 'capybara-screenshot'
   spec.add_dependency 'poltergeist', '>= 1.8.0'
+  spec.add_dependency 'selenium-webdriver'
+  spec.add_dependency 'chromedriver-helper'
 
   # CI server dependencies:
   spec.add_dependency 'activesupport', '< 6.0.0'
