@@ -11,5 +11,5 @@ Capybara.register_driver(:chrome_headless) do |app|
 end
 
 Capybara::Screenshot.register_driver(:chrome_headless) do |driver, path|
-  driver.browser.render_screenshot(path)
+  driver.browser.save_screenshot(path)
 end
