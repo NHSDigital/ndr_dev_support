@@ -25,7 +25,7 @@ namespace :ci do
         name = metric[:name].to_sym
         # TODO: Add :docstring where required
         docstring = metric[:docstring] || 'TODO'
-        label_set = metric[:label_set]
+        label_set = metric[:label_set] || {}
         value = metric[:value]
 
         case metric[:type]

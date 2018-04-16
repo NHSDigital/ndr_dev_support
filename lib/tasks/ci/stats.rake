@@ -14,9 +14,9 @@ namespace :ci do
     test_ratio = 100.0 * test_loc / code_loc
 
     metrics = [
-      { name: 'stats_code_loc', type: :gauge, label_set: {}, value: code_loc },
-      { name: 'stats_test_loc', type: :gauge, label_set: {}, value: test_loc },
-      { name: 'stats_test_ratio', type: :gauge, label_set: {}, value: test_ratio }
+      { name: 'stats_code_loc', type: :gauge, value: code_loc },
+      { name: 'stats_test_loc', type: :gauge, value: test_loc },
+      { name: 'stats_test_ratio', type: :gauge, value: test_ratio }
     ]
     @metrics.concat(metrics)
     puts metrics.inspect
