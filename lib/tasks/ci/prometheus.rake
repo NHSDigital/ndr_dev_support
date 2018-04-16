@@ -22,7 +22,7 @@ namespace :ci do
       prometheus = Prometheus::Client.registry
 
       @metrics.each do |metric|
-        name = metric[:name].to_sym
+        name = "ci_#{metric[:name]}".to_sym
         # TODO: Add :docstring where required
         docstring = metric[:docstring] || 'TODO'
         label_set = metric[:label_set] || {}
