@@ -85,54 +85,47 @@ $ find . -iregex .*\.rake$ | xargs rake rubocop:diff:file
 
 ### Integration test environment
 
-ndr_dev_support bundles a configured Rails integration testing environment. It uses `capybara` and `poltergeist` to drive a PhantomJS headless browser, and includes some sensible configuration.
+ndr_dev_support bundles a configured Rails integration testing environment.
 
-If an integration test errors or fails, `capybara-screenshot` is used to automatically retrieve a full-height screenshot from PhantomJS, which is then stored in `tmp/`.
+By default, it uses `capybara` and `poltergeist` to drive a PhantomJS headless browser, and includes some sensible configuration.
 
-Beyond standard Capybara testing DSL, ndr_dev_support bundles some additional functionality:
-
-* `clear_headless_session!` - causes PhantomJS to reset, simulating a browser restart.
-* `delete_all_cookies!` - causes PhantomJS to delete all cookies. Helpful for testing AJAX logouts.
-* `within_screenshot_compatible_window` – similar to `within_window`, but allows failure screenshots to be taken of the failing child window, rather than the spawning parent.
-
-To use, ensure `phantomjs` is installed, and add the following to your application's `test_helper.rb`
+To use, simply add the following to your application's `test_helper.rb`
 
 ```ruby
 require 'ndr_dev_support/integration_testing'
 ```
 
-When using `capybara` with PhantomJS, the test database must be consistent between the test runner and the application being tested. With transactional tests in operation, this means that both must share a connection. Doing so is error-prone, and can introduce race conditions. However, some projects have had success with the approach, so it is available within `ndr_dev_support` with the following additional require statement:
+#### Other drivers
+
+Other drivers are also supported; `chrome` / `chrome_headless` / `firefox` are all powered by selenium, and can either be explicitly used with:
 
 ```ruby
-# WARNING: can result in race conditions within the test suite
-require 'ndr_dev_support/integration_testing/connection_sharing'
+Capybara.default_driver    = :chrome_headless
+Capybara.javascript_driver = :chrome_headless
 ```
 
-The slower, more reliable, alternative is to use the `database_cleaner` gem. `ndr_dev_support` provides no built-in support for this approach, as configuration can be quite project-specific. However, as a starting point:
+...or, assuming no driver has been explicitly set, can be selected at runtime:
 
-Add to the `Gemfile`:
-
-```ruby
-group :test do
-  gem 'database_cleaner'
-end
+```
+$ INTEGRATION_DRIVER=chrome_headless bin/rake test
 ```
 
-Add to `test_helper.rb`:
+#### Screenshots
 
-```ruby
-require 'database_cleaner'
-DatabaseCleaner.strategy = :deletion # anecdotally, faster than :truncation for our projects
+If an integration test errors or fails, `capybara-screenshot` is used to automatically retrieve a full-height screenshot from the headless browser, which is then stored in `tmp/`.
 
-class ActionDispatch::IntegrationTest
-  # Don't wrap each test case in a transaction:
-  self.use_transactional_tests = false
+#### DSL extensions
 
-  # Instead, insert fixtures afresh between each test:
-  setup    { DatabaseCleaner.start }
-  teardown { DatabaseCleaner.clean }
-end
-```
+Beyond standard Capybara testing DSL, ndr_dev_support bundles some additional functionality:
+
+* `clear_headless_session!` - causes the headless browser to reset, simulating a browser restart.
+* `delete_all_cookies!` - causes the headless browser to delete all cookies. Helpful for testing AJAX logouts.
+* `within_screenshot_compatible_window` – similar to `within_window`, but allows failure screenshots to be taken of the failing child window, rather than the spawning parent.
+* `within_modal` - scope capybara to only interact within a modal, and (by default) expect the modal to disappear when done.
+
+#### Database synchronisation
+
+When using a headless browser for integration tests, the test database must be consistent between the test runner and the application being tested. With transactional tests in operation, this means that both must share a connection. It is up to the individual project to provide this facility; as of Rails 5.1, it is built in to the framework directly.
 
 ## Development
 
