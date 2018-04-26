@@ -24,7 +24,9 @@ module NdrDevSupport
       # `remain: true` to signal that the modal should remain active.
       def within_modal(selector: '#modal', remain: false)
         within(selector) { yield }
-        assert(remain ? has_selector?(selector) : has_no_selector?(selector))
+
+        message = "modal was #{'not ' unless remain} expected to remain visible!"
+        assert(remain ? has_selector?(selector) : has_no_selector?(selector), message)
       end
 
       # Adds variant of Capybara's #within_window method, that doesn't return
