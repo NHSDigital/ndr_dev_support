@@ -30,8 +30,8 @@ file safety:
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   README.md:
     comments: 
-    reviewed_by: timgentry
-    safe_revision: 04a0d70cc467dad5a380744a6c678693429e0213
+    reviewed_by: josh.pencheon
+    safe_revision: e0b3871607c649565330d6e62740ffd860930338
   Rakefile:
     comments: 
     reviewed_by: josh.pencheon
@@ -50,32 +50,52 @@ file safety:
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   lib/ndr_dev_support/daemon/ci_server.rb:
     comments: 
-    reviewed_by: 
-    safe_revision: 
+    reviewed_by: josh.pencheon
+    safe_revision: 3d81c21c0085acb44aedadeaa66313ac280eb326
   lib/ndr_dev_support/daemon/stoppable.rb:
     comments: 
-    reviewed_by: 
-    safe_revision: 
+    reviewed_by: josh.pencheon
+    safe_revision: 1bdb008829c0c19d7167f9d6aea9b97db15a5403
   lib/ndr_dev_support/integration_testing.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 5b238d73cfb0e506ced8b4e474cc2b3392838925
-  lib/ndr_dev_support/integration_testing/capybara.rb:
+    safe_revision: e0b3871607c649565330d6e62740ffd860930338
+  lib/ndr_dev_support/integration_testing/drivers/chrome.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 88ac9269eb8f0b44c5920a946708e4715421bcad
-  lib/ndr_dev_support/integration_testing/connection_sharing.rb:
+    safe_revision: e0b3871607c649565330d6e62740ffd860930338
+  lib/ndr_dev_support/integration_testing/drivers/chrome_headless.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 6cf4a9cab6f8f028d45e05e256b63d9fe9d1b7fc
-  lib/ndr_dev_support/integration_testing/poltergeist.rb:
+    safe_revision: e0b3871607c649565330d6e62740ffd860930338
+  lib/ndr_dev_support/integration_testing/drivers/firefox.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 88ac9269eb8f0b44c5920a946708e4715421bcad
-  lib/ndr_dev_support/integration_testing/screenshot.rb:
+    safe_revision: e0b3871607c649565330d6e62740ffd860930338
+  lib/ndr_dev_support/integration_testing/drivers/poltergeist.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 88ac9269eb8f0b44c5920a946708e4715421bcad
+    safe_revision: e0b3871607c649565330d6e62740ffd860930338
+  lib/ndr_dev_support/integration_testing/drivers/switchable.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: e0b3871607c649565330d6e62740ffd860930338
+  lib/ndr_dev_support/integration_testing/dsl.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: 12d9c51ec2bc946ee02eee63700e905b8c0c01c1
+  lib/ndr_dev_support/rake_ci/brakeman_helper.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: 49caa4ef8ad9926843354d36f4610d40603ec632
+  lib/ndr_dev_support/rake_ci/concerns/commit_metadata_persistable.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: 49caa4ef8ad9926843354d36f4610d40603ec632
+  lib/ndr_dev_support/rake_ci/simple_cov_helper.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: 6240a84dc859af0623328f8667b93299c8eae257
   lib/ndr_dev_support/rubocop/executor.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -94,25 +114,29 @@ file safety:
     safe_revision: 41cf1558f567928faaa1e670a36d941c03c78044
   lib/ndr_dev_support/slack_message_publisher.rb:
     comments: 
-    reviewed_by: 
-    safe_revision: 
+    reviewed_by: josh.pencheon
+    safe_revision: ad38e92c6e56b9d81fdab10681d8f2924eeadf5a
   lib/ndr_dev_support/tasks.rb:
     comments: 
-    reviewed_by: timgentry
-    safe_revision: ad38e92c6e56b9d81fdab10681d8f2924eeadf5a
+    reviewed_by: josh.pencheon
+    safe_revision: 6240a84dc859af0623328f8667b93299c8eae257
   lib/ndr_dev_support/version.rb:
     comments: 
-    reviewed_by: timgentry
-    safe_revision: 8e076cbdbac3a1d65e955457b58e42f4ed6ff152
+    reviewed_by: josh.pencheon
+    safe_revision: b725560e101395a6dd1a9ece106462edb6ebcc74
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
-    reviewed_by: timgentry
-    safe_revision: 4813e92fc951a3c033c08c848a9e07e8d5867133
+    reviewed_by: josh.pencheon
+    safe_revision: 73030d56a06d05ae2d8716713b01647d76b7d904
+  lib/tasks/ci/brakeman.rake:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: 49caa4ef8ad9926843354d36f4610d40603ec632
   lib/tasks/ci/bundle_audit.rake:
     comments: 
-    reviewed_by: 
-    safe_revision: 
+    reviewed_by: josh.pencheon
+    safe_revision: ddcf7de0bf1f5fb17cc28e2460009e162ff8917c
   lib/tasks/ci/bundle_install.rake:
     comments: 
     reviewed_by: timgentry
@@ -131,8 +155,8 @@ file safety:
     safe_revision: f828113894a16581d0aa181504c799e661f8401d
   lib/tasks/ci/prometheus.rake:
     comments: 
-    reviewed_by: 
-    safe_revision: 
+    reviewed_by: josh.pencheon
+    safe_revision: a10b6f3f5c9261135fae534e5785e2342430dde2
   lib/tasks/ci/rugged.rake:
     comments: 
     reviewed_by: timgentry
@@ -141,22 +165,26 @@ file safety:
     comments: 
     reviewed_by: timgentry
     safe_revision: e581239a77666500a3108bcb3d480e370a82adb8
+  lib/tasks/ci/simplecov.rake:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: 6240a84dc859af0623328f8667b93299c8eae257
   lib/tasks/ci/slack.rake:
     comments: 
     reviewed_by: timgentry
     safe_revision: ad38e92c6e56b9d81fdab10681d8f2924eeadf5a
   lib/tasks/ci/stats.rake:
     comments: 
-    reviewed_by: timgentry
-    safe_revision: 2abc538e6e43896896721470237e5f91be1bf500
+    reviewed_by: josh.pencheon
+    safe_revision: 137be2205f283d444286c47502387487bb1b7015
   lib/tasks/rubocop.rake:
     comments: 
     reviewed_by: josh.pencheon
     safe_revision: 41cf1558f567928faaa1e670a36d941c03c78044
   ndr_dev_support.gemspec:
     comments: 
-    reviewed_by: timgentry
-    safe_revision: 73030d56a06d05ae2d8716713b01647d76b7d904
+    reviewed_by: josh.pencheon
+    safe_revision: e0b3871607c649565330d6e62740ffd860930338
   test/ndr_dev_support_test.rb:
     comments: 
     reviewed_by: timgentry
