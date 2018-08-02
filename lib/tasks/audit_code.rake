@@ -365,7 +365,7 @@ def print_repo_file_diffs(repolatest, repo, fname, usr, safe_revision, interacti
       if usr.to_s.strip.empty?
         usr = ask('File reviewed by:') do |q|
           q.whitespace = :strip_and_collapse
-          q.validate = /\A[\w \-]+\Z/
+          q.validate = /\A[\w \-.]+\Z/
         end
       end
       comment = ask('Please write your comments (optional):')
