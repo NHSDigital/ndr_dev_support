@@ -29,6 +29,21 @@ module NdrDevSupport
         assert(remain ? has_selector?(selector) : has_no_selector?(selector), message)
       end
 
+      def find_new(*args, **options)
+        # There is no point waiting to see there are no existing matches:
+        pre_options = { wait: 0 }.merge(options)
+        prior_matches = find_all(*args, **pre_options)
+
+        yield
+
+        # We expect exactly one new match as a result of the interaction:
+        post_options = { count: prior_matches.length + 1 }
+        current_matches = find_all(*args, **post_options)
+
+        additional_matches = current_matches.to_a - prior_matches.to_a
+        additional_matches.first
+      end
+
       # Adds variant of Capybara's #within_window method, that doesn't return
       # to the preview window on an exception. This allows us to screenshot
       # a popup automatically if a test errors/fails whilst it has focus.
