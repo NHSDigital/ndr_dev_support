@@ -83,7 +83,7 @@ file safety:
   lib/ndr_dev_support/integration_testing/dsl.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: dfe1e6bf5e6c014d6a1a5f9c7e3268900910b00e
+    safe_revision: d347807124f115b337162646b524c42f59a0559e
   lib/ndr_dev_support/rake_ci/brakeman_helper.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -123,7 +123,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: d96ee996d3b7fcd7ccf3450355ffe4c32253b3a5
+    safe_revision: e6095b3848d308da6d77a77df01136ead2d1dc1a
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
