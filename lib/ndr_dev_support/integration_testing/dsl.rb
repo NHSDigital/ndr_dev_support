@@ -40,8 +40,7 @@ module NdrDevSupport
         post_options = { count: prior_matches.length + 1 }
         current_matches = find_all(*args, **post_options)
 
-        additional_matches = current_matches.to_a - prior_matches.to_a
-        additional_matches.first
+        current_matches.without(*prior_matches).first
       end
 
       # Adds variant of Capybara's #within_window method, that doesn't return
