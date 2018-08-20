@@ -2,6 +2,7 @@ namespace :ci do
   namespace :dependencies do
     desc 'setup'
     task :setup do
+      require 'highline/import'
       ENV['PROJECT_NAME'] = gem_name || ask('Project Name: ')
     end
 
