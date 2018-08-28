@@ -1,0 +1,54 @@
+namespace :ci do
+  desc 'Brakeman'
+  task brakeman: 'ci:rugged:setup' do
+    next unless defined?(Rails)
+
+    require 'ndr_dev_support/rake_ci/brakeman_helper'
+    # Usage: bundle exec rake ci:brakeman
+
+    @metrics ||= []
+    @attachments ||= []
+
+    brakeman = NdrDevSupport::RakeCI::BrakemanHelper.new
+    brakeman.commit = @commit
+    brakeman.run
+
+    Brakeman::Warning::TEXT_CONFIDENCE.each do |confidence, text|
+      metric = {
+        name: 'brakeman_warnings',
+        type: :gauge,
+        label_set: { confidence: text },
+        value: brakeman.warning_counts_by_confidence[confidence] || 0
+      }
+      @metrics << metric
+      puts metric.inspect
+    end
+
+    unless brakeman.new_fingerprints.empty?
+      # new warnings found
+      attachment = {
+        color: 'danger',
+        title: "#{brakeman.new_fingerprints.size} new Brakeman warning(s) :rotating_light:",
+        text: '_Brakeman_ warning fingerprint(s):' \
+              "```#{brakeman.new_fingerprints.to_a.join("\n")}```",
+        footer: 'bundle exec rake ci:brakeman',
+        mrkdwn_in: ['text']
+      }
+      @attachments << attachment
+      puts attachment.inspect
+    end
+
+    unless brakeman.old_fingerprints.empty?
+      # old warnings missing
+      attachment = {
+        color: 'good',
+        title: "#{brakeman.old_fingerprints.size} Brakeman warning(s) resolved :+1:",
+        footer: 'bundle exec rake ci:brakeman'
+      }
+      @attachments << attachment
+      puts attachment.inspect
+    end
+
+    brakeman.save_current_fingerprints
+  end
+end

@@ -7,14 +7,28 @@
 AllCops:
   # All cops should ignore files in the following locations:
   Exclude:
-    - 'bin/*'
-    - 'db/**/*'
-    - 'lib/generators/**/templates/*'
-    - 'vendor/**/*'
+  - 'bin/*'
+  - 'db/**/*'
+  - 'lib/generators/**/templates/*'
+  - 'tmp/**/*'
+  - 'vendor/**/*'
+
+# Once supported by RuboCop, this will prevent cop-specific Excludes from
+# overwriting the AllCops defaults above:
+#
+#   inherit_mode:
+#     merge:
+#       - Exclude
 
 # Run the Rails cops by default (-R/--rails not required):
 Rails:
   Enabled: true
+
+##################### Layout #################################
+
+Layout/DotPosition:
+  # Multi-line method chaining should be done with trailing dots.
+  EnforcedStyle: trailing
 
 ##################### Style ##################################
 
@@ -22,12 +36,16 @@ Rails:
 Style/BlockComments:
   Enabled: false
 
-Style/DotPosition:
-  # Multi-line method chaining should be done with trailing dots.
-  EnforcedStyle: trailing
+Style/Documentation:
+  Exclude:
+  - 'test/**/*.rb'
 
-Style/IfUnlessModifier:
-  MaxLineLength: 100
+Style/FrozenStringLiteralComment:
+  # We're not confident enough to make this recommendation everywhere
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 100
 
 Style/ModuleFunction:
   # `extend self` has fewer side effects than `module_function`.
@@ -35,28 +53,43 @@ Style/ModuleFunction:
 
 Style/NumericLiterals:
   Exclude:
-    - 'test/**/*.rb'
+  - 'test/**/*.rb'
+
+Style/YodaCondition:
+  # Disagree; literals as first argument can guard against accidental assignment.
+  Enabled: false
 
 Style/SingleLineBlockParams:
   # Prefer readability of contextually-named variables.
   Enabled: false
 
-Style/WhileUntilModifier:
-  MaxLineLength: 100
+####################### Performance ############################
+
+# Disagree; readabilty trumps here IMO.
+Performance/Casecmp:
+  Enabled: false
 
 ##################### Metrics ##################################
 # NOTE: we bump some metrics by 50%, in recognition of Rubocop's
 #       desire to split that which we would consider atomic.
 
+Metrics/AbcSize:
+  Max: 23
+
+Metrics/BlockLength:
+  # We're already limiting method size, blocks outside of methods
+  # can legitimately be long (RuboCop defaults to max: 25 lines).
+  Enabled: false
+
 Metrics/ClassLength:
   Max: 150
   Exclude:
-    - test/**/*.rb
+  - 'test/**/*.rb'
 
 Metrics/ModuleLength:
   Max: 150
   Exclude:
-    - test/**/*.rb
+  - 'test/**/*.rb'
 
 Metrics/CyclomaticComplexity:
   Max: 9
@@ -64,12 +97,12 @@ Metrics/CyclomaticComplexity:
 Metrics/LineLength:
   Max: 100
   Exclude:
-    - test/**/*.rb
+  - 'test/**/*.rb'
 
 Metrics/MethodLength:
   Max: 15
   Exclude:
-    - test/**/*.rb
+  - 'test/**/*.rb'
 
 Metrics/PerceivedComplexity:
   Max: 12
@@ -80,4 +113,14 @@ Rails/ActionFilter:
   # 'action' is the default already; we explicitly list here as Rails 3.x
   # projects will want to override this configuration to use 'filter' instead.
   EnforcedStyle: action
+
+Rails/DynamicFindBy:
+  Exclude:
+  - 'test/integration/**/*.rb'
+
+Rails/SkipsModelValidations:
+  # Methods like 'update_column' exist for a reason, and it is the developer's
+  # responsibilty to understand the behaviour of the code they write; blanket
+  # avoiding them is not helpful/practical.
+  Enabled: false
 
