@@ -123,7 +123,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: e6095b3848d308da6d77a77df01136ead2d1dc1a
+    safe_revision: dfc2f07ce535be4b7a342690f2af7783e1f6c9e4
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -144,7 +144,7 @@ file safety:
   lib/tasks/ci/dependencies.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 4dc952cb99ec6f4e416a5b668ceca7e8d7604eef
+    safe_revision: 6af85e180b58156a35fc0b633947421be4e7ef58
   lib/tasks/ci/housekeep.rake:
     comments: 
     reviewed_by: timgentry
