@@ -27,12 +27,21 @@ namespace :ci do
     end
 
     def current_dependencies
-      @current_dependencies ||= Bundler.environment.current_dependencies
+      @current_dependencies ||=
+        begin
+          gemspec, = Dir['*.gemspec']
+
+          if gemspec
+            Bundler.load_gemspec(gemspec).dependencies
+          else
+            Bundler.environment.current_dependencies
+          end
+        end
     end
 
     # There is probably a simpler way of getting this information
     def gem_name
-      self_dependency = current_dependencies.detect do |dep|
+      self_dependency = Bundler.environment.current_dependencies.detect do |dep|
         dep.source && dep.source.path.to_s == '.'
       end
       self_dependency && self_dependency.name
