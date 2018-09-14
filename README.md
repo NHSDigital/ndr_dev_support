@@ -6,6 +6,7 @@ providing:
 1. rake tasks to manage code auditing of ruby based projects
 2. rake tasks to limit Rubocop's output to changed (and related) code
 3. integration testing support, which can be required from a project's `test_helper.rb`
+4. Deployment support, through Capistrano.
 
 ## Installation
 
@@ -126,6 +127,18 @@ Beyond standard Capybara testing DSL, ndr_dev_support bundles some additional fu
 #### Database synchronisation
 
 When using a headless browser for integration tests, the test database must be consistent between the test runner and the application being tested. With transactional tests in operation, this means that both must share a connection. It is up to the individual project to provide this facility; as of Rails 5.1, it is built in to the framework directly.
+
+### Deployment support
+
+There are various capistrano plugins in the `ndr_dev_support/capistrano` directory - see each one for details.
+For new projects, you should likely add the following:
+
+```ruby
+# in config/deploy.rb
+require 'ndr_dev_support/capistrano/ndr_model'
+```
+
+This will pull in the majority of behaviour needed to deploy in our preferred style.
 
 ## Development
 
