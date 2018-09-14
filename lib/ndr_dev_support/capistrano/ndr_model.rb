@@ -7,6 +7,7 @@ require_relative 'revision_logger'
 require_relative 'ruby_version'
 require_relative 'standalone_gems'
 require_relative 'svn_cache'
+require_relative 'sysadmin_scripts'
 
 # This file contains logic for managing deployments structured in our preferred "NDRv2" style.
 # More details on the structure can be found on plan.io issue #6565.
@@ -153,8 +154,8 @@ def add_target(env, name, app, port, app_user, is_web_server)
     set :webapp_deployment, is_web_server
     set :daemon_deployment, !is_web_server
 
+    set :branch, release_config_for(env).fetch('branch')
     if exists?(:repository_branches)
-      set :branch, release_config_for(env).fetch('branch')
       set :repository, fetch(:repository_branches) + fetch(:branch)
     end
 

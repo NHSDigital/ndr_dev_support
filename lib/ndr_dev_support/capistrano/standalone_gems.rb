@@ -11,11 +11,10 @@ Capistrano::Configuration.instance(:must_exist).load do
       #   end
       #
       gem_list = Array(fetch(:out_of_bundle_gems, []))
-      return unless gem_list.any?
 
       # Extract the current version requirements for each of the gems from the lockfile,
       # and then check they're installed. If not, install them from the vendored cache.
-      run <<~CMD
+      run <<~CMD if gem_list.any?
         export RBENV_VERSION=`cat "#{latest_release}/.ruby-version"`;
         cat "#{latest_release}/Gemfile.lock" | egrep "^    (#{gem_list.join('|')}) " | tr -d '()' | \
         while read gem ver; do
