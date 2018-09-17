@@ -6,6 +6,7 @@ Capistrano::Configuration.instance(:must_exist).load do
   set :deploy_via, :copy
   set :copy_strategy, :export
   set :copy_cache, 'tmp/deployment'
+  set :copy_dir, 'tmp/staging'
 
   namespace :ndr_dev_support do
     desc 'Remove the SVN cache (it may be pointing at the wrong branch)'
