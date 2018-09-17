@@ -37,6 +37,11 @@ Capistrano::Configuration.instance(:must_exist).load do
   # Paths in shared/ that the application can write to:
   set :explicitly_writeable_shared_paths, %w[log tmp tmp/pids]
 
+  # This flag gets set only when running `ndr_dev_support:prepare`, which means it can be used
+  # to toggle behaviour in environments where some targets are using the NDR model of deployment,
+  # and others aren't.
+  set :ndr_model_deployment, false
+
   namespace :ndr_dev_support do
     desc 'Custom tasks to be run once, immediately before the initial `cap setup`'
     task :pre_setup do
@@ -108,6 +113,9 @@ Capistrano::Configuration.instance(:must_exist).load do
       set(:default_environment) do
         { 'PATH' => "#{application_home}/.rbenv/shims:#{application_home}/.rbenv/bin:$PATH" }
       end
+
+      # Set a flag so behaviour can toggle in mixed use cases
+      set(:ndr_model_deployment, true)
     end
 
     after 'deploy:update', 'deploy:cleanup' # Keep only 5 deployments
