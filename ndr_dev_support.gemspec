@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   # Integration test dependencies:
   spec.add_dependency 'capybara'
   spec.add_dependency 'capybara-screenshot'
-  spec.add_dependency 'chromedriver-helper'
+  spec.add_dependency 'chromedriver-helper', '~> 2.0'
   spec.add_dependency 'poltergeist', '>= 1.8.0'
   spec.add_dependency 'selenium-webdriver'
 
