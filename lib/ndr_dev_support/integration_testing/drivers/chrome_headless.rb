@@ -1,3 +1,4 @@
+require 'chromedriver-helper'
 require 'selenium-webdriver'
 
 Capybara.register_driver(:chrome_headless) do |app|
