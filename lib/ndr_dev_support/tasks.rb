@@ -1,7 +1,6 @@
 load 'tasks/audit_code.rake'
 load 'tasks/ci/brakeman.rake'
 load 'tasks/ci/bundle_audit.rake'
-load 'tasks/ci/bundle_install.rake'
 load 'tasks/ci/dependencies.rake'
 load 'tasks/ci/housekeep.rake'
 load 'tasks/ci/linguist.rake'

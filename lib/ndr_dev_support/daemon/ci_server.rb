@@ -1,3 +1,4 @@
+require 'English'
 require_relative 'stoppable'
 require 'rugged'
 
@@ -46,7 +47,11 @@ module NdrDevSupport
         objectids_between_master_and_remote.each do |oid|
           `git rebase #{oid}`
 
-          Rake::Task['ci:all'].invoke
+          WithCleanRbenv.with_clean_rbenv do
+            # TODO: rbenv_install
+            bundle_install
+            `rbenv exec bundle exec rake ci:all`
+          end
         end
       end
 
@@ -88,6 +93,27 @@ module NdrDevSupport
         end
 
         revisions.reverse
+      end
+
+      def bundle_install
+        return unless File.file?('Gemfile')
+
+        `rbenv exec bundle install --local --jobs=3`
+        return if $CHILD_STATUS.exitstatus.zero? || ENV['SLACK_WEBHOOK_URL'].nil?
+
+        slack_publisher = NdrDevSupport::SlackMessagePublisher.new(ENV['SLACK_WEBHOOK_URL'],
+                                                                   username: 'Rake CI',
+                                                                   icon_emoji: ':robot_face:',
+                                                                   channel: ENV['SLACK_CHANNEL'])
+
+        attachment = {
+          color: 'danger',
+          fallback: 'Failure running bundle install --local',
+          text: 'Failure running `bundle install --local`',
+          footer: 'bundle exec rake ci:bundle_install'
+        }
+
+        slack_publisher.post(attachments: [attachment])
       end
     end
   end
