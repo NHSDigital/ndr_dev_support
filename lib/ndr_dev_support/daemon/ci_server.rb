@@ -52,6 +52,7 @@ module NdrDevSupport
             # TODO: rbenv_install
             bundle_install
             `rbenv exec bundle exec rake ci:all`
+            git_discard_changes
           end
         end
       end
@@ -62,6 +63,13 @@ module NdrDevSupport
 
       def git_checkout(oid)
         `git checkout #{oid}`
+      end
+
+      def git_discard_changes
+        # git clean would remove all unstaged files
+        stash_output = `git stash`
+        return if stash_output.start_with?('No local changes to save')
+        `git stash drop stash@{0}`
       end
 
       def svn_remote?
