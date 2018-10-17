@@ -1,6 +1,7 @@
 require 'English'
 require_relative 'stoppable'
 require 'rugged'
+require 'with_clean_rbenv'
 
 module NdrDevSupport
   module Daemon
