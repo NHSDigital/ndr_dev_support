@@ -97,6 +97,7 @@ module NdrDevSupport
 
       def bundle_install
         return unless File.file?('Gemfile')
+        return if system('bundle check')
 
         `rbenv exec bundle install --local --jobs=3`
         return if $CHILD_STATUS.exitstatus.zero? || ENV['SLACK_WEBHOOK_URL'].nil?
