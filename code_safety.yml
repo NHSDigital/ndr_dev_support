@@ -31,7 +31,7 @@ file safety:
   README.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: e0b3871607c649565330d6e62740ffd860930338
+    safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
   Rakefile:
     comments: 
     reviewed_by: josh.pencheon
@@ -48,10 +48,42 @@ file safety:
     comments: 
     reviewed_by: timgentry
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+  lib/ndr_dev_support/capistrano/assets.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
+  lib/ndr_dev_support/capistrano/ndr_model.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: bcecae9e1eeffa84687f1748abebc0c8505a228d
+  lib/ndr_dev_support/capistrano/restart.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
+  lib/ndr_dev_support/capistrano/revision_logger.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
+  lib/ndr_dev_support/capistrano/ruby_version.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
+  lib/ndr_dev_support/capistrano/standalone_gems.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
+  lib/ndr_dev_support/capistrano/svn_cache.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: 123d0cd32bdf9e0940fac8945985aa9f467616c1
+  lib/ndr_dev_support/capistrano/sysadmin_scripts.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
   lib/ndr_dev_support/daemon/ci_server.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 3d81c21c0085acb44aedadeaa66313ac280eb326
+    safe_revision: ec3d1f3fa1d1f1f3d039587a2f31bda28062f731
   lib/ndr_dev_support/daemon/stoppable.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -63,11 +95,11 @@ file safety:
   lib/ndr_dev_support/integration_testing/drivers/chrome.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: e0b3871607c649565330d6e62740ffd860930338
+    safe_revision: 1c2b62f359b64c1cfb1754216533fbd4a86fd60e
   lib/ndr_dev_support/integration_testing/drivers/chrome_headless.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: e0b3871607c649565330d6e62740ffd860930338
+    safe_revision: 1c2b62f359b64c1cfb1754216533fbd4a86fd60e
   lib/ndr_dev_support/integration_testing/drivers/firefox.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -119,11 +151,11 @@ file safety:
   lib/ndr_dev_support/tasks.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 4dc952cb99ec6f4e416a5b668ceca7e8d7604eef
+    safe_revision: ec3d1f3fa1d1f1f3d039587a2f31bda28062f731
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 35e322d31c8d44dac3daa3d6dead1d4b9dd6e1a6
+    safe_revision: 3efca19afad2f7dedc1d470cd8dd51e95ec77545
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -137,10 +169,6 @@ file safety:
     comments: 
     reviewed_by: josh.pencheon
     safe_revision: ddcf7de0bf1f5fb17cc28e2460009e162ff8917c
-  lib/tasks/ci/bundle_install.rake:
-    comments: 
-    reviewed_by: timgentry
-    safe_revision: cf22c7ab8b2eb67b501b5ebd1309c832db4fdf6c
   lib/tasks/ci/dependencies.rake:
     comments: 
     reviewed_by: josh.pencheon
@@ -188,7 +216,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 8faa3e5e7ba5ef29daa1a857c8c15702f57c5a3f
+    safe_revision: ec3d1f3fa1d1f1f3d039587a2f31bda28062f731
   test/daemon/ci_server_test.rb:
     comments: 
     reviewed_by: josh.pencheon
