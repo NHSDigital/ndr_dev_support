@@ -45,6 +45,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'github-linguist'
   spec.add_dependency 'prometheus-client'
   spec.add_dependency 'rugged'
+  spec.add_dependency 'with_clean_rbenv'
 
   # Deployment dependencies:
   spec.add_dependency 'capistrano', '~> 2.15'
