@@ -2,6 +2,7 @@ namespace :ci do
   namespace :slack do
     desc 'Set up Slack'
     task :setup do
+      require 'highline/import'
       @attachments = []
 
       ENV['SLACK_WEBHOOK_URL'] ||= ask('Slack Webhook URL: ')

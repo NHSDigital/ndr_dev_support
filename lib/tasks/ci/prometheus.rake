@@ -2,6 +2,7 @@ namespace :ci do
   namespace :prometheus do
     desc 'Set up Prometheus'
     task :setup do
+      require 'highline/import'
       @metrics = []
 
       ENV['PROMETHEUS_PUSHGATEWAY'] ||= ask('Prometheus pushgateway (host:port): ')
