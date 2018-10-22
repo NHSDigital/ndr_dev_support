@@ -1,6 +1,8 @@
 require 'English'
 require_relative 'stoppable'
+require 'open3'
 require 'rugged'
+require 'shellwords'
 require 'with_clean_rbenv'
 
 module NdrDevSupport
@@ -46,7 +48,7 @@ module NdrDevSupport
         git_checkout(MASTER_BRANCH_NAME)
 
         objectids_between_master_and_remote.each do |oid|
-          `git rebase #{oid}`
+          git_rebase(oid)
 
           WithCleanRbenv.with_clean_rbenv do
             # TODO: rbenv_install
@@ -62,7 +64,19 @@ module NdrDevSupport
       end
 
       def git_checkout(oid)
-        `git checkout #{oid}`
+        Open3.popen3('git', 'checkout', oid) do |_stdin, _stdout, stderr, wait_thr|
+          msg = stderr.read.strip
+          # TODO: Once https://github.com/PublicHealthEngland/ndr_dev_support/issues/27
+          # has been resolved, use logging instead of puts
+          puts msg unless msg == "Already on '#{oid}'"
+
+          process_status = wait_thr.value
+          raise stderr.read unless process_status.exited?
+        end
+      end
+
+      def git_rebase(oid)
+        `git rebase #{Shellwords.escape(oid)}`
       end
 
       def git_discard_changes
