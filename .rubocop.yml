@@ -44,10 +44,6 @@ Style/FrozenStringLiteralComment:
   # We're not confident enough to make this recommendation everywhere
   Enabled: false
 
-Metrics/LineLength:
-  Max: 100
-  # FIXME: ExcludedMethods and Exclude don't seem to work here
-
 Style/ModuleFunction:
   # `extend self` has fewer side effects than `module_function`.
   EnforcedStyle: extend_self
@@ -102,6 +98,7 @@ Metrics/CyclomaticComplexity:
 Metrics/LineLength:
   Max: 100
   Exclude:
+  - 'db/migrate/*.rb'
   - 'test/**/*.rb'
 
 Metrics/MethodLength:
