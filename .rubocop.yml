@@ -8,7 +8,7 @@ AllCops:
   # All cops should ignore files in the following locations:
   Exclude:
   - 'bin/*'
-  - 'db/**/*'
+  - 'db/schema.rb'
   - 'lib/generators/**/templates/*'
   - 'tmp/**/*'
   - 'vendor/**/*'
@@ -44,15 +44,13 @@ Style/FrozenStringLiteralComment:
   # We're not confident enough to make this recommendation everywhere
   Enabled: false
 
-Metrics/LineLength:
-  Max: 100
-
 Style/ModuleFunction:
   # `extend self` has fewer side effects than `module_function`.
   EnforcedStyle: extend_self
 
 Style/NumericLiterals:
   Exclude:
+  - 'db/migrate/*.rb'
   - 'test/**/*.rb'
 
 Style/YodaCondition:
@@ -75,6 +73,8 @@ Performance/Casecmp:
 
 Metrics/AbcSize:
   Max: 23
+  Exclude:
+  - 'db/migrate/*.rb'
 
 Metrics/BlockLength:
   # We're already limiting method size, blocks outside of methods
@@ -84,6 +84,7 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Max: 150
   Exclude:
+  - 'db/migrate/*.rb'
   - 'test/**/*.rb'
 
 Metrics/ModuleLength:
@@ -97,11 +98,13 @@ Metrics/CyclomaticComplexity:
 Metrics/LineLength:
   Max: 100
   Exclude:
+  - 'db/migrate/*.rb'
   - 'test/**/*.rb'
 
 Metrics/MethodLength:
   Max: 15
   Exclude:
+  - 'db/migrate/*.rb'
   - 'test/**/*.rb'
 
 Metrics/PerceivedComplexity:
