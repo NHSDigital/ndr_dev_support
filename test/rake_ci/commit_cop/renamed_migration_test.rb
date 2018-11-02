@@ -37,7 +37,7 @@ module RakeCI
         assert_nil @cop.check(@changes)
       end
 
-      def test_should_not_respond_to_scope_renamed_migration
+      def test_should_not_respond_to_scope_renamed_timestamp_unchanged_migration
         @changes[:renamed].add([
                                  'db/migrate/20181020223344_create_something.rb',
                                  'db/migrate/20181020223344_create_something.some_scope.rb'
@@ -45,7 +45,15 @@ module RakeCI
         assert_nil @cop.check(@changes)
       end
 
-      def test_should_respond_to_renamed_migration
+      def test_should_not_respond_to_renamed_timestamp_unchanged_migration
+        @changes[:renamed].add([
+                                 'db/migrate/20181020223344_create_lookup.rb',
+                                 'db/migrate/20181020223344_create_specific_lookup.rb'
+                               ])
+        assert_nil @cop.check(@changes)
+      end
+
+      def test_should_respond_to_timestamp_changed_migration
         @changes[:renamed].add([
                                  'db/migrate/20181020223344_create_something.rb',
                                  'db/migrate/20181020223355_create_somethang.rb'
@@ -53,7 +61,7 @@ module RakeCI
         assert_kind_of Hash, @cop.check(@changes)
       end
 
-      def test_custom_pattern
+      def test_custom_pattern_should_respond_to_timestamp_changed_migration
         NdrDevSupport::RakeCI::CommitCop.with_pattern do
           NdrDevSupport::RakeCI::CommitCop.migration_path_pattern = %r{\Adatabase/migrate/}
 
