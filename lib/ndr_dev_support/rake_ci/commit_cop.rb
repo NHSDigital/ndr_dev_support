@@ -8,8 +8,13 @@ module NdrDevSupport
     # This module encapsulates commit cop logic
     module CommitCop
       # This defines the regular expression that identifies the path to migration files.
-      mattr_accessor :migration_path_pattern
-      self.migration_path_pattern = %r{\Adb/migrate/}
+      mattr_accessor :migration_paths
+      self.migration_paths =
+        if defined?(Rails)
+          Rails.application.config.paths['db/migrate'].map(&:to_s)
+        else
+          []
+        end
 
       # This defines the regular expression that identifies structure dump files.
       mattr_accessor :structure_dump_pattern
@@ -46,12 +51,12 @@ module NdrDevSupport
 
       # Isolates migration/structure pattern changes by resetting them after yielding
       def self.with_pattern
-        default_migration_path_pattern = migration_path_pattern
+        default_migration_paths = migration_paths
         default_structure_dump_pattern = structure_dump_pattern
 
         yield
 
-        self.migration_path_pattern = default_migration_path_pattern
+        self.migration_paths = default_migration_paths
         self.structure_dump_pattern = default_structure_dump_pattern
       end
     end

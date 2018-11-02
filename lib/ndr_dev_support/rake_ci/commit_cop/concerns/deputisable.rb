@@ -14,7 +14,7 @@ module NdrDevSupport
             if file.is_a?(Array)
               file.any?(&migration_file?)
             else
-              file =~ NdrDevSupport::RakeCI::CommitCop.migration_path_pattern &&
+              file.start_with?(*NdrDevSupport::RakeCI::CommitCop.migration_paths) &&
                 file =~ /\d{14}_.*\.rb\z/
             end
           end
@@ -22,7 +22,7 @@ module NdrDevSupport
 
         def unscoped_migration_file?
           proc do |file|
-            file =~ NdrDevSupport::RakeCI::CommitCop.migration_path_pattern &&
+            file.start_with?(*NdrDevSupport::RakeCI::CommitCop.migration_paths) &&
               file =~ /\d{14}_[^\.]*\.rb\z/
           end
         end

@@ -6,6 +6,7 @@ module RakeCI
     # Test ModifiedMigration cop functionality
     class ModifiedMigrationTest < Minitest::Test
       def setup
+        NdrDevSupport::RakeCI::CommitCop.migration_paths = ['db/migrate']
         @cop = NdrDevSupport::RakeCI::CommitCop::ModifiedMigration.new
         @changes = { added: Set.new, deleted: Set.new, modified: Set.new, renamed: Set.new }
       end
@@ -36,10 +37,18 @@ module RakeCI
 
       def test_custom_pattern
         NdrDevSupport::RakeCI::CommitCop.with_pattern do
-          NdrDevSupport::RakeCI::CommitCop.migration_path_pattern = %r{\Adatabase/migrate/}
+          NdrDevSupport::RakeCI::CommitCop.migration_paths = ['database/migrate/', 'db/migrate']
 
           @changes[:modified].add('database/migrate/20181020223344_create_something.rb')
           assert_kind_of Hash, @cop.check(@changes)
+        end
+      end
+
+      def test_should_not_respond_to_modified_scoped_migration_outside_rails
+        NdrDevSupport::RakeCI::CommitCop.with_pattern do
+          NdrDevSupport::RakeCI::CommitCop.migration_paths = []
+          @changes[:modified].add('db/migrate/20181020223344_create_something.some_scope.rb')
+          assert_nil @cop.check(@changes)
         end
       end
     end

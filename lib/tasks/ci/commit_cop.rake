@@ -1,9 +1,3 @@
-# era
-# NdrDevSupport::RakeCI::CommitCop.structure_dump_pattern = %r{\Adb/(development_)?structure\.sql\z}
-# ndtms_v2
-# NdrDevSupport::RakeCI::CommitCop.migration_path_pattern = %r{\Adbs/migrate/}
-# NdrDevSupport::RakeCI::CommitCop.structure_dump_pattern = %r{\Adbs/(det|dams|ndtms)/structure\.sql\z}
-
 namespace :ci do
   desc 'commit_cop'
   task commit_cop: 'ci:rugged:setup' do |t|
@@ -21,9 +15,7 @@ namespace :ci do
       puts attachment.to_yaml
     end
   end
-end
 
-namespace :ci do
   desc 'changes'
   task changes: 'ci:rugged:setup' do
     # Usage: bin/rake ci:changes
