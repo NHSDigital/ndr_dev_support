@@ -75,6 +75,7 @@ Metrics/AbcSize:
   Max: 23
   Exclude:
   - 'db/migrate/*.rb'
+  - 'test/**/*.rb'
 
 Metrics/BlockLength:
   # We're already limiting method size, blocks outside of methods
