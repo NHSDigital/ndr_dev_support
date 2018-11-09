@@ -151,7 +151,7 @@ file safety:
   lib/ndr_dev_support/rake_ci/redmine/ticket_resolver.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: dea2b51d5ea63a845b62224b7bce517e9c2f0297
+    safe_revision: 2154aa7f32e731933ff6091b8f42b2b014028a6a
   lib/ndr_dev_support/rake_ci/simple_cov_helper.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -179,11 +179,11 @@ file safety:
   lib/ndr_dev_support/tasks.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 3e1fbd0a5931f7598a2dd3f929a7cd8366dc0e96
+    safe_revision: 2154aa7f32e731933ff6091b8f42b2b014028a6a
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 3efca19afad2f7dedc1d470cd8dd51e95ec77545
+    safe_revision: e3f427496995516245e0de5c371b6867cf0a04df
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -228,7 +228,7 @@ file safety:
   lib/tasks/ci/redmine.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: dea2b51d5ea63a845b62224b7bce517e9c2f0297
+    safe_revision: 2154aa7f32e731933ff6091b8f42b2b014028a6a
   lib/tasks/ci/rugged.rake:
     comments: 
     reviewed_by: timgentry
@@ -280,7 +280,7 @@ file safety:
   test/rake_ci/redmine/ticket_resolver_test.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: dea2b51d5ea63a845b62224b7bce517e9c2f0297
+    safe_revision: 2154aa7f32e731933ff6091b8f42b2b014028a6a
   test/test_helper.rb:
     comments: 
     reviewed_by: josh.pencheon
