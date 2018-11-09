@@ -37,9 +37,15 @@ module NdrDevSupport
         end
 
         def process_commit(user, revision, message)
+          resolved_tickets = []
+
           each_ticket_from(message) do |ticket, resolved|
             update_ticket(message, user, revision, ticket, resolved)
+
+            resolved_tickets << ticket if resolved
           end
+
+          resolved_tickets
         end
 
         def each_ticket_from(message, &block)
