@@ -2,8 +2,8 @@
 file safety:
   ".gitignore":
     comments: 
-    reviewed_by: timgentry
-    safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+    reviewed_by: josh.pencheon
+    safe_revision: 3e1fbd0a5931f7598a2dd3f929a7cd8366dc0e96
   ".hound.yml":
     comments: 
     reviewed_by: timgentry
@@ -11,7 +11,7 @@ file safety:
   ".rubocop.yml":
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 949a0ff086946426531a34d48f646b32c761c272
+    safe_revision: 33ecea8453c2b82c3e360819831bee5f1b8d3d4d
   ".travis.yml":
     comments: 
     reviewed_by: josh.pencheon
@@ -44,6 +44,10 @@ file safety:
     comments: 
     reviewed_by: timgentry
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+  lib/minitest/rake_ci_reporter.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: 3e1fbd0a5931f7598a2dd3f929a7cd8366dc0e96
   lib/ndr_dev_support.rb:
     comments: 
     reviewed_by: timgentry
@@ -83,7 +87,7 @@ file safety:
   lib/ndr_dev_support/daemon/ci_server.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: ec3d1f3fa1d1f1f3d039587a2f31bda28062f731
+    safe_revision: 66ce36e2646d392e3a67e19fcb9322ed8c5a6c16
   lib/ndr_dev_support/daemon/stoppable.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -120,10 +124,34 @@ file safety:
     comments: 
     reviewed_by: josh.pencheon
     safe_revision: 49caa4ef8ad9926843354d36f4610d40603ec632
+  lib/ndr_dev_support/rake_ci/commit_cop.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
+  lib/ndr_dev_support/rake_ci/commit_cop/concerns/deputisable.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
+  lib/ndr_dev_support/rake_ci/commit_cop/migration_without_structure_dump.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
+  lib/ndr_dev_support/rake_ci/commit_cop/modified_migration.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
+  lib/ndr_dev_support/rake_ci/commit_cop/renamed_migration.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
   lib/ndr_dev_support/rake_ci/concerns/commit_metadata_persistable.rb:
     comments: 
     reviewed_by: josh.pencheon
     safe_revision: 49caa4ef8ad9926843354d36f4610d40603ec632
+  lib/ndr_dev_support/rake_ci/redmine/ticket_resolver.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: dea2b51d5ea63a845b62224b7bce517e9c2f0297
   lib/ndr_dev_support/rake_ci/simple_cov_helper.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -151,7 +179,7 @@ file safety:
   lib/ndr_dev_support/tasks.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: ec3d1f3fa1d1f1f3d039587a2f31bda28062f731
+    safe_revision: 3e1fbd0a5931f7598a2dd3f929a7cd8366dc0e96
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -169,6 +197,10 @@ file safety:
     comments: 
     reviewed_by: josh.pencheon
     safe_revision: ddcf7de0bf1f5fb17cc28e2460009e162ff8917c
+  lib/tasks/ci/commit_cop.rake:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
   lib/tasks/ci/dependencies.rake:
     comments: 
     reviewed_by: josh.pencheon
@@ -181,6 +213,10 @@ file safety:
     comments: 
     reviewed_by: timgentry
     safe_revision: 00cd6c2f71612a467ee88ad53c21e08f073871d5
+  lib/tasks/ci/minitest.rake:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: 3e1fbd0a5931f7598a2dd3f929a7cd8366dc0e96
   lib/tasks/ci/notes.rake:
     comments: 
     reviewed_by: timgentry
@@ -188,23 +224,27 @@ file safety:
   lib/tasks/ci/prometheus.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: a10b6f3f5c9261135fae534e5785e2342430dde2
+    safe_revision: 6cb22447594ebf450fc60deb90fd223c8067ff18
+  lib/tasks/ci/redmine.rake:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: dea2b51d5ea63a845b62224b7bce517e9c2f0297
   lib/tasks/ci/rugged.rake:
     comments: 
     reviewed_by: timgentry
     safe_revision: 7ab7061b257f916eb43bc8d184aa425f1f08b739
   lib/tasks/ci/server.rake:
     comments: 
-    reviewed_by: timgentry
-    safe_revision: e581239a77666500a3108bcb3d480e370a82adb8
+    reviewed_by: josh.pencheon
+    safe_revision: d8e52aab569d9efac3e27485b5721c9608a84b6c
   lib/tasks/ci/simplecov.rake:
     comments: 
     reviewed_by: josh.pencheon
     safe_revision: 6240a84dc859af0623328f8667b93299c8eae257
   lib/tasks/ci/slack.rake:
     comments: 
-    reviewed_by: timgentry
-    safe_revision: ad38e92c6e56b9d81fdab10681d8f2924eeadf5a
+    reviewed_by: josh.pencheon
+    safe_revision: 6cb22447594ebf450fc60deb90fd223c8067ff18
   lib/tasks/ci/stats.rake:
     comments: 
     reviewed_by: josh.pencheon
@@ -216,7 +256,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: ec3d1f3fa1d1f1f3d039587a2f31bda28062f731
+    safe_revision: 3e1fbd0a5931f7598a2dd3f929a7cd8366dc0e96
   test/daemon/ci_server_test.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -225,6 +265,22 @@ file safety:
     comments: 
     reviewed_by: timgentry
     safe_revision: 26a8907a7a8a6b0d836aa12ca0335fa40be12240
+  test/rake_ci/commit_cop/migration_without_structure_dump_test.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
+  test/rake_ci/commit_cop/modified_migration_test.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
+  test/rake_ci/commit_cop/renamed_migration_test.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
+  test/rake_ci/redmine/ticket_resolver_test.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: dea2b51d5ea63a845b62224b7bce517e9c2f0297
   test/test_helper.rb:
     comments: 
     reviewed_by: josh.pencheon
