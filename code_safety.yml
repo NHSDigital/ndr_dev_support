@@ -59,7 +59,7 @@ file safety:
   lib/ndr_dev_support/capistrano/ndr_model.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: bcecae9e1eeffa84687f1748abebc0c8505a228d
+    safe_revision: eec7079a777c84f61b05c236df60195d4ddcf488
   lib/ndr_dev_support/capistrano/restart.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -75,7 +75,7 @@ file safety:
   lib/ndr_dev_support/capistrano/standalone_gems.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
+    safe_revision: eec7079a777c84f61b05c236df60195d4ddcf488
   lib/ndr_dev_support/capistrano/svn_cache.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -182,8 +182,8 @@ file safety:
     safe_revision: 2154aa7f32e731933ff6091b8f42b2b014028a6a
   lib/ndr_dev_support/version.rb:
     comments: 
-    reviewed_by: timgentry
-    safe_revision: b2cdc9bcf29d16582bbea453a41167aba0bca2cf
+    reviewed_by: josh.pencheon
+    safe_revision: 70ba4f109658ab013f988cad8ff74e76a62eccf3
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
