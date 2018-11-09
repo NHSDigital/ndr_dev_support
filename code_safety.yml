@@ -154,8 +154,8 @@ file safety:
     safe_revision: 2154aa7f32e731933ff6091b8f42b2b014028a6a
   lib/ndr_dev_support/rake_ci/simple_cov_helper.rb:
     comments: 
-    reviewed_by: josh.pencheon
-    safe_revision: 6240a84dc859af0623328f8667b93299c8eae257
+    reviewed_by: timgentry
+    safe_revision: 678403f777614189ab89aafa1cb1eafbcf48763c
   lib/ndr_dev_support/rubocop/executor.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -182,8 +182,8 @@ file safety:
     safe_revision: 2154aa7f32e731933ff6091b8f42b2b014028a6a
   lib/ndr_dev_support/version.rb:
     comments: 
-    reviewed_by: josh.pencheon
-    safe_revision: e3f427496995516245e0de5c371b6867cf0a04df
+    reviewed_by: timgentry
+    safe_revision: b2cdc9bcf29d16582bbea453a41167aba0bca2cf
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
