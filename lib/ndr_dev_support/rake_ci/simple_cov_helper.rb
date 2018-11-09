@@ -2,6 +2,7 @@ module NdrDevSupport
   module RakeCI
     # This helper persists the SimpleCov::Result
     class SimpleCovHelper
+      require 'rugged'
       require 'simplecov'
       require_relative 'concerns/commit_metadata_persistable'
 
