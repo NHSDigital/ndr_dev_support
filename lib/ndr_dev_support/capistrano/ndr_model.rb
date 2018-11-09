@@ -5,7 +5,7 @@ require_relative 'assets'
 require_relative 'restart'
 require_relative 'revision_logger'
 require_relative 'ruby_version'
-# require_relative 'standalone_gems' # This doesn't work with the permissions model
+require_relative 'standalone_gems'
 require_relative 'svn_cache'
 require_relative 'sysadmin_scripts'
 
