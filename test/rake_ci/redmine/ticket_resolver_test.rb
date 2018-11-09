@@ -65,6 +65,18 @@ module RakeCI
         assert_nil payload[:status_id]
       end
 
+      def test_process_commit
+        resolver = NdrDevSupport::RakeCI::Redmine::TicketResolver.new(nil, nil)
+
+        resolver.stubs(:ticket_closed?).returns(true)
+        resolver.stubs(:update_ticket).returns(nil)
+
+        assert_equal %w[34 23 42],
+                     resolver.process_commit('Bob Fossil',
+                                             @friendly_revision_name,
+                                             'This closes #34, resolved #23, and fixes #42')
+      end
+
       # TODO: Test Redmine API
     end
   end
