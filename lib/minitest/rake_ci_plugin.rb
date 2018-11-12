@@ -4,8 +4,20 @@ require 'ndr_dev_support/rake_ci/concerns/commit_metadata_persistable'
 
 # The plugin needs to extend Minitest
 module Minitest
+  def self.plugin_rake_ci_init(_options)
+    reporter << RakeCIReporter.new if RakeCIReporter.enabled?
+  end
+
   # RakeCI Minitest Reporter
   class RakeCIReporter < StatisticsReporter
+    def self.enable!
+      @enabled = true
+    end
+
+    def self.enabled?
+      @enabled ||= false
+    end
+
     include CommitMetadataPersistable
 
     def report
@@ -105,9 +117,5 @@ module Minitest
     def name
       'minitest'
     end
-  end
-
-  def self.plugin_rake_ci_init(_options)
-    reporter << RakeCIReporter.new
   end
 end
