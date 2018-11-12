@@ -111,5 +111,3 @@ module Minitest
     reporter << RakeCIReporter.new
   end
 end
-
-Minitest.extensions << 'rake_ci'

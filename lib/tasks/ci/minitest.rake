@@ -19,15 +19,15 @@ namespace :ci do
     desc 'setup'
     task :setup do
       # Load the RakeCI reporter:
-      require 'minitest/rake_ci_reporter'
+      require 'minitest/rake_ci'
 
       # Ensure spawned processes do the same:
-      ENV['RUBYOPT'] += ' -rminitest/rake_ci_reporter'
+      ENV['RUBYOPT'] += ' -rminitest/rake_ci'
     end
 
     desc 'process'
     task :process do
-      require 'minitest/rake_ci_reporter'
+      require 'minitest/rake_ci'
 
       @attachments ||= []
       @metrics ||= []
