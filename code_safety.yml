@@ -44,10 +44,14 @@ file safety:
     comments: 
     reviewed_by: timgentry
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
-  lib/minitest/rake_ci_reporter.rb:
+  lib/minitest/rake_ci.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 3e1fbd0a5931f7598a2dd3f929a7cd8366dc0e96
+    safe_revision: 3cadf2dc33034cfe7258f6cf4b199d3101b2a7ba
+  lib/minitest/rake_ci_plugin.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: 3cadf2dc33034cfe7258f6cf4b199d3101b2a7ba
   lib/ndr_dev_support.rb:
     comments: 
     reviewed_by: timgentry
@@ -183,7 +187,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 70ba4f109658ab013f988cad8ff74e76a62eccf3
+    safe_revision: a4651f260e323931116f76ff96fc2a5364085ad2
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -216,7 +220,7 @@ file safety:
   lib/tasks/ci/minitest.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 3e1fbd0a5931f7598a2dd3f929a7cd8366dc0e96
+    safe_revision: 3cadf2dc33034cfe7258f6cf4b199d3101b2a7ba
   lib/tasks/ci/notes.rake:
     comments: 
     reviewed_by: timgentry
