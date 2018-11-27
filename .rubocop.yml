@@ -122,6 +122,12 @@ Rails/DynamicFindBy:
   Exclude:
   - 'test/integration/**/*.rb'
 
+Rails/RefuteMethods:
+  # The 'refute_*' family of methods are named consistently and make grammatical
+  # sense; this doesn't hold true for the 'assert_no*' variants. Also, 'refute'
+  # has the same number of characters as 'assert'..!
+  Enabled: false
+
 Rails/SkipsModelValidations:
   # Methods like 'update_column' exist for a reason, and it is the developer's
   # responsibilty to understand the behaviour of the code they write; blanket
