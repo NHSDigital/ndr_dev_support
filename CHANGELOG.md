@@ -24,4 +24,3 @@
 ### Fixed
 * rubocop: Metrics/AbcSize now excludes tests
 * Replaced blanket db folder rubocop exclusion with cop specific exemptions (#31)
-
