@@ -23,6 +23,7 @@ module NdrDevSupport
 
       included do
         attr_reader :name, :start_time
+        attr_writer :logger
       end
 
       def initialize(*)
@@ -62,12 +63,15 @@ module NdrDevSupport
         end
       end
 
+      def logger
+        @logger ||= defined?(Rails) ? Rails.logger : Logger.new($stdout)
+      end
+
       def log(message, level = :info)
         tags    = "[#{Time.current.to_s(:db)}] [#{level.upcase}] [daemon: #{name} (#{Process.pid})]"
         message = "#{tags} #{message}"
 
-        $stdout.puts(message) unless Rails.env.test? || !$stdout.isatty
-        Rails.logger.send(level, message)
+        logger.send(level, message)
       end
 
       private
