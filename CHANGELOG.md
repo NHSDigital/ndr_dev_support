@@ -1,4 +1,7 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 4.2.0 / 2018-11-28
 ### Added
 * Improve `Stoppable` integration within a Rails project, adding configurable logger.
 
