@@ -9,15 +9,13 @@ module NdrDevSupport
       extend ActiveSupport::Concern
 
       # touch this file to trigger graceful exit
-      # TODO: Consider supporting Rails
-      # RESTART_FILENAME = Rails.root.join('tmp', 'restart.txt')
-      RESTART_FILENAME = 'restart.txt'
+      RESTART_FILENAME =
+        defined?(Rails) ? Rails.root.join('tmp', 'restart.txt') : 'restart.txt'
 
       MAX_MEMORY = 3.gigabytes # restart between jobs if memory consumption exceeds this
       MAX_UPTIME = 2.hours     # restart between jobs if have been up this long
 
       # how long the daemon waits when it runs out of things to do:
-      # BIG_SLEEP = Rails.env.development? ? 10.seconds : 1.minute
       BIG_SLEEP = 1.minute
 
       # when idle, how long the daemon between making restart checks?
