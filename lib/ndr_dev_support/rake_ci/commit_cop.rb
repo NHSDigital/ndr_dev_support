@@ -2,6 +2,7 @@ require 'active_support/core_ext/module/attribute_accessors'
 require_relative 'commit_cop/migration_without_structure_dump'
 require_relative 'commit_cop/modified_migration'
 require_relative 'commit_cop/renamed_migration'
+require_relative 'commit_cop/missing_associated_test_file'
 
 module NdrDevSupport
   module RakeCI
@@ -16,6 +17,18 @@ module NdrDevSupport
           []
         end
 
+      # This defines the regular expression that identifies the path to application files.
+      mattr_accessor :monitored_paths
+      self.monitored_paths =
+        if defined?(Rails)
+          Rails.application.config.paths.values_at('app/controllers',
+                                                   'app/helpers',
+                                                   'app/models',
+                                                   'app/mailers').flat_map { |obj| obj.map(&:to_s) }
+        else
+          []
+        end
+
       # This defines the regular expression that identifies structure dump files.
       mattr_accessor :structure_dump_pattern
       self.structure_dump_pattern = %r{\Adb/(structure\.sql|schema\.rb)\z}
@@ -23,7 +36,8 @@ module NdrDevSupport
       COMMIT_COPS = [
         MigrationWithoutStructureDump,
         ModifiedMigration,
-        RenamedMigration
+        RenamedMigration,
+        MissingAssociatedTestFile
       ].freeze
 
       # enumerates over each delta of the commmit
