@@ -22,9 +22,10 @@ module NdrDevSupport
 
           return if files_without_tests.empty?
 
-          attachment(:danger,
+          attachment :danger,
                      'No associated test file committed',
-                     'Files were submitted without an associated test file')
+                     "File(s) submitted without an associated test file:\n" \
+                     "#{files_without_tests.join("\n")}"
         end
       end
     end
