@@ -7,6 +7,7 @@ providing:
 2. rake tasks to limit Rubocop's output to changed (and related) code
 3. integration testing support, which can be required from a project's `test_helper.rb`
 4. Deployment support, through Capistrano.
+5. a rake task based Continuous Integration (CI) server.
 
 ## Installation
 
@@ -139,6 +140,71 @@ require 'ndr_dev_support/capistrano/ndr_model'
 ```
 
 This will pull in the majority of behaviour needed to deploy in our preferred style.
+
+## Rake CI server
+
+ndr_dev_support provides a rake based continuous integration server that runs on a `git` or `git svn` working copy of your application.
+It polls for changes to the respository and, unlike some CI servers, it checks out and tests every commit; enabling full and comparative analysis of code quality and other statistical trends.
+
+Out of the box it does nothing, but does provide a number of rake tasks that you can opt to use.
+Those rake tasks utilise the concepts of metrics and attachments (messages) and tasks tend to either generate them or publish them.
+
+NOTE: As the way tests are run across applications differs, the `:default` rake task must be able to run your full suite of tests.
+
+CI rake tasks have been written for:
+
+* `ci:brakeman` - [brakeman](https://brakemanscanner.org/) vulnerability scanner metrics are generated for warning counts and "danger" messages for new warnings and "good" messages for fixed warnings.
+* `ci:bundle_audit` - generates "danger" messages for high criticality [bundle audit](https://github.com/rubysec/bundler-audit) advisories and "warning" messages for all others.
+* `ci:commit_cop` - Runs a number of commit "Cops" which create messages when common commit mistakes occur. Current cops look for a Rails migration added without a structure dump file, modified Rails migrations and renamed Rails migrations.
+* `ci:dependencies:process` - generates a line of pipe delimited markup showing system dependencies (that could be used in a wiki page on Redmine)
+* `ci:housekeep` - runs `rake log:clear` and `rake tmp:clear` if defined
+* `ci:linguist` - generates project programming language metrics for languages over 1% of codebase.
+* `ci:minitest` - sets up Minitest and SimpleCov to capture metrics and messages and runs the `default` rake task and `ci:simplecov:process` before running `ci:redmine:update_tickets` if all tests pass.
+* `ci:notes` - runs the Rails `rake notes` task (if using Rails) and converts annotation counts into metrics.
+* `ci:prometheus:publish` - sends all metrics to specified [Prometheus](https://prometheus.io/) push gateway.
+* `ci:redmine:update_tickets` - if all tests pass, this will parse the commit message and resolve associated [Redmine](https://www.redmine.org/) tickets.
+* `ci:rugged:commit_details` - if there are messages, then it prepends message list with commit details.
+* `ci:simplecov:process` - generates metrics for [SimpleCov](https://github.com/colszowka/simplecov) measured test covered lines, test coverage percentage and total lines of code.
+* `ci:slack:publish` - sends all messages to specified [Slack](https://slack.com/) channel.
+* `ci:stats` - runs the Rails `rake stats` task (if using Rails) and converts counts into metrics
+
+To start the server, `cd` to the working copy and execute:
+
+    $ rake ci:server
+
+Configuration is managed within your application by implementing the `ci:all` rake task. When a new commit is detected, it checks it out and runs `rake ci:all`.
+
+An example Rails application rake task might look like:
+
+```ruby
+namespace :ci do
+  desc 'Setup CI stack, integrations, etc up front'
+  task setup: [
+    'ci:rugged:setup',
+    'ci:slack:setup',
+    'ci:prometheus:setup'
+  ]
+
+  desc 'all'
+  task all: [
+    # Setup
+    'ci:setup',
+    'ci:housekeep',
+    'db:migrate',
+    # Test and Analyse
+    'ci:minitest',
+    'ci:brakeman',
+    'ci:bundle_audit',
+    'ci:linguist',
+    'ci:notes',
+    'ci:stats',
+    # Report
+    'ci:publish'
+  ]
+end
+```
+
+NOTE: Defining the `ci:setup` rake tasks up front is not necessary, but will prompt for missing server credentials at the start of the first CI run.
 
 ## Development
 
