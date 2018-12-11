@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Added
+* Added an additional cop to check commits for missing associated test files.
 
 ## 4.2.0 / 2018-11-28
 ### Added
