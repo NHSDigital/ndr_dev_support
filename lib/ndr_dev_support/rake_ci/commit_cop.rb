@@ -35,9 +35,9 @@ module NdrDevSupport
 
       COMMIT_COPS = [
         MigrationWithoutStructureDump,
+        MissingAssociatedTestFile,
         ModifiedMigration,
-        RenamedMigration,
-        MissingAssociatedTestFile
+        RenamedMigration
       ].freeze
 
       # enumerates over each delta of the commmit
