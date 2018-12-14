@@ -44,39 +44,49 @@ module NdrDevSupport
       private
 
       def run_once
+        log('running once...')
+
         git_fetch
         git_checkout(MASTER_BRANCH_NAME)
 
         objectids_between_master_and_remote.each do |oid|
+          log("testing #{oid}...")
           git_rebase(oid)
 
           WithCleanRbenv.with_clean_rbenv do
             # TODO: rbenv_install
             bundle_install
-            `rbenv exec bundle exec rake ci:all`
+            system('rbenv exec bundle exec rake ci:all')
             git_discard_changes
           end
         end
+
+        log('completed single run.')
+      rescue => exception
+        log(<<~MSG)
+          Unhandled exception! #{exception.class}: #{exception.message}
+          #{(exception.backtrace || []).join("\n")}
+        MSG
+
+        raise exception
       end
 
       def git_fetch
-        svn_remote? ? `git svn fetch` : `git fetch`
+        system(svn_remote? ? 'git svn fetch' : 'git fetch')
       end
 
       def git_checkout(oid)
         Open3.popen3('git', 'checkout', oid) do |_stdin, _stdout, stderr, wait_thr|
           msg = stderr.read.strip
-          # TODO: Once https://github.com/PublicHealthEngland/ndr_dev_support/issues/27
-          # has been resolved, use logging instead of puts
-          puts msg unless msg == "Already on '#{oid}'"
+          log(msg) unless msg == "Already on '#{oid}'"
 
           process_status = wait_thr.value
-          raise stderr.read unless process_status.exited?
+          raise msg unless process_status.exited?
         end
       end
 
       def git_rebase(oid)
-        `git rebase #{Shellwords.escape(oid)}`
+        system("git rebase #{Shellwords.escape(oid)}") || raise('Unable to rebase!')
       end
 
       def git_discard_changes
@@ -122,7 +132,7 @@ module NdrDevSupport
         return unless File.file?('Gemfile')
         return if system('bundle check')
 
-        `rbenv exec bundle install --local --jobs=3`
+        system('rbenv exec bundle install --local --jobs=3')
         return if $CHILD_STATUS.exitstatus.zero? || ENV['SLACK_WEBHOOK_URL'].nil?
 
         slack_publisher = NdrDevSupport::SlackMessagePublisher.new(ENV['SLACK_WEBHOOK_URL'],
@@ -138,6 +148,8 @@ module NdrDevSupport
         }
 
         slack_publisher.post(attachments: [attachment])
+
+        raise 'Failure running `bundle install --local`'
       end
     end
   end
