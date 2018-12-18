@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Fixed
+* ci_server: improve logging and error handling (#44)
 
 ## 4.2.0 / 2018-11-28
 ### Added
