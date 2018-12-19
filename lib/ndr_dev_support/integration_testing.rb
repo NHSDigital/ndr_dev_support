@@ -3,6 +3,10 @@ require 'capybara/rails'
 ActionDispatch::IntegrationTest.include(Capybara::DSL)
 
 # Set up basic screenshotting capability:
+#
+# TODO: Once Rails 5.1 is the minimum version we support, we should be able to
+#       use the built-in behaviour that Rails adds to after_teardown.
+#
 require 'capybara-screenshot'
 if defined?(MiniTest)
   require 'capybara-screenshot/minitest'
