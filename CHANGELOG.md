@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Changed
+* Setting the Capybara save path and prune strategy. Resolves #45 (#46)
 
 ## 4.2.1 / 2018-12-18
 ### Fixed
