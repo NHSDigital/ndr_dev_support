@@ -12,8 +12,8 @@ module NdrDevSupport
           added = changes[:added]
           return unless added.any?
 
-          monitored_paths = CommitCop.monitored_paths.join('|')
-          monitored_files = added.select { |file| file =~ %r{((#{monitored_paths})\/.*\.rb)} }
+          tested_paths = CommitCop.tested_paths.join('|')
+          monitored_files = added.select { |file| file =~ %r{((#{tested_paths})\/.*\.rb)} }
 
           files_without_tests = monitored_files.reduce([]) do |missing_tests, monitored_file|
             test_file = monitored_file.gsub(%r{\A\w+\/(.*)\.rb\z}, 'test/\1_test.rb')

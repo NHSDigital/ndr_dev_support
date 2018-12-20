@@ -17,9 +17,10 @@ module NdrDevSupport
           []
         end
 
-      # This defines the regular expression that identifies the path to application files.
-      mattr_accessor :monitored_paths
-      self.monitored_paths =
+      # This defines the regular expression that identifies the path to application files
+      # that you would expect to have associated test files.
+      mattr_accessor :tested_paths
+      self.tested_paths =
         if defined?(Rails)
           Rails.application.config.paths.values_at('app/controllers',
                                                    'app/helpers',
