@@ -2,6 +2,8 @@ namespace :ci do
   namespace :redmine do
     desc 'Set up Redmine'
     task :setup do
+      require 'highline/import'
+
       ENV['REDMINE_HOSTNAME'] ||= ask('Redmine URL: ')
       ENV['REDMINE_HOSTNAME'] = nil if ENV['REDMINE_HOSTNAME'] == ''
 

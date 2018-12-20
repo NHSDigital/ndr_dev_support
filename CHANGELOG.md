@@ -1,6 +1,13 @@
 ## [Unreleased]
+### Changed
+* Setting the Capybara save path and prune strategy. Resolves #45 (#46)
+
 ### Added
 * Added an additional cop to check commits for missing associated test files.
+
+## 4.2.1 / 2018-12-18
+### Fixed
+* ci_server: improve logging and error handling (#44)
 
 ## 4.2.0 / 2018-11-28
 ### Added

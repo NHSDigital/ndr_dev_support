@@ -3,6 +3,10 @@ require 'capybara/rails'
 ActionDispatch::IntegrationTest.include(Capybara::DSL)
 
 # Set up basic screenshotting capability:
+#
+# TODO: Once Rails 5.1 is the minimum version we support, we should be able to
+#       use the built-in behaviour that Rails adds to after_teardown.
+#
 require 'capybara-screenshot'
 if defined?(MiniTest)
   require 'capybara-screenshot/minitest'
@@ -23,3 +27,6 @@ require 'ndr_dev_support/integration_testing/drivers/switchable'
 
 Capybara.default_driver    = :switchable
 Capybara.javascript_driver = :switchable
+
+Capybara.save_path = Rails.root.join('tmp', 'screenshots')
+Capybara::Screenshot.prune_strategy = { keep: 20 }
