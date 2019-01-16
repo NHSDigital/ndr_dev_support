@@ -4,8 +4,8 @@ namespace :ci do
 
   desc 'publish'
   task publish: [
-    'ci:slack:publish',
-    'ci:prometheus:publish'
+    'ci:prometheus:publish',
+    'ci:slack:publish'
   ]
 
   desc 'Runs the Rake CI server'

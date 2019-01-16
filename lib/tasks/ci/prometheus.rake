@@ -49,6 +49,15 @@ namespace :ci do
         client.add(prometheus)
       rescue Errno::ECONNREFUSED => exception
         warn "Failed to push metrics to Prometheus: #{exception.message}"
+
+        @attachments ||= []
+        @attachments << {
+          color: 'danger',
+          title: 'Publishing Error',
+          text: 'Build metrics could not be pushed - the Prometheus gateway was uncontactable',
+          footer: 'bundle exec rake ci:prometheus:publish',
+          mrkdwn_in: ['text']
+        }
       end
     end
   end
