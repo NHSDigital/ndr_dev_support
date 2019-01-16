@@ -43,9 +43,13 @@ namespace :ci do
         end
       end
 
-      Prometheus::Client::Push.new(
-        'rake-ci-job', nil, ENV['PROMETHEUS_PUSHGATEWAY']
-      ).add(prometheus)
+      client = Prometheus::Client::Push.new('rake-ci-job', nil, ENV['PROMETHEUS_PUSHGATEWAY'])
+
+      begin
+        client.add(prometheus)
+      rescue Errno::ECONNREFUSED => exception
+        warn "Failed to push metrics to Prometheus: #{exception.message}"
+      end
     end
   end
 end
