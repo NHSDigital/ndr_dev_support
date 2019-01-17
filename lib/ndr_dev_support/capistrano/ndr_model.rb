@@ -122,6 +122,9 @@ Capistrano::Configuration.instance(:must_exist).load do
 
     desc 'Symlink to the release any :shared_paths, ensure private/ is writeable'
     task :filesystem_tweaks do
+      # This task binds after a standard capistrano step, so we need to be careful:
+      next unless ndr_model_deployment
+
       fetch(:shared_paths, []).each do |path|
         # Symlink `path` from the shared space to the release being prepared, replacing anything
         # already there:

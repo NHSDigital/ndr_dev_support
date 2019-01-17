@@ -5,6 +5,9 @@
 ### Added
 * Added an additional cop to check commits for missing associated test files.
 
+### Fixed
+* capistrano: address filesystem issue with using NDR-model in mixed-mode project
+
 ## 4.2.1 / 2018-12-18
 ### Fixed
 * ci_server: improve logging and error handling (#44)
