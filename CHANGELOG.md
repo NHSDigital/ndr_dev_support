@@ -7,6 +7,7 @@
 
 ### Fixed
 * capistrano: address filesystem issue with using NDR-model in mixed-mode project
+* support Ruby 2.6. Minimum version is now 2.4
 
 ## 4.2.1 / 2018-12-18
 ### Fixed
