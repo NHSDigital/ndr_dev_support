@@ -19,7 +19,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 8166958d634cc01379fd8a34278c231ad37b061b
+    safe_revision: 21bcc26b9d466ccd9283dcb170fbee9138b7bfee
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -55,7 +55,7 @@ file safety:
   lib/minitest/rake_ci_plugin.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 3cadf2dc33034cfe7258f6cf4b199d3101b2a7ba
+    safe_revision: 9023b4def89e618d3f22333e9fbabd6a816873bf
   lib/ndr_dev_support.rb:
     comments: 
     reviewed_by: timgentry
@@ -95,7 +95,7 @@ file safety:
   lib/ndr_dev_support/daemon/ci_server.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: fe8682a3300a322c5f6b9a17dce471f11fa5e307
+    safe_revision: 5075331fb3f33cd214c2ca76b199f27ddd743170
   lib/ndr_dev_support/daemon/stoppable.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -159,7 +159,7 @@ file safety:
   lib/ndr_dev_support/rake_ci/concerns/commit_metadata_persistable.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 49caa4ef8ad9926843354d36f4610d40603ec632
+    safe_revision: d3347202d1efafc419c1d79d2643f3fdfcbfdd65
   lib/ndr_dev_support/rake_ci/redmine/ticket_resolver.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -195,7 +195,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 8166958d634cc01379fd8a34278c231ad37b061b
+    safe_revision: 21bcc26b9d466ccd9283dcb170fbee9138b7bfee
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -236,11 +236,11 @@ file safety:
   lib/tasks/ci/prometheus.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: fe8682a3300a322c5f6b9a17dce471f11fa5e307
+    safe_revision: 2d1b9d19acafebe6ca5f995bf15243abe2847eec
   lib/tasks/ci/redmine.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: ba171e9460b57d2d9932f6c0c0bdc3a5b282af80
+    safe_revision: 2d1b9d19acafebe6ca5f995bf15243abe2847eec
   lib/tasks/ci/rugged.rake:
     comments: 
     reviewed_by: timgentry
