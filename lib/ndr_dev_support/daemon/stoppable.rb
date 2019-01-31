@@ -64,7 +64,7 @@ module NdrDevSupport
       end
 
       def logger
-        @logger ||= defined?(Rails) ? Rails.logger : Logger.new($stdout)
+        @logger ||= defined?(Rails) && Rails.logger ? Rails.logger : Logger.new($stdout)
       end
 
       def log(message, level = :info)
