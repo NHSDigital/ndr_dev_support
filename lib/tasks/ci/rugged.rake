@@ -24,9 +24,11 @@ namespace :ci do
         }
       end
 
+      text = @commit.message.lines.grep_v(/\Agit-svn-id: /).join.strip
+
       attachment = {
-        fallback: @commit.message,
-        text: @commit.message,
+        fallback: text,
+        text: text,
         fields: fields,
         ts: @commit.author[:time].to_i
       }

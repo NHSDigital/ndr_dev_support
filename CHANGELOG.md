@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Fixed
+* CI: Remove duplicated revision information from commit message
 
 ## 5.1.0 / 2019-01-31
 ### Added
