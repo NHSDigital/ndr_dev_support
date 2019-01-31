@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Fixed
+* prevent `commit_metadata_persistable` from wiping prior result immediately
 
 ## 5.0.1 / 2019-01-31
 ### Fixed

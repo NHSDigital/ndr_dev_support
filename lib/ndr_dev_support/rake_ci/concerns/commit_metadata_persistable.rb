@@ -13,30 +13,29 @@ module CommitMetadataPersistable
   private
 
   def load_last_commit_data
-    hash = YAML.load_file(filename)
-
-    if commit.parents.map(&:oid).include?(hash[:commit])
-      # payload from parent commit
-      hash[:payload]
-    end
-  rescue Errno::ENOENT
-    nil
+    load_hash_matching(*commit.parents.map(&:oid))[:payload]
   end
 
   def load_current_commit_data
-    hash = YAML.load_file(filename)
+    load_hash_matching(commit.oid)[:payload]
+  end
 
-    if commit.oid == hash[:commit]
-      # payload from parent commit
-      hash[:payload]
-    end
+  def load_hash_matching(*commits)
+    match = Array.wrap(YAML.load_file(filename)).
+            detect { |h| commits.include? h[:commit] }
+
+    match || {}
   rescue Errno::ENOENT
-    nil
+    {}
   end
 
   def save_current_commit_data(data)
-    hash = { commit: commit.oid, payload: data }
-    File.write(filename, YAML.dump(hash))
+    hashes = [
+      load_hash_matching(*commit.parents.map(&:oid)),
+      { commit: commit.oid, payload: data }
+    ].reject(&:blank?)
+
+    File.write(filename, YAML.dump(hashes))
   end
 
   def filename
