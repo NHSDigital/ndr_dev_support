@@ -15,11 +15,11 @@ file safety:
   ".travis.yml":
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 8faa3e5e7ba5ef29daa1a857c8c15702f57c5a3f
+    safe_revision: 1cce5269b61341c5ec06e91b819df84ac6140165
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: a73717bdeb9f48c257aec4fa41a19735e99555c8
+    safe_revision: a225ce0f0bd125b8dce9b31f9766dd8703fb495e
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -67,7 +67,7 @@ file safety:
   lib/ndr_dev_support/capistrano/ndr_model.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: eec7079a777c84f61b05c236df60195d4ddcf488
+    safe_revision: 809acebc212beaaf23e6d73ae4d9b87382c2d087
   lib/ndr_dev_support/capistrano/restart.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -95,7 +95,7 @@ file safety:
   lib/ndr_dev_support/daemon/ci_server.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 0677afc93b0a64d56383e80fa1247e5be64bfb24
+    safe_revision: fe8682a3300a322c5f6b9a17dce471f11fa5e307
   lib/ndr_dev_support/daemon/stoppable.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -103,7 +103,7 @@ file safety:
   lib/ndr_dev_support/integration_testing.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: e0b3871607c649565330d6e62740ffd860930338
+    safe_revision: 0bca06801c072832f32b7abd8559888b91e9b337
   lib/ndr_dev_support/integration_testing/drivers/chrome.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -135,7 +135,7 @@ file safety:
   lib/ndr_dev_support/rake_ci/commit_cop.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
+    safe_revision: '01682912c2fc526b0bc29e2836de0aea31c65b12'
   lib/ndr_dev_support/rake_ci/commit_cop/concerns/deputisable.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -144,6 +144,10 @@ file safety:
     comments: 
     reviewed_by: josh.pencheon
     safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
+  lib/ndr_dev_support/rake_ci/commit_cop/missing_associated_test_file.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: '01682912c2fc526b0bc29e2836de0aea31c65b12'
   lib/ndr_dev_support/rake_ci/commit_cop/modified_migration.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -191,7 +195,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: a73717bdeb9f48c257aec4fa41a19735e99555c8
+    safe_revision: a225ce0f0bd125b8dce9b31f9766dd8703fb495e
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -232,7 +236,7 @@ file safety:
   lib/tasks/ci/prometheus.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 6cb22447594ebf450fc60deb90fd223c8067ff18
+    safe_revision: fe8682a3300a322c5f6b9a17dce471f11fa5e307
   lib/tasks/ci/redmine.rake:
     comments: 
     reviewed_by: josh.pencheon
@@ -244,7 +248,7 @@ file safety:
   lib/tasks/ci/server.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: d8e52aab569d9efac3e27485b5721c9608a84b6c
+    safe_revision: fe8682a3300a322c5f6b9a17dce471f11fa5e307
   lib/tasks/ci/simplecov.rake:
     comments: 
     reviewed_by: josh.pencheon
@@ -264,7 +268,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 3e1fbd0a5931f7598a2dd3f929a7cd8366dc0e96
+    safe_revision: 1cce5269b61341c5ec06e91b819df84ac6140165
   test/daemon/ci_server_test.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -277,6 +281,10 @@ file safety:
     comments: 
     reviewed_by: josh.pencheon
     safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
+  test/rake_ci/commit_cop/missing_associated_test_file_test.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: '01682912c2fc526b0bc29e2836de0aea31c65b12'
   test/rake_ci/commit_cop/modified_migration_test.rb:
     comments: 
     reviewed_by: josh.pencheon
