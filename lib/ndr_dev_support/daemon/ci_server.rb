@@ -47,17 +47,18 @@ module NdrDevSupport
         log('running once...')
 
         git_fetch
+        git_discard_changes
         git_checkout(MASTER_BRANCH_NAME)
 
         objectids_between_master_and_remote.each do |oid|
           log("testing #{oid}...")
+          git_discard_changes
           git_rebase(oid)
 
           WithCleanRbenv.with_clean_rbenv do
             # TODO: rbenv_install
             bundle_install
             system('rbenv exec bundle exec rake ci:all --trace')
-            git_discard_changes
           end
         end
 
