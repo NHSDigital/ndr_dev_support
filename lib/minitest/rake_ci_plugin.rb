@@ -76,7 +76,7 @@ module Minitest
       @current_attachments = []
       @current_attachments << failures_attachment if failures.positive?
       @current_attachments << errors_attachment if errors.positive?
-      @current_attachments << pass_attachment if newly_passing?
+      @current_attachments << pass_attachment if passing?
       @current_attachments
     end
 
@@ -99,13 +99,17 @@ module Minitest
     def pass_attachment
       {
         color: 'good',
-        text: 'Tests now pass',
+        text: newly_passing? ? 'Tests now pass! :tada:' : 'Tests passed',
         footer: 'bundle exec rake ci:minitest'
       }
     end
 
+    def passing?
+      !(failures.positive? || errors.positive?)
+    end
+
     def newly_passing?
-      return false if failures.positive? || errors.positive?
+      return false unless passing?
 
       last_commit_hash = load_last_commit_data
       return false if last_commit_hash.nil?

@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Added
+* CI: send a slack message whenever tests pass
+
 ### Fixed
 * prevent `commit_metadata_persistable` from wiping prior result immediately
 
