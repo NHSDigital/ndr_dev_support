@@ -43,9 +43,22 @@ namespace :ci do
         end
       end
 
-      Prometheus::Client::Push.new(
-        'rake-ci-job', nil, ENV['PROMETHEUS_PUSHGATEWAY']
-      ).add(prometheus)
+      client = Prometheus::Client::Push.new('rake-ci-job', nil, ENV['PROMETHEUS_PUSHGATEWAY'])
+
+      begin
+        client.add(prometheus)
+      rescue Errno::ECONNREFUSED => exception
+        warn "Failed to push metrics to Prometheus: #{exception.message}"
+
+        @attachments ||= []
+        @attachments << {
+          color: 'danger',
+          title: 'Publishing Error',
+          text: 'Build metrics could not be pushed - the Prometheus gateway was uncontactable',
+          footer: 'bundle exec rake ci:prometheus:publish',
+          mrkdwn_in: ['text']
+        }
+      end
     end
   end
 end

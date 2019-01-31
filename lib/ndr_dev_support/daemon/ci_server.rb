@@ -56,7 +56,7 @@ module NdrDevSupport
           WithCleanRbenv.with_clean_rbenv do
             # TODO: rbenv_install
             bundle_install
-            system('rbenv exec bundle exec rake ci:all')
+            system('rbenv exec bundle exec rake ci:all --trace')
             git_discard_changes
           end
         end
