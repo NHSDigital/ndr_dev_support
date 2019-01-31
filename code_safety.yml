@@ -19,7 +19,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: a225ce0f0bd125b8dce9b31f9766dd8703fb495e
+    safe_revision: 8166958d634cc01379fd8a34278c231ad37b061b
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -99,7 +99,7 @@ file safety:
   lib/ndr_dev_support/daemon/stoppable.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: c59abb543efd4ef9f769a03311e4291860a3c683
+    safe_revision: 07ba05e9dd59eeac187b5fe730ee653baa1a2732
   lib/ndr_dev_support/integration_testing.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -195,7 +195,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: a225ce0f0bd125b8dce9b31f9766dd8703fb495e
+    safe_revision: 8166958d634cc01379fd8a34278c231ad37b061b
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
