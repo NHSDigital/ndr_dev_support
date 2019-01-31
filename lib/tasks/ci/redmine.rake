@@ -17,12 +17,24 @@ namespace :ci do
       hostname = ENV['REDMINE_HOSTNAME']
       next if api_key.nil? || hostname.nil?
 
+      resolved_tickets = []
+      @attachments   ||= []
+
       require 'ndr_dev_support/rake_ci/redmine/ticket_resolver'
 
-      ticket_resolver = NdrDevSupport::RakeCI::Redmine::TicketResolver.new(api_key, hostname)
-      resolved_tickets = ticket_resolver.process_commit(@commit.author[:name],
-                                                        @friendly_revision_name,
-                                                        @commit.message)
+      begin
+        ticket_resolver = NdrDevSupport::RakeCI::Redmine::TicketResolver.new(api_key, hostname)
+        resolved_tickets = ticket_resolver.process_commit(@commit.author[:name],
+                                                          @friendly_revision_name,
+                                                          @commit.message)
+      rescue
+        @attachments << {
+          color: 'danger',
+          title: 'Redmine Update Error',
+          text: 'Ticket(s) could not be resolved on Redmine!',
+          footer: 'bundle exec rake ci:redmine:update_tickets'
+        }
+      end
 
       next if resolved_tickets.empty?
       resolved_tickets.map! { |ticket_id| "https://#{hostname}/issues/#{ticket_id}" }
@@ -36,7 +48,6 @@ namespace :ci do
         footer: 'bundle exec rake ci:minitest',
         mrkdwn_in: ['text']
       }
-      @attachments ||= []
       @attachments << attachment
     end
   end

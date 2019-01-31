@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Added
 * CI: send a slack message whenever tests pass
+* CI: send a slack message if Redmine update fails
 
 ### Fixed
 * prevent `commit_metadata_persistable` from wiping prior result immediately

@@ -58,8 +58,7 @@ namespace :ci do
           color: 'danger',
           title: 'Publishing Error',
           text: 'Build metrics could not be pushed - the Prometheus gateway was uncontactable',
-          footer: 'bundle exec rake ci:prometheus:publish',
-          mrkdwn_in: ['text']
+          footer: 'bundle exec rake ci:prometheus:publish'
         }
       end
     end
