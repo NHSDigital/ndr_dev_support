@@ -1,6 +1,10 @@
 ## [Unreleased]
 *no unreleased changes*
 
+## 5.0.1 / 2019-01-31
+### Fixed
+* fix CI issue when Rails isn't fully loaded.
+
 ## 5.0.0 / 2019-01-31
 ### Changed
 * Setting the Capybara save path and prune strategy. Resolves #45 (#46)
