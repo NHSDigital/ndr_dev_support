@@ -14,7 +14,10 @@ namespace :ci do
 
     desc 'Push Prometheus stats'
     task publish: :setup do
-      next if @metrics.empty? || ENV['PROMETHEUS_PUSHGATEWAY'].nil?
+      gateway = ENV['PROMETHEUS_PUSHGATEWAY']
+      project = ENV['PROMETHEUS_PROJECTNAME']
+
+      next if @metrics.empty? || gateway.nil?
 
       require 'prometheus/client'
       require 'prometheus/client/push'
@@ -35,7 +38,7 @@ namespace :ci do
             if prometheus.exist?(name)
               prometheus.get(name)
             else
-              prometheus.gauge(name, docstring, project: ENV['PROMETHEUS_PROJECTNAME'])
+              prometheus.gauge(name, docstring, project: project)
             end
           gauge.set(label_set, value)
         else
@@ -43,7 +46,7 @@ namespace :ci do
         end
       end
 
-      client = Prometheus::Client::Push.new('rake-ci-job', nil, ENV['PROMETHEUS_PUSHGATEWAY'])
+      client = Prometheus::Client::Push.new("rake-ci-#{project}", nil, gateway)
 
       begin
         client.add(prometheus)

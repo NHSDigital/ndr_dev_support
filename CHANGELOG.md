@@ -4,6 +4,7 @@
 
 ### Fixed
 * prevent `commit_metadata_persistable` from wiping prior result immediately
+* fix issue with multiple prometheus clients erasing each others' pushes
 
 ## 5.0.1 / 2019-01-31
 ### Fixed
