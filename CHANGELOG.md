@@ -1,4 +1,7 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 5.1.0 / 2019-01-31
 ### Added
 * CI: send a slack message whenever tests pass
 * CI: send a slack message if Redmine update fails
