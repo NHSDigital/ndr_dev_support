@@ -1,5 +1,6 @@
 ## [Unreleased]
 ### Fixed
+* Rubocop: bump to latest released version, for new cops
 * CI: Remove duplicated revision information from commit message
 
 ## 5.1.0 / 2019-01-31
