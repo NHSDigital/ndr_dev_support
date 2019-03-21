@@ -19,7 +19,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 21bcc26b9d466ccd9283dcb170fbee9138b7bfee
+    safe_revision: e3afc74e63943e91305df371dfe8ad0e30f8341b
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -131,7 +131,7 @@ file safety:
   lib/ndr_dev_support/rake_ci/brakeman_helper.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 49caa4ef8ad9926843354d36f4610d40603ec632
+    safe_revision: d3d238a863c0b016d2d782b1696964fa3f40738b
   lib/ndr_dev_support/rake_ci/commit_cop.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -195,7 +195,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 21bcc26b9d466ccd9283dcb170fbee9138b7bfee
+    safe_revision: e3afc74e63943e91305df371dfe8ad0e30f8341b
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -204,7 +204,7 @@ file safety:
   lib/tasks/ci/brakeman.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 49caa4ef8ad9926843354d36f4610d40603ec632
+    safe_revision: d3d238a863c0b016d2d782b1696964fa3f40738b
   lib/tasks/ci/bundle_audit.rake:
     comments: 
     reviewed_by: josh.pencheon
@@ -243,8 +243,8 @@ file safety:
     safe_revision: 2d1b9d19acafebe6ca5f995bf15243abe2847eec
   lib/tasks/ci/rugged.rake:
     comments: 
-    reviewed_by: timgentry
-    safe_revision: 7ab7061b257f916eb43bc8d184aa425f1f08b739
+    reviewed_by: josh.pencheon
+    safe_revision: 15543b915771dfe2ed81b8b326bdd3ab2cb5b562
   lib/tasks/ci/server.rake:
     comments: 
     reviewed_by: josh.pencheon
@@ -268,7 +268,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 1cce5269b61341c5ec06e91b819df84ac6140165
+    safe_revision: 62d99a8df1244b46709b109a86e3edca17325def
   test/daemon/ci_server_test.rb:
     comments: 
     reviewed_by: josh.pencheon
