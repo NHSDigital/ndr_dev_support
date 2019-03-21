@@ -51,4 +51,37 @@ namespace :ci do
 
     brakeman.save_current_fingerprints
   end
+
+  namespace :brakeman do
+    desc 'Brakeman fingerprint details'
+    task fingerprint_details: 'ci:rugged:setup' do
+      # Usage: bundle exec rake ci:brakeman:fingerprint_details FINGERPRINTS=fp1,fp2,...
+      next unless defined?(Rails)
+
+      require 'ndr_dev_support/rake_ci/brakeman_helper'
+      require 'brakeman/scanner'
+      require 'brakeman/report/report_text'
+
+      fingerprints = ENV['FINGERPRINTS'].split(/,/)
+
+      puts 'Scanning for fingerprints...'
+      puts fingerprints
+      puts
+
+      brakeman = NdrDevSupport::RakeCI::BrakemanHelper.new
+      brakeman.commit = @commit
+      brakeman.run
+
+      text_reporter = Brakeman::Report::Text.new(nil, brakeman.tracker)
+
+      brakeman.warnings.each do |warning|
+        next unless fingerprints.include?(warning.fingerprint)
+
+        puts
+        puts text_reporter.label('Fingerprint', warning.fingerprint.to_s)
+        puts text_reporter.output_warning(warning)
+      end
+      puts
+    end
+  end
 end
