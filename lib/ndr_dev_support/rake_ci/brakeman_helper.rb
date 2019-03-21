@@ -8,7 +8,7 @@ module NdrDevSupport
 
       include CommitMetadataPersistable
 
-      attr_reader :new_fingerprints, :old_fingerprints
+      attr_reader :new_fingerprints, :old_fingerprints, :tracker
 
       def run
         @tracker = ::Brakeman.run(app_path: '.')
