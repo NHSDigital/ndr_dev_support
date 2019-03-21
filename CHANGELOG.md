@@ -1,4 +1,10 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 5.2.0 / 2019-03-21
+### Added
+* Added rake task to filter brakeman output to specific fingerprints. (#51)
+
 ### Fixed
 * CI: Remove duplicated revision information from commit message
 
