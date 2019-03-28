@@ -71,4 +71,25 @@ namespace :rubocop do
       rubocop_file_ranges(file_ranges)
     end
   end
+
+  desc 'A summary of offense counts by cop'
+  task :summary do
+    # Usage: bin/rake rubocop:summary
+    require 'json'
+
+    output = `bundle exec rubocop --format json .`
+    offenses = JSON.parse(output)['files'].flat_map { |file| file['offenses'] }
+    cop_names = offenses.map { |offense| offense['cop_name'] }
+    summary = cop_names.group_by { |x| x }.
+              map { |cop_name, array| [cop_name, array.count] }.
+              sort_by { |_cop_name, count| count }.
+              reverse
+    cop_name_max_length = cop_names.map(&:length).max
+
+    puts "#{'Cop Name'.ljust(cop_name_max_length)} | Count"
+    puts "#{'-' * cop_name_max_length}-+------"
+    summary.each do |cop_name, count|
+      puts "#{cop_name.ljust(cop_name_max_length)} | #{count}"
+    end
+  end
 end
