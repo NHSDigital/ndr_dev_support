@@ -2,6 +2,9 @@
 ### Added
 * Offer current checkout name as project name when outputting system version info
 
+### Fixed
+* rake rubocop:diff now gracefully reports ruby syntax errors (#54)
+
 ## 5.2.0 / 2019-03-21
 ### Added
 * Added rake task to filter brakeman output to specific fingerprints. (#51)
