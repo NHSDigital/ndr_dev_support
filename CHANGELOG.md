@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Added
+* Offer current checkout name as project name when outputting system version info
 
 ## 5.2.0 / 2019-03-21
 ### Added

@@ -1,9 +1,11 @@
+require 'active_support/core_ext/object/blank'
+
 namespace :ci do
   namespace :dependencies do
     desc 'setup'
     task :setup do
       require 'highline/import'
-      ENV['PROJECT_NAME'] = gem_name || ask('Project Name: ')
+      ENV['PROJECT_NAME'] = gem_name || ask_for_project_name
     end
 
     desc 'process'
@@ -37,6 +39,13 @@ namespace :ci do
             Bundler.environment.current_dependencies
           end
         end
+    end
+
+    def ask_for_project_name
+      dir_name = File.basename(Dir.pwd)
+      response = ask("Project Name (leave blank to use '#{dir_name}'): ")
+
+      response.presence || dir_name
     end
 
     # There is probably a simpler way of getting this information
