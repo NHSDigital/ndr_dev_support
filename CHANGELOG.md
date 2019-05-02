@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Added
 * Offer current checkout name as project name when outputting system version info
+* Added a rake rubocop:summary task to list offence counts by cop (#52)
 
 ### Fixed
 * rake rubocop:diff now gracefully reports ruby syntax errors (#54)
