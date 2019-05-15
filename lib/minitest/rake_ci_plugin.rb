@@ -47,6 +47,34 @@ module Minitest
 
     private
 
+    def error_snippets
+      snippets_for results.reject(&:skipped?).select(&:error?)
+    end
+
+    def failure_snippets
+      snippets_for results.reject(&:skipped?).reject(&:error?)
+    end
+
+    # Adapted from Rails' TestUnit reporter
+    def snippets_for(results, limit = 5)
+      executable = defined?(Rails) ? 'bin/rails test ' : 'bundle exec rake test TEST='
+
+      snippets = results[0, limit].map do |result|
+        location, line =
+          if result.respond_to?(:source_location)
+            result.source_location
+          else
+            result.method(result.name).source_location
+          end
+
+        "#{executable}#{location.sub(%r{^#{Dir.pwd}/?}, '')}:#{line}"
+      end
+
+      snippets << "+ #{results.length - limit} more" if (results.length - limit).positive?
+
+      snippets.any? ? "\n```\n#{snippets.join("\n")}\n```" : ''
+    end
+
     def current_statistics
       @current_statistics ||= {
         total_time: total_time, runs: count, assertions: assertions, failures: failures,
@@ -84,7 +112,7 @@ module Minitest
     def failures_attachment
       {
         color: 'danger',
-        text: 'test failure'.pluralize(failures),
+        text: 'test failure'.pluralize(failures) + failure_snippets,
         footer: 'bundle exec rake ci:minitest'
       }
     end
@@ -92,7 +120,7 @@ module Minitest
     def errors_attachment
       {
         color: 'warning',
-        text: 'test error'.pluralize(errors),
+        text: 'test error'.pluralize(errors) + error_snippets,
         footer: 'bundle exec rake ci:minitest'
       }
     end
