@@ -2,6 +2,7 @@
 ### Added
 * Offer current checkout name as project name when outputting system version info
 * Added a rake rubocop:summary task to list offence counts by cop (#52)
+* Include rerun snippets in the slack attachments when tests error/fai (#55)
 
 ### Fixed
 * rake rubocop:diff now gracefully reports ruby syntax errors (#54)
