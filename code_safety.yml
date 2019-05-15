@@ -3,7 +3,7 @@ file safety:
   ".gitignore":
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 3e1fbd0a5931f7598a2dd3f929a7cd8366dc0e96
+    safe_revision: f462b71c3359c114eaff872b25f5bb864744dc92
   ".hound.yml":
     comments: 
     reviewed_by: timgentry
@@ -15,11 +15,11 @@ file safety:
   ".travis.yml":
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 1cce5269b61341c5ec06e91b819df84ac6140165
+    safe_revision: f462b71c3359c114eaff872b25f5bb864744dc92
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: e3afc74e63943e91305df371dfe8ad0e30f8341b
+    safe_revision: 9e77154cbe9ee9da8936b21991b00baa008c0629
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -48,6 +48,14 @@ file safety:
     comments: 
     reviewed_by: timgentry
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+  gemfiles/Gemfile.rails52:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: f462b71c3359c114eaff872b25f5bb864744dc92
+  gemfiles/Gemfile.rails60:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: f462b71c3359c114eaff872b25f5bb864744dc92
   lib/minitest/rake_ci.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -55,7 +63,7 @@ file safety:
   lib/minitest/rake_ci_plugin.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 9023b4def89e618d3f22333e9fbabd6a816873bf
+    safe_revision: f3a5b9d581f7ef463fc1a3075033c39b3397a46b
   lib/ndr_dev_support.rb:
     comments: 
     reviewed_by: timgentry
@@ -159,7 +167,7 @@ file safety:
   lib/ndr_dev_support/rake_ci/concerns/commit_metadata_persistable.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: d3347202d1efafc419c1d79d2643f3fdfcbfdd65
+    safe_revision: fd9fc5dd275a2285549984688d1d3744a628fd73
   lib/ndr_dev_support/rake_ci/redmine/ticket_resolver.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -171,7 +179,7 @@ file safety:
   lib/ndr_dev_support/rubocop/executor.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 41cf1558f567928faaa1e670a36d941c03c78044
+    safe_revision: e56876f46536ba006a9b68029306f41a188bf9c6
   lib/ndr_dev_support/rubocop/range_augmenter.rb:
     comments: 
     reviewed_by: joshpencheon
@@ -195,7 +203,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: e3afc74e63943e91305df371dfe8ad0e30f8341b
+    safe_revision: 9e77154cbe9ee9da8936b21991b00baa008c0629
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -216,7 +224,7 @@ file safety:
   lib/tasks/ci/dependencies.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 5b079c1360f1ccd8efb1f638cdde6a2826e11e96
+    safe_revision: 2f22aa6cc2f86b84e0bf2247e73bed205930db5a
   lib/tasks/ci/housekeep.rake:
     comments: 
     reviewed_by: timgentry
@@ -264,11 +272,11 @@ file safety:
   lib/tasks/rubocop.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 41cf1558f567928faaa1e670a36d941c03c78044
+    safe_revision: 9f33cc3f6fed0c24cb215befa1beaa4bc03e81ef
   ndr_dev_support.gemspec:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 62d99a8df1244b46709b109a86e3edca17325def
+    safe_revision: d117ccbb85276b2962936a6c50018ff1d6b5a12a
   test/daemon/ci_server_test.rb:
     comments: 
     reviewed_by: josh.pencheon
