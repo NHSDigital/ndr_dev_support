@@ -1,4 +1,7 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 5.3.0 / 2019-05-15
 ### Added
 * Offer current checkout name as project name when outputting system version info
 * Added a rake rubocop:summary task to list offence counts by cop (#52)
@@ -6,6 +9,7 @@
 
 ### Fixed
 * rake rubocop:diff now gracefully reports ruby syntax errors (#54)
+* Support Rails 6 release candidate
 
 ## 5.2.0 / 2019-03-21
 ### Added
