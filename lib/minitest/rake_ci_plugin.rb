@@ -1,3 +1,4 @@
+require 'active_support/core_ext/string/inflections'
 require 'minitest'
 require 'rugged'
 require 'ndr_dev_support/rake_ci/concerns/commit_metadata_persistable'
@@ -83,7 +84,7 @@ module Minitest
     def failures_attachment
       {
         color: 'danger',
-        text: ActionController::Base.helpers.pluralize(failures, 'test failure'),
+        text: 'test failure'.pluralize(failures),
         footer: 'bundle exec rake ci:minitest'
       }
     end
@@ -91,7 +92,7 @@ module Minitest
     def errors_attachment
       {
         color: 'warning',
-        text: ActionController::Base.helpers.pluralize(errors, 'test error'),
+        text: 'test error'.pluralize(errors),
         footer: 'bundle exec rake ci:minitest'
       }
     end
