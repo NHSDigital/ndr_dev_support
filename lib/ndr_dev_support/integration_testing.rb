@@ -18,6 +18,10 @@ end
 # Include our custom DSL extensions, that also cover screenshotting:
 require 'ndr_dev_support/integration_testing/dsl'
 
+# Keeps the selenium webdrivers automatically updated:
+require 'webdrivers'
+Webdrivers.cache_time = 24.hours
+
 # These are all the drivers we have capybara / screenshot support for:
 require 'ndr_dev_support/integration_testing/drivers/chrome'
 require 'ndr_dev_support/integration_testing/drivers/chrome_headless'

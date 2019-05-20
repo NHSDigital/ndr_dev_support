@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Fixed
+* Use `webdrivers` gem for Selenium WebDriver managements.
 
 ## 5.3.0 / 2019-05-15
 ### Added
