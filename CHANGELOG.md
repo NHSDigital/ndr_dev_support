@@ -1,5 +1,9 @@
 ## [Unreleased]
-*no unreleased changes*
+### Added
+* Introduce `show_me_the_cookies` into the integration testing DSL
+
+### Fixed
+* Use command line args to prevent headless Chrome hanging
 
 ## 5.3.1 / 2019-05-20
 ### Fixed
