@@ -1,4 +1,7 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 5.4.0 / 2019-05-30
 ### Added
 * Introduce `show_me_the_cookies` into the integration testing DSL
 
