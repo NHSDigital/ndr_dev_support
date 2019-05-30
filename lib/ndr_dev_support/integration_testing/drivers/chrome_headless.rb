@@ -1,4 +1,5 @@
 require 'selenium-webdriver'
+require 'show_me_the_cookies'
 
 Capybara.register_driver(:chrome_headless) do |app|
   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
@@ -21,3 +22,5 @@ end
 Capybara::Screenshot.register_driver(:chrome_headless) do |driver, path|
   driver.browser.save_screenshot(path)
 end
+
+ShowMeTheCookies.register_adapter(:chrome_headless, ShowMeTheCookies::SeleniumChrome)

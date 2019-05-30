@@ -1,20 +1,25 @@
 require 'capybara/rails'
+require 'show_me_the_cookies'
 
 module NdrDevSupport
   module IntegrationTesting
     # Additional integration testing DSL:
     module DSL
-      # Instruct the headless browser to clear its session:
+      include ShowMeTheCookies
+
+      # Instruct the browser to clear its session:
       def clear_headless_session!
         page.driver.reset!
       end
 
-      # Get the headless browser to delete all of the cookies
+      # Get the browser to delete all of the cookies
       # for the current page without resetting:
       def delete_all_cookies!
-        page.driver.cookies.each_key do |name|
-          page.driver.remove_cookie(name)
-        end
+        ActiveSupport::Deprecation.warn(<<~MSG)
+          `delete_all_cookies!` is deprecated in favour of `expire_cookies`
+        MSG
+
+        expire_cookies
       end
 
       # Wrap up interacting with modals. The assumption is that the modal
