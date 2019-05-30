@@ -19,7 +19,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: b87abcd1e7a0a02efbab463f7f992bbdb4b1a958
+    safe_revision: ca4471b6dbd4f8ef72574738f66f7f523721218c
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -115,27 +115,27 @@ file safety:
   lib/ndr_dev_support/integration_testing/drivers/chrome.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 1ecf54219c77969066a142a42b694e805d69f8b4
+    safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
   lib/ndr_dev_support/integration_testing/drivers/chrome_headless.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 1ecf54219c77969066a142a42b694e805d69f8b4
+    safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
   lib/ndr_dev_support/integration_testing/drivers/firefox.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: e0b3871607c649565330d6e62740ffd860930338
+    safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
   lib/ndr_dev_support/integration_testing/drivers/poltergeist.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: e0b3871607c649565330d6e62740ffd860930338
+    safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
   lib/ndr_dev_support/integration_testing/drivers/switchable.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: e0b3871607c649565330d6e62740ffd860930338
+    safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
   lib/ndr_dev_support/integration_testing/dsl.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: d347807124f115b337162646b524c42f59a0559e
+    safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
   lib/ndr_dev_support/rake_ci/brakeman_helper.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -203,7 +203,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: b87abcd1e7a0a02efbab463f7f992bbdb4b1a958
+    safe_revision: ca4471b6dbd4f8ef72574738f66f7f523721218c
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -276,7 +276,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 1ecf54219c77969066a142a42b694e805d69f8b4
+    safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
   test/daemon/ci_server_test.rb:
     comments: 
     reviewed_by: josh.pencheon
