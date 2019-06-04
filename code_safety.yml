@@ -11,7 +11,7 @@ file safety:
   ".rubocop.yml":
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 575c8396da29278d27f6e1b34e14728d2e0162bf
+    safe_revision: 4c73385591e807216d3bcd50b5f23b757c69f23b
   ".travis.yml":
     comments: 
     reviewed_by: josh.pencheon
@@ -19,7 +19,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: ca4471b6dbd4f8ef72574738f66f7f523721218c
+    safe_revision: 91978e1ad63e338cb9df9fd7d41b6761f38018b9
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -203,7 +203,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: ca4471b6dbd4f8ef72574738f66f7f523721218c
+    safe_revision: 91978e1ad63e338cb9df9fd7d41b6761f38018b9
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -276,7 +276,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
+    safe_revision: 4c73385591e807216d3bcd50b5f23b757c69f23b
   test/daemon/ci_server_test.rb:
     comments: 
     reviewed_by: josh.pencheon
