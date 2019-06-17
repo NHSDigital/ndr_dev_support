@@ -116,6 +116,9 @@ Rails/DynamicFindBy:
   Exclude:
   - 'test/integration/**/*.rb'
 
+Rails/RefuteMethods:
+  Enabled: false
+
 Rails/SkipsModelValidations:
   # Methods like 'update_column' exist for a reason, and it is the developer's
   # responsibilty to understand the behaviour of the code they write; blanket
