@@ -11,7 +11,7 @@ file safety:
   ".rubocop.yml":
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 4c73385591e807216d3bcd50b5f23b757c69f23b
+    safe_revision: a4fc1188be78ee287799c2fafd2395f94fccabbe
   ".travis.yml":
     comments: 
     reviewed_by: josh.pencheon
@@ -19,7 +19,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 91978e1ad63e338cb9df9fd7d41b6761f38018b9
+    safe_revision: a17b7d43e0c40ae2c5c3a5062c7c47380184dc32
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -119,7 +119,7 @@ file safety:
   lib/ndr_dev_support/integration_testing/drivers/chrome_headless.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
+    safe_revision: '0409b687d31202b2a4281ebfb7b0c330cc78d904'
   lib/ndr_dev_support/integration_testing/drivers/firefox.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -203,7 +203,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 91978e1ad63e338cb9df9fd7d41b6761f38018b9
+    safe_revision: a17b7d43e0c40ae2c5c3a5062c7c47380184dc32
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
