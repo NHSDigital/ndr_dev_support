@@ -1,6 +1,10 @@
 ## [Unreleased]
 *no unreleased changes*
 
+## 5.4.2 / 2019-06-18
+### Fixed
+* Tweak `:chrome_headless` driver for Chrome 75+
+
 ## 5.4.1 / 2019-06-04
 ### Fixed
 * Bump `rubocop` to a version that properly supports Ruby 2.6
