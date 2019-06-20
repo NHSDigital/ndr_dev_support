@@ -30,6 +30,9 @@ Layout/DotPosition:
   # Multi-line method chaining should be done with trailing dots.
   EnforcedStyle: trailing
 
+Layout/AlignHash:
+  EnforcedColonStyle: table
+
 ##################### Style ##################################
 
 # We make use of block comments, e.g. for validation documentation.
