@@ -20,6 +20,7 @@ namespace :ci do
       resolved_tickets = []
       @attachments   ||= []
 
+      require 'active_support/core_ext/object/try'
       require 'ndr_dev_support/rake_ci/redmine/ticket_resolver'
 
       begin
@@ -39,11 +40,16 @@ namespace :ci do
       next if resolved_tickets.empty?
       resolved_tickets.map! { |ticket_id| "https://#{hostname}/issues/#{ticket_id}" }
 
+      old_attachment = @attachments.detect { |att| att[:text] =~ /Tests( now)? pass/ }
+      basic_text     = old_attachment.try(:[], :text) || 'Tests passed'
+
+      @attachments.delete(old_attachment) if old_attachment
+
       issue_s = resolved_tickets.count == 1 ? 'issue' : 'issues'
       attachment = {
         color: 'good',
         title: "#{issue_s.capitalize} Resolved",
-        text: "Tests pass, so #{issue_s} #{resolved_tickets.join(', ')}" \
+        text: "#{basic_text}, so #{issue_s} #{resolved_tickets.join(', ')}" \
               " #{resolved_tickets.count == 1 ? 'has' : 'have'} been resolved",
         footer: 'bundle exec rake ci:minitest',
         mrkdwn_in: ['text']
