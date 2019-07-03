@@ -1,6 +1,11 @@
 ## [Unreleased]
 *no unreleased changes*
 
+## 5.4.3 / 2019-06-18
+### Fixed
+* Avoid `RBENV_ROOT` issues when deploying to NDR-model targets
+* Avoid duplicate 'tests passed' notifications (#49)
+
 ## 5.4.2 / 2019-06-18
 ### Fixed
 * Tweak `:chrome_headless` driver for Chrome 75+
