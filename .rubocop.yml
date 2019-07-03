@@ -31,7 +31,12 @@ Layout/DotPosition:
   EnforcedStyle: trailing
 
 Layout/AlignHash:
-  EnforcedColonStyle: table
+  EnforcedColonStyle:
+  - key
+  - table
+  EnforcedHashRocketStyle:
+  - key
+  - table
 
 ##################### Style ##################################
 
