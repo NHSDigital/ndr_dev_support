@@ -111,7 +111,10 @@ Capistrano::Configuration.instance(:must_exist).load do
 
       # Use the application user's ruby:
       set(:default_environment) do
-        { 'PATH' => "#{application_home}/.rbenv/shims:#{application_home}/.rbenv/bin:$PATH" }
+        {
+          'PATH'       => "#{application_home}/.rbenv/shims:#{application_home}/.rbenv/bin:$PATH",
+          'RBENV_ROOT' => "#{application_home}/.rbenv"
+        }
       end
 
       # Set a flag so behaviour can toggle in mixed use cases
