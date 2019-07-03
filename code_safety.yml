@@ -11,7 +11,7 @@ file safety:
   ".rubocop.yml":
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: a4fc1188be78ee287799c2fafd2395f94fccabbe
+    safe_revision: e67a239f5e3917fb190092a50862d17f540584fb
   ".travis.yml":
     comments: 
     reviewed_by: josh.pencheon
@@ -19,7 +19,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: a17b7d43e0c40ae2c5c3a5062c7c47380184dc32
+    safe_revision: f0f36386fbb45f6f8f299fb7784a757d34ed3618
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -75,7 +75,7 @@ file safety:
   lib/ndr_dev_support/capistrano/ndr_model.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 809acebc212beaaf23e6d73ae4d9b87382c2d087
+    safe_revision: fa4042dc341b14eb7feafcc78baf052dbb100eb3
   lib/ndr_dev_support/capistrano/restart.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -203,7 +203,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: a17b7d43e0c40ae2c5c3a5062c7c47380184dc32
+    safe_revision: f0f36386fbb45f6f8f299fb7784a757d34ed3618
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -248,7 +248,7 @@ file safety:
   lib/tasks/ci/redmine.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 2d1b9d19acafebe6ca5f995bf15243abe2847eec
+    safe_revision: 3c24b66ea4beb348de34330984302f1fe25faefd
   lib/tasks/ci/rugged.rake:
     comments: 
     reviewed_by: josh.pencheon
