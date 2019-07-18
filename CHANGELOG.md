@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Added
+* Add `flakey_test` to the minitest DSL, to allow sporadic failures to be retried
 
 ## 5.5.0 / 2020-01-27
 * bundle master RuboCop config, and allow it to be `required`
