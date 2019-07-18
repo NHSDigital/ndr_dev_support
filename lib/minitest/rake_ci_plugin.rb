@@ -9,6 +9,29 @@ module Minitest
     reporter << RakeCIReporter.new if RakeCIReporter.enabled?
   end
 
+  # Intermediate Reporter than can also track flakey failures
+  class FlakeyStatisticsReporter < StatisticsReporter
+    attr_accessor :flakey_results
+
+    def initialize(*)
+      super
+
+      self.flakey_results = []
+    end
+
+    def record(result)
+      super
+
+      return unless result.respond_to?(:flakes)
+
+      flakey_results << result if result.flakes.any?
+    end
+
+    def flakes
+      flakey_results.sum { |result| result.flakes.length }
+    end
+  end
+
   # RakeCI Minitest Reporter
   class RakeCIReporter < StatisticsReporter
     def self.enable!
