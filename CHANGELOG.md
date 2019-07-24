@@ -1,6 +1,10 @@
 ## [Unreleased]
 *no unreleased changes*
 
+## 5.4.4 / 2019-07-24
+### Fixed
+* Fix issue with `rake_ci` minitest plugin loading breaking webpacker
+
 ## 5.4.3 / 2019-06-18
 ### Fixed
 * Avoid `RBENV_ROOT` issues when deploying to NDR-model targets
