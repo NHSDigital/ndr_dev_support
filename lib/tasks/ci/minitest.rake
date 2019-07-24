@@ -17,11 +17,8 @@ namespace :ci do
   namespace :minitest do
     desc 'setup'
     task :setup do
-      # Load the RakeCI reporter:
-      require 'minitest/rake_ci'
-
-      # Ensure spawned processes do the same:
-      ENV['RUBYOPT'] += ' -rminitest/rake_ci'
+      # Ensure the rake_ci plugin auto-enables:
+      ENV['MINITEST_RAKE_CI'] = 'true'
     end
 
     desc 'process'

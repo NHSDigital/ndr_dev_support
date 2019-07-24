@@ -16,7 +16,7 @@ module Minitest
     end
 
     def self.enabled?
-      @enabled ||= false
+      @enabled ||= !!ENV['MINITEST_RAKE_CI']
     end
 
     include CommitMetadataPersistable
