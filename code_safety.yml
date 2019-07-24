@@ -19,7 +19,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: f0f36386fbb45f6f8f299fb7784a757d34ed3618
+    safe_revision: faf502176f3fbd49eabd1c3655b0741013b72c9a
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -59,7 +59,7 @@ file safety:
   lib/minitest/rake_ci.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 3cadf2dc33034cfe7258f6cf4b199d3101b2a7ba
+    safe_revision: aaa9a5512e8600b3a3bca5c9fdffaf615e3ba64d
   lib/minitest/rake_ci_plugin.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -203,7 +203,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: f0f36386fbb45f6f8f299fb7784a757d34ed3618
+    safe_revision: faf502176f3fbd49eabd1c3655b0741013b72c9a
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
