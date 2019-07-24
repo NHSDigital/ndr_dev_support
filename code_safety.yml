@@ -19,7 +19,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: faf502176f3fbd49eabd1c3655b0741013b72c9a
+    safe_revision: e40336350473cb2fc9e0b277233610033d9bbf5a
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -59,11 +59,11 @@ file safety:
   lib/minitest/rake_ci.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: aaa9a5512e8600b3a3bca5c9fdffaf615e3ba64d
+    safe_revision: 26efe45f35f211e7cb7a04967c51c0b6d116321e
   lib/minitest/rake_ci_plugin.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: f3a5b9d581f7ef463fc1a3075033c39b3397a46b
+    safe_revision: 26efe45f35f211e7cb7a04967c51c0b6d116321e
   lib/ndr_dev_support.rb:
     comments: 
     reviewed_by: timgentry
@@ -203,7 +203,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: faf502176f3fbd49eabd1c3655b0741013b72c9a
+    safe_revision: e40336350473cb2fc9e0b277233610033d9bbf5a
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -236,7 +236,7 @@ file safety:
   lib/tasks/ci/minitest.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 0677afc93b0a64d56383e80fa1247e5be64bfb24
+    safe_revision: 26efe45f35f211e7cb7a04967c51c0b6d116321e
   lib/tasks/ci/notes.rake:
     comments: 
     reviewed_by: timgentry
