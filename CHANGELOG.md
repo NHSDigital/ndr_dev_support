@@ -1,6 +1,10 @@
 ## [Unreleased]
 *no unreleased changes*
 
+## 5.4.5 / 2019-07-24
+### Fixed
+* Fix issue where other minitest plugins sporadically fail to load
+
 ## 5.4.4 / 2019-07-24
 ### Fixed
 * Fix issue with `rake_ci` minitest plugin loading breaking webpacker
