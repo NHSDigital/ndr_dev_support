@@ -51,6 +51,11 @@ module NdrDevSupport
         git_checkout(MASTER_BRANCH_NAME)
 
         objectids_between_master_and_remote.each do |oid|
+          if should_skip?(oid)
+            log("skipping #{oid}")
+            next
+          end
+
           log("testing #{oid}...")
           git_discard_changes
           git_rebase(oid)
@@ -95,6 +100,16 @@ module NdrDevSupport
         stash_output = `git stash`
         return if stash_output.start_with?('No local changes to save')
         `git stash drop stash@{0}`
+      end
+
+      # Skips over commits tagged with:
+      #   [ci skip]
+      #   [ci-skip]
+      #   [CI-SKIP]
+      #   ...etc
+      def should_skip?(oid)
+        message = `git show -s --format=%B #{Shellwords.escape(oid)}`
+        message.match?(/\[ci(-| )skip\]/i)
       end
 
       def svn_remote?
