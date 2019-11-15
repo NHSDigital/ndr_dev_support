@@ -31,7 +31,7 @@ namespace :ci do
         title: "#{brakeman.new_fingerprints.size} new Brakeman warning(s) :rotating_light:",
         text: '_Brakeman_ warning fingerprint(s):' \
               "```#{brakeman.new_fingerprints.to_a.join("\n")}```",
-        footer: 'bundle exec rake ci:brakeman',
+        footer: 'bundle exec rake ci:brakeman:fingerprint_details FINGERPRINTS=...',
         mrkdwn_in: ['text']
       }
       @attachments << attachment
@@ -72,7 +72,7 @@ namespace :ci do
       brakeman.commit = @commit
       brakeman.run
 
-      text_reporter = Brakeman::Report::Text.new(nil, brakeman.tracker)
+      text_reporter = Brakeman::Report::Text.new(brakeman.tracker)
 
       brakeman.warnings.each do |warning|
         next unless fingerprints.include?(warning.fingerprint)
