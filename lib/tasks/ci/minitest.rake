@@ -5,7 +5,7 @@ namespace :ci do
 
     # Run the tests
     test_cmd = 'bundle exec rake ci:minitest:setup ci:simplecov:setup default'
-    system test_cmd
+    system({ 'RAILS_ENV' => nil }, test_cmd)
 
     Rake::Task['ci:minitest:process'].invoke
 

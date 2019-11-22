@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Fixed
+* Fix issue with CI invoked through rake binstub for projects using Spring (#69)
 
 ## 5.4.5 / 2019-07-24
 ### Fixed
