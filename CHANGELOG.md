@@ -1,7 +1,11 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 5.4.6 / 2019-12-12
 ### Fixed
 * Fix issue with CI invoked through rake binstub for projects using Spring (#69)
 * Fix issue with shared paths in the `private/` directory
+* Fix CI brakeman task with recent brakeman version
 
 ## 5.4.5 / 2019-07-24
 ### Fixed
