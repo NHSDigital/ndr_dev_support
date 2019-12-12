@@ -128,15 +128,15 @@ Capistrano::Configuration.instance(:must_exist).load do
       # This task binds after a standard capistrano step, so we need to be careful:
       next unless ndr_model_deployment
 
+      # Make the private/ directory in the release writeable to the application user:
+      private_directory = File.join(release_path, 'private')
+      run "mkdir -p #{private_directory} && chgrp #{fetch(:application_group)} #{private_directory} && chmod g+s #{private_directory}"
+
       fetch(:shared_paths, []).each do |path|
         # Symlink `path` from the shared space to the release being prepared, replacing anything
         # already there:
         run "rm -rf #{File.join(release_path, path)} && ln -s #{File.join(shared_path, path)} #{File.join(release_path, path)}"
       end
-
-      # Make the private/ directory in the release writeable to the application user:
-      private_directory = File.join(release_path, 'private')
-      run "mkdir -p #{private_directory} && chgrp #{fetch(:application_group)} #{private_directory} && chmod g+s #{private_directory}"
     end
 
     after 'deploy:finalize_update', 'ndr_dev_support:filesystem_tweaks'

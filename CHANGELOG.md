@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Fixed
 * Fix issue with CI invoked through rake binstub for projects using Spring (#69)
+* Fix issue with shared paths in the `private/` directory
 
 ## 5.4.5 / 2019-07-24
 ### Fixed
