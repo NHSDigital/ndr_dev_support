@@ -15,11 +15,11 @@ file safety:
   ".travis.yml":
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 38266fd047417ecb4d5e6de71746f40495fc9de9
+    safe_revision: 1f2197bd4ea2f4330dae266eec6983e86482b613
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: e40336350473cb2fc9e0b277233610033d9bbf5a
+    safe_revision: 9d79c8a00cb8db92a7ed021b8f6805358f5d6913
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -75,7 +75,7 @@ file safety:
   lib/ndr_dev_support/capistrano/ndr_model.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: fa4042dc341b14eb7feafcc78baf052dbb100eb3
+    safe_revision: 57271c07e44808d8809e1fa11227a8c2e91a14bf
   lib/ndr_dev_support/capistrano/restart.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -203,7 +203,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: e40336350473cb2fc9e0b277233610033d9bbf5a
+    safe_revision: 9d79c8a00cb8db92a7ed021b8f6805358f5d6913
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -212,7 +212,7 @@ file safety:
   lib/tasks/ci/brakeman.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: d3d238a863c0b016d2d782b1696964fa3f40738b
+    safe_revision: 908c04663ca6949259f41fe38ee705f03774cbdf
   lib/tasks/ci/bundle_audit.rake:
     comments: 
     reviewed_by: josh.pencheon
@@ -236,7 +236,7 @@ file safety:
   lib/tasks/ci/minitest.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 26efe45f35f211e7cb7a04967c51c0b6d116321e
+    safe_revision: 29b7dc86673f4f876667db95e79a57b20766077e
   lib/tasks/ci/notes.rake:
     comments: 
     reviewed_by: timgentry
@@ -276,7 +276,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 4c73385591e807216d3bcd50b5f23b757c69f23b
+    safe_revision: 1f2197bd4ea2f4330dae266eec6983e86482b613
   test/daemon/ci_server_test.rb:
     comments: 
     reviewed_by: josh.pencheon
