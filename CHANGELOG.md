@@ -1,6 +1,10 @@
 ## [Unreleased]
 *no unreleased changes*
 
+## 5.4.7 / 2019-12-17
+### Fixed
+* Fix issue with `prometheus-client` API changing.
+
 ## 5.4.6 / 2019-12-12
 ### Fixed
 * Fix issue with CI invoked through rake binstub for projects using Spring (#69)
