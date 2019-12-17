@@ -19,7 +19,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 9d79c8a00cb8db92a7ed021b8f6805358f5d6913
+    safe_revision: 6743497f68d6ec0ba3794dc21d00aa8d44d6105a
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -203,7 +203,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 9d79c8a00cb8db92a7ed021b8f6805358f5d6913
+    safe_revision: 6743497f68d6ec0ba3794dc21d00aa8d44d6105a
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -276,7 +276,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 1f2197bd4ea2f4330dae266eec6983e86482b613
+    safe_revision: 7b188222b4d72504df0a4cba73c6b304cc9732ce
   test/daemon/ci_server_test.rb:
     comments: 
     reviewed_by: josh.pencheon
