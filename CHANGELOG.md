@@ -1,5 +1,7 @@
 ## [Unreleased]
-*no unreleased changes*
+
+### Fixed
+* deploy: insert temporary DB config to allow asset precompilation
 
 ## 5.4.7 / 2019-12-17
 ### Fixed

@@ -5,8 +5,9 @@ Capistrano::Configuration.instance(:must_exist).load do
       asset_script = fetch(:asset_script, <<~SHELL)
         set -e
         ruby -ryaml -e "puts YAML.dump('production' => { 'secret_key_base' => 'compile_me' })" > config/secrets.yml
-        RAILS_ENV=production bundle exec rake assets:precompile
-        rm config/secrets.yml
+        ruby -ryaml -e "puts YAML.dump('production' => { 'adapter' => 'placeholder' })" > config/database.yml
+        RAILS_ENV=production bundle exec rake assets:clobber assets:precompile
+        rm config/secrets.yml config/database.yml
       SHELL
 
       if fetch(:webapp_deployment)
