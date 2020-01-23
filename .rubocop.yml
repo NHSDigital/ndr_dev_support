@@ -4,6 +4,9 @@
 #
 # See the README for instructions on using in a project.
 
+require:
+  - rubocop-rails
+
 AllCops:
   # All cops should ignore files in the following locations:
   Exclude:
@@ -30,7 +33,7 @@ Layout/DotPosition:
   # Multi-line method chaining should be done with trailing dots.
   EnforcedStyle: trailing
 
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedColonStyle:
   - key
   - table
@@ -98,7 +101,7 @@ Metrics/ModuleLength:
 Metrics/CyclomaticComplexity:
   Max: 9
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 100
   Exclude:
   - 'db/migrate/*.rb'
