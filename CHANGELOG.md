@@ -1,7 +1,10 @@
 ## [Unreleased]
+*no unreleased changes*
 
+## 5.4.8 / 2020-01-24
 ### Fixed
 * deploy: insert temporary DB config to allow asset precompilation
+* bump rubocop version (#72)
 
 ## 5.4.7 / 2019-12-17
 ### Fixed
