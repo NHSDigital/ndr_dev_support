@@ -1,6 +1,9 @@
 ## [Unreleased]
 *no unreleased changes*
 
+### Added
+* bundle master RuboCop config, and allow it to be `required`
+
 ## 5.4.8 / 2020-01-24
 ### Fixed
 * deploy: insert temporary DB config to allow asset precompilation
