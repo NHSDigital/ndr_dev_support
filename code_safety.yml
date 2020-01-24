@@ -11,7 +11,7 @@ file safety:
   ".rubocop.yml":
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: e67a239f5e3917fb190092a50862d17f540584fb
+    safe_revision: 83097be1002f924a37fcbd6d9099e08e9ed65621
   ".travis.yml":
     comments: 
     reviewed_by: josh.pencheon
@@ -19,7 +19,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 6743497f68d6ec0ba3794dc21d00aa8d44d6105a
+    safe_revision: 57f7530eb0be94318d40a09a9648ca3df9d7575b
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -71,7 +71,7 @@ file safety:
   lib/ndr_dev_support/capistrano/assets.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
+    safe_revision: 74a4cd909afaf2ee8bcabdd252b2383b1474b6d4
   lib/ndr_dev_support/capistrano/ndr_model.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -203,7 +203,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 6743497f68d6ec0ba3794dc21d00aa8d44d6105a
+    safe_revision: 57f7530eb0be94318d40a09a9648ca3df9d7575b
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -276,7 +276,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 7b188222b4d72504df0a4cba73c6b304cc9732ce
+    safe_revision: 83097be1002f924a37fcbd6d9099e08e9ed65621
   test/daemon/ci_server_test.rb:
     comments: 
     reviewed_by: josh.pencheon
