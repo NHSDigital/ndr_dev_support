@@ -49,16 +49,22 @@ For more details of the audit tasks available, execute:
 
 ### RuboCop configuration
 
-ndr_dev_support includes tweaks to the default Ruby Style Guide, to better suit NDR.
-To use this updated style guide from within a project, add the following to top of the project's `.rubocop.yml` file:
+`ndr_dev_support` includes tweaks to the default Ruby and Ruby on Rails Style Guides, to better suit NDR.
+To use these updated style guides from within a project, add the following to top of the project's `.rubocop.yml` file:
 
 ```yaml
-inherit_from: 'https://raw.githubusercontent.com/PublicHealthEngland/ndr_dev_support/master/.rubocop.yml'
+require: ndr_dev_support
 ```
 
-RuboCop also allows `inherit_gem`, but this currently doesn't work with relative paths (paths are deemed relative to the config file, rather than the project including `ndr_dev_support`).
+Or, if using other extensions too:
 
-In order for these configuration to apply, you will need to invoke RuboCop using Bundler:
+```yaml
+require:
+  - ndr_dev_support
+  - some_other_extension
+```
+
+In order for these configurations to apply, you will need to invoke RuboCop using Bundler:
 
 ```
 $ bundle exec rubocop .
