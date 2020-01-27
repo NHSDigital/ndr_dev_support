@@ -1,7 +1,7 @@
 ## [Unreleased]
 *no unreleased changes*
 
-### Added
+## 5.5.0 / 2020-01-27
 * bundle master RuboCop config, and allow it to be `required`
 
 ## 5.4.8 / 2020-01-24
