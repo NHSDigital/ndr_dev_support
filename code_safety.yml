@@ -11,7 +11,7 @@ file safety:
   ".rubocop.yml":
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 83097be1002f924a37fcbd6d9099e08e9ed65621
+    safe_revision: 6211cff0ce44645ed3752723b5b0ee65f24c66aa
   ".travis.yml":
     comments: 
     reviewed_by: josh.pencheon
@@ -19,7 +19,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 57f7530eb0be94318d40a09a9648ca3df9d7575b
+    safe_revision: aa0d11190daa8842da406b933d61c4043823ef9a
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -35,7 +35,7 @@ file safety:
   README.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: dd220d1cd30d878bf8a35495efe474f08c5c0971
+    safe_revision: 2cf2b6e3ce2f054289699527c13cd7d795347ce3
   Rakefile:
     comments: 
     reviewed_by: josh.pencheon
@@ -48,6 +48,10 @@ file safety:
     comments: 
     reviewed_by: timgentry
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+  config/rubocop/ndr.yml:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: 6211cff0ce44645ed3752723b5b0ee65f24c66aa
   gemfiles/Gemfile.rails52:
     comments: 
     reviewed_by: josh.pencheon
@@ -66,8 +70,8 @@ file safety:
     safe_revision: 26efe45f35f211e7cb7a04967c51c0b6d116321e
   lib/ndr_dev_support.rb:
     comments: 
-    reviewed_by: timgentry
-    safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+    reviewed_by: josh.pencheon
+    safe_revision: 6211cff0ce44645ed3752723b5b0ee65f24c66aa
   lib/ndr_dev_support/capistrano/assets.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -180,6 +184,10 @@ file safety:
     comments: 
     reviewed_by: josh.pencheon
     safe_revision: e56876f46536ba006a9b68029306f41a188bf9c6
+  lib/ndr_dev_support/rubocop/inject.rb:
+    comments: 
+    reviewed_by: josh.pencheon
+    safe_revision: 6211cff0ce44645ed3752723b5b0ee65f24c66aa
   lib/ndr_dev_support/rubocop/range_augmenter.rb:
     comments: 
     reviewed_by: joshpencheon
@@ -203,7 +211,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 57f7530eb0be94318d40a09a9648ca3df9d7575b
+    safe_revision: aa0d11190daa8842da406b933d61c4043823ef9a
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
