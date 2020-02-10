@@ -5,8 +5,8 @@ require 'ndr_dev_support/rake_ci/concerns/commit_metadata_persistable'
 
 # The plugin needs to extend Minitest
 module Minitest
-  def self.plugin_rake_ci_init(_options)
-    reporter << RakeCIReporter.new if RakeCIReporter.enabled?
+  def self.plugin_rake_ci_init(options)
+    reporter << RakeCIReporter.new(options[:io], options) if RakeCIReporter.enabled?
   end
 
   # Intermediate Reporter than can also track flakey failures
@@ -141,7 +141,7 @@ module Minitest
       {
         color: 'danger',
         text: 'test failure'.pluralize(failures) + failure_snippets,
-        footer: 'bundle exec rake ci:minitest'
+        footer: footer
       }
     end
 
@@ -149,7 +149,7 @@ module Minitest
       {
         color: '#bb44ff',
         text: 'flakey test'.pluralize(flakes) + flake_snippets,
-        footer: 'bundle exec rake ci:minitest'
+        footer: footer
       }
     end
 
@@ -157,7 +157,7 @@ module Minitest
       {
         color: 'warning',
         text: 'test error'.pluralize(errors) + error_snippets,
-        footer: 'bundle exec rake ci:minitest'
+        footer: footer
       }
     end
 
@@ -165,7 +165,7 @@ module Minitest
       {
         color: 'good',
         text: newly_passing? ? 'Tests now pass! :tada:' : 'Tests passed',
-        footer: 'bundle exec rake ci:minitest'
+        footer: footer
       }
     end
 
@@ -185,6 +185,10 @@ module Minitest
 
     def name
       'minitest'
+    end
+
+    def footer
+      "bundle exec rake ci:minitest --seed #{options[:seed]}"
     end
   end
 end
