@@ -135,6 +135,27 @@ Beyond standard Capybara testing DSL, ndr_dev_support bundles some additional fu
 
 When using a headless browser for integration tests, the test database must be consistent between the test runner and the application being tested. With transactional tests in operation, this means that both must share a connection. It is up to the individual project to provide this facility; as of Rails 5.1, it is built in to the framework directly.
 
+#### Flakey Tests
+
+It is an unfortunate reality that sometimes tests are written that will fail sporadically. Whilst in such cases the test methodology should be addressed, investigations can be time-consuming.
+Therefore, `ndr_dev_support` grudgingly provides "flakey test" support, to minimise disruption to CI pipelines whilst root causes are investigated.
+
+```ruby
+test 'thing that always passes' do
+  # reliable test
+end
+
+flakey_test 'thing that occassionally needs a second or third attempt' do
+  # less reliable test
+end
+
+flakey_test 'thing that often needs multiple attempts', attempts: 10 do
+  # really unreliable test (gulp...)
+end
+```
+
+If tests still fail, they'll fail as normal. If tests pass after flakey failure, they'll be flagged to the RakeCI server, and rendered in purple on Slack.
+
 ### Deployment support
 
 There are various capistrano plugins in the `ndr_dev_support/capistrano` directory - see each one for details.
