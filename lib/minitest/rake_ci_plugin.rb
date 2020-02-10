@@ -9,8 +9,31 @@ module Minitest
     reporter << RakeCIReporter.new if RakeCIReporter.enabled?
   end
 
+  # Intermediate Reporter than can also track flakey failures
+  class FlakeyStatisticsReporter < StatisticsReporter
+    attr_accessor :flakey_results
+
+    def initialize(*)
+      super
+
+      self.flakey_results = []
+    end
+
+    def record(result)
+      super
+
+      return unless result.respond_to?(:flakes)
+
+      flakey_results << result if result.flakes.any?
+    end
+
+    def flakes
+      flakey_results.sum { |result| result.flakes.length }
+    end
+  end
+
   # RakeCI Minitest Reporter
-  class RakeCIReporter < StatisticsReporter
+  class RakeCIReporter < FlakeyStatisticsReporter
     def self.enable!
       @enabled = true
     end
@@ -55,6 +78,10 @@ module Minitest
       snippets_for results.reject(&:skipped?).reject(&:error?)
     end
 
+    def flake_snippets
+      snippets_for flakey_results
+    end
+
     # Adapted from Rails' TestUnit reporter
     def snippets_for(results, limit = 5)
       executable = defined?(Rails) ? 'bin/rails test ' : 'bundle exec rake test TEST='
@@ -78,7 +105,7 @@ module Minitest
     def current_statistics
       @current_statistics ||= {
         total_time: total_time, runs: count, assertions: assertions, failures: failures,
-        errors: errors, skips: skips
+        errors: errors, skips: skips, flakes: flakes
       }
     end
 
@@ -106,6 +133,7 @@ module Minitest
       @current_attachments << failures_attachment if failures.positive?
       @current_attachments << errors_attachment if errors.positive?
       @current_attachments << pass_attachment if passing?
+      @current_attachments << flakes_attachment if flakes.positive?
       @current_attachments
     end
 
@@ -113,6 +141,14 @@ module Minitest
       {
         color: 'danger',
         text: 'test failure'.pluralize(failures) + failure_snippets,
+        footer: 'bundle exec rake ci:minitest'
+      }
+    end
+
+    def flakes_attachment
+      {
+        color: '#bb44ff',
+        text: 'flakey test'.pluralize(flakes) + flake_snippets,
         footer: 'bundle exec rake ci:minitest'
       }
     end
