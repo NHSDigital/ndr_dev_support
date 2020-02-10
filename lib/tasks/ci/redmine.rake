@@ -41,7 +41,8 @@ namespace :ci do
       resolved_tickets.map! { |ticket_id| "https://#{hostname}/issues/#{ticket_id}" }
 
       old_attachment = @attachments.detect { |att| att[:text] =~ /Tests( now)? pass/ }
-      basic_text     = old_attachment.try(:[], :text) || 'Tests passed'
+      basic_text = old_attachment.try(:[], :text) || 'Tests passed'
+      footer = old_attachment.try(:[], :footer) || 'bundle exec rake ci:minitest'
 
       @attachments.delete(old_attachment) if old_attachment
 
@@ -51,7 +52,7 @@ namespace :ci do
         title: "#{issue_s.capitalize} Resolved",
         text: "#{basic_text}, so #{issue_s} #{resolved_tickets.join(', ')}" \
               " #{resolved_tickets.count == 1 ? 'has' : 'have'} been resolved",
-        footer: 'bundle exec rake ci:minitest',
+        footer: footer,
         mrkdwn_in: ['text']
       }
       @attachments << attachment
