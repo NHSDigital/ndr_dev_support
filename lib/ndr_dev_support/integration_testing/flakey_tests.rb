@@ -26,7 +26,7 @@ module NdrDevSupport
         return super unless attempts_remaining
 
         previous_failure = failures.last
-        attempts = []
+        failed_attempts = []
 
         loop do
           break if attempts_remaining < 1
@@ -40,11 +40,11 @@ module NdrDevSupport
           break if (attempts_remaining -= 1) < 1
 
           # Loop round and have another go:
-          attempts << failures.pop
+          failed_attempts << failures.pop
         end
 
         # Attempts were only flakey if we eventually passed:
-        flakes.concat(attempts) if failures.last == previous_failure
+        flakes.concat(failed_attempts) if failures.last == previous_failure
 
         self
       end
