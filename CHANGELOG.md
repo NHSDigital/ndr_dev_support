@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Fixed
+* Stop including asset compilation caches in the deployment archive.
 
 ## 5.6.0 / 2020-02-14
 ### Added
