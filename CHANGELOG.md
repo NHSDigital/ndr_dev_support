@@ -1,9 +1,13 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 5.6.0 / 2020-02-14
 ### Added
 * Add `flakey_test` to the minitest DSL, to allow sporadic failures to be retried
 * CI: include minitest seed in slack output
 
 ## 5.5.0 / 2020-01-27
+### Added
 * bundle master RuboCop config, and allow it to be `required`
 
 ## 5.4.8 / 2020-01-24
