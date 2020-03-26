@@ -1,5 +1,6 @@
 ## [Unreleased]
 ### Added
+* Add `ci:brakeman:strict` alternative CI task. (#77)
 * Send `brakeman_filtered_warnings` metrics. (#78)
 
 ### Fixed

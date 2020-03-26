@@ -11,55 +11,35 @@ namespace :ci do
 
     brakeman = NdrDevSupport::RakeCI::BrakemanHelper.new
     brakeman.commit = @commit
-    brakeman.run
+    brakeman.run(strict: false)
 
-    Brakeman::Warning::TEXT_CONFIDENCE.each do |confidence, text|
-      overall_metric = {
-        name: 'brakeman_warnings',
-        type: :gauge,
-        label_set: { confidence: text },
-        value: brakeman.warning_counts_by_confidence[confidence] || 0
-      }
-      filtered_metric = {
-        name: 'brakeman_filtered_warnings',
-        type: :gauge,
-        label_set: { confidence: text },
-        value: brakeman.filtered_warning_counts_by_confidence[confidence] || 0
-      }
-      @metrics << overall_metric << filtered_metric
-      puts overall_metric.inspect
-      puts filtered_metric.inspect
-    end
-
-    unless brakeman.new_fingerprints.empty?
-      # new warnings found
-      attachment = {
-        color: 'danger',
-        title: "#{brakeman.new_fingerprints.size} new Brakeman warning(s) :rotating_light:",
-        text: '_Brakeman_ warning fingerprint(s):' \
-              "```#{brakeman.new_fingerprints.to_a.join("\n")}```",
-        footer: 'bundle exec rake ci:brakeman:fingerprint_details FINGERPRINTS=...',
-        mrkdwn_in: ['text']
-      }
-      @attachments << attachment
-      puts attachment.inspect
-    end
-
-    unless brakeman.old_fingerprints.empty?
-      # old warnings missing
-      attachment = {
-        color: 'good',
-        title: "#{brakeman.old_fingerprints.size} Brakeman warning(s) resolved :+1:",
-        footer: 'bundle exec rake ci:brakeman'
-      }
-      @attachments << attachment
-      puts attachment.inspect
-    end
+    @metrics.concat(brakeman.metrics)
+    @attachments.concat(brakeman.attachments)
 
     brakeman.save_current_fingerprints
   end
 
   namespace :brakeman do
+    desc "Brakeman (strict mode - all issues must be reviewed by Brakeman's interactive mode)"
+    task strict: 'ci:rugged:setup' do
+      next unless defined?(Rails)
+
+      require 'ndr_dev_support/rake_ci/brakeman_helper'
+      # Usage: bundle exec rake ci:brakeman:strict
+
+      @metrics ||= []
+      @attachments ||= []
+
+      brakeman = NdrDevSupport::RakeCI::BrakemanHelper.new
+      brakeman.commit = @commit
+      brakeman.run(strict: true)
+
+      @metrics.concat(brakeman.metrics)
+      @attachments.concat(brakeman.attachments)
+
+      brakeman.save_current_fingerprints
+    end
+
     desc 'Brakeman fingerprint details'
     task fingerprint_details: 'ci:rugged:setup' do
       # Usage: bundle exec rake ci:brakeman:fingerprint_details FINGERPRINTS=fp1,fp2,...
