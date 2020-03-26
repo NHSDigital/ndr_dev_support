@@ -53,7 +53,7 @@ module NdrDevSupport
       end
 
       def current_fingerprints
-        @current_fingerprints ||= warnings.map(&:fingerprint).to_set
+        @current_fingerprints ||= filtered_warnings.map(&:fingerprint).to_set
       end
 
       def save_current_fingerprints

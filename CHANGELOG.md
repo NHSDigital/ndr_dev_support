@@ -4,6 +4,7 @@
 
 ### Fixed
 * Stop including asset compilation caches in the deployment archive.
+* Ensure brakeman alerts aren't sent to Slack if they've been reviewed and filtered out
 
 ## 5.6.0 / 2020-02-14
 ### Added
