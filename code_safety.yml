@@ -288,7 +288,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: a2f178853da640112cf3063ca1d640157c9edb9f
+    safe_revision: f4c1ea57d3eb817783fdc47a16169d215f9788a6
   test/daemon/ci_server_test.rb:
     comments: 
     reviewed_by: josh.pencheon
