@@ -1,4 +1,7 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 5.7.0 / 2020-03-26
 ### Added
 * Add `ci:brakeman:strict` alternative CI task. (#77)
 * Send `brakeman_filtered_warnings` metrics. (#78)
