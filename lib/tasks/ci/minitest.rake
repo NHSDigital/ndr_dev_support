@@ -47,10 +47,9 @@ namespace :ci do
       # Test(s) ran
       Rake::Task['ci:simplecov:process'].invoke
 
-      if hash[:statistics][:failures].zero? && hash[:statistics][:errors].zero? &&
-         Rake::Task.task_defined?('ci:redmine:update_tickets')
-        # Test(s) passing
-        Rake::Task['ci:redmine:update_tickets'].invoke
+      if Rake::Task.task_defined?('ci:redmine:update_tickets')
+        tests_passed = hash[:statistics][:failures].zero? && hash[:statistics][:errors].zero?
+        Rake::Task['ci:redmine:update_tickets'].invoke(tests_passed)
       end
 
       @attachments.concat(hash[:attachments])

@@ -2,6 +2,7 @@
 ### Added
 * Add `ci:brakeman:strict` alternative CI task. (#77)
 * Send `brakeman_filtered_warnings` metrics. (#78)
+* Allow redmine tickets to be updated (but not resolved) when the build fails (#73)
 
 ### Fixed
 * Stop including asset compilation caches in the deployment archive.

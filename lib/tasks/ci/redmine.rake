@@ -12,7 +12,7 @@ namespace :ci do
     end
 
     desc 'Update Redmine tickets'
-    task update_tickets: ['ci:rugged:setup', 'ci:redmine:setup'] do
+    task :update_tickets, [:tests_passed] => ['ci:rugged:setup', 'ci:redmine:setup'] do |task, args|
       api_key = ENV['REDMINE_API_KEY']
       hostname = ENV['REDMINE_HOSTNAME']
       next if api_key.nil? || hostname.nil?
@@ -27,7 +27,7 @@ namespace :ci do
         ticket_resolver = NdrDevSupport::RakeCI::Redmine::TicketResolver.new(api_key, hostname)
         resolved_tickets = ticket_resolver.process_commit(@commit.author[:name],
                                                           @friendly_revision_name,
-                                                          @commit.message)
+                                                          @commit.message, args.tests_passed)
       rescue
         @attachments << {
           color: 'danger',

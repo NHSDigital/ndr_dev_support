@@ -41,25 +41,35 @@ module RakeCI
         resolver = NdrDevSupport::RakeCI::Redmine::TicketResolver.new(nil, nil)
 
         # resolved, ticket open
-        payload = resolver.update_payload('Resolves #123', 'Bob', 'r9876', false, true)
+        payload = resolver.update_payload('Resolves #123', 'Bob', 'r9876', false, true, true)
         assert_kind_of Hash, payload
         assert_equal '_Resolved by Bob in r9876_:+Resolves+ #123', payload[:notes]
         assert_equal 3, payload[:status_id]
 
+        # resolved, ticket open
+        payload = resolver.update_payload('Resolves #123', 'Bob', 'r9876', false, true, false)
+        assert_kind_of Hash, payload
+        assert_equal <<~MSG.strip, payload[:notes]
+          _Resolved by Bob in r9876_:+Resolves+ #123
+
+          *Automated tests did not pass successfully, so ticket status left unchanged.*
+        MSG
+        assert_nil payload[:status_id]
+
         # resolved, ticket closed
-        payload = resolver.update_payload('Resolves #123', 'Bob', 'r9876', true, true)
+        payload = resolver.update_payload('Resolves #123', 'Bob', 'r9876', true, true, true)
         assert_kind_of Hash, payload
         assert_equal '_Resolved by Bob in r9876_:+Resolves+ #123', payload[:notes]
         assert_nil payload[:status_id]
 
         # unresolved, ticket open
-        payload = resolver.update_payload('Mentions #123', 'Bob', 'r9876', false, false)
+        payload = resolver.update_payload('Mentions #123', 'Bob', 'r9876', false, false, true)
         assert_kind_of Hash, payload
         assert_equal '_Referenced by Bob in r9876_:Mentions #123', payload[:notes]
         assert_nil payload[:status_id]
 
         # unresolved, ticket closed
-        payload = resolver.update_payload('Mentions #123', 'Bob', 'r9876', true, false)
+        payload = resolver.update_payload('Mentions #123', 'Bob', 'r9876', true, false, true)
         assert_kind_of Hash, payload
         assert_equal '_Referenced by Bob in r9876_:Mentions #123', payload[:notes]
         assert_nil payload[:status_id]
@@ -74,7 +84,12 @@ module RakeCI
         assert_equal %w[34 23 42],
                      resolver.process_commit('Bob Fossil',
                                              @friendly_revision_name,
-                                             'This closes #34, resolved #23, and fixes #42')
+                                             'This closes #34, resolved #23, and fixes #42', true)
+
+        assert_equal [],
+                     resolver.process_commit('Bob Fossil',
+                                             @friendly_revision_name,
+                                             'This closes #34, resolved #23, and fixes #42', false)
       end
 
       # TODO: Test Redmine API

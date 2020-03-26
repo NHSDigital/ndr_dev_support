@@ -36,13 +36,13 @@ module NdrDevSupport
           @hostname = hostname
         end
 
-        def process_commit(user, revision, message)
+        def process_commit(user, revision, message, tests_passed)
           resolved_tickets = []
 
           each_ticket_from(message) do |ticket, resolved|
-            update_ticket(message, user, revision, ticket, resolved)
+            update_ticket(message, user, revision, ticket, resolved, tests_passed)
 
-            resolved_tickets << ticket if resolved
+            resolved_tickets << ticket if resolved && tests_passed
           end
 
           resolved_tickets
@@ -62,13 +62,17 @@ module NdrDevSupport
           end
         end
 
-        def update_payload(message, user, revision, ticket_closed, resolved)
+        def update_payload(message, user, revision, ticket_closed, resolved, tests_passed)
+          if resolved && !ticket_closed && !tests_passed
+            message += "\n\n*Automated tests did not pass successfully, so ticket status left unchanged.*"
+          end
+
           payload = {
             notes: "_#{resolved ? 'Resolved' : 'Referenced'} by #{user} in #{revision}_:" \
                    "#{resolved ? message.gsub(CLOSE_REGEX, '+\1+') : message}"
           }
 
-          payload[:status_id] = 3 if resolved && !ticket_closed
+          payload[:status_id] = 3 if resolved && !ticket_closed && tests_passed
           payload
         end
 
@@ -83,7 +87,7 @@ module NdrDevSupport
         end
 
         def update_ticket(message, user, revision, ticket, resolved)
-          payload = update_payload(message, user, revision, ticket_closed?(ticket), resolved)
+          payload = update_payload(message, user, revision, ticket_closed?(ticket), resolved, tests_passed)
 
           http.send_request('PUT',
                             "/issues/#{ticket.to_i}.json",
