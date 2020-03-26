@@ -19,7 +19,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 8995f6ed25fa308e541c3d33396b0a30c4f4db80
+    safe_revision: 1f4383e983313441ba3b118891dfb1c3ff962368
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -35,7 +35,7 @@ file safety:
   README.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: a2f178853da640112cf3063ca1d640157c9edb9f
+    safe_revision: b405f60e921805378ba1f3beaeb10cf1a8503182
   Rakefile:
     comments: 
     reviewed_by: josh.pencheon
@@ -99,7 +99,7 @@ file safety:
   lib/ndr_dev_support/capistrano/svn_cache.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 123d0cd32bdf9e0940fac8945985aa9f467616c1
+    safe_revision: 2baa360b06290775a961a7573fe08edd18f8312e
   lib/ndr_dev_support/capistrano/sysadmin_scripts.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -147,7 +147,7 @@ file safety:
   lib/ndr_dev_support/rake_ci/brakeman_helper.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: d3d238a863c0b016d2d782b1696964fa3f40738b
+    safe_revision: 053c9834ca5d402a1f8dc8d09257dc7075a5ec06
   lib/ndr_dev_support/rake_ci/commit_cop.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -179,7 +179,7 @@ file safety:
   lib/ndr_dev_support/rake_ci/redmine/ticket_resolver.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 2154aa7f32e731933ff6091b8f42b2b014028a6a
+    safe_revision: 12aad1254186ee9ce0fde263bf8dccf46cdfebe2
   lib/ndr_dev_support/rake_ci/simple_cov_helper.rb:
     comments: 
     reviewed_by: timgentry
@@ -215,7 +215,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 8995f6ed25fa308e541c3d33396b0a30c4f4db80
+    safe_revision: 1f4383e983313441ba3b118891dfb1c3ff962368
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -224,7 +224,7 @@ file safety:
   lib/tasks/ci/brakeman.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 908c04663ca6949259f41fe38ee705f03774cbdf
+    safe_revision: 053c9834ca5d402a1f8dc8d09257dc7075a5ec06
   lib/tasks/ci/bundle_audit.rake:
     comments: 
     reviewed_by: josh.pencheon
@@ -248,7 +248,7 @@ file safety:
   lib/tasks/ci/minitest.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 29b7dc86673f4f876667db95e79a57b20766077e
+    safe_revision: 12aad1254186ee9ce0fde263bf8dccf46cdfebe2
   lib/tasks/ci/notes.rake:
     comments: 
     reviewed_by: timgentry
@@ -260,7 +260,7 @@ file safety:
   lib/tasks/ci/redmine.rake:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 958ef09c5cf50bb50348e6bff949e3e5989254f9
+    safe_revision: 12aad1254186ee9ce0fde263bf8dccf46cdfebe2
   lib/tasks/ci/rugged.rake:
     comments: 
     reviewed_by: josh.pencheon
@@ -316,7 +316,7 @@ file safety:
   test/rake_ci/redmine/ticket_resolver_test.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 2154aa7f32e731933ff6091b8f42b2b014028a6a
+    safe_revision: 12aad1254186ee9ce0fde263bf8dccf46cdfebe2
   test/test_helper.rb:
     comments: 
     reviewed_by: josh.pencheon
