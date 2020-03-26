@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Added
+* Send `brakeman_filtered_warnings` metrics. (#78)
+
 ### Fixed
 * Stop including asset compilation caches in the deployment archive.
 

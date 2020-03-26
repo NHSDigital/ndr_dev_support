@@ -14,14 +14,21 @@ namespace :ci do
     brakeman.run
 
     Brakeman::Warning::TEXT_CONFIDENCE.each do |confidence, text|
-      metric = {
+      overall_metric = {
         name: 'brakeman_warnings',
         type: :gauge,
         label_set: { confidence: text },
         value: brakeman.warning_counts_by_confidence[confidence] || 0
       }
-      @metrics << metric
-      puts metric.inspect
+      filtered_metric = {
+        name: 'brakeman_filtered_warnings',
+        type: :gauge,
+        label_set: { confidence: text },
+        value: brakeman.filtered_warning_counts_by_confidence[confidence] || 0
+      }
+      @metrics << overall_metric << filtered_metric
+      puts overall_metric.inspect
+      puts filtered_metric.inspect
     end
 
     unless brakeman.new_fingerprints.empty?

@@ -22,8 +22,14 @@ module NdrDevSupport
         end
       end
 
+      # All warnings (including those we've flagged as false positives)
       def warnings
         @tracker.warnings
+      end
+
+      # Only the warnings we haven't flagged as false positives (i.e. the outstanding ones)
+      def filtered_warnings
+        @tracker.filtered_warnings
       end
 
       def warning_counts_by_confidence
@@ -34,6 +40,16 @@ module NdrDevSupport
           @warning_counts_by_confidence[confidence] = grouped_warnings.count
         end
         @warning_counts_by_confidence
+      end
+
+      def filtered_warning_counts_by_confidence
+        return @filtered_warning_counts_by_confidence if @filtered_warning_counts_by_confidence
+
+        @filtered_warning_counts_by_confidence = {}
+        filtered_warnings.group_by(&:confidence).each do |confidence, grouped_warnings|
+          @filtered_warning_counts_by_confidence[confidence] = grouped_warnings.count
+        end
+        @filtered_warning_counts_by_confidence
       end
 
       def current_fingerprints
