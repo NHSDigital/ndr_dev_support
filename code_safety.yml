@@ -19,7 +19,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 1f4383e983313441ba3b118891dfb1c3ff962368
+    safe_revision: 64f371f0a4c73da726410bd14eed3459f2af7a03
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -179,7 +179,7 @@ file safety:
   lib/ndr_dev_support/rake_ci/redmine/ticket_resolver.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 12aad1254186ee9ce0fde263bf8dccf46cdfebe2
+    safe_revision: 788b8fc31952a6fb640101df96a370b21d269249
   lib/ndr_dev_support/rake_ci/simple_cov_helper.rb:
     comments: 
     reviewed_by: timgentry
@@ -215,7 +215,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 1f4383e983313441ba3b118891dfb1c3ff962368
+    safe_revision: 64f371f0a4c73da726410bd14eed3459f2af7a03
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
