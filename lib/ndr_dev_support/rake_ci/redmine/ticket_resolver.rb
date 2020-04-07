@@ -86,7 +86,7 @@ module NdrDevSupport
           @http
         end
 
-        def update_ticket(message, user, revision, ticket, resolved)
+        def update_ticket(message, user, revision, ticket, resolved, tests_passed)
           payload = update_payload(message, user, revision, ticket_closed?(ticket), resolved, tests_passed)
 
           http.send_request('PUT',
