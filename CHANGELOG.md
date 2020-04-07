@@ -1,6 +1,10 @@
 ## [Unreleased]
 *no unreleased changes*
 
+## 5.7.1 / 2020-04-07
+### Fixed
+* Address issue updating redmine using commit message tags
+
 ## 5.7.0 / 2020-03-26
 ### Added
 * Add `ci:brakeman:strict` alternative CI task. (#77)
