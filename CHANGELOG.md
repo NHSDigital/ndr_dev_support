@@ -1,5 +1,7 @@
 ## [Unreleased]
+*no unreleased changes*
 
+## 5.8.0 / 2020-04-07
 ### Added
 * Ability to select git CI branch by exporting `RAKE_CI_BRANCH_NAME`
 
