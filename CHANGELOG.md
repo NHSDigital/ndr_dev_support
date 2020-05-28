@@ -1,5 +1,7 @@
 ## [Unreleased]
-*no unreleased changes*
+
+### Added
+* Ability to select git CI branch by exporting `RAKE_CI_BRANCH_NAME`
 
 ## 5.7.1 / 2020-04-07
 ### Fixed

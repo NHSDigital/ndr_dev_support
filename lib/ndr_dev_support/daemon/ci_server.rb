@@ -48,7 +48,7 @@ module NdrDevSupport
 
         git_fetch
         git_discard_changes
-        git_checkout(MASTER_BRANCH_NAME)
+        git_checkout(git_branch_name)
 
         objectids_between_master_and_remote.each do |oid|
           log("testing #{oid}...")
@@ -70,6 +70,10 @@ module NdrDevSupport
         MSG
 
         raise exception
+      end
+
+      def git_branch_name
+        ENV.fetch('RAKE_CI_BRANCH_NAME', MASTER_BRANCH_NAME)
       end
 
       def git_fetch
@@ -117,7 +121,7 @@ module NdrDevSupport
       def objectids_between_master_and_remote
         walker = Rugged::Walker.new(@repo)
         walker.push(repo.branches[remote_branch].target_id)
-        current_target_id = repo.branches[MASTER_BRANCH_NAME].target_id
+        current_target_id = repo.branches[git_branch_name].target_id
 
         revisions = []
         # walk backwards from the most recent commit, breaking at the current one
