@@ -28,7 +28,7 @@ Or install it yourself as:
 To add development support tasks (see below) to your project, add this line to your application's `Rakefile`:
 
 ```ruby
-require 'ndr_dev_support/tasks'
+require 'ndr_dev_support/tasks' if Rails.env.development? || Rails.env.test?
 ```
 
 ## Usage
