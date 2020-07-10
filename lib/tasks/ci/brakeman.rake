@@ -57,7 +57,7 @@ namespace :ci do
 
       brakeman = NdrDevSupport::RakeCI::BrakemanHelper.new
       brakeman.commit = @commit
-      brakeman.run
+      brakeman.run(strict: false)
 
       text_reporter = Brakeman::Report::Text.new(brakeman.tracker)
 
