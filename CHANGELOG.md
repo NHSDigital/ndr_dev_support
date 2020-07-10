@@ -1,4 +1,7 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 5.8.1 / 2020-07-10
 ### Fixed
 * Fix issue running `brakeman:fingerprint_details` task
 
