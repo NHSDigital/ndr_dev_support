@@ -1,6 +1,7 @@
 ## [Unreleased]
 *no unreleased changes*
 
+## 5.8.2 / 2020-07-22
 ### Fixed
 * Tweak integration testing driver config, for capybara 3.33.0 deprecations
 
