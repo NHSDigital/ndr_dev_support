@@ -18,14 +18,23 @@ module NdrDevSupport
         CONFIGURED = ENV.fetch('INTEGRATION_DRIVER', DEFAULT).to_sym
 
         Capybara.register_driver(:switchable) do |app|
-          Capybara.drivers.fetch(CONFIGURED).call(app)
+          configured_driver = Capybara.drivers[CONFIGURED]
+          raise "Driver #{CONFIGURED} not found!" unless configured_driver
+
+          configured_driver.call(app)
         end
 
         Capybara::Screenshot.register_driver(:switchable) do |driver, path|
-          Capybara::Screenshot.registered_drivers.fetch(CONFIGURED).call(driver, path)
+          configured_screenshot_driver = Capybara::Screenshot.registered_drivers[CONFIGURED]
+          raise "Screenshot driver #{CONFIGURED} not found!" unless configured_screenshot_driver
+
+          configured_screenshot_driver.call(driver, path)
         end
 
-        ShowMeTheCookies.register_adapter(:switchable, ShowMeTheCookies.adapters.fetch(CONFIGURED))
+        cookie_driver = ShowMeTheCookies.adapters[CONFIGURED]
+        raise "Cookie driver #{CONFIGURED} not found!" unless cookie_driver
+
+        ShowMeTheCookies.register_adapter(:switchable, cookie_driver)
       end
     end
   end
