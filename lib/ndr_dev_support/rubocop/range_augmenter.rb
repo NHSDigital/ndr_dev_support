@@ -4,8 +4,6 @@ module NdrDevSupport
     # all lines covered, expanding the ranges to include full method
     # defintions, and class/module headers.
     class RangeAugmenter
-      require 'parser/current'
-
       MODULE_TYPES = [:module, :class].freeze
       METHOD_TYPES = [:def, :defs].freeze
 
@@ -27,6 +25,7 @@ module NdrDevSupport
       end
 
       def augmented_lines
+        require 'parser/current'
         root  = Parser::CurrentRuby.parse IO.read(filename)
         nodes = extract_augmenting_nodes(root)
 
