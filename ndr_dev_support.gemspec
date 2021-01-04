@@ -1,4 +1,4 @@
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'ndr_dev_support/version'
 
@@ -29,8 +29,9 @@ Gem::Specification.new do |spec|
   # Rubocop dependencies:
   spec.add_dependency 'parser'
   spec.add_dependency 'rainbow'
-  spec.add_dependency 'rubocop', '0.79.0'
-  spec.add_dependency 'rubocop-rails', '2.4.1'
+  spec.add_dependency 'rubocop', '~> 1.7'
+  spec.add_dependency 'rubocop-rake', '~> 0.5'
+  spec.add_dependency 'rubocop-rails', '~> 2.9'
   spec.add_dependency 'unicode-display_width', '>= 1.3.3'
 
   # Integration test dependencies:
