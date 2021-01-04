@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Fixed
 * Fix unnecessary 'parser/current' warnings when not using rubocop
+* Test against Ruby 3.0
 
 ## 5.8.2 / 2020-07-22
 ### Fixed
