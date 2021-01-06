@@ -8,6 +8,10 @@ require:
   - rubocop-rails
 
 AllCops:
+  # Given we take a "follow the herd" approach, with this file
+  # containing just deviations, enable new cops by default.
+  NewCops: enable
+
   # All cops should ignore files in the following locations:
   Exclude:
   - 'bin/*'
@@ -126,6 +130,11 @@ Rails/ActionFilter:
 Rails/DynamicFindBy:
   Exclude:
   - 'test/integration/**/*.rb'
+
+Rails/RakeEnvironment:
+  # Particularly without spring, this can make things that should be quick
+  # slower than desirable.
+  Enabled: false
 
 Rails/RefuteMethods:
   Enabled: false

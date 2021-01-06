@@ -1,4 +1,8 @@
 ## [Unreleased]
+### Added
+* Move to keep up with Rubocop releases
+* Add `rubocop-rake`, for additional rake-specific Rubocop checks
+
 ### Fixed
 * Fix unnecessary 'parser/current' warnings when not using rubocop
 * Test against Ruby 3.0
