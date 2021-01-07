@@ -6,6 +6,7 @@
 
 require:
   - rubocop-rails
+  - rubocop-rake
 
 AllCops:
   # Given we take a "follow the herd" approach, with this file
