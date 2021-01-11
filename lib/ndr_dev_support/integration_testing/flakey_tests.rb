@@ -15,6 +15,12 @@ module NdrDevSupport
             self.attempts_per_test = attempts_per_test.merge(test_name.to_s => attempts)
           end
         end
+
+        def test_repeatedly(description, times: 100, &block)
+          (1..times).map do |n|
+            test("#{description} - #{n}/#{times}", &block)
+          end
+        end
       end
 
       def flakes
