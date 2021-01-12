@@ -1,4 +1,7 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 5.9.0 / 2021-01-12
 ### Added
 * Move to keep up with Rubocop releases
 * Add `rubocop-rake`, for additional rake-specific Rubocop checks
