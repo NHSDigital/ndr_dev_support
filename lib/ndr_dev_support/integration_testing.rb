@@ -35,5 +35,8 @@ require 'ndr_dev_support/integration_testing/drivers/switchable'
 Capybara.default_driver    = :switchable
 Capybara.javascript_driver = :switchable
 
+# Inject middleware to disable jQuery fx, CSS transitions/animations
+Capybara.disable_animation = true
+
 Capybara.save_path = Rails.root.join('tmp', 'screenshots')
 Capybara::Screenshot.prune_strategy = { keep: 20 }

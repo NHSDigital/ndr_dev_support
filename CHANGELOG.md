@@ -2,6 +2,7 @@
 ### Added
 * Move to keep up with Rubocop releases
 * Add `rubocop-rake`, for additional rake-specific Rubocop checks
+* Disable browser animations in the test environment by default
 
 ### Fixed
 * Fix unnecessary 'parser/current' warnings when not using rubocop
