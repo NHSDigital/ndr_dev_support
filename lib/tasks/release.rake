@@ -12,7 +12,8 @@ namespace :ndr_dev_support do
       raise 'Error getting git tags!' if $?.exitstatus > 0
 
       if existing_tags.split("\n").include?(release_tag)
-        abort "The tag for the release (#{release_tag}) already exists; stopping build process."
+        puts "The tag for the release (#{release_tag}) already exists; nothing to do!"
+        exit 0
       end
     end
   end
