@@ -1,6 +1,5 @@
 require 'English'
 require 'open3'
-require 'rubocop'
 require 'shellwords'
 
 module NdrDevSupport

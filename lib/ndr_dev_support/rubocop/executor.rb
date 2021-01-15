@@ -10,7 +10,7 @@ module NdrDevSupport
       class << self
         # Use RuboCop to produce a list of all files that should be scanned.
         def target_files
-          @target_files ||= `rubocop -L`.each_line.map(&:strip)
+          @target_files ||= `rubocop -L 2>/dev/null`.each_line.map(&:strip)
         end
       end
 
@@ -23,7 +23,7 @@ module NdrDevSupport
       def offenses_by_file
         return [] if @filenames.empty?
 
-        output = JSON.parse(`rubocop --format json #{escaped_paths.join(' ')}`)
+        output = JSON.parse(`rubocop --format json #{escaped_paths.join(' ')} 2>/dev/null`)
 
         output['files'].each_with_object({}) do |file_output, result|
           result[file_output['path']] = file_output['offenses']

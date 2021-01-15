@@ -1,4 +1,12 @@
-require 'rubocop'
+require 'stringio'
+
+begin
+  # Go nuclear on "warning: parser/current ..."
+  $stderr = StringIO.new
+  require 'rubocop'
+ensure
+  $stderr = STDERR
+end
 
 module NdrDevSupport
   module Rubocop
