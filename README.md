@@ -1,4 +1,4 @@
-## NdrDevSupport [![Maintainability](https://api.codeclimate.com/v1/badges/2b2a644964f2aa930f81/maintainability)](https://codeclimate.com/github/PublicHealthEngland/ndr_dev_support/maintainability) [![Build Status](https://travis-ci.org/PublicHealthEngland/ndr_dev_support.svg?branch=master)](https://travis-ci.org/PublicHealthEngland/ndr_dev_support) [![Gem Version](https://badge.fury.io/rb/ndr_dev_support.svg)](https://badge.fury.io/rb/ndr_dev_support)
+## NdrDevSupport [![Maintainability](https://api.codeclimate.com/v1/badges/2b2a644964f2aa930f81/maintainability)](https://codeclimate.com/github/PublicHealthEngland/ndr_dev_support/maintainability) [![Build Status](https://github.com/publichealthengland/ndr_dev_support/workflows/test/badge.svg)](https://github.com/publichealthengland/ndr_dev_support/actions?query=workflow%3Atest) [![Gem Version](https://badge.fury.io/rb/ndr_dev_support.svg)](https://badge.fury.io/rb/ndr_dev_support)
 
 This is the Public Health England (PHE) National Disease Registers (NDR) Developer Support ruby gem,
 providing:
