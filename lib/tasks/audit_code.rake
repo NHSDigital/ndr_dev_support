@@ -331,6 +331,29 @@ def root_revision
   end
 end
 
+def capture_file_diffs(repo, fname, safe_revision, repolatest)
+  cmd =
+    case repository_type
+    when 'git'
+      cmd = ['git', '--no-pager', 'diff', '--color', '-b', "#{safe_revision}..#{repolatest}", fname]
+    when 'git-svn', 'svn'
+      cmd = ['svn', 'diff', '-r', "#{safe_revision.to_i}:#{repolatest.to_i}", '-x', '-b', "#{repo}/#{fname}"]
+    end
+
+  stdout_and_err_str, _status = Open3.capture2e(*cmd)
+
+  if stdout_and_err_str.start_with?('fatal: Invalid revision range ')
+    abort <<~ERROR
+      Error running:
+        #{cmd}
+
+      Invalid commit ID in code_safety.yml for #{fname}? (#{safe_revision})
+    ERROR
+  end
+
+  [cmd.join(' '), stdout_and_err_str]
+end
+
 def print_repo_file_diffs(repolatest, repo, fname, usr, safe_revision, interactive)
   require 'open3'
   require 'highline/import'
@@ -341,21 +364,9 @@ def print_repo_file_diffs(repolatest, repo, fname, usr, safe_revision, interacti
     system("printf '\033[3J'") # clear the scrollback
   end
 
-  cmd = nil
-  case repository_type
-  when 'git'
-    cmd = ['git', '--no-pager', 'diff', '--color', '-b', "#{safe_revision}..#{repolatest}", fname]
-  when 'git-svn', 'svn'
-    cmd = ['svn', 'diff', '-r', "#{safe_revision.to_i}:#{repolatest.to_i}", '-x', '-b', "#{repo}/#{fname}"]
-  end
-  if cmd
-    puts(cmd.join(' '))
-    stdout_and_err_str, _status = Open3.capture2e(*cmd)
-    puts 'Invalid commit ID in code_safety.yml ' + safe_revision if stdout_and_err_str.start_with?('fatal: Invalid revision range ')
-    puts(stdout_and_err_str)
-  else
-    puts 'Unknown repo'
-  end
+  cmd, diffs = capture_file_diffs(repo, fname, safe_revision, repolatest)
+  puts cmd
+  puts diffs
 
   if interactive
     response = ask("Flag #{fname} changes safe? [Yes|No|Abort]: ") { |q| q.case = :down }
