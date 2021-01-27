@@ -47,9 +47,6 @@ end
 # Parameter max_print is number of entries to print before truncating output
 # (negative value => print all)
 def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, usr = 'usr', interactive = false, outfile = nil)
-  puts 'Running source code safety audit script.'
-  puts
-
   max_print = 1_000_000 if max_print.negative?
   show_diffs = true if interactive
   file_safety = load_file_safety
@@ -263,14 +260,11 @@ def get_trunk_repo
   case repository_type
   when 'svn'
     repo_info = %x[svn info]
-    puts 'svn case'
     repo_info.split("\n").select { |x| x =~ /^URL: / }.collect { |x| x[5..-1] }.first
   when 'git-svn'
-    puts 'git-svn case'
     repo_info = %x[git svn info]
     repo_info.split("\n").select { |x| x =~ /^URL: / }.collect { |x| x[5..-1] }.first
   when 'git'
-    puts 'git case'
     repo_info = %x[git remote -v]
     repo_info.split("\n").first[7..-9]
   else
@@ -479,8 +473,24 @@ File #{SAFETY_FILE} lists the safety and revision information
 of the era source code. This task updates the list, and [TODO] warns about
 files which have changed since they were last verified as safe."
   task(:code) do
-    puts 'Usage: audit:code [max_print=n] [ignore_new=false|true] [show_diffs=false|true] [reviewed_by=usr] [interactive=false|true] [outfile=path/to/output.csv]'
-    puts "This is a #{repository_type} repository"
+    puts <<~USAGE
+
+      NDR's code auditing tool.
+
+      Usage:
+
+        #{rake_cmd} audit:code
+          [interactive=false|true]      # use an interactive wizard to perform code review
+          [max_print=n]                 # limit the number of summary rows to n
+          [ignore_new=false|true]       # don't add new files to code_safety.yml
+          [show_diffs=false|true]       # display the full diff for each file
+          [reviewed_by=usr]             # your name, to author to any reviews added
+          [outfile=path/to/output.csv]  # dump a summary of outstanding review to CSV
+
+    USAGE
+
+    puts "This is a #{repository_type} repository."
+    puts
 
     ignore_new = (ENV['ignore_new'].to_s =~ /\Atrue\Z/i)
     show_diffs = (ENV['show_diffs'].to_s =~ /\Atrue\Z/i)
