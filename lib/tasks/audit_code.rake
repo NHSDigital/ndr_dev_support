@@ -45,7 +45,7 @@ end
 
 # Parameter max_print is number of entries to print before truncating output
 # (negative value => print all)
-def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, show_in_priority = false, usr = 'usr', interactive = false)
+def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, usr = 'usr', interactive = false)
   puts 'Running source code safety audit script.'
   puts
 
@@ -81,7 +81,6 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
 
     # Post-wizard, reload the results and continue to print a summary:
     file_safety = load_file_safety
-    show_in_priority = false
     max_print = 0
     show_diffs = false
   else
@@ -90,7 +89,7 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
     set_last_changed_revisions(trunk_repo, file_safety)
   end
 
-  print_summary(file_safety, usr, trunk_repo, show_in_priority, max_print, show_diffs, orig_count)
+  print_summary(file_safety, usr, trunk_repo, max_print, show_diffs, orig_count)
 end
 
 def run_review_wizard(trunk_repo, file_safety, usr)
@@ -110,7 +109,7 @@ def run_review_wizard(trunk_repo, file_safety, usr)
   end
 end
 
-def print_summary(file_safety, usr, trunk_repo, show_in_priority, max_print, show_diffs, orig_count)
+def print_summary(file_safety, usr, trunk_repo, max_print, show_diffs, orig_count)
   puts "\nSummary:"
   puts "Number of files originally in #{SAFETY_FILE}: #{orig_count}"
   puts "Number of new files added: #{file_safety.size - orig_count}"
@@ -124,11 +123,9 @@ def print_summary(file_safety, usr, trunk_repo, show_in_priority, max_print, sho
   printed = []
 
   file_list =
-    if show_in_priority
-      file_safety.sort_by { |_k, v| v.nil? ? -100 : v['last_changed_rev'].to_i }.map(&:first)
-    else
-      file_safety.keys.sort
-    end
+      file_safety.
+      sort_by { |_k, v| v.nil? ? -100 : v['last_changed_rev'].to_i }.
+      map(&:first)
 
   file_list.each do |f|
     printed << f if print_file_safety(file_safety, f, false, printed.size >= max_print)
@@ -439,17 +436,16 @@ File #{SAFETY_FILE} lists the safety and revision information
 of the era source code. This task updates the list, and [TODO] warns about
 files which have changed since they were last verified as safe."
   task(:code) do
-    puts 'Usage: audit:code [max_print=n] [ignore_new=false|true] [show_diffs=false|true] [show_in_priority=false|true] [reviewed_by=usr] [interactive=false|true]'
+    puts 'Usage: audit:code [max_print=n] [ignore_new=false|true] [show_diffs=false|true] [reviewed_by=usr] [interactive=false|true]'
     puts "This is a #{repository_type} repository"
 
     ignore_new = (ENV['ignore_new'].to_s =~ /\Atrue\Z/i)
     show_diffs = (ENV['show_diffs'].to_s =~ /\Atrue\Z/i)
-    show_in_priority = (ENV['show_in_priority'].to_s =~ /\Atrue\Z/i)
     max_print = ENV['max_print'] =~ /\A-?[0-9][0-9]*\Z/ ? ENV['max_print'].to_i : 20
     reviewer  = ENV['reviewed_by']
     interactive = (ENV['interactive'].to_s =~ /\Atrue\Z/i)
 
-    all_safe = audit_code_safety(max_print, ignore_new, show_diffs, show_in_priority, reviewer, interactive)
+    all_safe = audit_code_safety(max_print, ignore_new, show_diffs, reviewer, interactive)
 
     unless show_diffs || interactive
       puts "To show file diffs, run:  #{rake_cmd} audit:code max_print=-1 show_diffs=true"
