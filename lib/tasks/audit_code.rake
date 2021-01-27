@@ -78,12 +78,9 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
     puts "Not checking for new files in #{safety_repo}"
   else
     puts "Checking for new files in #{safety_repo}"
-    new_files = get_new_files(safety_repo)
-    # Ignore subdirectories, and exclude code_safety.yml by default.
-    new_files.delete_if { |f| f =~ /[\/\\]$/ || Pathname.new(f).expand_path == SAFETY_FILE }
-    new_files.each { |f| add_new_file_to_file_safety(file_safety, f) }
-    update_safety_file(file_safety) # Save changes before checking latest revisions
+    add_new_files(safety_repo, file_safety)
   end
+
   puts "Updating latest revisions for #{file_safety.size} files"
   set_last_changed_revisions(trunk_repo, file_safety, file_safety.keys)
   puts "\nSummary:"
@@ -225,21 +222,23 @@ def get_trunk_repo
   end
 end
 
-def get_new_files(safety_repo)
-  case repository_type
-  when 'svn', 'git-svn'
-    %x[svn ls -R "#{safety_repo}"].split("\n")
-  when 'git'
-    #%x[git ls-files --modified].split("\n")
-    %x[git ls-files].split("\n")
+def add_new_files(safety_repo, file_safety)
+  new_files =
+    case repository_type
+    when 'svn', 'git-svn'
+      %x[svn ls -R "#{safety_repo}"].split("\n")
+    when 'git'
+      %x[git ls-files].split("\n")
+    else
+      []
+    end
 
-    # TODO: Below is for remote repository - for testing use local files
-    #new_files = %x[git ls-files --modified #{safety_repo}].split("\n")
-    # TODO: Do we need the --modified option?
-    #new_files = %x[git ls-files --modified].split("\n")
-  else
-    []
-  end
+  # Ignore subdirectories, and exclude code_safety.yml by default.
+  new_files.delete_if { |f| f =~ /[\/\\]$/ || Pathname.new(f).expand_path == SAFETY_FILE }
+
+  # Save changes before checking latest revisions
+  new_files.each { |f| add_new_file_to_file_safety(file_safety, f) }
+  update_safety_file(file_safety)
 end
 
 # Fill in the latest changed revisions in a file safety map.
