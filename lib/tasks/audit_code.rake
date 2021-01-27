@@ -46,9 +46,11 @@ end
 
 # Parameter max_print is number of entries to print before truncating output
 # (negative value => print all)
-def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, usr = 'usr', interactive = false, outfile = nil)
+def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, usr = 'usr', interactive = false, outfile = nil, filter = nil)
   max_print = 1_000_000 if max_print.negative?
   show_diffs = true if interactive
+  ignore_new = true if filter
+
   file_safety = load_file_safety
   file_safety.each_value do |v|
     rev = v['safe_revision']
@@ -74,11 +76,18 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, us
     Please run `#{rake_cmd} audit:tidy_code_safety_file` to remove them.
   MESSAGE
 
+  if filter
+    filter_file_safety(file_safety, filter)
+    puts "Applying provided file filter: #{file_safety.size} file(s) remain"
+  end
+
   if interactive
     run_review_wizard(trunk_repo, file_safety, usr)
 
     # Post-wizard, reload the results and continue to print a summary:
     file_safety = load_file_safety
+    filter_file_safety(file_safety, filter) if filter
+
     max_print = 0
     show_diffs = false
   else
@@ -87,7 +96,12 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, us
     set_last_changed_revisions(trunk_repo, file_safety)
   end
 
-  print_summary(file_safety, usr, trunk_repo, max_print, show_diffs, orig_count, outfile)
+  print_summary(file_safety, usr, trunk_repo, max_print, show_diffs, orig_count, ignore_new, outfile, filter)
+end
+
+def filter_file_safety(file_safety, filter)
+  filtered_paths = CSV.read(filter, headers: true).map { |row| row.to_h.fetch('path') }
+  file_safety.select! { |fname, _entry| filtered_paths.include?(fname) }
 end
 
 def run_review_wizard(trunk_repo, file_safety, usr)
@@ -108,16 +122,16 @@ def run_review_wizard(trunk_repo, file_safety, usr)
   end
 end
 
-def print_summary(file_safety, usr, trunk_repo, max_print, show_diffs, orig_count, outfile)
+def print_summary(file_safety, usr, trunk_repo, max_print, show_diffs, orig_count, ignore_new, outfile, filter)
   puts "\nSummary:"
   puts "Number of files originally in #{SAFETY_FILE}: #{orig_count}"
-  puts "Number of new files added: #{file_safety.size - orig_count}"
+  puts "Number of new files added: #{file_safety.size - orig_count}" unless ignore_new
 
   # Now generate statistics:
   unknown = file_safety.values.select { |x| unreviewed?(x) }
   unsafe = file_safety.values.select { |x| stale_review?(x) }
-  puts "Number of files with no safe version: #{unknown.size}"
-  puts "Number of files which are no longer safe: #{unsafe.size}"
+  puts "Number of#{' filtered' if filter} files with no safe version: #{unknown.size}"
+  puts "Number of#{' filtered' if filter} files which are no longer safe: #{unsafe.size}"
   puts
   printed = []
 
@@ -485,6 +499,7 @@ files which have changed since they were last verified as safe."
           [ignore_new=false|true]       # don't add new files to code_safety.yml
           [show_diffs=false|true]       # display the full diff for each file
           [reviewed_by=usr]             # your name, to author to any reviews added
+          [filter=path/to/input.csv]    # filter reviewing to only files specified in the filter file
           [outfile=path/to/output.csv]  # dump a summary of outstanding review to CSV
 
     USAGE
@@ -497,9 +512,10 @@ files which have changed since they were last verified as safe."
     max_print = ENV['max_print'] =~ /\A-?[0-9][0-9]*\Z/ ? ENV['max_print'].to_i : 20
     reviewer  = ENV['reviewed_by']
     interactive = (ENV['interactive'].to_s =~ /\Atrue\Z/i)
+    filter = ENV['filter']
     outfile = ENV['outfile']
 
-    all_safe = audit_code_safety(max_print, ignore_new, show_diffs, reviewer, interactive, outfile)
+    all_safe = audit_code_safety(max_print, ignore_new, show_diffs, reviewer, interactive, outfile, filter)
 
     unless show_diffs || interactive
       puts "To show file diffs, run:  #{rake_cmd} audit:code max_print=-1 show_diffs=true"
