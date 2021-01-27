@@ -10,9 +10,6 @@ SAFETY_FILE =
     Pathname.new('code_safety.yml').expand_path
   end
 
-# Temporary overrides to only audit external access files
-SAFETY_REPOS = [['/svn/era', '/svn/extra/era/external-access']]
-
 # Returns the (Bundler aware) rake command
 def rake_cmd
   ENV['BUNDLE_BIN_PATH'] ? 'bundle exec rake' : 'rake'
@@ -62,17 +59,6 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
   orig_count = file_safety.size
 
   safety_repo = trunk_repo = get_trunk_repo
-
-  # TODO: below is broken for git-svn
-  # Is it needed?
-
-  SAFETY_REPOS.each do |suffix, alt|
-    # Temporarily override to only audit a different file list
-    if safety_repo.end_with?(suffix)
-      safety_repo = safety_repo[0...-suffix.length] + alt
-      break
-    end
-  end
 
   if ignore_new
     puts "Not checking for new files in #{safety_repo}"
