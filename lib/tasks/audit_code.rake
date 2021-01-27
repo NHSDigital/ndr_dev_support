@@ -67,19 +67,20 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
     add_new_files(safety_repo, file_safety)
   end
 
+  missing_files = file_safety.keys.reject { |path| File.file?(path) }
+  abort(<<~MESSAGE) if missing_files.any?
+
+    The following file(s) no longer exist in the repository:
+      #{missing_files.join("\n  ")}
+
+    Please run `#{rake_cmd} audit:tidy_code_safety_file` to remove them.
+  MESSAGE
+
   puts "Updating latest revisions for #{file_safety.size} files"
   set_last_changed_revisions(trunk_repo, file_safety, file_safety.keys)
   puts "\nSummary:"
   puts "Number of files originally in #{SAFETY_FILE}: #{orig_count}"
   puts "Number of new files added: #{file_safety.size - orig_count}"
-
-  missing_files = file_safety.keys.reject { |path| File.file?(path) }
-
-  unless missing_files.empty?
-    puts "Number of files no longer in repository but in code_safety.yml: #{missing_files.length}"
-    puts "  Please run #{rake_cmd} audit:tidy_code_safety_file to remove redundant files"
-    missing_files.each { |path| puts '  ' + path }
-  end
 
   # Now generate statistics:
   unknown = file_safety.values.select { |x| x['safe_revision'].nil? }
