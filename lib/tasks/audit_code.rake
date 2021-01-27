@@ -77,13 +77,36 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
   MESSAGE
 
   if interactive
-    abort "Interactive mode suspended, sorry!"
+    run_review_wizard(trunk_repo, file_safety, usr)
+
+    # Post-wizard, reload the results and continue to print a summary:
+    file_safety = load_file_safety
+    show_in_priority = false
+    max_print = 0
+    show_diffs = false
   else
     # Get updates for all files in one go:
     puts "Updating latest revisions for #{file_safety.size} files"
-    set_last_changed_revisions(trunk_repo, file_safety, file_safety.keys)
+    set_last_changed_revisions(trunk_repo, file_safety)
+  end
 
-    print_summary(file_safety, usr, trunk_repo, show_in_priority, max_print, show_diffs, orig_count)
+  print_summary(file_safety, usr, trunk_repo, show_in_priority, max_print, show_diffs, orig_count)
+end
+
+def run_review_wizard(trunk_repo, file_safety, usr)
+  puts <<~INTRO
+
+    In interactive mode, you'll be presented with one diff at a time for review.
+
+    For each diff, you can enter a decision (if you can make one) along with
+    any comments you may have, before being taken to the next diff.
+  INTRO
+
+  file_safety.each_key do |fname|
+    set_last_changed_revision(trunk_repo, file_safety, fname)
+    next unless print_file_safety(file_safety, fname, false, true)
+
+    print_file_diffs(file_safety, trunk_repo, fname, usr, true)
   end
 end
 
@@ -110,7 +133,7 @@ def print_summary(file_safety, usr, trunk_repo, show_in_priority, max_print, sho
   file_list.each do |f|
     printed << f if print_file_safety(file_safety, f, false, printed.size >= max_print)
   end
-  puts "... and #{printed.size - max_print} others" if printed.size > max_print
+  puts "... and #{printed.size - max_print} others" if printed.size > max_print && max_print > 0
   if show_diffs
     puts
     printed.each do |f|
@@ -251,8 +274,8 @@ end
 # Fill in the latest changed revisions in a file safety map.
 # (Don't write this data to the YAML file, as it is intrinsic to the SVN
 # repository.)
-def set_last_changed_revisions(repo, file_safety, fnames)
-  fnames = file_safety.keys if fnames.nil?
+def set_last_changed_revisions(repo, file_safety)
+  fnames = file_safety.keys
   dot_freq = (fnames.size / 40.0).ceil # Print up to 40 progress dots
 
   fnames.each_with_index do |f, i|
