@@ -76,25 +76,30 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
     Please run `#{rake_cmd} audit:tidy_code_safety_file` to remove them.
   MESSAGE
 
-  puts "Updating latest revisions for #{file_safety.size} files"
-  set_last_changed_revisions(trunk_repo, file_safety, file_safety.keys)
+  if interactive
+    abort "Interactive mode suspended, sorry!"
+  else
+    # Get updates for all files in one go:
+    puts "Updating latest revisions for #{file_safety.size} files"
+    set_last_changed_revisions(trunk_repo, file_safety, file_safety.keys)
+
+    print_summary(file_safety, usr, trunk_repo, show_in_priority, max_print, show_diffs, orig_count)
+  end
+end
+
+def print_summary(file_safety, usr, trunk_repo, show_in_priority, max_print, show_diffs, orig_count)
   puts "\nSummary:"
   puts "Number of files originally in #{SAFETY_FILE}: #{orig_count}"
   puts "Number of new files added: #{file_safety.size - orig_count}"
 
   # Now generate statistics:
-  unknown = file_safety.values.select { |x| x['safe_revision'].nil? }
-  unsafe = file_safety.values.select do |x|
-    !x['safe_revision'].nil? && x['safe_revision'] != -1 &&
-      x['last_changed_rev'] != x['safe_revision'] &&
-      !(x['last_changed_rev'] =~ /^[0-9]+$/ && x['safe_revision'] =~ /^[0-9]+$/ &&
-      x['last_changed_rev'].to_i < x['safe_revision'].to_i)
-  end
+  unknown = file_safety.values.select { |x| unreviewed?(x) }
+  unsafe = file_safety.values.select { |x| stale_review?(x) }
   puts "Number of files with no safe version: #{unknown.size}"
   puts "Number of files which are no longer safe: #{unsafe.size}"
   puts
   printed = []
-  # We also print a third category: ones which are no longer in the repository
+
   file_list =
     if show_in_priority
       file_safety.sort_by { |_k, v| v.nil? ? -100 : v['last_changed_rev'].to_i }.map(&:first)
@@ -109,12 +114,27 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, sh
   if show_diffs
     puts
     printed.each do |f|
-      print_file_diffs(file_safety, trunk_repo, f, usr, interactive)
+      print_file_diffs(file_safety, trunk_repo, f, usr, false)
     end
   end
 
   # Returns `true` unless there are pending reviews:
   unsafe.length.zero? && unknown.length.zero?
+end
+
+def stale_review?(entry)
+  return false if unreviewed?(entry)
+
+  # Could be comparing Git SHAs, or SVN revisions:
+  entry['last_changed_rev'] != entry['safe_revision']
+end
+
+def unreviewed?(entry)
+  entry['safe_revision'].nil?
+end
+
+def needs_review?(entry)
+  unreviewed?(entry) || stale_review?(entry)
 end
 
 # Print summary details of a file's known safety
