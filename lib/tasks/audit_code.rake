@@ -1,3 +1,4 @@
+require 'csv'
 require 'pathname'
 require 'yaml'
 
@@ -45,7 +46,7 @@ end
 
 # Parameter max_print is number of entries to print before truncating output
 # (negative value => print all)
-def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, usr = 'usr', interactive = false)
+def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, usr = 'usr', interactive = false, outfile = nil)
   puts 'Running source code safety audit script.'
   puts
 
@@ -89,7 +90,7 @@ def audit_code_safety(max_print = 20, ignore_new = false, show_diffs = false, us
     set_last_changed_revisions(trunk_repo, file_safety)
   end
 
-  print_summary(file_safety, usr, trunk_repo, max_print, show_diffs, orig_count)
+  print_summary(file_safety, usr, trunk_repo, max_print, show_diffs, orig_count, outfile)
 end
 
 def run_review_wizard(trunk_repo, file_safety, usr)
@@ -109,7 +110,7 @@ def run_review_wizard(trunk_repo, file_safety, usr)
   end
 end
 
-def print_summary(file_safety, usr, trunk_repo, max_print, show_diffs, orig_count)
+def print_summary(file_safety, usr, trunk_repo, max_print, show_diffs, orig_count, outfile)
   puts "\nSummary:"
   puts "Number of files originally in #{SAFETY_FILE}: #{orig_count}"
   puts "Number of new files added: #{file_safety.size - orig_count}"
@@ -138,8 +139,35 @@ def print_summary(file_safety, usr, trunk_repo, max_print, show_diffs, orig_coun
     end
   end
 
+  export_csv(trunk_repo, file_safety, printed, outfile) if outfile
+
   # Returns `true` unless there are pending reviews:
   unsafe.length.zero? && unknown.length.zero?
+end
+
+def export_csv(repo, file_safety, printed, outfile)
+  CSV.open(outfile, 'w') do |csv|
+    csv << %w[path last_changed_revision safe_revision diff_lines]
+
+    file_safety.each do |fname, entry|
+      # Only emit files needing review:
+      next unless printed.include?(fname)
+
+      last_changed_revision = entry['last_changed_rev']
+      safe_revision = entry['safe_revision']
+
+      _cmd, diffs = capture_file_diffs(repo, fname, safe_revision, last_changed_revision)
+      diff_lines = diffs.split("\n").length
+
+      csv << [fname, last_changed_revision, safe_revision, diff_lines]
+    end
+  end
+
+  puts <<~MESSAGE
+
+    CSV output exported to: #{outfile}
+
+  MESSAGE
 end
 
 def stale_review?(entry)
@@ -447,7 +475,7 @@ File #{SAFETY_FILE} lists the safety and revision information
 of the era source code. This task updates the list, and [TODO] warns about
 files which have changed since they were last verified as safe."
   task(:code) do
-    puts 'Usage: audit:code [max_print=n] [ignore_new=false|true] [show_diffs=false|true] [reviewed_by=usr] [interactive=false|true]'
+    puts 'Usage: audit:code [max_print=n] [ignore_new=false|true] [show_diffs=false|true] [reviewed_by=usr] [interactive=false|true] [outfile=path/to/output.csv]'
     puts "This is a #{repository_type} repository"
 
     ignore_new = (ENV['ignore_new'].to_s =~ /\Atrue\Z/i)
@@ -455,8 +483,9 @@ files which have changed since they were last verified as safe."
     max_print = ENV['max_print'] =~ /\A-?[0-9][0-9]*\Z/ ? ENV['max_print'].to_i : 20
     reviewer  = ENV['reviewed_by']
     interactive = (ENV['interactive'].to_s =~ /\Atrue\Z/i)
+    outfile = ENV['outfile']
 
-    all_safe = audit_code_safety(max_print, ignore_new, show_diffs, reviewer, interactive)
+    all_safe = audit_code_safety(max_print, ignore_new, show_diffs, reviewer, interactive, outfile)
 
     unless show_diffs || interactive
       puts "To show file diffs, run:  #{rake_cmd} audit:code max_print=-1 show_diffs=true"
