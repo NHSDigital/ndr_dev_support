@@ -156,6 +156,22 @@ end
 
 If tests still fail, they'll fail as normal. If tests pass after flakey failure, they'll be flagged to the RakeCI server, and rendered in purple on Slack.
 
+#### Repeating Flakey Tests
+
+To aid with investigations into potentially-flakey tests, `ndr_dev_support` also provides the ability to run an integration test repeatedly (by default, 100 times):
+
+```ruby
+test_repeatedly 'thing that we think might fail' do
+  # something flakey
+end
+
+test_repeatedly 'thing that we think might fail very occassionally', times: 1000 do
+  # something slightly flakey
+end
+```
+
+This may be faster to work with than repeatedly executing the entire test runner in a bash loop, for example.
+
 ### Deployment support
 
 There are various capistrano plugins in the `ndr_dev_support/capistrano` directory - see each one for details.
