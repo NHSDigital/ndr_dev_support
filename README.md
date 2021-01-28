@@ -158,7 +158,7 @@ If tests still fail, they'll fail as normal. If tests pass after flakey failure,
 
 #### Repeating Flakey Tests
 
-To aid with investigations into potentially-flakey specs, `ndr_dev_support` also provides the ability to run a test repeatedly (by default, 100 times):
+To aid with investigations into potentially-flakey tests, `ndr_dev_support` also provides the ability to run an integration test repeatedly (by default, 100 times):
 
 ```ruby
 test_repeatedly 'thing that we think might fail' do
