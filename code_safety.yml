@@ -1,5 +1,17 @@
 ---
 file safety:
+  ".github/CODEOWNERS":
+    comments: 
+    reviewed_by: 
+    safe_revision: 
+  ".github/workflows/lint.yml":
+    comments: 
+    reviewed_by: 
+    safe_revision: 
+  ".github/workflows/test.yml":
+    comments: 
+    reviewed_by: 
+    safe_revision: 
   ".gitignore":
     comments: 
     reviewed_by: josh.pencheon
@@ -12,10 +24,6 @@ file safety:
     comments: 
     reviewed_by: josh.pencheon
     safe_revision: 6211cff0ce44645ed3752723b5b0ee65f24c66aa
-  ".travis.yml":
-    comments: 
-    reviewed_by: josh.pencheon
-    safe_revision: e5ac2d160975264f40bac7e871b61aa6b54f7af2
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
