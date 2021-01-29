@@ -1,6 +1,15 @@
 ## [Unreleased]
 *no unreleased changes*
 
+## 5.10.0 / 2021-01-29
+### Added
+* Added `test_repeatedly` for integration test debugging (#85)
+* Added `outfile` and `filter` options to code auditing (#93)
+
+### Fixed
+* Fixed excessive `parser/current` warnings (#91)
+* Improved performance of interactive code auditing (#93)
+
 ## 5.9.0 / 2021-01-12
 ### Added
 * Move to keep up with Rubocop releases
