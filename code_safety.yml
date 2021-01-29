@@ -2,16 +2,16 @@
 file safety:
   ".github/CODEOWNERS":
     comments: 
-    reviewed_by: 
-    safe_revision: 
+    reviewed_by: josh.pencheon
+    safe_revision: ae4a81930ad3ab1b858474bc73b714aeed0f83a8
   ".github/workflows/lint.yml":
     comments: 
-    reviewed_by: 
-    safe_revision: 
+    reviewed_by: josh.pencheon
+    safe_revision: 0ce43640c417e174054f903fd82043948ebe8ccb
   ".github/workflows/test.yml":
     comments: 
-    reviewed_by: 
-    safe_revision: 
+    reviewed_by: josh.pencheon
+    safe_revision: 761cacc344191277f4e07ea5982fce89f7a47e0c
   ".gitignore":
     comments: 
     reviewed_by: josh.pencheon
@@ -27,7 +27,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 0fa311a1f72ceb8c8d5c5a66fd0ac22eb0317781
+    safe_revision: fcdfdf7a55adc46a601a9cc501d36411e512015d
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -43,7 +43,7 @@ file safety:
   README.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: e389930b98976f20e3fc94c771e5c456b729f8cb
+    safe_revision: a18f35895baebb1b0971043b3b3f666bb4eb9b5c
   Rakefile:
     comments: 
     reviewed_by: josh.pencheon
@@ -151,7 +151,7 @@ file safety:
   lib/ndr_dev_support/integration_testing/flakey_tests.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: a2f178853da640112cf3063ca1d640157c9edb9f
+    safe_revision: a18f35895baebb1b0971043b3b3f666bb4eb9b5c
   lib/ndr_dev_support/rake_ci/brakeman_helper.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -195,11 +195,11 @@ file safety:
   lib/ndr_dev_support/rubocop/executor.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: e56876f46536ba006a9b68029306f41a188bf9c6
+    safe_revision: 1d8a97dc5dd2e58bfd689d5e2c94e077a4ca0649
   lib/ndr_dev_support/rubocop/inject.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 6211cff0ce44645ed3752723b5b0ee65f24c66aa
+    safe_revision: 1d8a97dc5dd2e58bfd689d5e2c94e077a4ca0649
   lib/ndr_dev_support/rubocop/range_augmenter.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -207,7 +207,7 @@ file safety:
   lib/ndr_dev_support/rubocop/range_finder.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 41cf1558f567928faaa1e670a36d941c03c78044
+    safe_revision: 1d8a97dc5dd2e58bfd689d5e2c94e077a4ca0649
   lib/ndr_dev_support/rubocop/reporter.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -223,12 +223,12 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 0fa311a1f72ceb8c8d5c5a66fd0ac22eb0317781
+    safe_revision: fcdfdf7a55adc46a601a9cc501d36411e512015d
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
     reviewed_by: josh.pencheon
-    safe_revision: 810858eb1acb297625708de6ddf8179c528c48f4
+    safe_revision: 7bd9e27c4995a9329c1e2076f6c9a772f1da48d0
   lib/tasks/ci/brakeman.rake:
     comments: 
     reviewed_by: josh.pencheon
@@ -296,7 +296,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: 5b427cb12907bc87e5e0cb754dcaa524fdbfb1b9
+    safe_revision: 8d5bef0365849bd87cd3239a722fc21df1e55c48
   test/daemon/ci_server_test.rb:
     comments: 
     reviewed_by: josh.pencheon
