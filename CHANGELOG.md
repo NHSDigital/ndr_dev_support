@@ -1,6 +1,10 @@
 ## [Unreleased]
 *no unreleased changes*
 
+## 5.10.1 / 2021-02-01
+### Fixed
+* Fixed an issue with binary files breaking certain code audit modes (#94)
+
 ## 5.10.0 / 2021-01-29
 ### Added
 * Added `test_repeatedly` for integration test debugging (#85)
