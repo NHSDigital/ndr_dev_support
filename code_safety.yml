@@ -27,7 +27,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: fcdfdf7a55adc46a601a9cc501d36411e512015d
+    safe_revision: ae7af78e0193891c430ea880dae9f530dcec206b
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -223,12 +223,12 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: josh.pencheon
-    safe_revision: fcdfdf7a55adc46a601a9cc501d36411e512015d
+    safe_revision: ae7af78e0193891c430ea880dae9f530dcec206b
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
     reviewed_by: josh.pencheon
-    safe_revision: 7bd9e27c4995a9329c1e2076f6c9a772f1da48d0
+    safe_revision: cc586e0bcb9b636a4aab19198dfc99171ef49f50
   lib/tasks/ci/brakeman.rake:
     comments: 
     reviewed_by: josh.pencheon
