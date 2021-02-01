@@ -169,7 +169,7 @@ def export_csv(repo, file_safety, printed, outfile)
       safe_revision = entry['safe_revision']
 
       _cmd, diffs = capture_file_diffs(repo, fname, safe_revision, last_changed_revision)
-      diff_lines = diffs.split("\n").length
+      diff_lines = diffs.force_encoding('BINARY').split("\n").length
 
       csv << [fname, last_changed_revision, safe_revision, diff_lines]
     end
