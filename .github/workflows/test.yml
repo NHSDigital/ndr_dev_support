@@ -13,6 +13,7 @@ jobs:
         gemfile:
           - gemfiles/Gemfile.rails52
           - gemfiles/Gemfile.rails60
+          - gemfiles/Gemfile.rails61
 
     name: Ruby ${{ matrix.ruby-version }} / Bundle ${{ matrix.gemfile }}
 
