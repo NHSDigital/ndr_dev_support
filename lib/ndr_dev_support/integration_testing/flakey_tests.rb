@@ -59,4 +59,6 @@ module NdrDevSupport
   end
 end
 
-ActionDispatch::IntegrationTest.include(NdrDevSupport::IntegrationTesting::FlakeyTests)
+if defined?(ActionDispatch)
+  ActionDispatch::IntegrationTest.include(NdrDevSupport::IntegrationTesting::FlakeyTests)
+end
