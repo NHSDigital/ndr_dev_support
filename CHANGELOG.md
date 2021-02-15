@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Fixed
+* Fixed an issue using `flakey_test` with `minitest` v5.11 onwards
 
 ## 5.10.1 / 2021-02-01
 ### Fixed

@@ -33,11 +33,12 @@ module NdrDevSupport
 
         previous_failure = failures.last
         failed_attempts = []
+        result = nil
 
         loop do
           break if attempts_remaining < 1
 
-          super
+          result = super
 
           # No failure was added; we passed!
           break if failures.last == previous_failure
@@ -52,10 +53,12 @@ module NdrDevSupport
         # Attempts were only flakey if we eventually passed:
         flakes.concat(failed_attempts) if failures.last == previous_failure
 
-        self
+        result
       end
     end
   end
 end
 
-ActionDispatch::IntegrationTest.include(NdrDevSupport::IntegrationTesting::FlakeyTests)
+if defined?(ActionDispatch)
+  ActionDispatch::IntegrationTest.include(NdrDevSupport::IntegrationTesting::FlakeyTests)
+end

@@ -35,7 +35,7 @@ Gem::Specification.new do |spec|
   # Integration test dependencies:
   spec.add_dependency 'capybara', '>= 3.34'
   spec.add_dependency 'capybara-screenshot'
-  spec.add_dependency 'minitest', '~> 5.0'
+  spec.add_dependency 'minitest', '~> 5.11'
   spec.add_dependency 'poltergeist', '>= 1.8.0'
   spec.add_dependency 'selenium-webdriver'
   spec.add_dependency 'show_me_the_cookies'
