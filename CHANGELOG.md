@@ -1,6 +1,10 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 5.10.2 / 2021-02-15
 ### Fixed
 * Fixed an issue using `flakey_test` with `minitest` v5.11 onwards
+* Allow use with Rails 6.1
 
 ## 5.10.1 / 2021-02-01
 ### Fixed
