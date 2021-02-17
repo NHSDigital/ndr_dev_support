@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Fixed
+* Stop linting failing when there are no lintable changes.
 
 ## 5.10.2 / 2021-02-15
 ### Fixed
