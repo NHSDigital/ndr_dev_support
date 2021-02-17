@@ -1,6 +1,6 @@
 ## [Unreleased]
-### Fixed
-* Stop linting failing when there are no lintable changes.
+### Changed
+* Linting: return a zero exit status when there are no lintable changes (#97)
 
 ## 5.10.2 / 2021-02-15
 ### Fixed
