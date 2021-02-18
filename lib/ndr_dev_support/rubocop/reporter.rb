@@ -23,7 +23,7 @@ module NdrDevSupport
       # exit status for the rake task to terminate with.
       def report
         if @offenses.none?
-          puts Rainbow('No relevant changes found.').yellow
+          warn Rainbow('No relevant changes found.').yellow
           return true
         end
 
