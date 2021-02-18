@@ -22,15 +22,16 @@ module NdrDevSupport
       # Prints out a report, and returns an appriopriate
       # exit status for the rake task to terminate with.
       def report
-        if @offenses.any?
-          print_summary
-          puts
-          print_offenses
-          return @offenses.values.all?(&:empty?)
-        else
-          puts Rainbow('No relevant changes found.').yellow
-          return false
+        if @offenses.none?
+          warn Rainbow('No relevant changes found.').yellow
+          return true
         end
+
+        print_summary
+        puts
+        print_offenses
+
+        @offenses.values.all?(&:empty?)
       end
 
       private
