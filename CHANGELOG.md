@@ -1,4 +1,7 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 6.0.0 / 2021-02-25
 ### Changed
 * Linting: return a zero exit status when there are no lintable changes (#97)
 
