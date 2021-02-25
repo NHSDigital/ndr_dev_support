@@ -27,7 +27,7 @@ file safety:
   CHANGELOG.md:
     comments: 
     reviewed_by: joshpencheon
-    safe_revision: 9f3ebf2773adc7fdb15f268cfe7635f389da2b2e
+    safe_revision: 0edd51580039e7ebf99ce629d26c8d61656dfc5f
   CODE_OF_CONDUCT.md:
     comments: 
     reviewed_by: timgentry
@@ -214,8 +214,8 @@ file safety:
     safe_revision: 1d8a97dc5dd2e58bfd689d5e2c94e077a4ca0649
   lib/ndr_dev_support/rubocop/reporter.rb:
     comments: 
-    reviewed_by: josh.pencheon
-    safe_revision: 41cf1558f567928faaa1e670a36d941c03c78044
+    reviewed_by: joshpencheon
+    safe_revision: 0c1489e51848d8e7a0903128ea934064c0ab254e
   lib/ndr_dev_support/slack_message_publisher.rb:
     comments: 
     reviewed_by: josh.pencheon
@@ -227,7 +227,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments: 
     reviewed_by: joshpencheon
-    safe_revision: 9f3ebf2773adc7fdb15f268cfe7635f389da2b2e
+    safe_revision: 0edd51580039e7ebf99ce629d26c8d61656dfc5f
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
