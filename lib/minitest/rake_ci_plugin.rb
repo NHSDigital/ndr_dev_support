@@ -57,7 +57,7 @@ module Minitest
       save_current_commit_data(hash)
     end
 
-    def commit
+    redefine_method :commit do
       return @commit if @commit
 
       repo = Rugged::Repository.new('.')

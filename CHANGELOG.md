@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Fixed
+* Fix ruby warnings in CI plugin
 
 ## 6.0.0 / 2021-02-25
 ### Changed
