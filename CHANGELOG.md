@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Added
+* `deploy:setup` creates more of the "NDR model" shared directories
+
 ### Fixed
 * Fix ruby warnings in CI plugin
 

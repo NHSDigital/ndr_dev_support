@@ -69,9 +69,15 @@ Capistrano::Configuration.instance(:must_exist).load do
 
       fetch(:shared_paths, []).each do |path|
         full_path = File.join(shared_path, path)
+        parent_dir = File.dirname(full_path)
+
+        if /^n$/ =~ capture("test -e #{parent_dir} && echo 'y' || echo 'n'")
+          run "mkdir -p #{parent_dir}"
+          logger.info "Created shared '#{parent_dir}'"
+        end
 
         if /^n$/ =~ capture("test -e #{full_path} && echo 'y' || echo 'n'")
-          warn Rainbow("Warning: shared '#{path}' is not yet present!").red
+          logger.important "Warning: shared '#{path}' is not yet present!"
         end
       end
     end
