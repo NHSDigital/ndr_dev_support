@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Fixed
 * Fix ruby warnings in CI plugin
+* Remove inconsistent trailing whitespace in code_safety.yml
 
 ## 6.0.0 / 2021-02-25
 ### Changed
