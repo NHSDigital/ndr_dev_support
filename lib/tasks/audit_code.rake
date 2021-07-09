@@ -30,8 +30,12 @@ def update_safety_file(file_safety)
   File.open(SAFETY_FILE, 'w') do |file|
     # Consistent file diffs, as ruby preserves Hash insertion order since v1.9
     list = {}
-    list['file safety'] = Hash[file_safety.sort]
-    YAML.dump(list, file) # Save changes before checking latest revisions
+    list['file safety'] = file_safety.sort.to_h
+    # Remove inconsistent whitespace which old libyaml version introduces at the ends of lines
+    # https://github.com/yaml/libyaml/issues/46
+    yaml = YAML.dump(list).gsub(/^( *[a-z_]*:) $/, '\1')
+    yaml = YAML.dump(list) unless YAML.safe_load(yaml) == list
+    file << yaml # Save changes before checking latest revisions
   end
 end
 
