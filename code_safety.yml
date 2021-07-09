@@ -1,339 +1,339 @@
 ---
 file safety:
   ".github/CODEOWNERS":
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: ae4a81930ad3ab1b858474bc73b714aeed0f83a8
   ".github/workflows/lint.yml":
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 0ce43640c417e174054f903fd82043948ebe8ccb
   ".github/workflows/test.yml":
-    comments: 
+    comments:
     reviewed_by: joshpencheon
     safe_revision: 366ef1122fa4502c25cba9e508c565989545ef25
   ".gitignore":
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 38266fd047417ecb4d5e6de71746f40495fc9de9
   ".hound.yml":
-    comments: 
+    comments:
     reviewed_by: timgentry
     safe_revision: c03d4ff0dd037a2798563d464d0daeca1189debe
   ".rubocop.yml":
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 6211cff0ce44645ed3752723b5b0ee65f24c66aa
   CHANGELOG.md:
-    comments: 
-    reviewed_by: joshpencheon
-    safe_revision: 0edd51580039e7ebf99ce629d26c8d61656dfc5f
+    comments:
+    reviewed_by: brian.shand
+    safe_revision: 0d1c9d3e7192ad9e6c979d8d772ca49fc91f93cb
   CODE_OF_CONDUCT.md:
-    comments: 
+    comments:
     reviewed_by: timgentry
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   Gemfile:
-    comments: 
+    comments:
     reviewed_by: timgentry
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   LICENSE.txt:
-    comments: 
+    comments:
     reviewed_by: timgentry
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   README.md:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: a18f35895baebb1b0971043b3b3f666bb4eb9b5c
   Rakefile:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: a601dbd139132f50eb22b1c88d5eda14a465a7c2
   bin/console:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 3377bef3131bbe58acaa82083fcb27c9c6d1e2b0
   bin/setup:
-    comments: 
+    comments:
     reviewed_by: timgentry
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   config/rubocop/ndr.yml:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 05476acacadfa0ad7404f3c37cf3c17c4e0ba11b
   gemfiles/Gemfile.rails52:
-    comments: 
+    comments:
     reviewed_by: joshpencheon
     safe_revision: f25001ef74c44ab727eef5cb29cef9a54525d36f
   gemfiles/Gemfile.rails60:
-    comments: 
+    comments:
     reviewed_by: joshpencheon
     safe_revision: f25001ef74c44ab727eef5cb29cef9a54525d36f
   gemfiles/Gemfile.rails61:
-    comments: 
+    comments:
     reviewed_by: joshpencheon
     safe_revision: f25001ef74c44ab727eef5cb29cef9a54525d36f
   lib/minitest/rake_ci.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 26efe45f35f211e7cb7a04967c51c0b6d116321e
   lib/minitest/rake_ci_plugin.rb:
-    comments: 
-    reviewed_by: josh.pencheon
-    safe_revision: 958ef09c5cf50bb50348e6bff949e3e5989254f9
+    comments:
+    reviewed_by: brian.shand
+    safe_revision: 5cb6964bee8c7a7856193232f6b06653235a8309
   lib/ndr_dev_support.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 6211cff0ce44645ed3752723b5b0ee65f24c66aa
   lib/ndr_dev_support/capistrano/assets.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 74a4cd909afaf2ee8bcabdd252b2383b1474b6d4
   lib/ndr_dev_support/capistrano/ndr_model.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 57271c07e44808d8809e1fa11227a8c2e91a14bf
   lib/ndr_dev_support/capistrano/restart.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
   lib/ndr_dev_support/capistrano/revision_logger.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
   lib/ndr_dev_support/capistrano/ruby_version.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
   lib/ndr_dev_support/capistrano/standalone_gems.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: eec7079a777c84f61b05c236df60195d4ddcf488
   lib/ndr_dev_support/capistrano/svn_cache.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 2baa360b06290775a961a7573fe08edd18f8312e
   lib/ndr_dev_support/capistrano/sysadmin_scripts.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
   lib/ndr_dev_support/daemon/ci_server.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 3fdf010a91bd9927ef34e3df66b8a4bbbd20315a
   lib/ndr_dev_support/daemon/stoppable.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 07ba05e9dd59eeac187b5fe730ee653baa1a2732
   lib/ndr_dev_support/integration_testing.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 5b427cb12907bc87e5e0cb754dcaa524fdbfb1b9
   lib/ndr_dev_support/integration_testing/drivers/chrome.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
   lib/ndr_dev_support/integration_testing/drivers/chrome_headless.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: '0409b687d31202b2a4281ebfb7b0c330cc78d904'
   lib/ndr_dev_support/integration_testing/drivers/firefox.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
   lib/ndr_dev_support/integration_testing/drivers/poltergeist.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
   lib/ndr_dev_support/integration_testing/drivers/switchable.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: e9b74559d28e7520c0376d1bec4a2566aae14b05
   lib/ndr_dev_support/integration_testing/dsl.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
   lib/ndr_dev_support/integration_testing/flakey_tests.rb:
-    comments: 
+    comments:
     reviewed_by: joshpencheon
     safe_revision: 9fc4527cbc132218533cec8d696bd2aadd4a2291
   lib/ndr_dev_support/rake_ci/brakeman_helper.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 053c9834ca5d402a1f8dc8d09257dc7075a5ec06
   lib/ndr_dev_support/rake_ci/commit_cop.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: '01682912c2fc526b0bc29e2836de0aea31c65b12'
   lib/ndr_dev_support/rake_ci/commit_cop/concerns/deputisable.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
   lib/ndr_dev_support/rake_ci/commit_cop/migration_without_structure_dump.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
   lib/ndr_dev_support/rake_ci/commit_cop/missing_associated_test_file.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: '01682912c2fc526b0bc29e2836de0aea31c65b12'
   lib/ndr_dev_support/rake_ci/commit_cop/modified_migration.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
   lib/ndr_dev_support/rake_ci/commit_cop/renamed_migration.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
   lib/ndr_dev_support/rake_ci/concerns/commit_metadata_persistable.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: fd9fc5dd275a2285549984688d1d3744a628fd73
   lib/ndr_dev_support/rake_ci/redmine/ticket_resolver.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 788b8fc31952a6fb640101df96a370b21d269249
   lib/ndr_dev_support/rake_ci/simple_cov_helper.rb:
-    comments: 
+    comments:
     reviewed_by: timgentry
     safe_revision: 678403f777614189ab89aafa1cb1eafbcf48763c
   lib/ndr_dev_support/rubocop/executor.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 1d8a97dc5dd2e58bfd689d5e2c94e077a4ca0649
   lib/ndr_dev_support/rubocop/inject.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 1d8a97dc5dd2e58bfd689d5e2c94e077a4ca0649
   lib/ndr_dev_support/rubocop/range_augmenter.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 136936265a5b79f0eca1bc7e58c607a2492e57a5
   lib/ndr_dev_support/rubocop/range_finder.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 1d8a97dc5dd2e58bfd689d5e2c94e077a4ca0649
   lib/ndr_dev_support/rubocop/reporter.rb:
-    comments: 
+    comments:
     reviewed_by: joshpencheon
     safe_revision: 0c1489e51848d8e7a0903128ea934064c0ab254e
   lib/ndr_dev_support/slack_message_publisher.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: ad38e92c6e56b9d81fdab10681d8f2924eeadf5a
   lib/ndr_dev_support/tasks.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 2154aa7f32e731933ff6091b8f42b2b014028a6a
   lib/ndr_dev_support/version.rb:
-    comments: 
+    comments:
     reviewed_by: joshpencheon
     safe_revision: 0edd51580039e7ebf99ce629d26c8d61656dfc5f
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
-    reviewed_by: josh.pencheon
-    safe_revision: cc586e0bcb9b636a4aab19198dfc99171ef49f50
+    reviewed_by: brian.shand
+    safe_revision: 0d1c9d3e7192ad9e6c979d8d772ca49fc91f93cb
   lib/tasks/ci/brakeman.rake:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: fe7dfc7f1775e8b85ae6968e8f475b9e930addf7
   lib/tasks/ci/bundle_audit.rake:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: ddcf7de0bf1f5fb17cc28e2460009e162ff8917c
   lib/tasks/ci/commit_cop.rake:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
   lib/tasks/ci/dependencies.rake:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 2f22aa6cc2f86b84e0bf2247e73bed205930db5a
   lib/tasks/ci/housekeep.rake:
-    comments: 
+    comments:
     reviewed_by: timgentry
     safe_revision: 3dfcdb6c76fbccc44a331986673d63282f87f2fa
   lib/tasks/ci/linguist.rake:
-    comments: 
+    comments:
     reviewed_by: timgentry
     safe_revision: 00cd6c2f71612a467ee88ad53c21e08f073871d5
   lib/tasks/ci/minitest.rake:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 12aad1254186ee9ce0fde263bf8dccf46cdfebe2
   lib/tasks/ci/notes.rake:
-    comments: 
+    comments:
     reviewed_by: timgentry
     safe_revision: f828113894a16581d0aa181504c799e661f8401d
   lib/tasks/ci/prometheus.rake:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 2d1b9d19acafebe6ca5f995bf15243abe2847eec
   lib/tasks/ci/redmine.rake:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 12aad1254186ee9ce0fde263bf8dccf46cdfebe2
   lib/tasks/ci/rugged.rake:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 15543b915771dfe2ed81b8b326bdd3ab2cb5b562
   lib/tasks/ci/server.rake:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: fe8682a3300a322c5f6b9a17dce471f11fa5e307
   lib/tasks/ci/simplecov.rake:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 6240a84dc859af0623328f8667b93299c8eae257
   lib/tasks/ci/slack.rake:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 6cb22447594ebf450fc60deb90fd223c8067ff18
   lib/tasks/ci/stats.rake:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 137be2205f283d444286c47502387487bb1b7015
   lib/tasks/rubocop.rake:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 9f33cc3f6fed0c24cb215befa1beaa4bc03e81ef
   ndr_dev_support.gemspec:
-    comments: 
-    reviewed_by: joshpencheon
-    safe_revision: 9fc4527cbc132218533cec8d696bd2aadd4a2291
+    comments:
+    reviewed_by: brian.shand
+    safe_revision: 5cb6964bee8c7a7856193232f6b06653235a8309
   test/daemon/ci_server_test.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: cdd176f2e90284e11899c5c6eea1032f9b785b74
   test/integration_testing/flakey_tests_test.rb:
-    comments: 
+    comments:
     reviewed_by: joshpencheon
     safe_revision: 9fc4527cbc132218533cec8d696bd2aadd4a2291
   test/ndr_dev_support_test.rb:
-    comments: 
+    comments:
     reviewed_by: timgentry
     safe_revision: 26a8907a7a8a6b0d836aa12ca0335fa40be12240
   test/rake_ci/commit_cop/migration_without_structure_dump_test.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
   test/rake_ci/commit_cop/missing_associated_test_file_test.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: '01682912c2fc526b0bc29e2836de0aea31c65b12'
   test/rake_ci/commit_cop/modified_migration_test.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
   test/rake_ci/commit_cop/renamed_migration_test.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: a3f5b7d3709f7e340f2f7e81dab026a63b21e3ff
   test/rake_ci/redmine/ticket_resolver_test.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: 12aad1254186ee9ce0fde263bf8dccf46cdfebe2
   test/test_helper.rb:
-    comments: 
+    comments:
     reviewed_by: josh.pencheon
     safe_revision: cdd176f2e90284e11899c5c6eea1032f9b785b74
