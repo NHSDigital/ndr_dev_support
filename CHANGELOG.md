@@ -1,5 +1,5 @@
 ## [Unreleased]
-*no unreleased changes*
+* Support Rails 7, Ruby 3.1
 
 ## 6.0.1 / 2021-07-09
 ### Fixed
