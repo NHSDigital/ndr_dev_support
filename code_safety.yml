@@ -10,8 +10,8 @@ file safety:
     safe_revision: 0ce43640c417e174054f903fd82043948ebe8ccb
   ".github/workflows/test.yml":
     comments:
-    reviewed_by: joshpencheon
-    safe_revision: 366ef1122fa4502c25cba9e508c565989545ef25
+    reviewed_by: brian.shand
+    safe_revision: 65d59fe9bba9dc7d404f92b54a115b14e6697af9
   ".gitignore":
     comments:
     reviewed_by: josh.pencheon
@@ -27,7 +27,7 @@ file safety:
   CHANGELOG.md:
     comments:
     reviewed_by: brian.shand
-    safe_revision: d4d4ea4d2dcdf68819e75cbdac1009b145740b22
+    safe_revision: 65d59fe9bba9dc7d404f92b54a115b14e6697af9
   CODE_OF_CONDUCT.md:
     comments:
     reviewed_by: timgentry
@@ -72,6 +72,10 @@ file safety:
     comments:
     reviewed_by: joshpencheon
     safe_revision: f25001ef74c44ab727eef5cb29cef9a54525d36f
+  gemfiles/Gemfile.rails70:
+    comments:
+    reviewed_by: brian.shand
+    safe_revision: 65d59fe9bba9dc7d404f92b54a115b14e6697af9
   lib/minitest/rake_ci.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -300,7 +304,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 5cb6964bee8c7a7856193232f6b06653235a8309
+    safe_revision: 65d59fe9bba9dc7d404f92b54a115b14e6697af9
   test/daemon/ci_server_test.rb:
     comments:
     reviewed_by: josh.pencheon
