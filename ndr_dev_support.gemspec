@@ -42,7 +42,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'webdrivers', '>= 3.9'
 
   # CI server dependencies:
-  spec.add_dependency 'activesupport', '< 7'
+  spec.add_dependency 'activesupport', '< 7.1'
   spec.add_dependency 'brakeman', '>= 4.7.1'
   spec.add_dependency 'bundler-audit'
   spec.add_dependency 'github-linguist'
