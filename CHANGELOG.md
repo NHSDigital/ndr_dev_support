@@ -1,5 +1,6 @@
 ## [Unreleased]
-* no unreleased changes
+### Added
+* Add `bundle:update` rake task to update bundled gem files
 
 ## 6.0.2 / 2022-01-14
 ### Fixed
