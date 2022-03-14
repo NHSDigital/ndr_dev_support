@@ -27,7 +27,7 @@ namespace :bundle do
 
     gem_list = Bundler.with_unbundled_env { `bundle exec gem list ^#{gem}$` }
     # Needs to match e.g. "nokogiri (1.12.5 x86_64-darwin)"
-    old_gem_version = gem_list.match(/ \(([0-9.]+)( [a-z0-9_-]*)?\)$/).to_a&.second
+    old_gem_version = gem_list.match(/ \(([0-9.]+)( [a-z0-9_-]*)?\)$/).to_a[1]
     unless old_gem_version
       warn <<~MSG.chomp
         Cannot determine gem version for gem=#{gem}. Aborting. Output from bundle exec gem list:
@@ -114,7 +114,7 @@ namespace :bundle do
     end
 
     gem_list = Bundler.with_unbundled_env { `bundle exec gem list ^#{gem}$` }
-    new_gem_version2 = gem_list.match(/ \(([0-9.]+)( [a-z0-9_-]*)?\)$/).to_a&.second
+    new_gem_version2 = gem_list.match(/ \(([0-9.]+)( [a-z0-9_-]*)?\)$/).to_a[1]
 
     if new_gem_version && new_gem_version != new_gem_version2
       puts <<~MSG
@@ -132,7 +132,8 @@ namespace :bundle do
     puts "Looking for changed files using git status\n\n"
     files_to_git_rm = `git status vendor/cache/|grep 'deleted: ' | \
                        grep -o ': .*' | sed -e 's/^: *//'`.split("\n")
-    files_to_git_add = `git status Gemfile Gemfile.lock code_safety.yml|grep 'modified: ' | \
+    files_to_git_add = `git status Gemfile Gemfile.lock code_safety.yml config/code_safety.yml| \
+                        grep 'modified: ' | \
                         grep -o ': .*' | sed -e 's/^: *//'`.split("\n")
     files_to_git_add += `git status vendor/cache|expand|grep '^\s*vendor/cache' | \
                          sed -e 's/^ *//'`.split("\n")
