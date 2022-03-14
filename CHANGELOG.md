@@ -1,4 +1,7 @@
 ## [Unreleased]
+* no unreleased changes
+
+## 6.0.4 / 2022-03-14
 ### Fixed
 * bundle:update should commit code_safety.yml changes.
 
