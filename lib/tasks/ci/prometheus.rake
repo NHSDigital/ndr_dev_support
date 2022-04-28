@@ -38,15 +38,17 @@ namespace :ci do
             if prometheus.exist?(name)
               prometheus.get(name)
             else
-              prometheus.gauge(name, docstring, project: project)
+              labels = (label_set.keys + [:project]).uniq
+              prometheus.gauge(name, docstring: docstring, labels: labels,
+                                     preset_labels: { project: project })
             end
-          gauge.set(label_set, value)
+          gauge.set(value, labels: label_set)
         else
           raise "Unknown metric type (#{metric.inspect})"
         end
       end
 
-      client = Prometheus::Client::Push.new("rake-ci-#{project}", nil, gateway)
+      client = Prometheus::Client::Push.new(job: "rake-ci-#{project}", gateway: gateway)
 
       begin
         client.add(prometheus)

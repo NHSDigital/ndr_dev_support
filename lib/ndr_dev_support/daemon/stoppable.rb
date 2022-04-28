@@ -105,7 +105,12 @@ module NdrDevSupport
 
         number_of_mini_sleeps.times do
           return if should_stop?
+
           sleep(LITTLE_SLEEP)
+        rescue Interrupt
+          # Ctrl-C should stop cleanly if used while the process is snoozing
+          @should_stop = true
+          return
         end
       end
     end
