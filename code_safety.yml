@@ -11,7 +11,7 @@ file safety:
   ".github/workflows/test.yml":
     comments:
     reviewed_by: brian.shand
-    safe_revision: 65d59fe9bba9dc7d404f92b54a115b14e6697af9
+    safe_revision: c911246250d5387264d5a926c2572f98db58be6e
   ".gitignore":
     comments:
     reviewed_by: josh.pencheon
@@ -27,7 +27,7 @@ file safety:
   CHANGELOG.md:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 25fcab1b2df9476bfa294085a46073b218785c19
+    safe_revision: 5d47f0c8574b6fbc69f9144ce508f169b95cd90c
   CODE_OF_CONDUCT.md:
     comments:
     reviewed_by: timgentry
@@ -126,8 +126,8 @@ file safety:
     safe_revision: 3fdf010a91bd9927ef34e3df66b8a4bbbd20315a
   lib/ndr_dev_support/daemon/stoppable.rb:
     comments:
-    reviewed_by: josh.pencheon
-    safe_revision: 07ba05e9dd59eeac187b5fe730ee653baa1a2732
+    reviewed_by: brian.shand
+    safe_revision: ff47991823556a6936a7457b4a1eb9373851ee57
   lib/ndr_dev_support/integration_testing.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -231,7 +231,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 25fcab1b2df9476bfa294085a46073b218785c19
+    safe_revision: 5d47f0c8574b6fbc69f9144ce508f169b95cd90c
   lib/tasks/audit_bundle.rake:
     comments:
     reviewed_by: brian.shand
@@ -275,8 +275,8 @@ file safety:
     safe_revision: f828113894a16581d0aa181504c799e661f8401d
   lib/tasks/ci/prometheus.rake:
     comments:
-    reviewed_by: josh.pencheon
-    safe_revision: 2d1b9d19acafebe6ca5f995bf15243abe2847eec
+    reviewed_by: brian.shand
+    safe_revision: b30f609f1978015522eb8f60b2a81730d4b7de62
   lib/tasks/ci/redmine.rake:
     comments:
     reviewed_by: josh.pencheon
@@ -308,7 +308,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 65d59fe9bba9dc7d404f92b54a115b14e6697af9
+    safe_revision: c911246250d5387264d5a926c2572f98db58be6e
   test/daemon/ci_server_test.rb:
     comments:
     reviewed_by: josh.pencheon
