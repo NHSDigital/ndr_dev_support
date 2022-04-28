@@ -2,6 +2,9 @@
 ### Fixed
 * CI: support Ruby 3.0
 
+### Changed
+* Allow Ctrl-C to cleanly interrupt an idle daemon
+
 ## 6.0.5 / unreleased
 
 ## 6.0.4 / 2022-03-14
