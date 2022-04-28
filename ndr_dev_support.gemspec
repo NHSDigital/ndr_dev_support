@@ -12,12 +12,13 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/PublicHealthEngland/ndr_dev_support'
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(\.github|test|spec|features)/}) }
+  spec.files         = `git ls-files -z`.split("\x0").
+                       reject { |f| f.match(%r{^(\.github|test|spec|features)/}) }
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '>= 2.6'
+  spec.required_ruby_version = '>= 2.7'
 
   spec.add_dependency 'pry'
 
@@ -28,8 +29,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'parser'
   spec.add_dependency 'rainbow'
   spec.add_dependency 'rubocop', '~> 1.7'
-  spec.add_dependency 'rubocop-rake', '~> 0.5'
   spec.add_dependency 'rubocop-rails', '~> 2.9'
+  spec.add_dependency 'rubocop-rake', '~> 0.5'
   spec.add_dependency 'unicode-display_width', '>= 1.3.3'
 
   # Integration test dependencies:
