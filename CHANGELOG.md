@@ -4,6 +4,7 @@
 
 ### Changed
 * Allow Ctrl-C to cleanly interrupt an idle daemon
+* Drop support for Ruby 2.6
 
 ## 6.0.5 / unreleased
 
