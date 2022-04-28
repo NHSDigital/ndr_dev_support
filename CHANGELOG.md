@@ -1,4 +1,7 @@
 ## [Unreleased]
+* No unreleased changes
+
+## 6.1.0 / 2022-04-28
 ### Fixed
 * CI: support Ruby 3.0
 
