@@ -32,7 +32,24 @@ namespace :ci do
 
       brakeman = NdrDevSupport::RakeCI::BrakemanHelper.new
       brakeman.commit = @commit
-      brakeman.run(strict: true)
+      begin
+        brakeman.run(strict: true)
+      rescue StandardError => e
+        warn <<~MESSAGE
+          Error: Brakeman failed with #{e.class}: #{e}
+          There is probably a ruby syntax error in one of the files. To find it, run:
+          $ brakeman -I --debug
+          For the full backtrace, run
+          $ rake ci:brakeman --trace
+        MESSAGE
+        @attachments << {
+          color: 'danger',
+          title: 'Brakeman Error',
+          text: 'Brakeman run failed. Run brakeman -I --debug',
+          footer: 'bundle exec rake ci:brakeman:strict'
+        }
+        next
+      end
 
       @metrics.concat(brakeman.metrics)
       @attachments.concat(brakeman.attachments)
