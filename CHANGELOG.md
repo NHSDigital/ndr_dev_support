@@ -1,5 +1,6 @@
 ## [Unreleased]
-* No unreleased changes
+### Fixed
+* CI: fix crashes when brakeman parsing fails
 
 ## 6.1.0 / 2022-04-28
 ### Fixed
