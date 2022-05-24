@@ -108,13 +108,21 @@ namespace :bundle do
       exit 1
     end
 
+    gem_list = Bundler.with_unbundled_env { `bundle exec gem list ^#{gem}$` }
+    new_gem_version2 = gem_list.match(/ \(([0-9.]+)( [a-z0-9_-]*)?\)$/).to_a[1]
+
+    # Retrieve binary gems for platforms listed in Gemfile.lock
+    platforms = `bundle platform`.split("\n").grep(/^[*] x86_64-/).collect { |s| s[2..] }
+    Dir.chdir('vendor/cache') do
+      platforms.each do |platform|
+        system("gem fetch #{gem} --version=#{new_gem_version2} --platform=#{platform}")
+      end
+    end
+
     if File.exist?(SAFETY_FILE)
       # Remove references to unused files in code_safety.yml
       system('rake audit:tidy_code_safety_file')
     end
-
-    gem_list = Bundler.with_unbundled_env { `bundle exec gem list ^#{gem}$` }
-    new_gem_version2 = gem_list.match(/ \(([0-9.]+)( [a-z0-9_-]*)?\)$/).to_a[1]
 
     if new_gem_version && new_gem_version != new_gem_version2
       puts <<~MSG
