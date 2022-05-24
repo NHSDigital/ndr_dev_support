@@ -1,4 +1,8 @@
 ## [Unreleased]
+* No unreleased changes
+
+## 6.1.2 / 2022-05-24
+### Fixed
 * bundle:update should fetch binary gems for all bundled platforms
 
 ## 6.1.1 / 2022-04-29
