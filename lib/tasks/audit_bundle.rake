@@ -11,6 +11,10 @@ namespace :bundle do
     Updates the bundled gem (e.g. rails) version to e.g. 6.0.4.7
     and provides instructions for committing changes.
     It will attempt to modify a hardcoded version in the Gemfile if necessary.
+
+    If a secondary Gemfile is present in the same directory, e.g. Gemfile.monterey,
+    and it defines constants such as BUNDLER_OVERRIDE_PUMA=true, then this task
+    will attempt to update the secondary lock file, e.g. Gemfile.monterey.lock too.
   USAGE
   task(:update) do
     unless %w[git git-svn].include?(repository_type)
@@ -111,6 +115,28 @@ namespace :bundle do
     gem_list = Bundler.with_unbundled_env { `bundle exec gem list ^#{gem}$` }
     new_gem_version2 = gem_list.match(/ \(([0-9.]+)( [a-z0-9_-]*)?\)$/).to_a[1]
 
+    # Update secondary Gemfile.lock to keep vendored gems in sync
+    secondary_gemfiles = `git ls-tree --name-only HEAD Gemfile.*`.split("\n").grep_v(/[.]lock$/)
+    secondary_gemfiles.each do |secondary_gemfile|
+      gem_re = /^BUNDLER_OVERRIDE_([^ =]*) *=/
+      secondary_gems = File.readlines(secondary_gemfile).grep(gem_re).
+                       collect { |s| gem_re.match(s)[1].downcase }
+      if secondary_gems.empty?
+        puts "Warning: cannot update #{secondary_gemfile}.lock - no BUNDLER_OVERRIDE_... entries"
+        next
+      end
+      puts "Updating #{secondary_gemfile}.lock"
+      FileUtils.cp('Gemfile.lock', "#{secondary_gemfile}.lock")
+      Bundler.with_unbundled_env do
+        system("BUNDLE_GEMFILE=#{secondary_gemfile} bundle update --quiet \
+                --conservative --minor #{secondary_gems.join(' ')}")
+      end
+      system('git checkout -q vendor/cache/')
+      system('git clean -q -f vendor/cache')
+      Bundler.with_unbundled_env { system('bundle install --local --quiet 2> /dev/null') }
+      puts "Finished updating #{secondary_gemfile}.lock"
+    end
+
     # Retrieve binary gems for platforms listed in Gemfile.lock
     platforms = `bundle platform`.split("\n").grep(/^[*] x86_64-/).collect { |s| s[2..] }
     Dir.chdir('vendor/cache') do
@@ -140,7 +166,9 @@ namespace :bundle do
     puts "Looking for changed files using git status\n\n"
     files_to_git_rm = `git status vendor/cache/|grep 'deleted: ' | \
                        grep -o ': .*' | sed -e 's/^: *//'`.split("\n")
-    files_to_git_add = `git status Gemfile Gemfile.lock code_safety.yml config/code_safety.yml| \
+    secondary_lockfiles = secondary_gemfiles.collect { |s| "#{s}.lock" }
+    files_to_git_add = `git status Gemfile Gemfile.lock #{secondary_gemfiles.join(' ')} \
+                          #{secondary_lockfiles.join(' ')} code_safety.yml config/code_safety.yml| \
                         grep 'modified: ' | \
                         grep -o ': .*' | sed -e 's/^: *//'`.split("\n")
     files_to_git_add += `git status vendor/cache|expand|grep '^\s*vendor/cache' | \
