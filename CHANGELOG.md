@@ -1,5 +1,5 @@
 ## [Unreleased]
-* No unreleased changes
+* bundle:update should update secondary gem lock files
 
 ## 6.1.2 / 2022-05-24
 ### Fixed
