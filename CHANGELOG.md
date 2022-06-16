@@ -1,5 +1,6 @@
 ## [Unreleased]
-* No unreleased changes
+### Added
+* Add warning when upgrading webpacker
 
 ## 6.1.3 / 2022-05-25
 ### Fixed
