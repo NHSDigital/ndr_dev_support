@@ -143,6 +143,11 @@ namespace :bundle do
       platforms.each do |platform|
         system("gem fetch #{gem} --version=#{new_gem_version2} --platform=#{platform}")
       end
+    end if Dir.exist?('vendor/cache')
+
+    if gem == 'webpacker'
+      puts 'TODO: update package.json and yarn.lock with bin/rails webpacker:install'
+      puts '      and git add / git remove files in vendor/npm-packages-offline-cache'
     end
 
     if File.exist?(SAFETY_FILE)
