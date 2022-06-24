@@ -1,5 +1,6 @@
 ## [Unreleased]
-* No unreleased changes
+### Fixed
+* audit:code should allow special characters in filenames
 
 ## 6.1.4 / 2022-06-16
 ### Added

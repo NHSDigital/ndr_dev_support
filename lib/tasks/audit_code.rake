@@ -1,6 +1,7 @@
 require 'csv'
 require 'pathname'
 require 'yaml'
+require 'shellwords'
 
 SAFETY_FILE =
   if File.exist?('code_safety.yml')
@@ -338,7 +339,8 @@ def get_last_changed_revision(repo, fname)
     %x[git log -n 1 -- "#{fname}"].split("\n").first[7..-1]
   when 'git-svn', 'svn'
     begin
-      svn_info = %x[svn info -r head "#{repo}/#{fname}"]
+      dest = "#{repo}/#{fname}@"
+      svn_info = %x[svn info -r head #{Shellwords.escape(dest)}]
     rescue
       puts 'we have an error in the svn info line'
     end
@@ -376,9 +378,10 @@ def capture_file_diffs(repo, fname, safe_revision, repolatest)
   cmd =
     case repository_type
     when 'git'
-      cmd = ['git', '--no-pager', 'diff', '--color', '-b', "#{safe_revision}..#{repolatest}", fname]
+      ['git', '--no-pager', 'diff', '--color', '-b', "#{safe_revision}..#{repolatest}", fname]
     when 'git-svn', 'svn'
-      cmd = ['svn', 'diff', '-r', "#{safe_revision.to_i}:#{repolatest.to_i}", '-x', '-b', "#{repo}/#{fname}"]
+      ['svn', 'diff', '-r', "#{safe_revision.to_i}:#{repolatest.to_i}", '-x', '-b',
+       "#{repo}/#{fname}@"]
     end
 
   stdout_and_err_str, _status = Open3.capture2e(*cmd)
