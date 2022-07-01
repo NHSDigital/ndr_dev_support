@@ -30,6 +30,8 @@ require_relative 'sysadmin_scripts'
 #   and SVN branches. To use the latter, be sure to set the `:repository_branches` variable
 #   to point at the root of the branches. Otherwise, just set `:repository` directly as normal.
 #
+#   Set environment variable DEPLOYER to deploy as a particular user instead of prompting.
+#
 Capistrano::Configuration.instance(:must_exist).load do
   # Paths that are symlinked for each release to the "shared" directory:
   set :shared_paths, %w[config/database.yml config/secrets.yml log tmp]
@@ -94,9 +96,14 @@ Capistrano::Configuration.instance(:must_exist).load do
 
       # Gather SSH credentials: (password is asked for by Net::SSH, if needed)
       set :use_sudo, false
-      set :user, Capistrano::CLI.ui.ask('Deploy as: ')
+      if ENV['DEPLOYER']
+        set :user, ENV['DEPLOYER']
+        Capistrano::CLI.ui.say "Deploy as: #{fetch(:user)}"
+      else
+        set :user, Capistrano::CLI.ui.ask('Deploy as: ')
+      end
 
-      # If no alternate user is specified, deploy to the crediental-holding user.
+      # If no alternate user is specified, deploy to the credential-holding user.
       set :application_user, fetch(:user) unless fetch(:application_user)
 
       # The home folder of the application user:
