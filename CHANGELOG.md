@@ -1,5 +1,6 @@
 ## [Unreleased]
-* No unreleased changes
+### Added
+* capistrano: use DEPLOYER environment variable for non-interactive deployments
 
 ## 6.1.5 / 2022-06-24
 ### Fixed
