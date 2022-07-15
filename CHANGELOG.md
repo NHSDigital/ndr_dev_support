@@ -1,5 +1,6 @@
 ## [Unreleased]
-* No unreleased changes
+### Added
+* Add `cd:credentials` rake task for continuous deployment of credentials
 
 ## 6.1.6 / 2022-07-01
 ### Added
