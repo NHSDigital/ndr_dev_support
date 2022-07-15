@@ -1,5 +1,6 @@
 load 'tasks/audit_code.rake'
 load 'tasks/audit_bundle.rake'
+load 'tasks/cd/credentials.rake'
 load 'tasks/ci/brakeman.rake'
 load 'tasks/ci/bundle_audit.rake'
 load 'tasks/ci/commit_cop.rake'
