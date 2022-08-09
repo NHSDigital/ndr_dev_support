@@ -1,6 +1,10 @@
 ## [Unreleased]
 * No unreleased changes
 
+## 6.1.8 / 2022-08-09
+### Fixed
+* Fixed ActiveSupport 7 deprecation messages
+
 ## 6.1.7 / 2022-07-15
 ### Added
 * Add `cd:credentials` rake task for continuous deployment of credentials
