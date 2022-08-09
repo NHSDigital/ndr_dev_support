@@ -68,7 +68,8 @@ module NdrDevSupport
       end
 
       def log(message, level = :info)
-        tags    = "[#{Time.current.to_s(:db)}] [#{level.upcase}] [daemon: #{name} (#{Process.pid})]"
+        tags    = "[#{Time.current.to_formatted_s(:db)}] [#{level.upcase}] " \
+                  "[daemon: #{name} (#{Process.pid})]"
         message = "#{tags} #{message}"
 
         logger.send(level, message)
