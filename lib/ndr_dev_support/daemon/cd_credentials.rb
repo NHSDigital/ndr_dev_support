@@ -109,11 +109,14 @@ module NdrDevSupport
       end
 
       def publish_results
+        attachments0 = attachments
+        return if attachments0.empty?
+
         slack_publisher = NdrDevSupport::SlackMessagePublisher.new(ENV['SLACK_WEBHOOK_URL'],
                                                                    username: 'Rake CI',
                                                                    icon_emoji: ':robot_face:',
                                                                    channel: ENV['SLACK_CHANNEL'])
-        slack_publisher.post(attachments: attachments)
+        slack_publisher.post(attachments: attachments0)
       end
 
       # Status / warning messages for slack notifications

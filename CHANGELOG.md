@@ -1,5 +1,6 @@
 ## [Unreleased]
-* No unreleased changes
+### Fixed
+* CD: don't post empty messages to Slack
 
 ## 6.1.8 / 2022-08-09
 ### Fixed
