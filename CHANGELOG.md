@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Fixed
 * CD: don't post empty messages to Slack
+* Adjust dependencies to continue to support Poltergeist
 
 ## 6.1.8 / 2022-08-09
 ### Fixed
