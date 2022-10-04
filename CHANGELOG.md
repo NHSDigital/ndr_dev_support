@@ -1,4 +1,8 @@
 ## [Unreleased]
+## [Unreleased]
+* No unreleased changes
+
+## 6.1.9 / 2022-10-04
 ### Fixed
 * CD: don't post empty messages to Slack
 * Adjust dependencies to continue to support Poltergeist
