@@ -1,4 +1,7 @@
 ## [Unreleased]
+* No unreleased changes
+
+## 7.0.0 / 2022-10-05
 ## Changed
 * Change default browser for integration tests to headless Chrome
 * Drop support for Poltergeist and PhantomJS
