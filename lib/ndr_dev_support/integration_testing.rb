@@ -29,7 +29,6 @@ Webdrivers.cache_time = 24.hours
 require 'ndr_dev_support/integration_testing/drivers/chrome'
 require 'ndr_dev_support/integration_testing/drivers/chrome_headless'
 require 'ndr_dev_support/integration_testing/drivers/firefox'
-require 'ndr_dev_support/integration_testing/drivers/poltergeist'
 require 'ndr_dev_support/integration_testing/drivers/switchable'
 
 Capybara.default_driver    = :switchable
