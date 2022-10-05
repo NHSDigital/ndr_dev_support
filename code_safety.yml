@@ -2,8 +2,8 @@
 file safety:
   ".github/CODEOWNERS":
     comments:
-    reviewed_by: josh.pencheon
-    safe_revision: ae4a81930ad3ab1b858474bc73b714aeed0f83a8
+    reviewed_by: brian.shand
+    safe_revision: '058996443438979550013c0c983c63b68d3fc58b'
   ".github/workflows/lint.yml":
     comments:
     reviewed_by: josh.pencheon
@@ -11,7 +11,7 @@ file safety:
   ".github/workflows/test.yml":
     comments:
     reviewed_by: brian.shand
-    safe_revision: c911246250d5387264d5a926c2572f98db58be6e
+    safe_revision: 7ce59c6d85cf81eb4791deb94e066dc91704713c
   ".gitignore":
     comments:
     reviewed_by: josh.pencheon
@@ -27,7 +27,7 @@ file safety:
   CHANGELOG.md:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 5d47f0c8574b6fbc69f9144ce508f169b95cd90c
+    safe_revision: dbfd8e8448033324dbde951950e0c73925dbeb6c
   CODE_OF_CONDUCT.md:
     comments:
     reviewed_by: timgentry
@@ -38,12 +38,12 @@ file safety:
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   LICENSE.txt:
     comments:
-    reviewed_by: timgentry
-    safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
+    reviewed_by: brian.shand
+    safe_revision: f50cf0b5a10fd0aa6499e101fc70a142bc6e9171
   README.md:
     comments:
-    reviewed_by: josh.pencheon
-    safe_revision: a18f35895baebb1b0971043b3b3f666bb4eb9b5c
+    reviewed_by: brian.shand
+    safe_revision: f50cf0b5a10fd0aa6499e101fc70a142bc6e9171
   Rakefile:
     comments:
     reviewed_by: josh.pencheon
@@ -60,10 +60,6 @@ file safety:
     comments:
     reviewed_by: josh.pencheon
     safe_revision: 05476acacadfa0ad7404f3c37cf3c17c4e0ba11b
-  gemfiles/Gemfile.rails52:
-    comments:
-    reviewed_by: joshpencheon
-    safe_revision: f25001ef74c44ab727eef5cb29cef9a54525d36f
   gemfiles/Gemfile.rails60:
     comments:
     reviewed_by: joshpencheon
@@ -94,8 +90,8 @@ file safety:
     safe_revision: 74a4cd909afaf2ee8bcabdd252b2383b1474b6d4
   lib/ndr_dev_support/capistrano/ndr_model.rb:
     comments:
-    reviewed_by: josh.pencheon
-    safe_revision: 57271c07e44808d8809e1fa11227a8c2e91a14bf
+    reviewed_by: brian.shand
+    safe_revision: 7daa8f47557444038fdf25beb2e56435d90e3339
   lib/ndr_dev_support/capistrano/restart.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -120,6 +116,10 @@ file safety:
     comments:
     reviewed_by: josh.pencheon
     safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
+  lib/ndr_dev_support/daemon/cd_credentials.rb:
+    comments:
+    reviewed_by: brian.shand
+    safe_revision: c0909dd931655db714019a57005747259dc6abc2
   lib/ndr_dev_support/daemon/ci_server.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -127,11 +127,11 @@ file safety:
   lib/ndr_dev_support/daemon/stoppable.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: ff47991823556a6936a7457b4a1eb9373851ee57
+    safe_revision: e3d98ef2b728519d26efd8a5ab73cdb97f2a25f4
   lib/ndr_dev_support/integration_testing.rb:
     comments:
-    reviewed_by: josh.pencheon
-    safe_revision: 5b427cb12907bc87e5e0cb754dcaa524fdbfb1b9
+    reviewed_by: brian.shand
+    safe_revision: 55bf622a37081fc3afd8db9daba1b2f9840c7807
   lib/ndr_dev_support/integration_testing/drivers/chrome.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -146,8 +146,8 @@ file safety:
     safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
   lib/ndr_dev_support/integration_testing/drivers/switchable.rb:
     comments:
-    reviewed_by: josh.pencheon
-    safe_revision: e9b74559d28e7520c0376d1bec4a2566aae14b05
+    reviewed_by: brian.shand
+    safe_revision: 55bf622a37081fc3afd8db9daba1b2f9840c7807
   lib/ndr_dev_support/integration_testing/dsl.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -218,29 +218,33 @@ file safety:
     safe_revision: 0c1489e51848d8e7a0903128ea934064c0ab254e
   lib/ndr_dev_support/slack_message_publisher.rb:
     comments:
-    reviewed_by: josh.pencheon
-    safe_revision: ad38e92c6e56b9d81fdab10681d8f2924eeadf5a
+    reviewed_by: brian.shand
+    safe_revision: e3d98ef2b728519d26efd8a5ab73cdb97f2a25f4
   lib/ndr_dev_support/tasks.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 93f9ed210c6a19eee4884ea8a906067c65ee67f6
+    safe_revision: 189b6e38a0392a3ec0429ab33b456ac88a018a2b
   lib/ndr_dev_support/version.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 5d47f0c8574b6fbc69f9144ce508f169b95cd90c
+    safe_revision: dbfd8e8448033324dbde951950e0c73925dbeb6c
   lib/tasks/audit_bundle.rake:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 9682c3eb39a98d5a5256732af647a8bd7750826b
+    safe_revision: 664b4c343e9c21723b284a7bbd2b02e2c55806e6
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
     reviewed_by: brian.shand
-    safe_revision: 0d1c9d3e7192ad9e6c979d8d772ca49fc91f93cb
+    safe_revision: 1706666ce209cf65d93494a441ecec7212e82954
+  lib/tasks/cd/credentials.rake:
+    comments:
+    reviewed_by: brian.shand
+    safe_revision: 189b6e38a0392a3ec0429ab33b456ac88a018a2b
   lib/tasks/ci/brakeman.rake:
     comments:
-    reviewed_by: josh.pencheon
-    safe_revision: fe7dfc7f1775e8b85ae6968e8f475b9e930addf7
+    reviewed_by: brian.shand
+    safe_revision: 4bc70cfa2fced009b205a29154a1f5200b2105bf
   lib/tasks/ci/bundle_audit.rake:
     comments:
     reviewed_by: josh.pencheon
@@ -304,7 +308,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments:
     reviewed_by: brian.shand
-    safe_revision: c911246250d5387264d5a926c2572f98db58be6e
+    safe_revision: 7ce59c6d85cf81eb4791deb94e066dc91704713c
   test/daemon/ci_server_test.rb:
     comments:
     reviewed_by: josh.pencheon
