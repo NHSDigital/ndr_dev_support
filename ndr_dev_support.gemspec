@@ -42,7 +42,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'webdrivers', '>= 3.9'
 
   # CI server dependencies:
-  spec.add_dependency 'activesupport', '< 7.1'
+  spec.add_dependency 'activesupport', '>= 6.0', '< 7.1'
   spec.add_dependency 'brakeman', '>= 4.7.1'
   spec.add_dependency 'bundler-audit'
   spec.add_dependency 'github-linguist'
@@ -53,6 +53,7 @@ Gem::Specification.new do |spec|
 
   # Deployment dependencies:
   spec.add_dependency 'capistrano', '~> 2.15'
+  spec.add_dependency 'net-scp', '>= 2.0.0'
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'mocha'
