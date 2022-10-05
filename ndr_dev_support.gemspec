@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = []
   spec.summary       = 'NDR Developer Support library'
   spec.description   = 'Provides support to developers of NDR projects'
-  spec.homepage      = 'https://github.com/PublicHealthEngland/ndr_dev_support'
+  spec.homepage      = 'https://github.com/NHSDigital/ndr_dev_support'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").
