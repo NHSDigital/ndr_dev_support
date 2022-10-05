@@ -3,6 +3,7 @@
 * Change default browser for integration tests to headless Chrome
 * Drop support for Poltergeist and PhantomJS
 * Replace Public Health England naming with NHS Digital
+* Drop support for Rails 5.2
 
 ## 6.1.9 / 2022-10-04
 ### Fixed
