@@ -144,10 +144,6 @@ file safety:
     comments:
     reviewed_by: josh.pencheon
     safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
-  lib/ndr_dev_support/integration_testing/drivers/poltergeist.rb:
-    comments:
-    reviewed_by: josh.pencheon
-    safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
   lib/ndr_dev_support/integration_testing/drivers/switchable.rb:
     comments:
     reviewed_by: josh.pencheon

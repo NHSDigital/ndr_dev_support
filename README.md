@@ -95,7 +95,7 @@ $ find . -iregex .*\.rake$ | xargs rake rubocop:diff:file
 
 ndr_dev_support bundles a configured Rails integration testing environment.
 
-By default, it uses `capybara` and `poltergeist` to drive a PhantomJS headless browser, and includes some sensible configuration.
+By default, it uses `capybara` and `selenium` to drive a headless Chrome browser, and includes some sensible configuration.
 
 To use, simply add the following to your application's `test_helper.rb`
 
