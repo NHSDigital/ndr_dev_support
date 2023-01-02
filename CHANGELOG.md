@@ -1,5 +1,5 @@
 ## [Unreleased]
-* No unreleased changes
+* Support Ruby 3.2
 
 ## 7.0.0 / 2022-10-05
 ## Changed
