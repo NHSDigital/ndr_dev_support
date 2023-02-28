@@ -1,5 +1,9 @@
 ## [Unreleased]
+### Fixed
 * Support Ruby 3.2
+
+### Changed
+* CI: include minitest error details in slack output
 
 ## 7.0.0 / 2022-10-05
 ## Changed

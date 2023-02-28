@@ -82,7 +82,7 @@ module Minitest
       snippets_for flakey_results
     end
 
-    # Adapted from Rails' TestUnit reporter
+    # Adapted from Rails' TestUnit reporter in lib/rails/test_unit/reporter.rb
     def snippets_for(results, limit = 5)
       executable = defined?(Rails) ? 'bin/rails test ' : 'bundle exec rake test TEST='
 
@@ -94,7 +94,8 @@ module Minitest
             result.method(result.name).source_location
           end
 
-        "#{executable}#{location.sub(%r{^#{Dir.pwd}/?}, '')}:#{line}"
+        # Include test result details, as well has how to rerun the failed test
+        "#{result}#{executable}#{location.sub(%r{^#{Dir.pwd}/?}, '')}:#{line}"
       end
 
       snippets << "+ #{results.length - limit} more" if (results.length - limit).positive?
