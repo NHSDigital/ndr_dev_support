@@ -1,4 +1,7 @@
 ## [Unreleased]
+* No unreleased changes
+
+## 7.1.0 / 2023-03-02
 ### Fixed
 * Support Ruby 3.2
 
