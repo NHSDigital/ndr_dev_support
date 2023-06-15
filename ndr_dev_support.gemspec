@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '>= 2.7'
+  spec.required_ruby_version = '>= 3.0'
 
   spec.add_dependency 'pry'
 
@@ -42,7 +42,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'webdrivers', '>= 3.9'
 
   # CI server dependencies:
-  spec.add_dependency 'activesupport', '>= 6.0', '< 7.1'
+  spec.add_dependency 'activesupport', '>= 6.1', '< 7.1'
   spec.add_dependency 'brakeman', '>= 4.7.1'
   spec.add_dependency 'bundler-audit'
   spec.add_dependency 'github-linguist'
