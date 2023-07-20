@@ -37,9 +37,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'capybara', '>= 3.34'
   spec.add_dependency 'capybara-screenshot'
   spec.add_dependency 'minitest', '~> 5.11'
-  spec.add_dependency 'selenium-webdriver'
+  spec.add_dependency 'selenium-webdriver', '~> 4.8'
   spec.add_dependency 'show_me_the_cookies'
-  spec.add_dependency 'webdrivers', '>= 3.9'
 
   # CI server dependencies:
   spec.add_dependency 'activesupport', '>= 6.1', '< 7.1'

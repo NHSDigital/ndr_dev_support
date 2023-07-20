@@ -21,10 +21,6 @@ require 'ndr_dev_support/integration_testing/dsl'
 # Include support for retrying tests that sporadically fail:
 require 'ndr_dev_support/integration_testing/flakey_tests'
 
-# Keeps the selenium webdrivers automatically updated:
-require 'webdrivers'
-Webdrivers.cache_time = 24.hours
-
 # These are all the drivers we have capybara / screenshot support for:
 require 'ndr_dev_support/integration_testing/drivers/chrome'
 require 'ndr_dev_support/integration_testing/drivers/chrome_headless'
