@@ -12,6 +12,11 @@ Capybara.register_driver :chrome_headless do |app|
     opts.args << '--window-size=1920,1080'
     opts.args << '--enable-features=NetworkService,NetworkServiceInProcess'
   end
+  # Hide messages such as the following:
+  # WARN Selenium [:logger_info] Details on how to use and modify Selenium logger:
+  #   https://selenium.dev/documentation/webdriver/troubleshooting/logging#ruby
+  Selenium::WebDriver.logger.ignore([:logger_info])
+
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: browser_options)
 end
 

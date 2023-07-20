@@ -1,6 +1,7 @@
 ## [Unreleased]
 ## Changed
 * Drop support for Ruby 2.7, Rails 6.0
+* Remove dependency on outdated `webdrivers` gem
 
 ## 7.1.0 / 2023-03-02
 ### Fixed
