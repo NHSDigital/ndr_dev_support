@@ -11,7 +11,7 @@ file safety:
   ".github/workflows/test.yml":
     comments:
     reviewed_by: brian.shand
-    safe_revision: 7ce59c6d85cf81eb4791deb94e066dc91704713c
+    safe_revision: 0b7b8df9d36ec3b92bacf27c34ea4588a5442208
   ".gitignore":
     comments:
     reviewed_by: josh.pencheon
@@ -27,7 +27,7 @@ file safety:
   CHANGELOG.md:
     comments:
     reviewed_by: brian.shand
-    safe_revision: dbfd8e8448033324dbde951950e0c73925dbeb6c
+    safe_revision: 0b7b8df9d36ec3b92bacf27c34ea4588a5442208
   CODE_OF_CONDUCT.md:
     comments:
     reviewed_by: timgentry
@@ -60,10 +60,6 @@ file safety:
     comments:
     reviewed_by: josh.pencheon
     safe_revision: 05476acacadfa0ad7404f3c37cf3c17c4e0ba11b
-  gemfiles/Gemfile.rails60:
-    comments:
-    reviewed_by: joshpencheon
-    safe_revision: f25001ef74c44ab727eef5cb29cef9a54525d36f
   gemfiles/Gemfile.rails61:
     comments:
     reviewed_by: joshpencheon
@@ -79,7 +75,7 @@ file safety:
   lib/minitest/rake_ci_plugin.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 5cb6964bee8c7a7856193232f6b06653235a8309
+    safe_revision: d8f383a18c17be5843b78e2a462aee3ae7a8babe
   lib/ndr_dev_support.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -227,7 +223,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: dbfd8e8448033324dbde951950e0c73925dbeb6c
+    safe_revision: 1a1040acdb99a2f169f7dad109c03b42cb4be138
   lib/tasks/audit_bundle.rake:
     comments:
     reviewed_by: brian.shand
@@ -308,7 +304,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 7ce59c6d85cf81eb4791deb94e066dc91704713c
+    safe_revision: 0b7b8df9d36ec3b92bacf27c34ea4588a5442208
   test/daemon/ci_server_test.rb:
     comments:
     reviewed_by: josh.pencheon
