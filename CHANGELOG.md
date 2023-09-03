@@ -1,5 +1,6 @@
 ## [Unreleased]
-* No unreleased changes
+### Fixed
+* Fix outdated MiniTest reference
 
 ## 7.2.0 / 2023-07-20
 ## Changed
