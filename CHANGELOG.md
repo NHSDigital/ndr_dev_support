@@ -1,4 +1,7 @@
 ## [Unreleased]
+## Changed
+* Use feature/ branch names for rake bundle:update
+
 ### Fixed
 * Fix outdated MiniTest reference
 

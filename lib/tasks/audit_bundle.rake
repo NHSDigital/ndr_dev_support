@@ -195,7 +195,7 @@ namespace :bundle do
 
     if repository_type == 'git'
       # Check out a fresh branch, if a git working copy (but not git-svn)
-      branch_name = "#{gem}_#{new_gem_version2.gsub('.', '_')}"
+      branch_name = "feature/#{gem}_#{new_gem_version2.gsub('.', '_')}"
       system('git', 'checkout', '-b', branch_name) # Create a new git branch
     end
 
