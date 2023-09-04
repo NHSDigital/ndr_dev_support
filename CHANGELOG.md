@@ -1,5 +1,9 @@
 ## [Unreleased]
-* No unreleased changes
+## Changed
+* Use feature/ branch names for rake bundle:update
+
+### Fixed
+* Fix outdated MiniTest reference
 
 ## 7.2.0 / 2023-07-20
 ## Changed

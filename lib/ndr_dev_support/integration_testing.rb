@@ -8,7 +8,7 @@ ActionDispatch::IntegrationTest.include(Capybara::DSL)
 #       use the built-in behaviour that Rails adds to after_teardown.
 #
 require 'capybara-screenshot'
-if defined?(MiniTest)
+if defined?(Minitest)
   require 'capybara-screenshot/minitest'
   ActionDispatch::IntegrationTest.include(Capybara::Screenshot::MiniTestPlugin)
 else
