@@ -1,4 +1,7 @@
 ## [Unreleased]
+* No unreleased changes
+
+## 7.2.1 / 2023-09-04
 ## Changed
 * Use feature/ branch names for rake bundle:update
 
