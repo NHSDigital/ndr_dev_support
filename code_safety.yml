@@ -27,7 +27,7 @@ file safety:
   CHANGELOG.md:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 0b7b8df9d36ec3b92bacf27c34ea4588a5442208
+    safe_revision: 33958124007700acdf215f44eebf81694f6f887d
   CODE_OF_CONDUCT.md:
     comments:
     reviewed_by: timgentry
@@ -127,15 +127,15 @@ file safety:
   lib/ndr_dev_support/integration_testing.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 55bf622a37081fc3afd8db9daba1b2f9840c7807
+    safe_revision: 33958124007700acdf215f44eebf81694f6f887d
   lib/ndr_dev_support/integration_testing/drivers/chrome.rb:
     comments:
     reviewed_by: josh.pencheon
     safe_revision: f1a32b1f2d1851b87a883dbf8620aa0e921e436c
   lib/ndr_dev_support/integration_testing/drivers/chrome_headless.rb:
     comments:
-    reviewed_by: josh.pencheon
-    safe_revision: '0409b687d31202b2a4281ebfb7b0c330cc78d904'
+    reviewed_by: brian.shand
+    safe_revision: 139809a501285b658aed8aa7b41d4d9ff3580137
   lib/ndr_dev_support/integration_testing/drivers/firefox.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -223,11 +223,11 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 1a1040acdb99a2f169f7dad109c03b42cb4be138
+    safe_revision: 31c03d654b103b7bcd7581955fa60f79ab0d620d
   lib/tasks/audit_bundle.rake:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 664b4c343e9c21723b284a7bbd2b02e2c55806e6
+    safe_revision: 33958124007700acdf215f44eebf81694f6f887d
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -304,7 +304,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 0b7b8df9d36ec3b92bacf27c34ea4588a5442208
+    safe_revision: 139809a501285b658aed8aa7b41d4d9ff3580137
   test/daemon/ci_server_test.rb:
     comments:
     reviewed_by: josh.pencheon
