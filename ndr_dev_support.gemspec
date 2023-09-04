@@ -12,8 +12,10 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/NHSDigital/ndr_dev_support'
   spec.license       = 'MIT'
 
+  gem_files          = %w[CHANGELOG.md CODE_OF_CONDUCT.md LICENSE.txt README.md
+                          config lib ndr_dev_support.gemspec]
   spec.files         = `git ls-files -z`.split("\x0").
-                       reject { |f| f.match(%r{^(\.github|test|spec|features)/}) }
+                       select { |f| gem_files.include?(f.split('/')[0]) }
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
