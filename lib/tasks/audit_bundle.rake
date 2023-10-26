@@ -204,9 +204,10 @@ namespace :bundle do
       manually add any additional platform-specific gems required (e.g. for nokogiri),
       re-run tests locally, then run the following to commit the changes:
 
-      $ git rm #{files_to_git_rm.join(' ')}
-      $ git add #{files_to_git_add.join(' ')}
-      $ git commit -m '# Bump #{gem} to #{new_gem_version2}'
+      $ ( git rm #{files_to_git_rm.join(' ')}
+          git add #{files_to_git_add.join(' ')}
+          git commit -m '# Bump #{gem} to #{new_gem_version2}'
+        )
     MSG
   end
 end
