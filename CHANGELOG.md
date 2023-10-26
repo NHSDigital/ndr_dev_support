@@ -1,4 +1,7 @@
 ## [Unreleased]
+* No unreleased changes
+
+## 7.2.2 / 2023-10-26
 * Support Rails 7.1
 * Convenience updates for rake bundle:update
 
