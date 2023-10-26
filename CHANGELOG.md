@@ -1,5 +1,5 @@
 ## [Unreleased]
-* No unreleased changes
+* Support Rails 7.1
 
 ## 7.2.1 / 2023-09-04
 ## Changed
