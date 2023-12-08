@@ -107,7 +107,6 @@ Metrics/CyclomaticComplexity:
   Max: 9
 
 Layout/LineLength:
-  Max: 100
   Exclude:
   - 'db/migrate/*.rb'
   - 'test/**/*.rb'
