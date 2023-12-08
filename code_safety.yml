@@ -26,8 +26,8 @@ file safety:
     safe_revision: 6211cff0ce44645ed3752723b5b0ee65f24c66aa
   CHANGELOG.md:
     comments:
-    reviewed_by: kenny.lee
-    safe_revision: 251a8b5dcf3367b6ef5ce2e0a2b502651a5a994b
+    reviewed_by: brian.shand
+    safe_revision: 9ddeada6dca636c793ab5d866910b758dff626b4
   CODE_OF_CONDUCT.md:
     comments:
     reviewed_by: timgentry
@@ -226,8 +226,8 @@ file safety:
     safe_revision: 189b6e38a0392a3ec0429ab33b456ac88a018a2b
   lib/ndr_dev_support/version.rb:
     comments:
-    reviewed_by: kenny.lee
-    safe_revision: 251a8b5dcf3367b6ef5ce2e0a2b502651a5a994b
+    reviewed_by: brian.shand
+    safe_revision: 9ddeada6dca636c793ab5d866910b758dff626b4
   lib/tasks/audit_bundle.rake:
     comments:
     reviewed_by: kenny.lee
