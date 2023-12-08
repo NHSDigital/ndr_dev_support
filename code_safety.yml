@@ -26,8 +26,8 @@ file safety:
     safe_revision: 6211cff0ce44645ed3752723b5b0ee65f24c66aa
   CHANGELOG.md:
     comments:
-    reviewed_by: brian.shand
-    safe_revision: 1b55014650c0db7f423737419189f5aa09cc2c69
+    reviewed_by: kenny.lee
+    safe_revision: c8a64ddb01dff6d6091e7227146cadeb9ded49b0
   CODE_OF_CONDUCT.md:
     comments:
     reviewed_by: timgentry
@@ -58,8 +58,8 @@ file safety:
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   config/rubocop/ndr.yml:
     comments:
-    reviewed_by: josh.pencheon
-    safe_revision: 05476acacadfa0ad7404f3c37cf3c17c4e0ba11b
+    reviewed_by: kenny.lee
+    safe_revision: c8a64ddb01dff6d6091e7227146cadeb9ded49b0
   gemfiles/Gemfile.rails61:
     comments:
     reviewed_by: joshpencheon
@@ -230,8 +230,8 @@ file safety:
     safe_revision: 99b0f8fdf6572349f272d0690a92d1613ba3a5c1
   lib/tasks/audit_bundle.rake:
     comments:
-    reviewed_by: brian.shand
-    safe_revision: 33958124007700acdf215f44eebf81694f6f887d
+    reviewed_by: kenny.lee
+    safe_revision: 96f1af81f5aff439742fc293581256317ff4aa46
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support

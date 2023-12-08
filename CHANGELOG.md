@@ -1,4 +1,7 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 7.2.2 / 2023-12-08
 * Support Rails 7.1
 * Convenience updates for rake bundle:update
 * use default rubocop line limit (120)
