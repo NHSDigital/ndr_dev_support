@@ -1,5 +1,7 @@
 ## [Unreleased]
-*no unreleased changes*
+## Changed
+* Change default browser for integration tests to new headless Chrome
+* Support old chrome headless driver
 
 ## 7.2.3 / 2023-12-08
 ### Fixed

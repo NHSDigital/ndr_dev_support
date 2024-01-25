@@ -105,7 +105,7 @@ require 'ndr_dev_support/integration_testing'
 
 #### Other drivers
 
-Other drivers are also supported; `chrome` / `chrome_headless` / `firefox` are all powered by selenium, and can either be explicitly used with:
+Other drivers are also supported; `chrome` / `chrome_headless` / `chrome_headless_old` / `firefox` are all powered by selenium, and can either be explicitly used with:
 
 ```ruby
 Capybara.default_driver    = :chrome_headless
