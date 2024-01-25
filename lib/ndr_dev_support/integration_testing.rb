@@ -24,6 +24,7 @@ require 'ndr_dev_support/integration_testing/flakey_tests'
 # These are all the drivers we have capybara / screenshot support for:
 require 'ndr_dev_support/integration_testing/drivers/chrome'
 require 'ndr_dev_support/integration_testing/drivers/chrome_headless'
+require 'ndr_dev_support/integration_testing/drivers/chrome_headless_old'
 require 'ndr_dev_support/integration_testing/drivers/firefox'
 require 'ndr_dev_support/integration_testing/drivers/switchable'
 
