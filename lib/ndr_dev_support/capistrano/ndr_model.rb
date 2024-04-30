@@ -116,6 +116,9 @@ Capistrano::Configuration.instance(:must_exist).load do
       # Where we'll be deploying to:
       set :deploy_to, File.join(application_home, fetch(:application))
 
+      # Reduce the number of releases we keep on the webapp servers
+      set :keep_releases, 3 unless exists?(:keep_releases) || fetch(:daemon_deployment)
+
       # Use the application user's ruby:
       set(:default_environment) do
         {
