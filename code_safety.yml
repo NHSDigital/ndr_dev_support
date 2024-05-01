@@ -27,7 +27,7 @@ file safety:
   CHANGELOG.md:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 9ddeada6dca636c793ab5d866910b758dff626b4
+    safe_revision: f51b4c68a606b737645e1eb18fb4d1774967f04d
   CODE_OF_CONDUCT.md:
     comments:
     reviewed_by: timgentry
@@ -43,7 +43,7 @@ file safety:
   README.md:
     comments:
     reviewed_by: brian.shand
-    safe_revision: f50cf0b5a10fd0aa6499e101fc70a142bc6e9171
+    safe_revision: b6078cecd536203f2f8e95ba577aa8189a1ebb60
   Rakefile:
     comments:
     reviewed_by: josh.pencheon
@@ -91,7 +91,7 @@ file safety:
   lib/ndr_dev_support/capistrano/ndr_model.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 7daa8f47557444038fdf25beb2e56435d90e3339
+    safe_revision: f51b4c68a606b737645e1eb18fb4d1774967f04d
   lib/ndr_dev_support/capistrano/restart.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -131,7 +131,7 @@ file safety:
   lib/ndr_dev_support/integration_testing.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 33958124007700acdf215f44eebf81694f6f887d
+    safe_revision: b6078cecd536203f2f8e95ba577aa8189a1ebb60
   lib/ndr_dev_support/integration_testing/drivers/chrome.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -139,7 +139,11 @@ file safety:
   lib/ndr_dev_support/integration_testing/drivers/chrome_headless.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 139809a501285b658aed8aa7b41d4d9ff3580137
+    safe_revision: b6078cecd536203f2f8e95ba577aa8189a1ebb60
+  lib/ndr_dev_support/integration_testing/drivers/chrome_headless_old.rb:
+    comments:
+    reviewed_by: brian.shand
+    safe_revision: b6078cecd536203f2f8e95ba577aa8189a1ebb60
   lib/ndr_dev_support/integration_testing/drivers/firefox.rb:
     comments:
     reviewed_by: josh.pencheon
