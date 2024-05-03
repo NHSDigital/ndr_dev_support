@@ -1,4 +1,7 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 7.2.4 / 2024-05-01
 ## Changed
 * Change default browser for integration tests to new headless Chrome
 * Support old chrome headless driver
