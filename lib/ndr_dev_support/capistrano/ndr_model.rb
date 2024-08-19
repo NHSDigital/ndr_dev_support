@@ -147,6 +147,18 @@ Capistrano::Configuration.instance(:must_exist).load do
         # already there:
         run "rm -rf #{File.join(release_path, path)} && ln -s #{File.join(shared_path, path)} #{File.join(release_path, path)}"
       end
+
+      # Make the shared/bundle/ directory writeable by deployers:
+      # We already set group permissions correctly in the bundle directory, but some gem installs
+      # ignore these permissions, so we need to fix them up.
+      # Set deployer group for everything created by this user
+      run "find #{File.join(shared_path, 'bundle')} -group #{fetch(:user)} -print0 |xargs -r0 chgrp -h deployer"
+      # Set group sticky and group / world bits on directories created by this user
+      run "find #{File.join(shared_path, 'bundle')} -user #{fetch(:user)} -type d " \
+          '-not -perm -2075 -print0 |xargs -r0 chmod g+rwxs,o+rx'
+      # Add group writeable and readable and world readable bits to all files created by this user
+      run "find #{File.join(shared_path, 'bundle')} -user #{fetch(:user)} -type f " \
+          '-not -perm -0064 -print0 |xargs -r0 chmod g+rw,o+r'
     end
 
     after 'deploy:finalize_update', 'ndr_dev_support:filesystem_tweaks'
