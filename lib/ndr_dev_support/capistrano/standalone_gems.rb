@@ -24,12 +24,13 @@ Capistrano::Configuration.instance(:must_exist).load do
       # Extract the current version requirements for each of the gems from the lockfile,
       # and then check they're installed. If not, install them from the vendored cache.
       run <<~CMD if gem_list.any?
+        set -e;
         export RBENV_VERSION=`cat "#{latest_release}/.ruby-version"`;
         cat "#{latest_release}/Gemfile.lock" | egrep "^    (#{gem_list.join('|')}) " | tr -d '()' | \
         while read gem ver; do
           gem list -i "$gem" --version "$ver" > /dev/null || \
           #{gem_install} "#{latest_release}/vendor/cache/$gem-$ver.gem" \
-            --ignore-dependencies --conservative --no-document;
+            --ignore-dependencies --conservative --no-document --local;
         done
       CMD
     end
