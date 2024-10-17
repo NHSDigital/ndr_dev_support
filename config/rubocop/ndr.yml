@@ -145,3 +145,5 @@ Rails/SkipsModelValidations:
   # avoiding them is not helpful/practical.
   Enabled: false
 
+Style/HashSyntax:
+  EnforcedShorthandSyntax: either
