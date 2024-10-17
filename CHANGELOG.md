@@ -1,6 +1,7 @@
 ## [Unreleased]
 * Capistrano: fix up installed gem permissions after deployment.
 * Capistrano: identify errors when installing out-of-bundle gems.
+* Allow either hash `EnforcedShorthandSyntax` style
 
 ## 7.2.4 / 2024-05-01
 ## Changed
