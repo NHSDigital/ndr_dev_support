@@ -1,10 +1,14 @@
 ## [Unreleased]
+### Changed
 * Capistrano: fix up installed gem permissions after deployment.
 * Capistrano: identify errors when installing out-of-bundle gems.
 * Allow either hash `EnforcedShorthandSyntax` style
 
+### Added
+* `deploy:setup` creates more of the "NDR model" shared directories
+
 ## 7.2.4 / 2024-05-01
-## Changed
+### Changed
 * Change default browser for integration tests to new headless Chrome
 * Support old chrome headless driver
 * Reduce the number of releases kept on application servers
