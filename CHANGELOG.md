@@ -2,6 +2,7 @@
 ### Changed
 * Capistrano: fix up installed gem permissions after deployment.
 * Capistrano: identify errors when installing out-of-bundle gems.
+* Allow either hash `EnforcedShorthandSyntax` style
 
 ### Added
 * `deploy:setup` creates more of the "NDR model" shared directories
