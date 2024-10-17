@@ -1,3 +1,5 @@
+require 'net/http'
+
 module NdrDevSupport
   # This Class publishes messages to Slack
   class SlackMessagePublisher

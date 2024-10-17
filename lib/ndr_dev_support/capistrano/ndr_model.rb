@@ -30,6 +30,8 @@ require_relative 'sysadmin_scripts'
 #   and SVN branches. To use the latter, be sure to set the `:repository_branches` variable
 #   to point at the root of the branches. Otherwise, just set `:repository` directly as normal.
 #
+#   Set environment variable DEPLOYER to deploy as a particular user instead of prompting.
+#
 Capistrano::Configuration.instance(:must_exist).load do
   # Paths that are symlinked for each release to the "shared" directory:
   set :shared_paths, %w[config/database.yml config/secrets.yml log tmp]
@@ -100,9 +102,14 @@ Capistrano::Configuration.instance(:must_exist).load do
 
       # Gather SSH credentials: (password is asked for by Net::SSH, if needed)
       set :use_sudo, false
-      set :user, Capistrano::CLI.ui.ask('Deploy as: ')
+      if ENV['DEPLOYER']
+        set :user, ENV['DEPLOYER']
+        Capistrano::CLI.ui.say "Deploy as: #{fetch(:user)}"
+      else
+        set :user, Capistrano::CLI.ui.ask('Deploy as: ')
+      end
 
-      # If no alternate user is specified, deploy to the crediental-holding user.
+      # If no alternate user is specified, deploy to the credential-holding user.
       set :application_user, fetch(:user) unless fetch(:application_user)
 
       # The home folder of the application user:
@@ -114,6 +121,9 @@ Capistrano::Configuration.instance(:must_exist).load do
 
       # Where we'll be deploying to:
       set :deploy_to, File.join(application_home, fetch(:application))
+
+      # Reduce the number of releases we keep on the webapp servers
+      set :keep_releases, 3 unless exists?(:keep_releases) || fetch(:daemon_deployment)
 
       # Use the application user's ruby:
       set(:default_environment) do
@@ -143,6 +153,18 @@ Capistrano::Configuration.instance(:must_exist).load do
         # already there:
         run "rm -rf #{File.join(release_path, path)} && ln -s #{File.join(shared_path, path)} #{File.join(release_path, path)}"
       end
+
+      # Make the shared/bundle/ directory writeable by deployers:
+      # We already set group permissions correctly in the bundle directory, but some gem installs
+      # ignore these permissions, so we need to fix them up.
+      # Set deployer group for everything created by this user
+      run "find #{File.join(shared_path, 'bundle')} -group #{fetch(:user)} -print0 |xargs -r0 chgrp -h deployer"
+      # Set group sticky and group / world bits on directories created by this user
+      run "find #{File.join(shared_path, 'bundle')} -user #{fetch(:user)} -type d " \
+          '-not -perm -2075 -print0 |xargs -r0 chmod g+rwxs,o+rx'
+      # Add group writeable and readable and world readable bits to all files created by this user
+      run "find #{File.join(shared_path, 'bundle')} -user #{fetch(:user)} -type f " \
+          '-not -perm -0064 -print0 |xargs -r0 chmod g+rw,o+r'
     end
 
     after 'deploy:finalize_update', 'ndr_dev_support:filesystem_tweaks'

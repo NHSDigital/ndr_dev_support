@@ -8,7 +8,7 @@ ActionDispatch::IntegrationTest.include(Capybara::DSL)
 #       use the built-in behaviour that Rails adds to after_teardown.
 #
 require 'capybara-screenshot'
-if defined?(MiniTest)
+if defined?(Minitest)
   require 'capybara-screenshot/minitest'
   ActionDispatch::IntegrationTest.include(Capybara::Screenshot::MiniTestPlugin)
 else
@@ -21,15 +21,11 @@ require 'ndr_dev_support/integration_testing/dsl'
 # Include support for retrying tests that sporadically fail:
 require 'ndr_dev_support/integration_testing/flakey_tests'
 
-# Keeps the selenium webdrivers automatically updated:
-require 'webdrivers'
-Webdrivers.cache_time = 24.hours
-
 # These are all the drivers we have capybara / screenshot support for:
 require 'ndr_dev_support/integration_testing/drivers/chrome'
 require 'ndr_dev_support/integration_testing/drivers/chrome_headless'
+require 'ndr_dev_support/integration_testing/drivers/chrome_headless_old'
 require 'ndr_dev_support/integration_testing/drivers/firefox'
-require 'ndr_dev_support/integration_testing/drivers/poltergeist'
 require 'ndr_dev_support/integration_testing/drivers/switchable'
 
 Capybara.default_driver    = :switchable

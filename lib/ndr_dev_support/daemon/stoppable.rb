@@ -68,7 +68,8 @@ module NdrDevSupport
       end
 
       def log(message, level = :info)
-        tags    = "[#{Time.current.to_s(:db)}] [#{level.upcase}] [daemon: #{name} (#{Process.pid})]"
+        tags    = "[#{Time.current.to_formatted_s(:db)}] [#{level.upcase}] " \
+                  "[daemon: #{name} (#{Process.pid})]"
         message = "#{tags} #{message}"
 
         logger.send(level, message)
@@ -105,7 +106,12 @@ module NdrDevSupport
 
         number_of_mini_sleeps.times do
           return if should_stop?
+
           sleep(LITTLE_SLEEP)
+        rescue Interrupt
+          # Ctrl-C should stop cleanly if used while the process is snoozing
+          @should_stop = true
+          return
         end
       end
     end

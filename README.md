@@ -1,7 +1,7 @@
-## NdrDevSupport [![Maintainability](https://api.codeclimate.com/v1/badges/2b2a644964f2aa930f81/maintainability)](https://codeclimate.com/github/PublicHealthEngland/ndr_dev_support/maintainability) [![Build Status](https://github.com/publichealthengland/ndr_dev_support/workflows/Test/badge.svg)](https://github.com/publichealthengland/ndr_dev_support/actions?query=workflow%3Atest) [![Gem Version](https://badge.fury.io/rb/ndr_dev_support.svg)](https://badge.fury.io/rb/ndr_dev_support)
+## NdrDevSupport [![Maintainability](https://api.codeclimate.com/v1/badges/2b2a644964f2aa930f81/maintainability)](https://codeclimate.com/github/PublicHealthEngland/ndr_dev_support/maintainability) [![Build Status](https://github.com/NHSDigital/ndr_dev_support/workflows/Test/badge.svg)](https://github.com/NHSDigital/ndr_dev_support/actions?query=workflow%3Atest) [![Gem Version](https://badge.fury.io/rb/ndr_dev_support.svg)](https://badge.fury.io/rb/ndr_dev_support)
 
-This is the Public Health England (PHE) National Disease Registers (NDR) Developer Support ruby gem,
-providing:
+This is the NHS Digital (NHS-D) National Disease Registration Service (NDRS) Developer Support ruby
+gem, providing:
 
 1. rake tasks to manage code auditing of ruby based projects
 2. rake tasks to limit Rubocop's output to changed (and related) code
@@ -95,7 +95,7 @@ $ find . -iregex .*\.rake$ | xargs rake rubocop:diff:file
 
 ndr_dev_support bundles a configured Rails integration testing environment.
 
-By default, it uses `capybara` and `poltergeist` to drive a PhantomJS headless browser, and includes some sensible configuration.
+By default, it uses `capybara` and `selenium` to drive a headless Chrome browser, and includes some sensible configuration.
 
 To use, simply add the following to your application's `test_helper.rb`
 
@@ -105,7 +105,7 @@ require 'ndr_dev_support/integration_testing'
 
 #### Other drivers
 
-Other drivers are also supported; `chrome` / `chrome_headless` / `firefox` are all powered by selenium, and can either be explicitly used with:
+Other drivers are also supported; `chrome` / `chrome_headless` / `chrome_headless_old` / `firefox` are all powered by selenium, and can either be explicitly used with:
 
 ```ruby
 Capybara.default_driver    = :chrome_headless
@@ -257,9 +257,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/PublicHealthEngland/ndr_dev_support. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/NHSDigital/ndr_dev_support. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-1. Fork it ( https://github.com/PublicHealthEngland/ndr_dev_support/fork )
+1. Fork it ( https://github.com/NHSDigital/ndr_dev_support/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
