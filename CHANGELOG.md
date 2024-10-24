@@ -1,4 +1,7 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 7.2.5 / 2024-10-24
 ### Changed
 * Capistrano: fix up installed gem permissions after deployment.
 * Capistrano: identify errors when installing out-of-bundle gems.
