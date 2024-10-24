@@ -27,7 +27,7 @@ file safety:
   CHANGELOG.md:
     comments:
     reviewed_by: brian.shand
-    safe_revision: f51b4c68a606b737645e1eb18fb4d1774967f04d
+    safe_revision: 3d4ea85906f613fa42392a948b0aaa32894014b0
   CODE_OF_CONDUCT.md:
     comments:
     reviewed_by: timgentry
@@ -58,8 +58,8 @@ file safety:
     safe_revision: c59a45986f8b6d087c8c21b1e889f31f7346da17
   config/rubocop/ndr.yml:
     comments:
-    reviewed_by: kenny.lee
-    safe_revision: c8a64ddb01dff6d6091e7227146cadeb9ded49b0
+    reviewed_by: brian.shand
+    safe_revision: a393b015283123a8fd953a98a0d52e45637de254
   gemfiles/Gemfile.rails61:
     comments:
     reviewed_by: joshpencheon
@@ -91,7 +91,7 @@ file safety:
   lib/ndr_dev_support/capistrano/ndr_model.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: f51b4c68a606b737645e1eb18fb4d1774967f04d
+    safe_revision: 3d4ea85906f613fa42392a948b0aaa32894014b0
   lib/ndr_dev_support/capistrano/restart.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -106,8 +106,8 @@ file safety:
     safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
   lib/ndr_dev_support/capistrano/standalone_gems.rb:
     comments:
-    reviewed_by: josh.pencheon
-    safe_revision: eec7079a777c84f61b05c236df60195d4ddcf488
+    reviewed_by: brian.shand
+    safe_revision: 8dab4aa16c44e7afeeb9d160c68b47fa1f4e349f
   lib/ndr_dev_support/capistrano/svn_cache.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -231,7 +231,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 9ddeada6dca636c793ab5d866910b758dff626b4
+    safe_revision: baf9d7fc8f6d89e0613f89f1da63738f30262f82
   lib/tasks/audit_bundle.rake:
     comments:
     reviewed_by: kenny.lee
