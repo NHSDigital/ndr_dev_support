@@ -43,7 +43,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'show_me_the_cookies'
 
   # CI server dependencies:
-  spec.add_dependency 'activesupport', '>= 6.1', '< 7.2'
+  spec.add_dependency 'activesupport', '>= 6.1', '< 8.1'
   spec.add_dependency 'brakeman', '>= 4.7.1'
   spec.add_dependency 'bundler-audit'
   spec.add_dependency 'github-linguist'
