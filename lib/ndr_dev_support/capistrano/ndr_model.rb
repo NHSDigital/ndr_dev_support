@@ -2,6 +2,7 @@ require 'rainbow'
 
 # Discrete bits of functionality we use automatically:
 require_relative 'assets'
+require_relative 'install_ruby'
 require_relative 'restart'
 require_relative 'revision_logger'
 require_relative 'ruby_version'

@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Added
+* Capistrano: install rbenv and ruby from /opt/rbenv.tar.gz
 
 ## 7.2.6 / 2024-11-13
 ### Fixed
