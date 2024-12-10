@@ -37,14 +37,17 @@ Capistrano::Configuration.instance(:must_exist).load do
               tar xf /opt/rbenv.tar.gz .rbenv;
               PATH=\\`echo \\"\\$PATH\\"|sed -e \\"s_[^:=]*/[.]rbenv[^:]*:__g\\"\\` .rbenv/bin/rbenv init bash;
             fi;
-            eval \\"\\$(.rbenv/bin/rbenv init - --no-rehash bash)\\";
-            export TMPDIR=\\`mktemp -d \\"\\$HOME\\"/rbenv_tmp_XXXX\\`;
-            set +e;
-            rbenv install #{version} --skip-existing 2>&1;
-            set -e;
-            RBENV_VERSION=#{version} ruby --version;
-            rm -rf \\"\\`printenv TMPDIR\\`\\";
-            rbenv global #{version};
+            if [ ! -e .rbenv ]; then
+              echo rbenv not installed: aborting;
+            else
+              eval \\"\\$(.rbenv/bin/rbenv init - --no-rehash bash)\\";
+              export TMPDIR=\\`mktemp -d \\"\\$HOME\\"/rbenv_tmp_XXXX\\`;
+              if rbenv install #{version} --skip-existing 2>&1; then
+                RBENV_VERSION=#{version} ruby --version;
+                rm -rf \\"\\`printenv TMPDIR\\`\\";
+                rbenv global #{version};
+              fi;
+            fi;
           ";
           { kill % && wait; } 2> /dev/null;
           set -e;
