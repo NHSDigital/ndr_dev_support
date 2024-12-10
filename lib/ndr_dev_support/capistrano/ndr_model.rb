@@ -173,7 +173,7 @@ Capistrano::Configuration.instance(:must_exist).load do
 end
 
 def release_config_for(env)
-  branches = YAML.load_file('config/deployments.yml')
+  branches = YAML.safe_load_file('config/deployments.yml', permitted_classes: [Date])
   branches.fetch(env.to_s) { raise 'Unknown release branch!' }
 end
 
