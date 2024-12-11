@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'pry'
 
   # Audit dependencies:
+  spec.add_dependency 'csv'
   spec.add_dependency 'highline', '>= 1.6.0'
 
   # Rubocop dependencies:
