@@ -28,6 +28,10 @@ Capistrano::Configuration.instance(:must_exist).load do
       # We remove ~/.rbenv paths from capistrano-defined PATH when running `rbenv init`
       # so that it knows the path is needed in ~/.bash_profile
       run <<~SHELL
+echo Checking what visibility we have: ls #{latest_release};
+ls #{latest_release};
+echo ls -la #{latest_release}/vendor;
+ls -la #{latest_release}/vendor;
         set -e;
         if ! rbenv versions --bare 2> /dev/null | grep -qF #{version}; then
           echo Installing ruby #{version};
