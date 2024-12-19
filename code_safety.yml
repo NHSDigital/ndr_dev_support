@@ -27,7 +27,7 @@ file safety:
   CHANGELOG.md:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 601cb39a50fd3b719083fed23bf1cb9ae512d223
+    safe_revision: 71036ef8c1a1d040281c692868246e6ab7a6ba37
   CODE_OF_CONDUCT.md:
     comments:
     reviewed_by: timgentry
@@ -94,12 +94,16 @@ file safety:
     safe_revision: 6211cff0ce44645ed3752723b5b0ee65f24c66aa
   lib/ndr_dev_support/capistrano/assets.rb:
     comments:
-    reviewed_by: josh.pencheon
-    safe_revision: 74a4cd909afaf2ee8bcabdd252b2383b1474b6d4
+    reviewed_by: brian.shand
+    safe_revision: 71036ef8c1a1d040281c692868246e6ab7a6ba37
+  lib/ndr_dev_support/capistrano/install_ruby.rb:
+    comments:
+    reviewed_by: brian.shand
+    safe_revision: 71036ef8c1a1d040281c692868246e6ab7a6ba37
   lib/ndr_dev_support/capistrano/ndr_model.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 3d4ea85906f613fa42392a948b0aaa32894014b0
+    safe_revision: 71036ef8c1a1d040281c692868246e6ab7a6ba37
   lib/ndr_dev_support/capistrano/restart.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -320,7 +324,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments:
     reviewed_by: brian.shand
-    safe_revision: e94e2b902cb943150a043b6b0b3d397fa1bea547
+    safe_revision: 71036ef8c1a1d040281c692868246e6ab7a6ba37
   test/daemon/ci_server_test.rb:
     comments:
     reviewed_by: josh.pencheon
