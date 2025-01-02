@@ -27,7 +27,7 @@ file safety:
   CHANGELOG.md:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 71036ef8c1a1d040281c692868246e6ab7a6ba37
+    safe_revision: f15b2f95bdb7252b9bf60eee65e69207ce486e9d
   CODE_OF_CONDUCT.md:
     comments:
     reviewed_by: timgentry
@@ -96,6 +96,10 @@ file safety:
     comments:
     reviewed_by: brian.shand
     safe_revision: 71036ef8c1a1d040281c692868246e6ab7a6ba37
+  lib/ndr_dev_support/capistrano/deploy_secrets.rb:
+    comments:
+    reviewed_by: brian.shand
+    safe_revision: f15b2f95bdb7252b9bf60eee65e69207ce486e9d
   lib/ndr_dev_support/capistrano/install_ruby.rb:
     comments:
     reviewed_by: brian.shand
@@ -103,7 +107,7 @@ file safety:
   lib/ndr_dev_support/capistrano/ndr_model.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 71036ef8c1a1d040281c692868246e6ab7a6ba37
+    safe_revision: f15b2f95bdb7252b9bf60eee65e69207ce486e9d
   lib/ndr_dev_support/capistrano/restart.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -243,7 +247,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 601cb39a50fd3b719083fed23bf1cb9ae512d223
+    safe_revision: e1b6dbf71344f982a4238e3e8085d533f7c51d06
   lib/tasks/audit_bundle.rake:
     comments:
     reviewed_by: kenny.lee
