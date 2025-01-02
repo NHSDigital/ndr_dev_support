@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Added
+* Capistrano: deploy application secrets from a subversion or git repository
 
 ## 7.3.0 / 2024-12-19
 ### Added
