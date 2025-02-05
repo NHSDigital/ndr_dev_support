@@ -1,3 +1,5 @@
+require 'tmpdir'
+
 # Add a git or svn secrets respository for ndr_dev_support:deploy_secrets
 def add_secrets_repo(name:, url:, scm:, branch: nil)
   raise "Invalid repo name #{name}" unless /\A[A-Z0-9_-]+\z/i.match?(name)

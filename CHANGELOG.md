@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Fixed
+* Capistrano: Add missing `tmpdir` requirement to deploy application secrets
 
 ## 7.3.1 / 2025-01-02
 ### Added
