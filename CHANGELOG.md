@@ -6,6 +6,9 @@
 ### Added
 * Capistrano: add task deploy:preinstall to preinstall ruby and bundled gems
 
+## Changed
+* Drop support for Rails 6.1
+
 ## 7.3.1 / 2025-01-02
 ### Added
 * Capistrano: deploy application secrets from a subversion or git repository
