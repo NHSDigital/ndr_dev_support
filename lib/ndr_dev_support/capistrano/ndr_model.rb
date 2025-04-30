@@ -4,6 +4,7 @@ require 'rainbow'
 require_relative 'assets'
 require_relative 'deploy_secrets'
 require_relative 'install_ruby'
+require_relative 'preinstall'
 require_relative 'restart'
 require_relative 'revision_logger'
 require_relative 'ruby_version'
@@ -191,6 +192,14 @@ def target_ruby_version_for(env)
   match = raw.match(/\A(?<version>\d+\.\d+\.\d+)\z/)
 
   match ? match[:version] : raise('Unrecognized Ruby version!')
+end
+
+def log_deployment_message(msg)
+  name = fetch(:deployer_name, capture('id -un').chomp)
+  log  = File.join(shared_path, 'revisions.log')
+  msg  = "[#{Time.now}] #{name} #{msg}" # rubocop:disable Rails/TimeZone
+
+  run "(test -e #{log} || (touch #{log} && chmod 664 #{log})) && echo #{Shellwords.escape(msg)} >> #{log};"
 end
 
 def add_target(env, name, app, port, app_user, is_web_server)

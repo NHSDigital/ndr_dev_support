@@ -3,6 +3,9 @@
 * Capistrano: Add missing `tmpdir` requirement to deploy application secrets
 * Capistrano: cap deploy:setup should be safe on existing deployments
 
+### Added
+* Capistrano: add task deploy:preinstall to preinstall ruby and bundled gems
+
 ## 7.3.1 / 2025-01-02
 ### Added
 * Capistrano: deploy application secrets from a subversion or git repository
