@@ -53,11 +53,15 @@ Capistrano::Configuration.instance(:must_exist).load do
       # sticky; all deployments made within it should be owned by the deployer group too. This
       # means that e.g. a deployment by "bob.smith" can then be rolled back by "tom.jones".
       run "mkdir -p #{deploy_to}"
-      run "chgrp -R deployer #{deploy_to}"
+      # Set deployer group for everything created by this user
+      # run "chgrp -R deployer #{deploy_to}"
+      run "find #{deploy_to} -group #{fetch(:user)} -print0 |xargs -r0 chgrp -h deployer"
 
       # The sticky group will apply automatically to new subdirectories, but
       # any existing subdirectories will need it manually applying via `-R`.
-      run "chmod -R g+s #{deploy_to}"
+      # run "chmod -R g+s #{deploy_to}"
+      run "find #{deploy_to} -user #{fetch(:user)} -type d " \
+          '-not -perm -2000 -print0 |xargs -r0 chmod g+s'
     end
 
     desc 'Custom tasks to be run once, after the initial `cap setup`'
@@ -67,8 +71,12 @@ Capistrano::Configuration.instance(:must_exist).load do
         run "mkdir -p #{full_path}"
 
         # Allow the application to write into here:
-        run "chgrp -R #{application_group} #{full_path}"
-        run "chmod -R g+s #{full_path}"
+        # run "chgrp -R #{application_group} #{full_path}"
+        # run "chmod -R g+s #{full_path}"
+        run "find #{full_path} -user #{fetch(:user)} -not -group #{application_group} " \
+            "-print0 |xargs -r0 chgrp -h #{application_group}"
+        run "find #{full_path} -user #{fetch(:user)} -type d " \
+            '-not -perm -2000 -print0 |xargs -r0 chmod g+s'
       end
 
       fetch(:shared_paths, []).each do |path|
