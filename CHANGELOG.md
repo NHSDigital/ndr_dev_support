@@ -1,4 +1,7 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 7.3.2 / 2025-05-01
 ### Fixed
 * Capistrano: Add missing `tmpdir` requirement to deploy application secrets
 * Capistrano: cap deploy:setup should be safe on existing deployments
