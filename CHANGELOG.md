@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Fixed
+* Update rubocop version dependency
 
 ## 7.3.2 / 2025-05-01
 ### Fixed
