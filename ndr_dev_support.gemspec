@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   # Rubocop dependencies:
   spec.add_dependency 'parser'
   spec.add_dependency 'rainbow'
-  spec.add_dependency 'rubocop', '~> 1.7'
+  spec.add_dependency 'rubocop', '~> 1.72'
   spec.add_dependency 'rubocop-rails', '~> 2.9'
   spec.add_dependency 'rubocop-rake', '~> 0.5'
   spec.add_dependency 'unicode-display_width', '>= 1.3.3'
