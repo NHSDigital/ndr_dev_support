@@ -1,6 +1,13 @@
 ## [Unreleased]
 ### Fixed
 * Capistrano: Add missing `tmpdir` requirement to deploy application secrets
+* Capistrano: cap deploy:setup should be safe on existing deployments
+
+### Added
+* Capistrano: add task deploy:preinstall to preinstall ruby and bundled gems
+
+## Changed
+* Drop support for Rails 6.1
 
 ## 7.3.1 / 2025-01-02
 ### Added

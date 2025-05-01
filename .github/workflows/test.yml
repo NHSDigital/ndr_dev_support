@@ -12,7 +12,6 @@ jobs:
           - '3.2'
           - '3.3'
         gemfile:
-          - gemfiles/Gemfile.rails61
           - gemfiles/Gemfile.rails70
           - gemfiles/Gemfile.rails71
           - gemfiles/Gemfile.rails72

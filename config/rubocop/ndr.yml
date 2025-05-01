@@ -4,7 +4,7 @@
 #
 # See the README for instructions on using in a project.
 
-require:
+plugins:
   - rubocop-rails
   - rubocop-rake
 
