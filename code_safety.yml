@@ -11,7 +11,7 @@ file safety:
   ".github/workflows/test.yml":
     comments:
     reviewed_by: brian.shand
-    safe_revision: e94e2b902cb943150a043b6b0b3d397fa1bea547
+    safe_revision: 5eb1de9dcb6774acaba4c444b596d293ddbb5ffe
   ".gitignore":
     comments:
     reviewed_by: josh.pencheon
@@ -27,7 +27,7 @@ file safety:
   CHANGELOG.md:
     comments:
     reviewed_by: brian.shand
-    safe_revision: f15b2f95bdb7252b9bf60eee65e69207ce486e9d
+    safe_revision: 5eb1de9dcb6774acaba4c444b596d293ddbb5ffe
   CODE_OF_CONDUCT.md:
     comments:
     reviewed_by: timgentry
@@ -59,15 +59,11 @@ file safety:
   config/rubocop/ndr.yml:
     comments:
     reviewed_by: brian.shand
-    safe_revision: a393b015283123a8fd953a98a0d52e45637de254
-  gemfiles/Gemfile.rails61:
-    comments:
-    reviewed_by: joshpencheon
-    safe_revision: f25001ef74c44ab727eef5cb29cef9a54525d36f
+    safe_revision: 5eb1de9dcb6774acaba4c444b596d293ddbb5ffe
   gemfiles/Gemfile.rails70:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 65d59fe9bba9dc7d404f92b54a115b14e6697af9
+    safe_revision: 68636827e980b858ad5292d6a40262623dc07fe4
   gemfiles/Gemfile.rails71:
     comments:
     reviewed_by: brian.shand
@@ -99,7 +95,7 @@ file safety:
   lib/ndr_dev_support/capistrano/deploy_secrets.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: f15b2f95bdb7252b9bf60eee65e69207ce486e9d
+    safe_revision: 68636827e980b858ad5292d6a40262623dc07fe4
   lib/ndr_dev_support/capistrano/install_ruby.rb:
     comments:
     reviewed_by: brian.shand
@@ -107,15 +103,19 @@ file safety:
   lib/ndr_dev_support/capistrano/ndr_model.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: f15b2f95bdb7252b9bf60eee65e69207ce486e9d
+    safe_revision: 5eb1de9dcb6774acaba4c444b596d293ddbb5ffe
+  lib/ndr_dev_support/capistrano/preinstall.rb:
+    comments:
+    reviewed_by: brian.shand
+    safe_revision: 5eb1de9dcb6774acaba4c444b596d293ddbb5ffe
   lib/ndr_dev_support/capistrano/restart.rb:
     comments:
     reviewed_by: josh.pencheon
     safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
   lib/ndr_dev_support/capistrano/revision_logger.rb:
     comments:
-    reviewed_by: josh.pencheon
-    safe_revision: a2b7c20eb58572c213f77677b36aa2f7e6db747e
+    reviewed_by: brian.shand
+    safe_revision: 5eb1de9dcb6774acaba4c444b596d293ddbb5ffe
   lib/ndr_dev_support/capistrano/ruby_version.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -247,7 +247,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: e1b6dbf71344f982a4238e3e8085d533f7c51d06
+    safe_revision: cbdcc0b5ffe24661da57b7989346a5a2269779c7
   lib/tasks/audit_bundle.rake:
     comments:
     reviewed_by: kenny.lee
