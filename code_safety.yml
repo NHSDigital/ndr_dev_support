@@ -6,12 +6,12 @@ file safety:
     safe_revision: '058996443438979550013c0c983c63b68d3fc58b'
   ".github/workflows/lint.yml":
     comments:
-    reviewed_by: josh.pencheon
-    safe_revision: 0ce43640c417e174054f903fd82043948ebe8ccb
+    reviewed_by: brian.shand
+    safe_revision: ee3d54ea6bbbdaa73e016c961b1009f1a83dfcd5
   ".github/workflows/test.yml":
     comments:
     reviewed_by: brian.shand
-    safe_revision: 5eb1de9dcb6774acaba4c444b596d293ddbb5ffe
+    safe_revision: ee3d54ea6bbbdaa73e016c961b1009f1a83dfcd5
   ".gitignore":
     comments:
     reviewed_by: josh.pencheon
@@ -27,7 +27,7 @@ file safety:
   CHANGELOG.md:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 5eb1de9dcb6774acaba4c444b596d293ddbb5ffe
+    safe_revision: ee3d54ea6bbbdaa73e016c961b1009f1a83dfcd5
   CODE_OF_CONDUCT.md:
     comments:
     reviewed_by: timgentry
@@ -247,11 +247,11 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: cbdcc0b5ffe24661da57b7989346a5a2269779c7
+    safe_revision: 6816b09116b8ef4ba1456fdb614705bef5b08c6d
   lib/tasks/audit_bundle.rake:
     comments:
-    reviewed_by: kenny.lee
-    safe_revision: 96f1af81f5aff439742fc293581256317ff4aa46
+    reviewed_by: brian.shand
+    safe_revision: ee3d54ea6bbbdaa73e016c961b1009f1a83dfcd5
   lib/tasks/audit_code.rake:
     comments: Identical to the version reviewed by josh.pencheon when contained within
       ndr_support
@@ -328,7 +328,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 71036ef8c1a1d040281c692868246e6ab7a6ba37
+    safe_revision: ee3d54ea6bbbdaa73e016c961b1009f1a83dfcd5
   test/daemon/ci_server_test.rb:
     comments:
     reviewed_by: josh.pencheon
