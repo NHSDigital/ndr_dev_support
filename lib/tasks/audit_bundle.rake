@@ -138,11 +138,12 @@ namespace :bundle do
     end
 
     # Retrieve binary gems for platforms listed in Gemfile.lock
-    platforms = `bundle platform`.split("\n").grep(/^[*] x86_64-/).collect { |s| s[2..] }
     Dir.chdir('vendor/cache') do
+      platforms = `bundle platform`.split("\n").grep(/^[*] x86_64-/).collect { |s| s[2..] }
       platforms.each do |platform|
         system("gem fetch #{gem} --version=#{new_gem_version2} --platform=#{platform}")
       end
+      system('bundle package --all-platforms')
     end if Dir.exist?('vendor/cache')
 
     if gem == 'webpacker'
@@ -206,7 +207,7 @@ namespace :bundle do
 
       $ ( git rm #{files_to_git_rm.join(' ')}
           git add #{files_to_git_add.join(' ')}
-          git commit -m '# Bump #{gem} to #{new_gem_version2}'
+          git commit -m 'Bump #{gem} to #{new_gem_version2}'
         )
     MSG
   end
