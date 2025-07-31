@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Fixed
 * Update rubocop version dependency
+* rake bundle:update should package gems for all platforms
 
 ## 7.3.2 / 2025-05-01
 ### Fixed
