@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Fixed
+* Capistrano: deploy:preinstall should fix up installed gem permissions
 
 ## 7.3.3 / 2025-07-31
 ### Fixed

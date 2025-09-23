@@ -164,8 +164,12 @@ Capistrano::Configuration.instance(:must_exist).load do
         # already there:
         run "rm -rf #{File.join(release_path, path)} && ln -s #{File.join(shared_path, path)} #{File.join(release_path, path)}"
       end
+    end
 
-      # Make the shared/bundle/ directory writeable by deployers:
+    after 'deploy:finalize_update', 'ndr_dev_support:filesystem_tweaks'
+
+    desc 'Make the shared/bundle/ directory writeable by deployers'
+    task :bundle_permissions do
       # We already set group permissions correctly in the bundle directory, but some gem installs
       # ignore these permissions, so we need to fix them up.
       # Set deployer group for everything created by this user
@@ -178,7 +182,8 @@ Capistrano::Configuration.instance(:must_exist).load do
           '-not -perm -0064 -print0 |xargs -r0 chmod g+rw,o+r'
     end
 
-    after 'deploy:finalize_update', 'ndr_dev_support:filesystem_tweaks'
+    # Ensure we have fixed the bundle permissions before potentially aborting
+    before 'ndr_dev_support:check_preinstall', 'ndr_dev_support:bundle_permissions'
   end
 end
 
