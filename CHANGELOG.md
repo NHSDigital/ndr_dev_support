@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Fixed
 * Capistrano: deploy:preinstall should fix up installed gem permissions
+* Support Ruby 3.4
 
 ### Added
 * Capistrano: cleanup bundled gems for old ruby versions.
