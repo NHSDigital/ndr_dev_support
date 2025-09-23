@@ -2,6 +2,9 @@
 ### Fixed
 * Capistrano: deploy:preinstall should fix up installed gem permissions
 
+### Added
+* Capistrano: cleanup bundled gems for old ruby versions.
+
 ## 7.3.3 / 2025-07-31
 ### Fixed
 * Update rubocop version dependency
