@@ -5,6 +5,7 @@ on: [push]
 jobs:
   test:
     strategy:
+      fail-fast: false
       matrix:
         ruby-version:
           - '3.1'
@@ -21,6 +22,10 @@ jobs:
           # https://www.fastruby.io/blog/ruby/rails/versions/compatibility-table.html
           - ruby-version: '3.1'
             gemfile: 'gemfiles/Gemfile.rails80'
+          # rails 7.0 requires ruby <= 3.3
+          # https://www.fastruby.io/blog/ruby/rails/versions/compatibility-table.html
+          - ruby-version: '3.4'
+            gemfile: 'gemfiles/Gemfile.rails70'
 
     name: Ruby ${{ matrix.ruby-version }} / Bundle ${{ matrix.gemfile }}
 
