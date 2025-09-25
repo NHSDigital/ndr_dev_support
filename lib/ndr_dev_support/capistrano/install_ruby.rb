@@ -97,7 +97,29 @@ Capistrano::Configuration.instance(:must_exist).load do
         fi
       SHELL
     end
+
+    desc <<~DESC
+      Cleanup bundled gems for old ruby versions.
+
+      Deletes shared bundle files that no longer match any installed releases.
+
+      This interacts reasonably with deploy:preinstall:
+      When deploy:preinstall installs new .rbenv and new shared bundled gems, this
+      will not delete them. If an older ruby version is then deployed, this removes
+      the new version's installed bundle, but leaves the .rbenv installation.
+    DESC
+    task :cleanup_unused_bundles do
+      # For ruby X.Y.Z, bundled gems are in .../shared/bundle/ruby/X.Y.0
+      # Generates e.g.
+      # find_options="-not ( -name DUMMY -or -name 3.1.0 -or -name 3.2.0 )"
+      # and then removes e.g. shared/bundle/ruby/3.0.0
+      run "find_options=\"-not ( -name DUMMY `grep -ho '^[0-9]*[.][0-9]*' " \
+          "#{releases_path}/*/.ruby-version | sed -e 's/.*/-or -name &.0/'` ) \"; " \
+          "find #{File.join(shared_path, 'bundle/ruby/*')} -maxdepth 0 $find_options " \
+          "-exec echo rm -rf '{}' ';' -exec rm -rf '{}' ';'"
+    end
   end
 
   before 'bundle:install', 'ndr_dev_support:install_ruby'
+  after 'deploy:finalize_update', 'ndr_dev_support:cleanup_unused_bundles'
 end
