@@ -1,4 +1,7 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 7.3.4 / 2025-09-26
 ### Fixed
 * Capistrano: deploy:preinstall should fix up installed gem permissions
 * Support Ruby 3.4
