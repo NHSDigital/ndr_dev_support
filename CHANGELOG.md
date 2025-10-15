@@ -1,5 +1,6 @@
 ## [Unreleased]
-*no unreleased changes*
+### Fixed
+* Capistrano: Do not include macOS extended attributes in tar files
 
 ## 7.3.4 / 2025-09-26
 ### Fixed
