@@ -20,6 +20,10 @@ jobs:
           - gemfiles/Gemfile.rails80
           - gemfiles/Gemfile.rails81
         exclude:
+          # rails 8.1 requires ruby >= 3.2
+          # https://www.fastruby.io/blog/ruby/rails/versions/compatibility-table.html
+          - ruby-version: '3.1'
+            gemfile: 'gemfiles/Gemfile.rails81'
           # rails 8.0 requires ruby >= 3.2
           # https://www.fastruby.io/blog/ruby/rails/versions/compatibility-table.html
           - ruby-version: '3.1'
