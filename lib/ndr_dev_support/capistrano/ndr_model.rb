@@ -2,6 +2,7 @@ require 'rainbow'
 
 # Discrete bits of functionality we use automatically:
 require_relative 'assets'
+require_relative 'bundler_deployment'
 require_relative 'deploy_secrets'
 require_relative 'install_ruby'
 require_relative 'macos_bsdtar'

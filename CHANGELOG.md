@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Fixed
 * Support Rails 8.1, Ruby 4.0
+* capistrano: Support bundler 4 with capistrano 2
 
 ## 7.3.5 / 2025-10-16
 ### Fixed
