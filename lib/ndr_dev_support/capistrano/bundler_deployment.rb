@@ -4,16 +4,15 @@
 # but remove calls to "require 'bundler/capistrano'", and
 # Bundler will be activated after each new deployment.
 
-if Gem::Version.new(Bundler::VERSION).release < Gem::Version.new('4.0')
-  require 'bundler/capistrano' unless defined?(Bundler::Deployment)
-else
+unless defined?(Bundler::Deployment)
   # Redefine deployment helpers for Capistrano 2, previously defined in bundler < 4
   # cf. https://blog.rubygems.org/2025/12/03/upgrade-to-rubygems-bundler-4.html
   # Code copied from bundler 2 source files bundler/deployment.rb and bundler/capistrano.rb
+  # then modified to support bundler >= 2
   # rubocop:disable Style/Documentation, Metrics/AbcSize, Metrics/MethodLength, Style/StringLiterals, Style/SymbolArray, Style/RaiseArgs, Layout/EmptyLineAfterGuardClause, Style/StringLiteralsInInterpolation, Style/Lambda
   module Bundler
     class Deployment
-      def self.define_task(context, task_method = :task, opts = {})
+      def self.define_task(context, task_method = :task, opts = {}) # rubocop:disable Metrics/CyclomaticComplexity
         if defined?(Capistrano) && context.is_a?(Capistrano::Configuration)
           context_name = "capistrano"
           role_default = "{:except => {:no_release => true}}"
@@ -61,13 +60,24 @@ else
             if app_path.to_s.empty?
               raise error_type.new("Cannot detect current release path - make sure you have deployed at least once.")
             end
-            args = ["--gemfile #{File.join(app_path, bundle_gemfile)}"]
-            args << "--path #{bundle_dir}" unless bundle_dir.to_s.empty?
-            args << bundle_flags.to_s
-            args << "--without #{bundle_without.join(" ")}" unless bundle_without.empty?
-            args << "--with #{bundle_with.join(" ")}" unless bundle_with.empty?
+            # Separate out flags that need to be sent to `bundle config` with Bundler 4
+            if bundle_flags.include?('--deployment')
+              bundle_flags = bundle_flags.split(/ /).grep_v('--deployment').join(' ')
+              config_settings = ['deployment true']
+            else
+              config_settings = []
+            end
 
-            run "cd #{app_path} && #{bundle_cmd} install #{args.join(" ")}"
+            args = ["--gemfile #{File.join(app_path, bundle_gemfile)}"]
+            config_settings << "path #{bundle_dir}" unless bundle_dir.to_s.empty?
+            args << bundle_flags.to_s
+            config_settings << "without #{bundle_without.join(" ")}" unless bundle_without.empty?
+            config_settings << "with #{bundle_with.join(" ")}" unless bundle_with.empty?
+
+            bundle_cmds = config_settings.collect do |settings|
+              "#{bundle_cmd} config set --local #{settings}"
+            end + ["#{bundle_cmd} install #{args.join(" ")}"]
+            run "cd #{app_path} && #{bundle_cmds.join(' && ')}"
           end
         end
       end
