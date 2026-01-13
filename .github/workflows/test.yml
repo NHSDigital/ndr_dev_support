@@ -12,12 +12,18 @@ jobs:
           - '3.2'
           - '3.3'
           - '3.4'
+          - '4.0'
         gemfile:
           - gemfiles/Gemfile.rails70
           - gemfiles/Gemfile.rails71
           - gemfiles/Gemfile.rails72
           - gemfiles/Gemfile.rails80
+          - gemfiles/Gemfile.rails81
         exclude:
+          # rails 8.1 requires ruby >= 3.2
+          # https://www.fastruby.io/blog/ruby/rails/versions/compatibility-table.html
+          - ruby-version: '3.1'
+            gemfile: 'gemfiles/Gemfile.rails81'
           # rails 8.0 requires ruby >= 3.2
           # https://www.fastruby.io/blog/ruby/rails/versions/compatibility-table.html
           - ruby-version: '3.1'
@@ -25,6 +31,8 @@ jobs:
           # rails 7.0 requires ruby <= 3.3
           # https://www.fastruby.io/blog/ruby/rails/versions/compatibility-table.html
           - ruby-version: '3.4'
+            gemfile: 'gemfiles/Gemfile.rails70'
+          - ruby-version: '4.0'
             gemfile: 'gemfiles/Gemfile.rails70'
 
     name: Ruby ${{ matrix.ruby-version }} / Bundle ${{ matrix.gemfile }}
