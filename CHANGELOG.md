@@ -1,4 +1,7 @@
 ## [Unreleased]
+*no unreleased changes*
+
+## 7.3.6 / 2026-01-13
 ### Added
 * Support Rails 8.1, Ruby 4.0
 * capistrano: Support bundler 4 with capistrano 2

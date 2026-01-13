@@ -11,7 +11,7 @@ file safety:
   ".github/workflows/test.yml":
     comments:
     reviewed_by: brian.shand
-    safe_revision: d8963cc3aba1fee14c79355c84d430c0f687a03e
+    safe_revision: 6662a0fde64246865c217cf078f48798d027ce33
   ".gitignore":
     comments:
     reviewed_by: josh.pencheon
@@ -27,7 +27,7 @@ file safety:
   CHANGELOG.md:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 5067036e40c25008dcc3d171a456205123adb9fe
+    safe_revision: 6662a0fde64246865c217cf078f48798d027ce33
   CODE_OF_CONDUCT.md:
     comments:
     reviewed_by: timgentry
@@ -76,6 +76,10 @@ file safety:
     comments:
     reviewed_by: brian.shand
     safe_revision: e94e2b902cb943150a043b6b0b3d397fa1bea547
+  gemfiles/Gemfile.rails81:
+    comments:
+    reviewed_by: brian.shand
+    safe_revision: 6662a0fde64246865c217cf078f48798d027ce33
   lib/minitest/rake_ci.rb:
     comments:
     reviewed_by: josh.pencheon
@@ -92,6 +96,10 @@ file safety:
     comments:
     reviewed_by: brian.shand
     safe_revision: 71036ef8c1a1d040281c692868246e6ab7a6ba37
+  lib/ndr_dev_support/capistrano/bundler_deployment.rb:
+    comments:
+    reviewed_by: brian.shand
+    safe_revision: 6662a0fde64246865c217cf078f48798d027ce33
   lib/ndr_dev_support/capistrano/deploy_secrets.rb:
     comments:
     reviewed_by: brian.shand
@@ -107,7 +115,7 @@ file safety:
   lib/ndr_dev_support/capistrano/ndr_model.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 5067036e40c25008dcc3d171a456205123adb9fe
+    safe_revision: 6662a0fde64246865c217cf078f48798d027ce33
   lib/ndr_dev_support/capistrano/preinstall.rb:
     comments:
     reviewed_by: brian.shand
@@ -251,7 +259,7 @@ file safety:
   lib/ndr_dev_support/version.rb:
     comments:
     reviewed_by: brian.shand
-    safe_revision: 1afa953a706645dc7f8273f5fa29719c4ab1af4d
+    safe_revision: 22a13b9ba9062f4046b97bba6a323bedfde19942
   lib/tasks/audit_bundle.rake:
     comments:
     reviewed_by: brian.shand
@@ -332,7 +340,7 @@ file safety:
   ndr_dev_support.gemspec:
     comments:
     reviewed_by: brian.shand
-    safe_revision: ee3d54ea6bbbdaa73e016c961b1009f1a83dfcd5
+    safe_revision: 6662a0fde64246865c217cf078f48798d027ce33
   test/daemon/ci_server_test.rb:
     comments:
     reviewed_by: josh.pencheon
